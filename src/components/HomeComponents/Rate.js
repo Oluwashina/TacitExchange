@@ -54,6 +54,7 @@ const RateCalculator = (props) => {
                       handleSubmit,
                       handleBlur,
                       handleReset,
+                      setFieldValue,
                       values,
                       touched,
                       errors
@@ -68,7 +69,7 @@ const RateCalculator = (props) => {
                                  name="giftname"
                                  values={values.giftname}
                                  onChange={(e) => {
-                                    handleChange(e)
+                                    handleChange(e, setFieldValue("category", ""))
                                     handleSubCategory(e.currentTarget.value);
                                   }}
                                  onBlur={handleBlur}
