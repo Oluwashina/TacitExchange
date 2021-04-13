@@ -1,13 +1,49 @@
-body {
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  border: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html{
+  scroll-behavior: smooth;
 }
+
+body{
+  font-family: 'Nunito', sans-serif;
+}
+
+
+
+/* Tacit exchange button styles */
+.btn-blueTacit{
+  background: #0898D7;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 40px;
+  transition: all ease-in 0.5s;
+}
+
+.btn-blueTacit:hover{
+  color: white;
+}
+
+.btn-pinkTacit{
+  background: #9d0957;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 40px;
+  transition: all ease-in-out .15s;
+}
+
+.btn-pinkTacit:hover{
+  background-color: #AB0351;
+  color: white;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+

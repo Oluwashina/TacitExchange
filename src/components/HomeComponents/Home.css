@@ -1,0 +1,202 @@
+
+.hero{
+    background-image: url(../../assets/images/hero-1.jpg);
+    background: linear-gradient(rgba(8, 152, 215, 0.3), rgba(8, 152, 215, 0.4)), url(../../assets/images/hero-1.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    height: 500px;
+    position: relative;
+}
+
+.hero-title{
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-left: 60%;
+}
+
+.hero-title h1{
+    font-weight: 800;
+    line-height: 60px;
+    color: #fff;
+}
+
+
+
+/* rate calculator section */
+.rate{
+    background: #F2F5F7;
+    padding: 80px 150px;
+}
+
+.rate-text{
+    color: #2C3A50;
+    font-weight: bold;
+}
+
+.input-style{
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    border-radius: 5px;
+    padding: 25px 20px;
+  }
+  .input-style:focus {
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    box-shadow: none;
+    outline: 0 none;
+  }
+
+  .select-style{
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    height: 52px;  
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url(../../assets/images/selectArrow.svg);
+    background-position:
+      calc(100% - 20px) calc(1em + 4px),
+      calc(100% - 15px) calc(1em + 2px),
+      100% 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+  .select-style:focus{
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    outline: 0 none;
+    box-shadow: none; 
+  }
+
+  .calc-size{
+      width: auto;
+  }
+
+  /* features */
+  .features{
+      background: #fff;
+      padding: 80px 100px;
+  }
+  .features-list{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+
+  /* steps */
+  .steps{
+      padding: 80px 100px;
+      background: #fff;
+  }
+  .steps-head{
+    color: #2C3A50;
+    font-weight: bold;
+    line-height: 45px;
+  }
+  .steps-p{
+      color: #2C3A50;
+  }
+
+  /* testimonials */
+.testimonials{
+    padding: 80px 100px;
+    background: #F2F5F7;
+}
+.testimonials-div{
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 30px 20px;
+    width: 90% !important;
+}
+
+/* cards */
+.cards{
+    padding: 80px 100px;
+    background: #F2F5F7;
+}
+
+/* footer */
+.footer{
+    background: #2C3A50;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    color: white;
+}
+.footer-links{
+    list-style: none;
+    padding: 0px;
+}
+.footer-links li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all ease-in-out .15s;
+}
+.footer-links li a:hover{
+    color: #0898D7
+}
+
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    /* rate section */
+    .hero-title{
+        max-width: 100%;
+        margin-left: 0%;
+    }
+    .rate{
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .calc-size{
+        width: 100%;
+    }
+    
+    /* features */
+    .features{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* steps */
+    .steps{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .steps-head{
+        line-height: initial;
+    }
+
+    /* testimonials */
+    .testimonials{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .testimonials-div{
+        width: 95% !important;
+    }
+
+    /* cards */
+    .cards{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    /* footer */
+    .footer{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+}
