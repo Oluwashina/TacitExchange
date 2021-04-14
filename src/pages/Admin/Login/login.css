@@ -1,0 +1,50 @@
+.icon{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 12px;
+    text-align: center;
+    background: rgba(158, 7, 158, 0.15);
+    border-radius: 5px 0px 0px 5px;
+    color: #9d0957;
+    width: 45px;
+}
+
+.whiteLogo{
+    position: absolute;
+    right: 40px;
+    bottom: 100px;
+}
+
+.login-div{
+    padding: 30px 50px;
+}
+
+
+.admininput{
+    border: 1px solid #9d0957;
+    border-radius: 5px;
+    width: 70%;
+    padding: 23px 5px 23px 55px;
+  }
+  
+  
+.admininput:focus {
+      /* border-color: rgba(50, 54, 67, 0.2); */
+      border: 1px solid #9d0957;
+      box-shadow: none;
+      outline: 0 none;
+}
+
+
+  /* media query */
+  @media screen and (max-width: 767px){ 
+      .admininput{
+          width: 100%;
+      }  
+      .login-div{
+          padding-left: 15px;
+          padding-right: 15px;
+      }
+
+  }

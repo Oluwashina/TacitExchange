@@ -9,7 +9,7 @@ const Features = () => {
     return (
         <>
             <div className="features">
-                <div className="container">
+                <div className="">
 
                     <div className="row">
                         <div className="col-lg-4">

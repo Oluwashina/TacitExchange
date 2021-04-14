@@ -3,6 +3,7 @@ import {Form, Formik} from 'formik'
 import {rateValidator} from '../../validationSchema/validator'
 import {connect} from 'react-redux'
 import { getRateCategory, getRateSubCategory, getRateValue } from '../../store/actions/rate';
+import Nigeria from  '../../assets/images/nigerialogo.svg'
 
 const RateCalculator = (props) => {
 
@@ -119,7 +120,7 @@ const RateCalculator = (props) => {
                                 onBlur={handleBlur}
                                 id="amount"
                                 className="form-control input-style"
-                                placeholder="Enter Gift Card Amount"
+                                placeholder="Amount in USD"
                                 type="text"
                                 />
                                 <small style={{ color: "#dc3545" }}>
@@ -129,8 +130,18 @@ const RateCalculator = (props) => {
                         </div>
 
                         <div className="col-lg-6">
-                            <div className="form-group mt-lg-3 mt-0">
+                            <div className="form-group input-container mt-lg-3 mt-0">
                               <label htmlFor="category">You Get</label>
+                              <div className="amount-style">
+                                    <div className="amount-div">
+                                        <div>
+                                            <img src={Nigeria} style={{width: '25px', height:"25px"}} alt="nigeria" />
+                                        </div>
+                                        <div className="ml-2">
+                                            <p className="mb-0" style={{color: '#2C3A50', fontWeight: 'bold'}}>NGN</p>
+                                        </div>
+                                    </div>
+                                </div>
                               <input
                                 className="form-control input-style"
                                 style={{color: '#2C3A50', fontWeight: 'bold'}}
