@@ -45,11 +45,13 @@ const Testimonials = () => {
     return ( 
         <>  
             <div className="testimonials">
+
                 <div className="text-center">
                     <h3 className="steps-head">What People Are Saying About Us</h3>
                 </div>
 
                 {/* carousels for testimonials layout */}
+            <div className="container-fluid">
                 <Slider {...settings}>
 
                     <div className="testimonials-div mt-4 mt-lg-5">
@@ -110,6 +112,7 @@ const Testimonials = () => {
 
 
                 </Slider>
+            </div>
 
             </div>
 

@@ -55,7 +55,7 @@ const Footer = () => {
                             <p className="mb-0" style={{fontSize: 14}}>(+234) 137632128</p>
                         </div>
                         <div className="mt-2">
-                            <p className="mb-0" style={{fontSize: 14}}>Support@tacitexchange.com</p>
+                            <p className="mb-0" style={{fontSize: 14}}>support@tacitexchange.com</p>
                         </div>
                         <div className="mt-2">
                             <p className="mb-0" style={{fontSize: 14}}>No 89B Lekki Phase 1, Lagos</p>
