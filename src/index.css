@@ -20,10 +20,11 @@ body{
   border-radius: 5px;
   color: white;
   padding: 10px 40px;
-  transition: all ease-in 0.5s;
+  transition: all ease-in .15s;
 }
 
 .btn-blueTacit:hover{
+  background: #0d92d5;
   color: white;
 }
 

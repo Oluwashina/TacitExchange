@@ -121,7 +121,7 @@ const RateCalculator = (props) => {
                                 id="amount"
                                 className="form-control input-style"
                                 placeholder="Amount in USD"
-                                type="text"
+                                type="tel"
                                 />
                                 <small style={{ color: "#dc3545" }}>
                                   {touched.amount && errors.amount}
@@ -143,11 +143,14 @@ const RateCalculator = (props) => {
                                     </div>
                                 </div>
                               <input
-                                className="form-control input-style"
-                                style={{color: '#2C3A50', fontWeight: 'bold'}}
+                                className="form-control input-style amount-disabled"
+                                style={{color: '#2C3A50', fontWeight: 'bold', fontSize: '1.3rem'}}
                                 placeholder="0.00"
                                 disabled
-                                value={amount.toFixed(2)}
+                                value={amount.toFixed(2).replace(
+                                    /\B(?=(\d{3})+(?!\d))/g,
+                                    ","
+                                  )}
                                 type="text"
                                 />
                             </div>

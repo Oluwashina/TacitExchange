@@ -4,6 +4,7 @@ import {connect } from 'react-redux'
 import { forgotPasswordValidator } from "../../../validationSchema/validator";
 import Logo from '../../../assets/images/logo.png'
 import Hero from '../../../assets/images/adminlogin.png'
+import {Link} from 'react-router-dom'
 
 const AdminForgotPassword = () => {
 
@@ -68,6 +69,10 @@ const AdminForgotPassword = () => {
                   )}
 
               </Formik>
+
+              <div className="mt-5">
+                <p style={{fontWeight: 500}}>Already have an account? <Link to="/admin" style={{textDecoration: 'none', color:'#9d0957'}}>Sign In</Link></p>
+              </div>
              
             </div>
           </div>
