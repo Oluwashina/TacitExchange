@@ -35,6 +35,7 @@ const RateCalculator = (props) => {
 
     return ( 
         <>
+        <section id="rate-calculator">
             <div className="rate">
 
                 <div className="">
@@ -169,7 +170,8 @@ const RateCalculator = (props) => {
                 </Formik>
 
             
-            </div>
+             </div>
+         </section>
         </>
      );
 }

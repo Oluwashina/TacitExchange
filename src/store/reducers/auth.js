@@ -3,6 +3,7 @@
 const initState = {
   isAuthenticated: false,
   token: '',
+  resetcode: false,
 };
 
 const authReducer = (state = initState, action) => {

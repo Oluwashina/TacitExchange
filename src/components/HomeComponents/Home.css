@@ -11,6 +11,7 @@ header{
     z-index: 999;
     top: 0;
     background: #fff;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
 }
 
 .header{
@@ -327,6 +328,45 @@ header{
     color: #0898D7
 }
 
+/* modal dialog styles */
+.modal-content{
+    background: #fff;
+    position: initial;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    /* height: 515px; */
+}
+.login-text{
+    color: white;
+    font-weight: 800;
+}
+.modal-contain{
+    padding: 80px 40px 30px 40px;
+}
+.contain-head{
+    padding: 0px 40px
+}
+
+/* input styles */
+.input-style{
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding: 25px 20px;
+  }
+  .input-style:focus {
+    border: 1px solid #D1D1D1;
+    box-shadow: none;
+    outline: 0 none;
+  }
+
+  .registerImage{
+      position: absolute;
+      top: 0px;
+      left: 70px;
+  }
+  
+
+
 
 /* Media query for smaller phones */
 
@@ -455,6 +495,18 @@ header{
         padding-right: 15px;
         padding-top: 50px;
         padding-bottom: 20px;
+    }
+
+    /* login text */
+    .login-text{
+        color: #0898D7;
+        font-weight: 800;
+    }
+    .modal-contain{
+        padding: 20px 40px;
+    }
+    .registerDialog .modal-dialog{
+        width: auto;
     }
 
 }
