@@ -79,7 +79,7 @@ const RateCalculator = (props) => {
                                  id="giftname">
                                     <option defaultValue="" >Select</option>
                                     {category.map((opt, index) => {
-                                            return <option key={index} value={opt._id}>{opt.categoryname}</option>
+                                            return <option key={index} value={opt.id}>{opt.categoryname}</option>
                                         })}
                                     
                                 </select>
@@ -101,7 +101,7 @@ const RateCalculator = (props) => {
                                  id="category">
                                     <option defaultValue="">Select</option>
                                     {subcategory.map((opt, index) => {
-                                            return <option key={index} value={opt._id}>{opt.subcategoryname}</option>
+                                            return <option key={index} value={opt.id}>{opt.subcategoryname}</option>
                                         })}
                                 </select>
                                 <small style={{ color: "#dc3545" }}>

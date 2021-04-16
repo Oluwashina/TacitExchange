@@ -10,8 +10,11 @@ import forgotCircle from '../../assets/images/forgotCircle.svg'
 import {Form, Formik} from 'formik'
 import { loginValidator, registerValidator, forgotPasswordValidator } from "../../validationSchema/validator";
 import {connect} from 'react-redux'
+import { forgotPassword, loginUser, signUp } from '../../store/actions/auth';
 
 const Navbar = (props) => {
+
+    const {login, Register, forgot} = props
 
     const [navShow, setnavShow] = useState(false);
 
@@ -56,16 +59,23 @@ const Navbar = (props) => {
         }
     }
 
+    // login func
     const handleSubmit = async (values) =>{
         console.log(values)
+        await login(values);
       }
 
+    //   register func
     const handleRegisterSubmit = async (values) =>{
         console.log(values)
+        await Register(values)
+        setShowRegister(false)
     }
 
+    // forgot password submit
     const handleForgotSubmit = async (values) =>{
         console.log(values)
+        await forgot(values)
     }
 
     return ( 
@@ -471,13 +481,15 @@ const Navbar = (props) => {
 
 const mapStateToProps = (state) =>{
     return{
-
+        isAuthenticated: state.auth.isAuthenticated,
     }
 }
 
 const mapDispatchToProps =(dispatch) =>{
     return{
-
+        login: (creds) => dispatch(loginUser(creds)),
+        Register: (creds) => dispatch(signUp(creds)),
+        forgot: (val) => dispatch(forgotPassword(val)),
     }
 }
  

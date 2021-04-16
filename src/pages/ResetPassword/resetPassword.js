@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import {ResetPassword, verifyResetCode  } from '../../store/actions/auth';
 import { useLocation, Link } from "react-router-dom";
 
-const UserReset = ({ Reset, verifyCode, code, isLoading }) => {
+const UserReset = ({ Reset, verifyCode, code,  }) => {
   const search = useLocation().search;
 
 
@@ -167,7 +167,6 @@ const UserReset = ({ Reset, verifyCode, code, isLoading }) => {
 const mapStateToProps = (state) => {
   return {
     code: state.auth.resetcode,
-    isLoading: state.auth.isLoading,
   };
 };
 
