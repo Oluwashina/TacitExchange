@@ -4,9 +4,9 @@
     left: 0px;
     padding: 12px;
     text-align: center;
-    background: rgba(158, 7, 158, 0.15);
+    background: rgba(8, 152, 215, 0.2);
     border-radius: 5px 0px 0px 5px;
-    color: #9d0957;
+    color: #0898D7;
     width: 45px;
 }
 
@@ -22,7 +22,7 @@
 
 
 .admininput{
-    border: 1px solid #9d0957;
+    border: 1px solid #0898D7;
     border-radius: 5px;
     width: 70%;
     padding: 23px 5px 23px 55px;
@@ -31,7 +31,7 @@
   
 .admininput:focus {
       /* border-color: rgba(50, 54, 67, 0.2); */
-      border: 1px solid #9d0957;
+      border: 1px solid #0898D7;
       box-shadow: none;
       outline: 0 none;
 }

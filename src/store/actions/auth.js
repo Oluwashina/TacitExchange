@@ -66,7 +66,7 @@ export const signUp = (user) => {
 export const getEmailVerify = (val) => {
     return async (dispatch, getState) => {
       try {
-        const res = await GetApi("emailverify/"+val, getToken());
+        const res = await GetApi("verifyuser/"+val, getToken());
         if (res.status === 200) {
           dispatch({ type: "VALID_LINK", data: res.data});
         }

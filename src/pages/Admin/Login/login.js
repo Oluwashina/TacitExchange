@@ -30,7 +30,7 @@ const AdminLogin = () => {
               </div>
 
               <div className="mt-5">
-                <h4 style={{ color: "#9d0957", fontWeight: 600 }}>LogIn</h4>
+                <h4 style={{ color: "#0898D7", fontWeight: 600 }}>LogIn</h4>
               </div>
 
               {/* form submission */}
@@ -89,13 +89,13 @@ const AdminLogin = () => {
                             </div>
                           
                             <Link to="/admin/forgotpassword" style={{textDecoration: 'none', color: '#000000'}}>
-                              <p style={{fontWeight: 600,fontStyle: 'italic'}}>Forgot Password?</p>
+                              <p style={{fontWeight: 600,fontStyle: 'italic',}}>Forgot Password?</p>
                             </Link>
                          
                             <button 
                             type="submit"
                             disabled={isSubmitting}
-                            className="btn btn-pinkTacit">Login</button>
+                            className="btn btn-blueTacit">Login</button>
                       </Form>
                   )}
 

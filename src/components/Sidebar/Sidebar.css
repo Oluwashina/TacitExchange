@@ -1,0 +1,84 @@
+/* navbar styles */
+
+.sidebarBg{
+background-color: #f5f6f8; 
+}
+
+.navbar-bg{
+    background: #0898D7;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+}
+
+.imageStyle{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+  }
+
+.search-style{
+    background-color: #910691;
+    border-radius: 20px;
+    border: none;
+    padding: 0px 10px 0px 38px;
+    color: #fff;
+}
+.search-style:focus{
+    background: #910691;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
+    box-shadow: none;
+    outline: 0 none;
+}
+.search-style::placeholder{
+    color: white;
+}
+.iconn{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    padding: 6px 0px 0px 12px;
+    color: #fff;
+    font-size: 19px;
+}
+
+/* sidenav */
+.sidenav {
+    height: 100%;
+    width: 66px;
+    position: fixed;
+    /* z-index: 1; */
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding-top: 30px;
+  }
+
+  .main {
+    margin-left: 66px;/* Same as the width of the sidenav */
+    /* font-size: 10px; Increased text to enable scrolling */
+    padding: 10px 10px;
+  }
+
+  .contain{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .activeNav{
+    background: #E5E3F3;
+    padding: 12px;
+    cursor: pointer;
+  }
+  .Nav{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E5E3F3;  
+    cursor: pointer;
+  }

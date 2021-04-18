@@ -1,0 +1,42 @@
+
+.line-div{
+    background: #fff;
+    padding: 25px 30px;
+}   
+
+.chart-filter{
+    background: #E5E3F3;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* filter div */
+.filter-div{
+    background: rgba(226, 223, 242, 0.82);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .active-filter{
+      background-color: #0898D7;
+      border-radius: 10px;
+      border-right:  0.2px solid #0898D7;
+      padding: 10px 30px;
+  }
+  .active-filter p{
+      color: white;
+  }
+  .filter-tab{
+      border-right:  0.2px solid #0898D7;
+      padding: 10px 30px;
+  }
+  .filter-tab:nth-last-child(1){
+    padding: 10px 30px;
+    border-right: none;
+  }

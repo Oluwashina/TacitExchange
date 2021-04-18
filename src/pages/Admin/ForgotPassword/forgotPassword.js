@@ -21,7 +21,7 @@ const AdminForgotPassword = () => {
               <img src={Logo} className="img-fluid" alt="logo" />
 
               <div style={{marginTop: '100px'}}>
-                <h4 style={{ color: "#9d0957", fontWeight: 600 }}>Forgot Password?</h4>
+                <h4 style={{ color: "#0898D7", fontWeight: 600 }}>Forgot Password?</h4>
                 <p className="mt-2" style={{fontStyle: "italic", fontWeight: 600}}>Please type in your e-mail Address</p>
               </div>
 
@@ -64,14 +64,14 @@ const AdminForgotPassword = () => {
                             <button 
                             type="submit"
                             disabled={isSubmitting}
-                            className="btn btn-pinkTacit">Submit</button>
+                            className="btn btn-blueTacit">Submit</button>
                       </Form>
                   )}
 
               </Formik>
 
               <div className="mt-5">
-                <p style={{fontWeight: 500}}>Already have an account? <Link to="/admin" style={{textDecoration: 'none', color:'#9d0957'}}>Sign In</Link></p>
+                <p style={{fontWeight: 500}}>Already have an account? <Link to="/admin" style={{textDecoration: 'none', color:'#0898D7'}}>Sign In</Link></p>
               </div>
              
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Logo from "../../assets/images/logo.png";
 import WelcomeImg from "../../assets/images/adminlogin.png";
 import { Form, Formik } from "formik";
@@ -12,10 +12,10 @@ const UserReset = ({ Reset, verifyCode, code,  }) => {
 
 
   // Verify reset code sent to email if valid!
-//   useEffect(() => {
-//     const code = new URLSearchParams(search).get("code");
-//     verifyCode(code);
-//   }, [verifyCode, search]);
+  useEffect(() => {
+    const code = new URLSearchParams(search).get("code");
+    verifyCode(code);
+  }, [verifyCode, search]);
 
   // Reset password submit button
   const handleSubmit = async (values, setSubmitting) => {

@@ -20,7 +20,7 @@ const initState = {
             }
         case 'RateCalculation':
             // first find the object of category selected
-            let categoryDetails = state.subcategory.find(pro=> pro._id === action.data.id)
+            let categoryDetails = state.subcategory.find(pro=> pro.id === action.data.id)
 
             // Then do some checks with the amount sent for minimum and maximum
             let rate = categoryDetails.nairarate
