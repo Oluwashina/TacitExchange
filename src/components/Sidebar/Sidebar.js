@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
     return {
         firstname: state.auth.firstname,
         lastname: state.auth.lastname,
-        image: state.auth.imageUrl,
+        image: state.auth.profilePic,
     };
   };
 

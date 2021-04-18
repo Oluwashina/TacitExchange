@@ -9,7 +9,10 @@ const initState = {
   id: "",
   phoneNumber: "",
   isVerified: false,
+  isEnabled: false,
   walletBalance: "",
+  role: "",
+  profilePic: "",
   resetcode: false,
   validlink: false
 };
@@ -28,7 +31,10 @@ const authReducer = (state = initState, action) => {
               id: action.data.profile.id,
               phoneNumber: action.data.profile.phoneNumber,
               isVerified: action.data.profile.isVerified,
+              isEnabled: action.data.profile.isEnabled,
               walletBalance: action.data.profile.walletBalance,
+              role: action.data.profile.role,
+              profilePic: action.data.profile.profilePic
           }
     case 'logout':
           return {

@@ -18,6 +18,8 @@ const Navbar = (props) => {
 
     const [navShow, setnavShow] = useState(false);
 
+    const [role] = useState("Exchanger")
+
     const [show, setShow] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const [showForgot, setShowForgot] = useState(false);
@@ -68,7 +70,11 @@ const Navbar = (props) => {
     //   register func
     const handleRegisterSubmit = async (values) =>{
         console.log(values)
-        await Register(values)
+        const creds = {
+            ...values,
+            role
+        }
+        await Register(creds)
         setShowRegister(false)
     }
 

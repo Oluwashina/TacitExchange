@@ -47,6 +47,7 @@ export const signUp = (user) => {
                    phoneNumber: user.phoneNumber,
                    email: user.email,
                    password: user.password,
+                   role: user.role
                   }, "", "application/json")
       if (res.status === 201) {
         dispatch({ type: "SIGNUP_SUCCESS", data: res.data });

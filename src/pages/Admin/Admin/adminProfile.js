@@ -301,7 +301,7 @@ const AdminProfile = (props) => {
 
 const mapStateToProps = (state) =>{
     return{
-        image: state.auth.imageUrl,
+        image: state.auth.profilePic,
         firstname: state.auth.firstname,
         lastname: state.auth.lastname,
         email: state.auth.email,
