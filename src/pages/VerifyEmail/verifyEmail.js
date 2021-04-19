@@ -1,28 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import Navbar from '../../components/HomeComponents/Navbar';
 import Footer from '../../components/HomeComponents/Footer';
 import { getEmailVerify } from '../../store/actions/auth';
-// import { useLocation } from "react-router-dom";
+
+
 
 const VerifyEmail = (props) => {    
 
-    // const search = useLocation().search;
+    const {verify, code, msg} = props
+
 
     const {link} = props
+    
 
-//     useEffect(() =>{
-//         const code = new URLSearchParams(search).get("code");
-//         verify(code)
-//   }, [verify, search])
+    useEffect(() =>{
+      verify(code) 
+  }, [verify, code])
 
 if(link) {
     return ( 
         <>
         <Navbar />
-        <div class="container" style={{marginTop: 150}}>
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
+        <div className="container" style={{marginTop: 150}}>
+        <div className="row justify-content-center">
+            <div className="col-lg-6">
                 <div style={{background: '#fff', padding: '20px 30px 50px 30px', boxShadow: '0 2px 10px rgb(0 0 0 / 10%)', borderRadius: '5px'}}>
 
                     <div className="text-center">
@@ -34,7 +36,7 @@ if(link) {
                     </div>
 
                     <div className="mt-2 text-center">
-                        <p className="mb-0">Oops, Looks like the link is not valid!</p>
+                        <p className="mb-0">Oops, {msg}!</p>
                     </div>
 
                 </div>
@@ -52,9 +54,9 @@ if(link) {
   return (
       <>
     <Navbar />
-    <div class="container" style={{marginTop: 150}}>
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
+    <div className="container" style={{marginTop: 150}}>
+    <div className="row justify-content-center">
+        <div className="col-lg-6">
             <div style={{background: '#fff', padding: '20px 30px 50px 30px', boxShadow: '0 2px 10px rgb(0 0 0 / 10%)', borderRadius: '5px'}}>
 
                 <div className="text-center">
@@ -81,9 +83,12 @@ if(link) {
   )
 }
 
-const mapStateToProps =(state) =>{
+const mapStateToProps =(state, ownProps) =>{
+    let code = ownProps.match.params.code
     return{
-        link: state.auth.validlink
+        link: state.auth.validlink,
+        msg: state.auth.email_msg,
+        code: code
     }
 }
 

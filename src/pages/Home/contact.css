@@ -1,0 +1,36 @@
+.half-contact{
+    background: #2C3A50;
+    padding: 50px 50px;
+    color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    height: 630px;
+}
+
+.second-contact{
+    background: #fff;
+    padding: 30px 50px;
+    box-shadow: 0px 10px 60px 5px rgb(0 0 0 / 3%);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 630px;
+}
+
+
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .half-contact{
+        height: auto;
+        border-radius: 0px;
+        padding: 50px 20px;
+    }
+    .second-contact{
+        height: auto;
+        padding: 50px 20px;
+        border-radius: 0px;
+    }
+
+
+}

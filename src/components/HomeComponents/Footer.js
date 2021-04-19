@@ -52,7 +52,7 @@ const Footer = () => {
                     <div className="col-lg-2 mt-lg-0 mt-3">
                         <h6>Contact Us</h6>
                         <div className="mt-4">
-                            <a href="tel:+234137632128"  style={{textDecoration: 'none', color: '#fff', fontSize: 14}}>(+234) 137632128</a>
+                            <a href="tel:+234137632128"  style={{textDecoration: 'none', color: '#fff', fontSize: 14}}>+234 816 851 6315</a>
                         </div>
                         <div className="mt-2">
                             <a href="mailto:support@tacitexchange.com"  style={{fontSize: 14, color: '#fff', textDecoration: 'none'}}>support@tacitexchange.com</a>

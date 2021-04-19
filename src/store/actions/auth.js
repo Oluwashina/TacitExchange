@@ -1,4 +1,4 @@
-import {PostApi, PutApi, GetApi} from '../helpers'
+import {PostApi, PutApi} from '../helpers'
 import cogoToast from "cogo-toast";
 import axios from 'axios'
 import {apiUrl} from '../config'
@@ -65,19 +65,25 @@ export const signUp = (user) => {
 
 // check for email verification link code if clicked or not
 export const getEmailVerify = (val) => {
-    return async (dispatch, getState) => {
-      try {
-        const res = await GetApi("verifyuser/"+val, getToken());
-        if (res.status === 200) {
-          dispatch({ type: "VALID_LINK", data: res.data});
-        }
-        if(res.status === 400){
-          dispatch({ type: "INVALID_LINK", err: res.data });
-        }
-      } catch (err) {
-       console.log(err)
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("verifyuser", {
+        verificationCode: val
+      }, "", "application/json")
+      if (res.status === 201) {
+        cogoToast.success("Email verified successfully!", {
+          position: "top-center",
+        });
+        dispatch({ type: 'VALID_EMAIL_LINK', data: res.data });
       }
-    };
+      if(res.status === 400){
+        cogoToast.error("Oops looks like the code is invalid or has been used.");
+        dispatch({ type: 'INVALID_EMAIL_LINK', data: res.data });
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
   };
 
 

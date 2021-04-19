@@ -14,6 +14,7 @@ const initState = {
   role: "",
   profilePic: "",
   resetcode: false,
+  email_msg: "",
   validlink: false
 };
 
@@ -60,15 +61,17 @@ const authReducer = (state = initState, action) => {
         ...state,
         resetcode: true
       }
-    case 'VALID_LINK':
+    case 'VALID_EMAIL_LINK':
       return{
         ...state,
-        validlink: false
+        validlink: false,
+        email_msg: action.data.message
       }
-    case 'INVALID_LINK':
+    case 'INVALID_EMAIL_LINK':
       return{
         ...state,
-        validlink: true
+        validlink: true,
+        email_msg: action.data.message
       }
     default:
       return state;

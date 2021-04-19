@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from './pages/Home/home';
 import verifyEmail from './pages/VerifyEmail/verifyEmail';
 import ResetPassword from './pages/ResetPassword/resetPassword'
+import ContactPage from './pages/Home/contact';
 
 // admin routes
 import AdminLogin from './pages/Admin/Login/login'
@@ -11,6 +12,7 @@ import AdminForgotPassword from './pages/Admin/ForgotPassword/forgotPassword';
 import AdminDashboard from './pages/Admin/Dashboard/dashboard';
 import Admins from './pages/Admin/Admin/admin';
 import adminProfile from './pages/Admin/Admin/adminProfile';
+
 
 
 function App() {
@@ -22,8 +24,9 @@ function App() {
               
               {/* home route */}
               <Route exact path="/" component={HomePage} />
-              <Route path="/verifyemail" component={verifyEmail} />
+              <Route path="/verifyemail/:code" component={verifyEmail} />
               <Route path="/resetpassword" component={ResetPassword} />
+              <Route path="/contact" component={ContactPage} />
 
 
               {/* admin route */}

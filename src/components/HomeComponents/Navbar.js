@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import Logo from '../../assets/images/logo.png'
-// import {Link} from 'react-router-dom'
-import {HashLink as Link} from 'react-router-hash-link'
+import {useLocation} from 'react-router-dom'
+import {HashLink as Link,} from 'react-router-hash-link'
 import Modal from 'react-bootstrap/Modal'
 import loginCircle from '../../assets/images/loginCircle.svg'
 import registerCircle from '../../assets/images/registerCircle.svg'
@@ -19,6 +19,11 @@ const Navbar = (props) => {
     const [navShow, setnavShow] = useState(false);
 
     const [role] = useState("Exchanger")
+
+    // check for which path you are on
+    const isActive = useLocation().pathname
+
+    console.log(props)
 
     const [show, setShow] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
@@ -450,13 +455,17 @@ const Navbar = (props) => {
                     <nav className={ navShow ? "open" : "" }>
                         <ul className="mainNav">
                             <li className="navLink">
-                                <Link to="/" className="active">Home</Link>
+                                <Link to="/"
+                                className={isActive === "/" ? 'active' : ''}
+                                >Home</Link>
                             </li>
                             <li className="navLink">
                                 <Link to="/">Support & FAQ</Link>
                             </li>
                             <li className="navLink">
-                                <Link to="/">Contact Us</Link>
+                                <Link 
+                                 className={isActive === "/contact" ? 'active' : ''}
+                                to="/contact">Contact Us</Link>
                             </li>
                             <li className="navLink">
                                 <Link to="/#rate-calculator">Rate Calculator</Link>

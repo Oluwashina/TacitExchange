@@ -85,3 +85,13 @@ export const ChangePasswordValidator = Yup.object({
    .required("Passwords must match")
    .oneOf([Yup.ref('newpassword'), null], 'Passwords must match')
 });
+
+
+export const contactValidator = Yup.object({
+  name: Yup.string().required("Name is required"),
+  subject: Yup.string().required('Subject is required'),
+  email: Yup.string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  message: Yup.string().required("Message is required"),
+});
