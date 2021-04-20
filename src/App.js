@@ -17,6 +17,9 @@ import AdminForgotPassword from './pages/Admin/ForgotPassword/forgotPassword';
 import AdminDashboard from './pages/Admin/Dashboard/dashboard';
 import Admins from './pages/Admin/Admin/admin';
 import adminProfile from './pages/Admin/Admin/adminProfile';
+import AdminTrades from './pages/Admin/Trades/trades';
+import AdminUsers from './pages/Admin/Users/users';
+import AdminRates from './pages/Admin/Rates/rates';
 
 
 
@@ -40,6 +43,9 @@ function App() {
               <Route path="/admin/dashboard" component={AdminDashboard} />
               <Route path="/admin/admin" component={Admins} />
               <Route path="/admin/profile" component={adminProfile} />
+              <Route path="/admin/trades" component={AdminTrades} />
+              <Route path="/admin/users" component={AdminUsers} />
+              <Route path="/admin/rates" component={AdminRates} />
 
 
             </Switch>

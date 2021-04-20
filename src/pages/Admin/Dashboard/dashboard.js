@@ -2,9 +2,53 @@ import React from 'react';
 import Charts from '../../../components/Charts/Chart';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import './dashboard.css'
+import DataTable from 'react-data-table-component'
+import {movies} from "./data";
 
 
 const AdminDashboard = () => {
+    
+const columns = [
+    {
+      name: "Trade Id",
+      selector: "id",
+      sortable: true
+    },
+    {
+      name: "Card Name",
+      selector: "title",
+      sortable: true
+    },
+    {
+      name: "Amount Due",
+      selector: "amount",
+      sortable: true,
+    },
+    {
+        name: "Date Initiated",
+        selector: "date",
+        sortable: true,
+    },
+    {
+        name: "Status",
+        selector: "status",
+        sortable: true,
+      },
+      {
+        name: 'Actions',
+        button: true,
+        cell: row => <button
+        className="btn btn-sm btn-view"
+        onClick={() => {
+            ViewTransact(row.id)}}
+         >View</button>,
+      }
+
+  ];
+
+  const ViewTransact = (id) =>{
+      alert(id)
+  }
 
     return ( 
         <>
@@ -20,7 +64,7 @@ const AdminDashboard = () => {
                                 <div className="dash-div">
 
                                     <div>
-                                        <p className="mb-0" style={{color: '#0898D7'}}>Pending Payment</p>
+                                        <p className="mb-0" style={{color: '#0898D7'}}>Pending Trades</p>
                                     </div>
 
                                     <div className="mt-4">
@@ -79,8 +123,20 @@ const AdminDashboard = () => {
                                 
                     {/* charts display */}
 
-                    <div className="mt-4">
+                    <div className="mt-5">
                         <Charts />
+                    </div>
+
+                    {/* recent Trades */}
+                    <div className="mt-5 mb-5">
+                         <DataTable
+                            title="Pending Trades"
+                            columns={columns}
+                            data={movies}
+                            pagination
+                            persistTableHead
+                            progressPending={false}
+                            />
                     </div>
                     
                 </div>

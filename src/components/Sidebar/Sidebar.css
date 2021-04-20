@@ -17,22 +17,22 @@ background-color: #f5f6f8;
   }
 
 .search-style{
-    background-color: #910691;
+    background-color: #fff;
     border-radius: 20px;
     border: none;
     padding: 0px 10px 0px 38px;
-    color: #fff;
+    color: #2C3A50;
 }
 .search-style:focus{
-    background: #910691;
+    background: #fff;
     border-radius: 20px;
     border: none;
-    color: #fff;
+    color: #2C3A50;
     box-shadow: none;
     outline: 0 none;
 }
 .search-style::placeholder{
-    color: white;
+    color: #0898D7;
 }
 .iconn{
     position: absolute;
@@ -40,7 +40,7 @@ background-color: #f5f6f8;
     left: 0px;
     text-align: center;
     padding: 6px 0px 0px 12px;
-    color: #fff;
+    color: #0898D7;
     font-size: 19px;
 }
 
