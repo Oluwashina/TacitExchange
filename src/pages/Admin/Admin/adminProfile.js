@@ -1,15 +1,15 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {connect} from 'react-redux'
 import './admin.css'
 import Profile from '../../../assets/images/profile.svg'
 import { Form, Formik } from "formik";
 import { ChangePasswordValidator } from "../../../validationSchema/validator";
-import { UploadPhoto } from '../../../store/actions/auth';
+import { ChangePassword, UploadPhoto } from '../../../store/actions/auth';
 
 const AdminProfile = (props) => {
 
-    const {image, firstname, lastname, email, photoloader, handlePicture} = props
+    const {image, firstname, lastname, email, photoloader, handlePicture, saveProfile, history, loading} = props
 
     const [val, setVal] = useState(3);
 
@@ -74,10 +74,16 @@ const AdminProfile = (props) => {
       };
 
       const handleSubmit = async (values, setSubmitting) => {
-        // await saveProfile(values);
+        await saveProfile(values);
         console.log(values)
-        // history.push("/");
       };
+
+      //  route to login after successful changed password
+      useEffect(() =>{
+        if(loading){
+          history.push("/admin")
+        }
+    },[loading, history])
 
     return ( 
         <>
@@ -306,13 +312,15 @@ const mapStateToProps = (state) =>{
         firstname: state.auth.firstname,
         lastname: state.auth.lastname,
         email: state.auth.email,
-        photoloader: state.auth.photoloader
+        photoloader: state.auth.photoloader,
+        loading: state.auth.loading,
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-      handlePicture: (values) => dispatch(UploadPhoto(values)) 
+      handlePicture: (values) => dispatch(UploadPhoto(values)), 
+      saveProfile: (values) => dispatch(ChangePassword(values)),
     }
 }
  

@@ -17,7 +17,8 @@ const initState = {
   resetcode: false,
   email_msg: "",
   validlink: false,
-  photoloader: false
+  photoloader: false,
+  loading: false,
 };
 
 const authReducer = (state = initState, action) => {
@@ -26,6 +27,7 @@ const authReducer = (state = initState, action) => {
       localStorage.setItem("token", action.data.token)
         return {
               ...state,
+              loading: false,
               isAuthenticated: true,
               token: action.data.token,
               firstname: action.data.profile.firstName,
@@ -57,6 +59,25 @@ const authReducer = (state = initState, action) => {
               profilePic: '',
               accountDetails: {}
           }
+    case 'PasswordChanged':
+      return{
+        ...state,
+        loading: true,
+        isAuthenticated: false,
+        token: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        id: '',
+        phoneNumber: '',
+        isVerified: '',
+        isEnabled: '',
+        walletBalance: '',
+        role: '',
+        profilePic: '',
+        accountDetails: {}
+
+      }
    case 'SIGNUP_SUCCESS':
             return{
               ...state,

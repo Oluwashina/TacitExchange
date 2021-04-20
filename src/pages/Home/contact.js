@@ -10,7 +10,7 @@ const ContactPage = () => {
 
     useEffect(() =>{
         const script = document.createElement("script")
-        script.src = "//code.tidio.co/fvnoban6szuhxukufe6owkwmst9olm2p.js"
+        script.src = "//code.tidio.co/xk1by3s7lv023iycqvnyon4hvtr9fyo7.js"
         script.async = true
         document.body.appendChild(script)
      }, [])

@@ -4,32 +4,42 @@ import { Form, Formik } from "formik";
 import { RegisterAdminValidator } from "../../../validationSchema/validator";
 import "./admin.css";
 import {connect} from 'react-redux'
+import { signUpAdmin } from '../../../store/actions/auth';
 
 const Admins = (props) => {
 
+  const {Register} = props
+
     const [val, setVal] = useState(1);
+
+    const [role] = useState("SubAdmin")
 
     const handleSubmit = async (values, setSubmitting) => {
         console.log(values)
+        const creds = {
+          ...values,
+          role
+      }
+        await Register(creds)
       };
 
-      const [fundData] = useState([
+      const [tabData] = useState([
         { id: 1, name: "tab-1", text: "New", value: "1" },
         { id: 2, name: "tab-2", text: "View All", value: "2" },
         { id: 3, name: "tab-5", text: "Profile", value: "3" },
       ]);
 
-      const funding = fundData.map((item) => (
+      const tabs = tabData.map((item) => (
         <div
           key={item.id}
           className={val === item.id ? "filter-tab active-filter" : "filter-tab"}
-          onClick={() => FundToggle(item.id)}
+          onClick={() => TabToggle(item.id)}
         >
           <p className="mb-0">{item.text}</p>
         </div>
       ));
 
-      const FundToggle = (id) => {
+      const TabToggle = (id) => {
         // route to all admin
         if (id === 1) {
             setVal(id)
@@ -61,7 +71,7 @@ const Admins = (props) => {
               alignItems: "center",
             }}
           >
-            <div className="chart-filter">{funding}</div>
+            <div className="chart-filter">{tabs}</div>
           </div>
 
             {/* admin layout */}
@@ -218,7 +228,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-
+      Register: (creds) => dispatch(signUpAdmin(creds))
     }
 }
  

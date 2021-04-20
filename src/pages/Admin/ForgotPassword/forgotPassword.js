@@ -5,11 +5,15 @@ import { forgotPasswordValidator } from "../../../validationSchema/validator";
 import Logo from '../../../assets/images/logo.png'
 import Hero from '../../../assets/images/adminlogin.png'
 import {Link} from 'react-router-dom'
+import { forgotPassword } from '../../../store/actions/auth';
 
-const AdminForgotPassword = () => {
+const AdminForgotPassword = (props) => {
+
+     const {forgot} = props
 
     const handleSubmit = async (values) =>{
         console.log(values)
+        await forgot(values)
       }
 
     return ( 
@@ -99,7 +103,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-
+      forgot: (val) => dispatch(forgotPassword(val)),
     }
 }
 

@@ -63,6 +63,33 @@ export const signUp = (user) => {
   };
 };
 
+// sign up an admin functionality(subadmin)
+export const signUpAdmin = (user) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("userd", {
+                   firstName: user.firstname,
+                   lastName: user.lastname,
+                   phoneNumber: user.phoneNumber,
+                   email: user.email,
+                   password: user.password,
+                   role: user.role
+                  }, "", "application/json")
+      if (res.status === 201) {
+        dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
+        cogoToast.success("Admin created successfully!");
+      }
+      if(res.status === 400){
+        dispatch({ type: "SIGNUP_FAIL", err: res.data});
+        cogoToast.error('Email already exists!!!')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};
+
+
 // check for email verification link code if clicked or not
 export const getEmailVerify = (val) => {
   return async (dispatch, getState) => {
@@ -117,6 +144,29 @@ export const verifyResetCode = (code) => {
       if(res.status === 400){
         // Invalid code
         dispatch({ type: 'INVALID_RESETCODE' });
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};
+
+ //   Change password functionality
+ export const ChangePassword = (user) => {
+  return async (dispatch, getState) => {
+    
+    const values = {
+      oldPassword: user.password,
+      newPassword: user.newpassword
+    }
+    try {
+      const res = await PostApi("changepassword/admin", { ...values }, getToken(), "application/json");
+      if (res.status === 200) {
+          dispatch({ type: "PasswordChanged"})
+        cogoToast.success('Password updated successfully! Kindly Login again.', { position: 'bottom-right', })
+      }
+      if(res.status === 400){
+        cogoToast.error('Check that your old password is correct!')
       }
     } catch (err) {
       console.log(err)
