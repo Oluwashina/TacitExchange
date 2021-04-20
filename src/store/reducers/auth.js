@@ -13,9 +13,11 @@ const initState = {
   walletBalance: "",
   role: "",
   profilePic: "",
+  accountDetails: {},
   resetcode: false,
   email_msg: "",
-  validlink: false
+  validlink: false,
+  photoloader: false
 };
 
 const authReducer = (state = initState, action) => {
@@ -35,13 +37,25 @@ const authReducer = (state = initState, action) => {
               isEnabled: action.data.profile.isEnabled,
               walletBalance: action.data.profile.walletBalance,
               role: action.data.profile.role,
-              profilePic: action.data.profile.profilePic
+              profilePic: action.data.profile.profilePic,
+              accountDetails: action.data.profile.accountDetails
           }
     case 'logout':
           return {
               ...state,
               isAuthenticated: false,
               token: '',
+              firstname: '',
+              lastname: '',
+              email: '',
+              id: '',
+              phoneNumber: '',
+              isVerified: '',
+              isEnabled: '',
+              walletBalance: '',
+              role: '',
+              profilePic: '',
+              accountDetails: {}
           }
    case 'SIGNUP_SUCCESS':
             return{
@@ -72,6 +86,21 @@ const authReducer = (state = initState, action) => {
         ...state,
         validlink: true,
         email_msg: action.data.message
+      }
+    case 'PhotoLoader':
+        return{
+            ...state,
+            photoloader: true
+        }
+    case 'StopPhotoLoader':
+        return{
+            ...state,
+            photoloader: false
+      }
+    case 'profilePicture':
+        return{
+            ...state,
+            profilePic: action.image   
       }
     default:
       return state;

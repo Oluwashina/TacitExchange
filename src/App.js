@@ -1,6 +1,11 @@
 import React from 'react'
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// private routes
+// import UserRoute from './components/PrivateRoutes/exchangerRoute'
+// import AdminRoute from './components/PrivateRoutes/adminRoute'
+
 import HomePage from './pages/Home/home';
 import verifyEmail from './pages/VerifyEmail/verifyEmail';
 import ResetPassword from './pages/ResetPassword/resetPassword'

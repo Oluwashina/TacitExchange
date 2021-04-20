@@ -163,14 +163,6 @@ export const updateProfile = (user) => {
                    isEnabled: getState().auth.isEnabled,
                    walletBalance: getState().auth.walletBalance,
                    profilePic: getState().auth.profilePic,
-                   pickUpDetails: getState().auth.pickUpDetails,
-                   billingDetails: {
-                    store: user.store,
-                    address: user.street,
-                    state: user.state,
-                    city: user.city,
-                    phone: user.phone,
-                   }
                   }, getToken(), "application/json")
       if (res.status === 201) {
         dispatch({ type: "PROFILE_UPDATE", data: user });
@@ -201,14 +193,21 @@ export const UploadPhoto = (value) => {
             var image = res.data.imageUrl
             // actual call to update profile 
             dispatch({type: "profilePicture", image})
-               const id = getState().auth.id
+            // check for role so to know what to send
+            let role = getState().auth.role
+            if(role === 'Admin'){
               const values = {
                 firstName: getState().auth.firstname,
                 lastName: getState().auth.lastname,
+                role: getState().auth.role,
                 email: getState().auth.email,
                 phoneNumber:getState().auth.phoneNumber,
+                isVerified: getState().auth.isVerified,
+                isEnabled: getState().auth.isEnabled,
+                walletBalance: getState().auth.walletBalance,
+                profilePic: image,
               }
-              axios.put(apiUrl + "member/"+id, {...values}, {
+                axios.put(apiUrl + "member", {...values}, {
                   headers: {
                       Accept: 'application/json',
                       Authorization: getToken()
@@ -219,10 +218,12 @@ export const UploadPhoto = (value) => {
                     cogoToast.success('Image updated successfully!')
                   } 
               }).catch((err) => {
-                 dispatch({ type: "StopPhotoLoader"});
+                dispatch({ type: "StopPhotoLoader"});
                   cogoToast.error('Error while uploading picture!')
               })
-        }
+            }
+                  // else for exchanger
+          }
         if(res.status === 400 || res.status === 404){
           cogoToast.error('Error while uploading image!')
           dispatch({ type: "StopPhotoLoader"});

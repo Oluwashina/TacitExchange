@@ -20,11 +20,11 @@ const AdminDashboard = () => {
                                 <div className="dash-div">
 
                                     <div>
-                                        <p className="mb-0" style={{color: '#0898D7'}}>Trades</p>
+                                        <p className="mb-0" style={{color: '#0898D7'}}>Pending Payment</p>
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5>50,000</h5>
+                                        <h5 style={{color: '#dc3545'}}>50</h5>
                                     </div>
 
                                 </div>
@@ -35,11 +35,11 @@ const AdminDashboard = () => {
                                 <div className="dash-div">
 
                                     <div>
-                                        <p className="mb-0" style={{color: '#0898D7'}}>Trades</p>
+                                        <p className="mb-0" style={{color: '#0898D7'}}>Completed Trades</p>
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5>50,000</h5>
+                                        <h5 style={{color: '#13AA52'}}>50,000</h5>
                                     </div>
 
                                 </div>

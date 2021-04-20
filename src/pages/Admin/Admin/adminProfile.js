@@ -5,10 +5,11 @@ import './admin.css'
 import Profile from '../../../assets/images/profile.svg'
 import { Form, Formik } from "formik";
 import { ChangePasswordValidator } from "../../../validationSchema/validator";
+import { UploadPhoto } from '../../../store/actions/auth';
 
 const AdminProfile = (props) => {
 
-    const {image, firstname, lastname, email, photoloader} = props
+    const {image, firstname, lastname, email, photoloader, handlePicture} = props
 
     const [val, setVal] = useState(3);
 
@@ -34,27 +35,27 @@ const AdminProfile = (props) => {
     const handleFile = () =>{
         var file = fileRef.current.files[0]
         console.log(file)
-        // handlePicture(file)
+        handlePicture(file)
 
     }
 
-    const [fundData] = useState([
+    const [tabData] = useState([
         { id: 1, name: "tab-1", text: "New", value: "1" },
         { id: 2, name: "tab-2", text: "View All", value: "2" },
         { id: 3, name: "tab-5", text: "Profile", value: "3" },
       ]);
 
-      const funding = fundData.map((item) => (
+      const tabs = tabData.map((item) => (
         <div
           key={item.id}
           className={val === item.id ? "filter-tab active-filter" : "filter-tab"}
-          onClick={() => FundToggle(item.id)}
+          onClick={() => TabToggle(item.id)}
         >
           <p className="mb-0">{item.text}</p>
         </div>
       ));
 
-      const FundToggle = (id) => {
+      const TabToggle = (id) => {
         // route to all admin
         if (id === 1) {
             setVal(id)
@@ -92,7 +93,7 @@ const AdminProfile = (props) => {
                     alignItems: "center",
                     }}
                 >
-                    <div className="chart-filter">{funding}</div>
+                    <div className="chart-filter">{tabs}</div>
                 </div>
 
                 {/* main layout */} 
@@ -311,7 +312,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        
+      handlePicture: (values) => dispatch(UploadPhoto(values)) 
     }
 }
  

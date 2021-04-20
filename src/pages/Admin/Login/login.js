@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./login.css";
 import {Form, Formik} from 'formik'
 import {connect } from 'react-redux'
@@ -6,13 +6,22 @@ import { loginValidator } from "../../../validationSchema/validator";
 import {Link} from 'react-router-dom'
 import Logo from '../../../assets/images/logo.png'
 import Hero from '../../../assets/images/adminlogin.png'
+import { loginUser } from '../../../store/actions/auth';
 
 
-const AdminLogin = () => {
+const AdminLogin = (props) => {
+
+  const {login, history, isAuthenticated} = props
 
     const handleSubmit = async (values) =>{
-        console.log(values)
+        await login(values);
       }
+
+      useEffect(() =>{
+        if(isAuthenticated){
+          history.push('/admin/dashboard')
+        }
+      },[isAuthenticated, history])
 
     return ( 
         <>
@@ -118,15 +127,15 @@ const AdminLogin = () => {
      );
 }
 
-const mapStateToProps = () =>{
+const mapStateToProps = (state) =>{
     return{
-
+      isAuthenticated: state.auth.isAuthenticated,
     }
 }
 
-const mapDispatchToProps = () =>{
+const mapDispatchToProps = (dispatch) =>{
     return{
-        
+      login: (creds) => dispatch(loginUser(creds)),
     }
 }
  
