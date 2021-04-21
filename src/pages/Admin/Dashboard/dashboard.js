@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Charts from '../../../components/Charts/Chart';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import './dashboard.css'
 import DataTable from 'react-data-table-component'
 import {movies} from "./data";
+import {connect} from 'react-redux'
+import {getDashboardCount} from '../../../store/actions/admin'
 
 
-const AdminDashboard = () => {
+const AdminDashboard = (props) => {
+
+    const {count, getCount} = props
+
+   useEffect(() => {
+        getCount();
+      }, [getCount]);
     
 const columns = [
     {
@@ -68,7 +76,7 @@ const columns = [
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5 style={{color: '#dc3545'}}>50</h5>
+                                        <h5 style={{color: '#dc3545'}}>{count.countPendingTrade}</h5>
                                     </div>
 
                                 </div>
@@ -83,7 +91,7 @@ const columns = [
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5 style={{color: '#13AA52'}}>50,000</h5>
+                                        <h5 style={{color: '#13AA52'}}>{count.countCompletedTrade}</h5>
                                     </div>
 
                                 </div>
@@ -97,7 +105,7 @@ const columns = [
                                 </div>
 
                                 <div className="mt-4">
-                                    <h5>50</h5>
+                                    <h5>{count.countAllExchanger}</h5>
                                 </div>
 
                                 </div>
@@ -107,11 +115,11 @@ const columns = [
                           <div className="dash-div">
 
                                 <div>
-                                    <p className="mb-0" style={{color: '#0898D7'}}>Trades</p>
+                                    <p className="mb-0" style={{color: '#0898D7'}}>Outflow</p>
                                 </div>
 
                                 <div className="mt-4">
-                                    <h5>50,000</h5>
+                                    <h5>NGN 50,000</h5>
                                 </div>
 
                                 </div>
@@ -144,5 +152,17 @@ const columns = [
         </>
      );
 }
+
+const mapStateToProps = (state) =>{
+    return{
+        count: state.admin.count
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+     getCount : () => dispatch(getDashboardCount()),
+    }
+}
  
-export default AdminDashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);

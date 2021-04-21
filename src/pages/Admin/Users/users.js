@@ -1,36 +1,56 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import DataTable from 'react-data-table-component'
-import {movies} from '../Dashboard/data'
+import {connect} from 'react-redux'
+import { getAllUsers } from '../../../store/actions/admin';
 
 
-const AdminUsers = () => {
+const AdminUsers = (props) => {
+
+  const {history, usersFetch, users} = props
+
+  const [role] = useState("Exchanger")
+
+  // make call to fetch all users
+  useEffect(() => {
+    usersFetch(role);
+  }, [usersFetch, role]);
 
     const columns = [
         {
           name: "First Name",
-          selector: "id",
+          selector: "firstName",
           sortable: true
         },
         {
           name: "Last Name",
-          selector: "title",
+          selector: "lastName",
           sortable: true
         },
         {
           name: "Email Address",
-          selector: "amount",
+          selector: "email",
           sortable: true,
         },
         {
             name: "Date Registered",
-            selector: "date",
+            selector: "createdAt",
             sortable: true,
         },
         {
             name: "Phone Number",
-            selector: "status",
+            selector: "phoneNumber",
             sortable: true,
+          },
+          {
+            name: "Status",
+            cell: row => <span>
+              {row.isEnabled ? (
+                                   "Active"
+                                    ) : (
+                                  "Inactive"
+                        )}
+            </span>
           },
           {
             name: 'Actions',
@@ -44,7 +64,7 @@ const AdminUsers = () => {
       ];
 
       const ViewTransact = (id) =>{
-        alert(id)
+        history.push("/admin/user/"+id)
     }
 
     return ( 
@@ -59,7 +79,7 @@ const AdminUsers = () => {
                          <DataTable
                             title="Users"
                             columns={columns}
-                            data={movies}
+                            data={users}
                             pagination
                             persistTableHead
                             progressPending={false}
@@ -72,5 +92,17 @@ const AdminUsers = () => {
         </>
      );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    users: state.admin.users
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    usersFetch: (val) => dispatch(getAllUsers(val)),
+  }
+}
  
-export default AdminUsers;
+export default connect(mapStateToProps, mapDispatchToProps)(AdminUsers);

@@ -20,6 +20,8 @@ import adminProfile from './pages/Admin/Admin/adminProfile';
 import AdminTrades from './pages/Admin/Trades/trades';
 import AdminUsers from './pages/Admin/Users/users';
 import AdminRates from './pages/Admin/Rates/rates';
+import ViewAdmin from './pages/Admin/Admin/viewAdmin';
+import UsersDetails from './pages/Admin/Users/usersbyId';
 
 
 
@@ -42,9 +44,11 @@ function App() {
               <Route path="/admin/forgotpassword" component={AdminForgotPassword} />
               <Route path="/admin/dashboard" component={AdminDashboard} />
               <Route path="/admin/admin" component={Admins} />
+              <Route path="/admin/all" component={ViewAdmin} />
               <Route path="/admin/profile" component={adminProfile} />
               <Route path="/admin/trades" component={AdminTrades} />
               <Route path="/admin/users" component={AdminUsers} />
+              <Route path="/admin/user/:id" component={UsersDetails} />
               <Route path="/admin/rates" component={AdminRates} />
 
 

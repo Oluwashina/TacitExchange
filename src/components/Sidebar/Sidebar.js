@@ -54,7 +54,7 @@ const SideBar = (props) => {
                         >
                               <div className="form-group input-container mb-0">
                               <i className="mdi mdi-magnify iconn"></i>
-                                <input type="text" placeholder="Search by email"
+                                <input type="text" placeholder="Search by Firstname"
                                  onChange={handleChange}  
                                 className="form-control search-style"  />
                             </div>

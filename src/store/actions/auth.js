@@ -67,7 +67,7 @@ export const signUp = (user) => {
 export const signUpAdmin = (user) => {
   return async (dispatch, getState) => {
     try {
-      const res = await PostApi("userd", {
+      const res = await PostApi("user", {
                    firstName: user.firstname,
                    lastName: user.lastname,
                    phoneNumber: user.phoneNumber,

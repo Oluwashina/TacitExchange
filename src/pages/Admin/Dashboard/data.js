@@ -7,27 +7,31 @@ export const movies = [
       amount: "NGN 80,000",
       date: "May 26, 2019",
       status: 'Pending',
+      active: 'Active'
     },
     {
-      id: 'TRX123423234SH',
+      id: 'TRX123423234ST',
       title: "ITunes gift card",
       amount: "NGN 80,000",
       date: "May 26, 2019",
       status: 'Pending',
+      active: 'Active'
     },
     {
-      id: 'TRX123423234SH',
+      id: 'TRX123423234SP',
       title: "Amazon gold gift card",
       amount: "NGN 80,000",
       date: "May 26, 2019",
       status: 'Processing',
+      active: 'Active'
     },  
     {
-      id: 'TRX123423234SH',
+      id: 'TRX123423234SD',
       title: "ITunes gift card",
       amount: "NGN 80,000",
       date: "May 26, 2019",
       status: 'Successful',
+      active: 'Inactive'
     },
     
   ];

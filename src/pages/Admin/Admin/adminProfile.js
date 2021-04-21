@@ -64,7 +64,7 @@ const AdminProfile = (props) => {
         // route to all admin
         if (id === 2) {
             setVal(id)
-        //   props.history.push("/admin/view");
+          props.history.push("/admin/all");
         }
         // route to admin profile
         if (id === 3) {

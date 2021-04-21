@@ -74,6 +74,30 @@ input[type="file"].adminphoto {
     display: none;
 }
 
+.btn-suspend{
+  background: #FF3535;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 40px;
+  transition: all ease-in 0.5s;
+}
+
+.btn-suspend:hover{
+  color: white;
+}
+
+.btn-active{
+  background:#00B327;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 40px;
+  transition: all ease-in 0.5s;
+}
+
+.btn-active:hover{
+  color: white;
+}
+
 /* Media query for smaller phones */
 
 @media (max-width:767px) {
