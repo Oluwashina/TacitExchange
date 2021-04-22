@@ -8,7 +8,7 @@ import Moment from 'react-moment'
 
 const UsersDetails = (props) => {
 
-    const {user, id, HandleActivate, HandleSuspend, susloader, getUserTrade, userTrade} = props
+    const {user, id, HandleActivate, HandleSuspend, susloader, getUserTrade, userTrade, userRole} = props
 
     const [date, setDate] = useState("today");
 
@@ -152,7 +152,7 @@ const UsersDetails = (props) => {
                             <div>
                                 <button 
                                 type="submit"
-                                disabled={susloader}
+                                disabled={susloader || userRole === 'SubAdmin'}
                                 className={ user.isEnabled ? 'btn btn-suspend' : 'btn btn-active'}
                                 onClick={() => Suspend(id)}
                                 >
@@ -267,7 +267,8 @@ const mapStateToProps = (state, ownProps) =>{
         user: user,
         id: id,
         susloader: state.admin.susloader,
-        userTrade: state.admin.userTrade
+        userTrade: state.admin.userTrade,
+        userRole: state.auth.role
     }
 }
 

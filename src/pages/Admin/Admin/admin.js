@@ -8,7 +8,7 @@ import { signUpAdmin } from '../../../store/actions/auth';
 
 const Admins = (props) => {
 
-  const {Register} = props
+  const {Register, userRole} = props
 
     const [val, setVal] = useState(1);
 
@@ -19,7 +19,7 @@ const Admins = (props) => {
         const creds = {
           ...values,
           role
-      }
+         }
         await Register(creds)
       };
 
@@ -202,7 +202,7 @@ const Admins = (props) => {
 
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || userRole === 'SubAdmin'}
                       className="btn btn-blueTacit btn-block mt-2"
                     >
                       Create New Admin
@@ -221,7 +221,7 @@ const Admins = (props) => {
 
 const mapStateToProps = (state) =>{
     return{
-
+      userRole: state.auth.role
     }
 }
 

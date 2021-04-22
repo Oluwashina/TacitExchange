@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 
 const AdminDashboard = (props) => {
 
-    const {count, getCount, getTrade, trade} = props
+    const {count, getCount, getTrade, trade, history} = props
 
     const [status] = useState('Pending')
 
@@ -62,7 +62,7 @@ const columns = [
   ];
 
   const ViewTransact = (id) =>{
-      alert(id)
+      history.push("/admin/trade/"+id)
   }
 
     return ( 

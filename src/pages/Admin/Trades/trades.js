@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 
 const AdminTrades = (props) => {
 
-   const {getTrade, trade} = props
+   const {getTrade, trade, history} = props
 
     const [initialTab, setTab] = useState(1);
     const [tradeName, setTradeName] = useState('Pending')
@@ -93,7 +93,7 @@ const AdminTrades = (props) => {
       ];
 
       const ViewTransact = (id) =>{
-        alert(id)
+        history.push("/admin/trade/"+id)
       }
   
 

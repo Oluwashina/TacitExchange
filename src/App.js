@@ -22,6 +22,7 @@ import AdminUsers from './pages/Admin/Users/users';
 import AdminRates from './pages/Admin/Rates/rates';
 import ViewAdmin from './pages/Admin/Admin/viewAdmin';
 import UsersDetails from './pages/Admin/Users/usersbyId';
+import AdminTradeDetails from './pages/Admin/Trades/TradeById';
 
 
 
@@ -47,6 +48,7 @@ function App() {
               <Route path="/admin/all" component={ViewAdmin} />
               <Route path="/admin/profile" component={adminProfile} />
               <Route path="/admin/trades" component={AdminTrades} />
+              <Route path="/admin/trade/:id" component={AdminTradeDetails} />
               <Route path="/admin/users" component={AdminUsers} />
               <Route path="/admin/user/:id" component={UsersDetails} />
               <Route path="/admin/rates" component={AdminRates} />

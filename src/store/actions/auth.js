@@ -277,7 +277,7 @@ export const UploadPhoto = (value) => {
             dispatch({type: "profilePicture", image})
             // check for role so to know what to send
             let role = getState().auth.role
-            if(role === 'Admin'){
+            if(role === 'Admin' || 'SubAdmin'){
               const values = {
                 firstName: getState().auth.firstname,
                 lastName: getState().auth.lastname,

@@ -7,7 +7,7 @@ import { getAllAdmins, SuspendAdmin, ActivateAdmin } from '../../../store/action
 
 const ViewAdmin = (props) => {
 
-    const {adminFetch, admins, HandleActivate, HandleSuspend, susloader} = props
+    const {adminFetch, admins, HandleActivate, HandleSuspend, susloader, userRole} = props
 
     const [role] = useState("SubAdmin")
 
@@ -46,9 +46,9 @@ const ViewAdmin = (props) => {
           name: "Status",
           cell: row => <span>
             {row.isEnabled ? (
-                                 "Active"
-                                  ) : (
-                                "Inactive"
+                          "Active"
+                          ) : (
+                        "Inactive"
                       )}
           </span>
         },
@@ -56,7 +56,7 @@ const ViewAdmin = (props) => {
             name: 'Actions',
             button: true,
             cell: row => <button
-            disabled={susloader}
+            disabled={susloader || userRole === 'SubAdmin'}
             className="btn btn-sm btn-view"
             onClick={() => {
                 Suspend(row.id, row.isEnabled)}}
@@ -160,7 +160,8 @@ const ViewAdmin = (props) => {
 const mapStateToProps = (state) =>{
   return{
     admins: state.admin.admins,
-    susloader: state.admin.susloader
+    susloader: state.admin.susloader,
+    userRole: state.auth.role
   }
 }
 
