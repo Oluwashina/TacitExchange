@@ -42,7 +42,6 @@ export const getAllAdmins = (val) => {
 };
 
 
-  
   // disable a user functionality
   export const SuspendUser = (user) =>{
     return async (dispatch, getState) => {
@@ -152,6 +151,42 @@ export const getDashboardCount = () => {
       }
       if(res.status === 400){
         dispatch({ type: "Count_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+};
+
+// get all pending trades
+export const getPendingTrade = () => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await GetApi(`trade?status=Pending`, getToken());
+      if (res.status === 200) {
+        dispatch({ type: "PendingTrade", data: res.data});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Trade_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+};
+
+// get a user trade history
+export const getUserTradeHistory = (val) => {
+  return async (dispatch, getState) => {
+    let day = val.time
+    let id = val.id
+    try {
+      const res = await GetApi(`user/trade/${id}?time=${day}`, getToken());
+      if (res.status === 200) {
+        dispatch({ type: "UserTradeHistory", data: res.data});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Trade_Error", err: res.data });
       }
     } catch (err) {
      console.log(err)

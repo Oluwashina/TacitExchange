@@ -3,18 +3,18 @@ import Charts from '../../../components/Charts/Chart';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import './dashboard.css'
 import DataTable from 'react-data-table-component'
-import {movies} from "./data";
 import {connect} from 'react-redux'
-import {getDashboardCount} from '../../../store/actions/admin'
-
+import {getDashboardCount, getPendingTrade} from '../../../store/actions/admin'
+import Moment from 'react-moment'
 
 const AdminDashboard = (props) => {
 
-    const {count, getCount} = props
+    const {count, getCount, getTrade, trade} = props
 
    useEffect(() => {
         getCount();
-      }, [getCount]);
+        getTrade()
+      }, [getCount, getTrade]);
     
 const columns = [
     {
@@ -24,22 +24,27 @@ const columns = [
     },
     {
       name: "Card Name",
-      selector: "title",
+      selector: "cardName",
       sortable: true
     },
     {
       name: "Amount Due",
-      selector: "amount",
-      sortable: true,
+      cell: row => <span> 
+              {`NGN ${row.amount}`}
+      </span>
     },
     {
         name: "Date Initiated",
-        selector: "date",
-        sortable: true,
+        cell: row => <span>
+             <Moment format="MMMM Do, YYYY">
+              {row.createdAt}
+             </Moment>
+            
+      </span>
     },
     {
         name: "Status",
-        selector: "status",
+        selector: "paymentStatus",
         sortable: true,
       },
       {
@@ -76,7 +81,7 @@ const columns = [
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5 style={{color: '#dc3545'}}>{count.countPendingTrade}</h5>
+                                        <h5 style={{color: '#dc3545'}}>{count.countPendingTrade ? count.countPendingTrade : 0}</h5>
                                     </div>
 
                                 </div>
@@ -91,7 +96,7 @@ const columns = [
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5 style={{color: '#13AA52'}}>{count.countCompletedTrade}</h5>
+                                        <h5 style={{color: '#13AA52'}}>{count.countCompletedTrade ? count.countCompletedTrade : 0}</h5>
                                     </div>
 
                                 </div>
@@ -105,7 +110,7 @@ const columns = [
                                 </div>
 
                                 <div className="mt-4">
-                                    <h5>{count.countAllExchanger}</h5>
+                                    <h5>{count.countAllExchanger ? count.countAllExchanger : 0}</h5>
                                 </div>
 
                                 </div>
@@ -115,11 +120,11 @@ const columns = [
                           <div className="dash-div">
 
                                 <div>
-                                    <p className="mb-0" style={{color: '#0898D7'}}>Outflow</p>
+                                    <p className="mb-0" style={{color: '#0898D7'}}>Total Outflow</p>
                                 </div>
 
                                 <div className="mt-4">
-                                    <h5>NGN 50,000</h5>
+                                    <h5 style={{fontWeight: 500}}>NGN {count.sumTotalTrade ? count.sumTotalTrade : 0.00}</h5>
                                 </div>
 
                                 </div>
@@ -140,7 +145,7 @@ const columns = [
                          <DataTable
                             title="Pending Trades"
                             columns={columns}
-                            data={movies}
+                            data={trade}
                             pagination
                             persistTableHead
                             progressPending={false}
@@ -155,13 +160,15 @@ const columns = [
 
 const mapStateToProps = (state) =>{
     return{
-        count: state.admin.count
+        count: state.admin.count,
+        trade: state.admin.pendingTrade
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
      getCount : () => dispatch(getDashboardCount()),
+     getTrade : () => dispatch(getPendingTrade()),
     }
 }
  

@@ -28,6 +28,38 @@ export const loginUser = (user) => {
   };
 };
 
+
+// administrator login
+export const loginAdmin = (user) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("authenticate", {...user}, "", "application/json")
+      if (res.status === 200) {
+        let role = res.data.profile.role
+        switch(role){
+          case 'Admin':
+            dispatch({ type: "LOGIN_SUCCESS", data: res.data });
+             cogoToast.success('Login Successful!', { position: 'bottom-right', })
+            break;
+          case 'SubAdmin':
+            dispatch({ type: "LOGIN_SUCCESS", data: res.data });
+            cogoToast.success('Login Successful!', { position: 'bottom-right', })
+              break;
+          default:
+            cogoToast.error('User not authorized!')
+            break;
+        }    
+      }
+      if(res.status === 400){
+        dispatch({ type: "LOGIN_FAIL", err: res.data});
+        cogoToast.error('Invalid Credentials!')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};
+
 // logout a user
 export const logOut = () => {
   return (dispatch, getState) => {

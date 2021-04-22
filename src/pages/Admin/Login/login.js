@@ -6,7 +6,7 @@ import { loginValidator } from "../../../validationSchema/validator";
 import {Link} from 'react-router-dom'
 import Logo from '../../../assets/images/logo.png'
 import Hero from '../../../assets/images/adminlogin.png'
-import { loginUser } from '../../../store/actions/auth';
+import { loginAdmin } from '../../../store/actions/auth';
 
 
 const AdminLogin = (props) => {
@@ -135,7 +135,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-      login: (creds) => dispatch(loginUser(creds)),
+      login: (creds) => dispatch(loginAdmin(creds)),
     }
 }
  

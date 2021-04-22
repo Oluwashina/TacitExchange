@@ -3,7 +3,9 @@ const initState = {
     users: [],
     admins: [],
     susloader: false,
-    count: {}
+    count: {},
+    userTrade: [],
+    pendingTrade: []
   };
   
   const adminReducer = (state = initState, action) => {
@@ -64,6 +66,16 @@ const initState = {
           return{
             ...state,
             count: action.data
+          }
+        case 'UserTradeHistory':
+          return{
+            ...state,
+            userTrade: action.data
+          }
+        case 'PendingTrade':
+          return{
+            ...state,
+            pendingTrade: action.data
           }
       default:
         return state;

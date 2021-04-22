@@ -1,16 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {Link} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
-import {movies} from '../Dashboard/data'
 import {connect} from 'react-redux'
-import { ActivateUser, SuspendUser } from '../../../store/actions/admin';
+import { ActivateUser, getUserTradeHistory, SuspendUser } from '../../../store/actions/admin';
+import Moment from 'react-moment'
 
 const UsersDetails = (props) => {
 
-    const {user, id, HandleActivate, HandleSuspend, susloader} = props
+    const {user, id, HandleActivate, HandleSuspend, susloader, getUserTrade, userTrade} = props
 
     const [date, setDate] = useState("today");
+
+    useEffect(() => {
+        const values = {
+            time: date,
+            id: id,
+          };
+        getUserTrade(values);
+      }, [getUserTrade, id, date]);
 
    const [filterData] = useState([
         { id: 1, name: 'tab-1', text: 'Today', value: 'today' },
@@ -29,8 +37,41 @@ const UsersDetails = (props) => {
     )
 
 
-    const DayToggle = (id) =>{
-        setDate(id)
+    const DayToggle = (val) =>{
+        setDate(val)
+        var values;
+        switch (val) {
+        case 1:
+            values = {
+                time: "today",
+                id: id,
+            };
+            getUserTrade(values);
+            break;
+        case 2:
+            values = {
+                time: "week",
+                id: id,
+            };
+            getUserTrade(values);
+            break;
+        case 3:
+            values = {
+                time: "month",
+                id: id,
+            };
+            getUserTrade(values);
+            break;
+        case 4:
+            values = {
+                time: "year",
+                id: id,
+            };
+            getUserTrade(values);
+            break;
+        default:
+            break;
+        }
     }
 
     const Suspend = (id) =>{
@@ -56,22 +97,27 @@ const UsersDetails = (props) => {
         },
         {
           name: "Card Name",
-          selector: "title",
+          selector: "cardName",
           sortable: true
         },
         {
           name: "Amount Due",
-          selector: "amount",
           sortable: true,
+          cell: row => <span> 
+                {`NGN ${row.amount}`}
+             </span>
         },
         {
             name: "Date Initiated",
-            selector: "date",
-            sortable: true,
+            cell: row => <span>
+            <Moment format="MMMM Do, YYYY">
+             {row.createdAt}
+            </Moment>   
+            </span>
         },
         {
             name: "Status",
-            selector: "status",
+            selector: "paymentStatus",
             sortable: true,
           },
       ];
@@ -196,7 +242,7 @@ const UsersDetails = (props) => {
                          <DataTable
                             title="Trade History"
                             columns={columns}
-                            data={movies}
+                            data={userTrade}
                             pagination
                             persistTableHead
                             progressPending={false}
@@ -221,6 +267,7 @@ const mapStateToProps = (state, ownProps) =>{
         user: user,
         id: id,
         susloader: state.admin.susloader,
+        userTrade: state.admin.userTrade
     }
 }
 
@@ -228,6 +275,7 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         HandleSuspend: (value) => dispatch(SuspendUser(value)),
         HandleActivate: (value) => dispatch(ActivateUser(value)),
+        getUserTrade : (values) => dispatch(getUserTradeHistory(values)),
     }
 }
  
