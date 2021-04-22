@@ -17,6 +17,7 @@ const AdminTrades = (props) => {
       const [tabData] = useState([
         { id: 1, name: "tab-1", text: "Pending Trades"},
         { id: 2, name: "tab-2", text: "Completed Trades" },
+        { id: 3, name: "tab-3", text: "Declined Trades" },
       ]);
 
       // tab Layout
@@ -47,6 +48,12 @@ const AdminTrades = (props) => {
           setTab(id);
           setTradeName('Completed')
           const value = 'Completed'
+          getTrade(value)
+        }
+        else if(id === 3){
+          setTab(id);
+          setTradeName('Declined')
+          const value = 'Declined'
           getTrade(value)
         }
       }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
 import { ActivateUser, getUserTradeHistory, SuspendUser } from '../../../store/actions/admin';
@@ -11,6 +11,8 @@ const UsersDetails = (props) => {
     const {user, id, HandleActivate, HandleSuspend, susloader, getUserTrade, userTrade, userRole} = props
 
     const [date, setDate] = useState("today");
+
+    const history = useHistory()
 
     useEffect(() => {
         const values = {
@@ -120,7 +122,20 @@ const UsersDetails = (props) => {
             selector: "paymentStatus",
             sortable: true,
           },
+          {
+            name: 'Actions',
+            button: true,
+            cell: row => <button
+            className="btn btn-sm btn-view"
+            onClick={() => {
+                ViewTransact(row.id)}}
+             >View</button>,
+          }
       ];
+
+      const ViewTransact = (id) =>{
+        history.push("/admin/usertrade/"+id)
+      }
   
 
     return ( 

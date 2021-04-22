@@ -2,12 +2,11 @@ import React from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {connect} from 'react-redux'
 import {Link, useHistory} from 'react-router-dom'
-import './trades.css'
 import ImageZoom from 'react-medium-image-zoom'
 import { ApproveTradePayment, DeclineTradePayment } from '../../../store/actions/admin';
 
 
-const AdminTradeDetails = (props) => {
+const UserTradeDetails = (props) => {
 
     const {trade, id, ApproveTrade, DeclineTrade, approveloader, declineloader} = props
     const history = useHistory()
@@ -53,7 +52,7 @@ const AdminTradeDetails = (props) => {
         }
       }
 
-    const getColor = (status) =>{
+      const getColor = (status) =>{
         switch(status){
             case 'Pending':
                 return '#ff0000'
@@ -76,7 +75,7 @@ const AdminTradeDetails = (props) => {
                     {/* back button */}
                     <div className="container mt-3 mb-5">
 
-                        <Link to="/admin/trades" style={{textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', fontSize: '18px'}}>
+                        <Link to={`/admin/user/${trade.userId}`} style={{textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', fontSize: '18px'}}>
                             <span><i className="mdi mdi-arrow-left"></i> Go Back</span>
                         </Link>
 
@@ -87,10 +86,10 @@ const AdminTradeDetails = (props) => {
                         <div className="mt-4 mb-4 card-head">
                             <div style={{display: 'flex', alignItems: 'center',}}>
                                 <div style={{width: '50px', height: '50px', borderRadius: '50%', background: '#FFDDD2', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                    <span style={{color:'#CB644E', fontWeight: 'bold'}}>{trade.userDetails.firstName.charAt(0)}{trade.userDetails.lastName.charAt(0)}</span>
+                                    <span style={{color:'#CB644E', fontWeight: 'bold'}}>{trade.userDetails.firstName ? trade.userDetails.firstName.charAt(0) : 'O'}{trade.userDetails.lastName ? trade.userDetails.lastName.charAt(0) : 'O'}</span>
                                 </div>
                                 <div className="ml-3 mt-1">
-                                    <h5>{trade.userDetails.firstName} {trade.userDetails.lastName}</h5>
+                                    <h5>{trade.userDetails.firstName ? trade.userDetails.firstName : ''} {trade.userDetails.lastName ? trade.userDetails.lastName : ""}</h5>
                                 </div>
                             </div>
 
@@ -167,6 +166,7 @@ const AdminTradeDetails = (props) => {
                                         <p className="mt-1 mb-0" 
                                         style={{
                                             color: getColor(trade.paymentStatus)
+                                            
                                             }}
                                         >{trade.paymentStatus}</p>
                                     </div>
@@ -184,18 +184,18 @@ const AdminTradeDetails = (props) => {
                                 <div className="row mt-4">
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Bank Name</p>
-                                        <p className="mt-1" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.bankName}</p>
+                                        <p className="mt-1" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.bankName ? trade.userDetails.accountDetails.bankName : 'GTB'}</p>
                                     </div>
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Account Number</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.accountNumber}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.accountNumber ? trade.userDetails.accountDetails.accountNumber : '0010020002'}</p>
                                     </div>
                                 </div>
 
                                 <div className="row mt-lg-3 mt-3">
                                     <div className="col-lg-12">
                                         <p className="mb-0" >Account Name</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.accountName}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.accountName ? trade.userDetails.accountDetails.accountName : 'Bola dea'}</p>
                                     </div>
                                    
                                 </div>
@@ -227,7 +227,7 @@ const AdminTradeDetails = (props) => {
 
 const mapStateToProps = (state, ownProps) =>{
     const id = ownProps.match.params.id
-    const trades = state.admin.Trades
+    const trades = state.admin.userTrade
     const trade = trades.find(val => val.id === id);
     return{
         trade: trade, 
@@ -244,4 +244,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
  
-export default connect(mapStateToProps,mapDispatchToProps)(AdminTradeDetails);
+export default connect(mapStateToProps,mapDispatchToProps)(UserTradeDetails);
