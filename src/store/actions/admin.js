@@ -159,12 +159,12 @@ export const getDashboardCount = () => {
 };
 
 // get all pending trades
-export const getPendingTrade = () => {
+export const getTrades = (val) => {
   return async (dispatch, getState) => {
     try {
-      const res = await GetApi(`trade?status=Pending`, getToken());
+      const res = await GetApi(`trade?status=${val}`, getToken());
       if (res.status === 200) {
-        dispatch({ type: "PendingTrade", data: res.data});
+        dispatch({ type: "Trades", data: res.data});
       }
       if(res.status === 400){
         dispatch({ type: "Trade_Error", err: res.data });

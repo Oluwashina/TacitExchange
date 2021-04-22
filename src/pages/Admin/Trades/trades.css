@@ -1,0 +1,21 @@
+.orderTab{
+    cursor: pointer;
+}
+.tabSpace{
+    margin-right: 20px;
+}
+.activeOrderTab{
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+}
+
+.activeOrderTab::after{
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: #0898D7;
+    position: absolute;
+    left: 0px;
+    bottom: -8px;
+}

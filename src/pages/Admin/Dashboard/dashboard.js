@@ -1,20 +1,22 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Charts from '../../../components/Charts/Chart';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import './dashboard.css'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
-import {getDashboardCount, getPendingTrade} from '../../../store/actions/admin'
+import {getDashboardCount, getTrades} from '../../../store/actions/admin'
 import Moment from 'react-moment'
 
 const AdminDashboard = (props) => {
 
     const {count, getCount, getTrade, trade} = props
 
+    const [status] = useState('Pending')
+
    useEffect(() => {
         getCount();
-        getTrade()
-      }, [getCount, getTrade]);
+        getTrade(status)
+      }, [getCount, getTrade, status]);
     
 const columns = [
     {
@@ -161,14 +163,14 @@ const columns = [
 const mapStateToProps = (state) =>{
     return{
         count: state.admin.count,
-        trade: state.admin.pendingTrade
+        trade: state.admin.Trades
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
      getCount : () => dispatch(getDashboardCount()),
-     getTrade : () => dispatch(getPendingTrade()),
+     getTrade : (status) => dispatch(getTrades(status)),
     }
 }
  
