@@ -1,15 +1,16 @@
 import React from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import './trades.css'
 import ImageZoom from 'react-medium-image-zoom'
+import { ApproveTradePayment, DeclineTradePayment } from '../../../store/actions/admin';
 
 
 const AdminTradeDetails = (props) => {
 
-    const {trade, id} = props
-
+    const {trade, id, ApproveTrade, DeclineTrade, approveloader, declineloader} = props
+    const history = useHistory()
     // mapping images 
     const imageLayout = trade.imageUrl.map((item, index) => (
         <div key={index} className="col-lg-3 mb-4">
@@ -29,11 +30,27 @@ const AdminTradeDetails = (props) => {
       ));
 
       const Approve = (id) =>{
-          alert(id)
+        var confirm_flag = window.confirm("You are about to approve this payment?");
+
+        if(confirm_flag){
+            ApproveTrade(id)
+
+            setTimeout(() => {
+                history.push('/admin/trades')
+              }, 2000);
+        }
       }
 
       const Decline = (id) =>{
-          alert(id)
+        var confirm_flag = window.confirm("You are about to decline this payment?");
+
+        if(confirm_flag){
+            DeclineTrade(id)
+
+            setTimeout(() => {
+                history.push('/admin/trades')
+              }, 2000);
+        }
       }
 
     return ( 
@@ -71,6 +88,7 @@ const AdminTradeDetails = (props) => {
                                 <button 
                                 type="submit" 
                                 className='btn btn-active mt-lg-0 mt-3'
+                                disabled={approveloader}
                                 onClick={() => {
                                     Approve(id)}}
                                 >
@@ -78,6 +96,7 @@ const AdminTradeDetails = (props) => {
                                 </button>
                                 <button 
                                 type="submit" 
+                                disabled={declineloader}
                                 className='btn btn-suspend ml-lg-3 mt-lg-0 mt-3'
                                 onClick={() => {
                                     Decline(id)}}
@@ -200,12 +219,15 @@ const mapStateToProps = (state, ownProps) =>{
     return{
         trade: trade, 
         id: id,
+        approveloader: state.admin.approveloader,
+        declineloader: state.admin.declineloader
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-
+        ApproveTrade: (id) => dispatch(ApproveTradePayment(id)),
+        DeclineTrade: (id) => dispatch(DeclineTradePayment(id))
     }
 }
  

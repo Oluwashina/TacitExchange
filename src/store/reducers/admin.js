@@ -5,7 +5,9 @@ const initState = {
     susloader: false,
     count: {},
     userTrade: [],
-    Trades: []
+    Trades: [],
+    declineloader: false,
+    approveloader: false
   };
   
   const adminReducer = (state = initState, action) => {
@@ -77,6 +79,26 @@ const initState = {
             ...state,
             Trades: action.data
           }
+      case 'approve_loader':
+        return{
+          ...state,
+          approveloader: true
+        }
+      case 'StopApproveLoader':
+        return{
+          ...state,
+          approveloader: false
+        }
+        case 'decline_loader':
+          return{
+            ...state,
+            declineloader: true
+          }
+      case 'StopDeclineLoader':
+        return{
+          ...state,
+          declineloader: false
+        }
       default:
         return state;
     }

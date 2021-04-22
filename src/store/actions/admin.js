@@ -194,5 +194,51 @@ export const getUserTradeHistory = (val) => {
   };
 };
 
+// approve a trade payment
+export const ApproveTradePayment = (id) =>{
+  return async (dispatch, getState) => {
+    dispatch({ type: "approve_loader", });
+    try {
+      const res = await PostApi(`payment/action/${id}?status=Completed`, '', getToken());
+      if (res.status === 200) {
+          
+          dispatch({ type: "StopApproveLoader" });
+        cogoToast.success('Trade successfully approved', { position: 'top-center', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "StopApproveLoader" });
+        cogoToast.error('Error while approving trade')
+      }
+    } catch (err) {
+      // var message = err.response.data
+      console.log(err)
+    }
+  };
+}
+
+// decline a trade payment
+export const DeclineTradePayment = (id) =>{
+  return async (dispatch, getState) => {
+    dispatch({ type: "decline_loader", });
+    try {
+      const res = await PostApi(`payment/action/${id}?status=Declined`, '', getToken());
+      if (res.status === 200) {
+          
+          dispatch({ type: "StopDeclineLoader" });
+        cogoToast.success('Trade successfully declined!!!', { position: 'top-center', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "StopDeclineLoader" });
+        cogoToast.error('Error while approving trade')
+      }
+    } catch (err) {
+      // var message = err.response.data
+      console.log(err)
+    }
+  };
+}
+
+
+
  
 
