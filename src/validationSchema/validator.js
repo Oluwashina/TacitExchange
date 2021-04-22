@@ -95,3 +95,22 @@ export const contactValidator = Yup.object({
     .required("Email is required"),
   message: Yup.string().required("Message is required"),
 });
+
+export const addGiftCardValidator = Yup.object({
+  category: Yup.string()
+    .required("Category is required"),
+  newcategory: Yup.string(),
+  subcategory: Yup.string()
+    .required("Subcategory is required"),
+  minAmount: Yup.string()
+  .required("Minimum Amount is required")
+  .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid amount"),
+  maxAmount: Yup.string()
+  .required("Maximum Amount is required")
+  .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid amount"),
+  rate: Yup.string()
+  .required("Rate is required")
+  .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid amount"),
+  terms: Yup.string()
+    .required("Terms and Conditions is required"),
+});

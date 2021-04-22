@@ -239,6 +239,27 @@ export const DeclineTradePayment = (id) =>{
 }
 
 
+// add new giftcards functionality
+export const AddGiftCard = (user) =>{
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("addcard", { ...user }, getToken());
+      if (res.status === 200) {
+          dispatch({type: "Card_Success"})
+        cogoToast.success('Giftcard successfully added!', { position: 'top-center', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "Card_Error" });
+        cogoToast.error('Error while adding card')
+      }
+    } catch (err) {
+      // var message = err.response.data
+      console.log(err)
+    }
+  };
+}
+
+
 
  
 
