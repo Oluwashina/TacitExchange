@@ -1,0 +1,20 @@
+.TradeLayout{
+    border: 2px solid rgba(8, 152, 215, 0.4);
+    box-sizing: border-box;
+    border-radius: 29.025px;
+    padding: 50px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.dashTrade{
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    background: #FFFFFF;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

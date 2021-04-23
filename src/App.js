@@ -26,6 +26,12 @@ import AdminTradeDetails from './pages/Admin/Trades/TradeById';
 import UserTradeDetails from './pages/Admin/Users/userTradebyId'
 import AdminNewRates from './pages/Admin/Rates/NewRates';
 
+// user routes
+import UserDashboard from './pages/Exchangers/Dashboard/dashboard';
+import UserProfile from './pages/Exchangers/Profile/profile';
+import UserNotifications from './pages/Exchangers/Notifications/notifications';
+import UserTrade from './pages/Exchangers/Trade/trade';
+
 
 
 function App() {
@@ -40,6 +46,12 @@ function App() {
               <Route path="/verifyemail/:code" component={verifyEmail} />
               <Route path="/resetpassword" component={ResetPassword} />
               <Route path="/contact" component={ContactPage} />
+
+              {/* Exchanger route */}
+              <Route path="/user/dashboard" component={UserDashboard} />
+              <Route path="/user/profile" component={UserProfile} />
+              <Route path="/user/notifications" component={UserNotifications} />
+              <Route path="/user/trade" component={UserTrade} />
 
 
               {/* admin route */}

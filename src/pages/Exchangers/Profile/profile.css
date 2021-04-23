@@ -1,0 +1,44 @@
+.userProfile{
+background: #FFFFFF;
+border: 1px solid #DFE0EB;
+box-sizing: border-box;
+border-radius: 8px;
+padding: 30px 50px;
+}
+
+.file.file{
+    display: table;
+    width: 30%;
+    margin: auto;
+    background: #9D0957;
+    border-radius: 10px;
+    color: white;
+    padding: 12px 30px;
+    font-weight: bold;
+    transition: all ease-in 0.5s;
+  }
+  .file.disabled, .file:disabled {
+    opacity: .65;
+    pointer-events: none;
+}
+input[type="file"].adminphoto {
+    display: none;
+}
+
+.user-lay{
+    width: 50%;
+    margin: auto;
+}
+
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .file.file{
+        width: 100%;
+    }
+    .user-lay{
+        width: 100%;
+    }
+
+}

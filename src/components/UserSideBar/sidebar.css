@@ -1,0 +1,122 @@
+.barBg{
+    background: #F7F8FC;
+}
+
+.userside{
+    height: 100vh;
+    top: 0px;
+    transform: translateX(0%);
+    width: 255px;
+    max-height: calc(100% - 0px);
+    position: fixed;
+    background: #2C3A50;
+    max-width: 100%;
+    overflow: hidden;
+    transition: .3s cubic-bezier(.25,.8,.5,1),z-index 1ms;
+}
+
+.userside.show{
+    height: 100vh;
+    top: 0px;
+    transform: translateX(0%);
+    width: 255px;
+    z-index: 6;
+    position: fixed;
+    box-shadow: 0 8px 10px -5px rgb(0 0 0 / 20%), 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%);
+}
+
+.sidehead{
+    position: absolute;
+    height: 60px;
+    top: 0px;
+    transform: translateY(0px);
+    left: 256px;
+    right: 0px;
+    z-index: 5;
+    padding: 20px 20px;
+}
+
+.usermain{
+    padding: 60px 0px 0px 256px;
+}
+
+
+/* list items */
+.v-list-item{
+    align-items: center;
+    display: flex;
+    flex: 1 1 100%;
+    letter-spacing: normal;
+    min-height: 50px;
+    outline: none;
+    padding: 0 20px;
+    position: relative;
+    text-decoration: none;
+    
+}
+
+.v-list-item.active{
+    background: rgb(159, 162, 180, 0.08);
+    border-left: 3px solid #DDE2FF;
+}
+
+.v-list-icon{
+    color: rgb(159, 162, 180, 0.4);
+    margin-right: 32px;
+    display: inline-flex;
+    min-width: 24px;
+}
+
+.v-list-icon.active{
+    margin-right: 32px;
+    color: #DDE2FF;
+    display: inline-flex;
+    min-width: 24px;
+}
+
+.v-list-icon img{
+    font-size: 24px;
+}
+
+
+.v-list-title.active{
+    font-size: 16px;
+    flex: 1 1 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    line-height: 1rem;
+    color: #DDE2FF;
+}
+
+.v-list-title span.active{
+    color: #DDE2FF;
+}
+
+.v-list-title span{
+    color: #A4A6B3;
+    font-size: 14px;
+}
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .sidehead{
+        position: absolute;
+        height: 60px;
+        margin-top: 0px;
+        transform: translateY(0px);
+        left: 0px;
+        right: 0px;
+    }
+    .userside{
+        height: 100vh;
+        top: 0px;
+        transform: translateX(-100%);
+        width: 255px;
+    }
+    .usermain{
+        padding: 60px 0px 0px;
+    }
+}

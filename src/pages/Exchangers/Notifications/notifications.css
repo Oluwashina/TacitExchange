@@ -1,0 +1,22 @@
+.notify-lay{
+    background: #FFFFFF;
+    border: 1px solid #DFE0EB;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 50px 80px;
+    }
+    
+
+.notifyDiv{
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 21.0479px;
+    padding: 25px 20px;
+}
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .notify-lay{
+        padding: 50px 20px;
+    }
+}
