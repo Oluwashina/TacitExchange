@@ -4,6 +4,7 @@ import Sidebar from '../../../components/Sidebar/Sidebar';
 import './dashboard.css'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
+import CountUp from 'react-countup'
 import {getDashboardCount, getTrades} from '../../../store/actions/admin'
 import Moment from 'react-moment'
 
@@ -83,7 +84,14 @@ const columns = [
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5 style={{color: '#dc3545'}}>{count.countPendingTrade ? count.countPendingTrade : 0}</h5>
+                                        <h5 style={{color: '#dc3545'}}>
+                                            <CountUp
+                                                start={0}
+                                                end= {count.countPendingTrade ? count.countPendingTrade : 0}
+                                                duration={2.5}
+                                                separator=","
+                                            />
+                                            </h5>
                                     </div>
 
                                 </div>
@@ -98,7 +106,15 @@ const columns = [
                                     </div>
 
                                     <div className="mt-4">
-                                        <h5 style={{color: '#13AA52'}}>{count.countCompletedTrade ? count.countCompletedTrade : 0}</h5>
+                                        <h5 style={{color: '#13AA52'}}>
+                                        <CountUp
+                                            start={0}
+                                            end= {count.countCompletedTrade ? count.countCompletedTrade : 0}
+                                            duration={2.5}
+                                            separator=","
+                                        />
+                                           
+                                       </h5>
                                     </div>
 
                                 </div>
@@ -112,7 +128,15 @@ const columns = [
                                 </div>
 
                                 <div className="mt-4">
-                                    <h5>{count.countAllExchanger ? count.countAllExchanger : 0}</h5>
+                                    <h5>
+                                    <CountUp
+                                            start={0}
+                                            end= {count.countAllExchanger ? count.countAllExchanger : 0}
+                                            duration={2.5}
+                                            separator=","
+                                        />
+                                       
+                                        </h5>
                                 </div>
 
                                 </div>
