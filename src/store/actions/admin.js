@@ -239,6 +239,24 @@ export const DeclineTradePayment = (id) =>{
 }
 
 
+// Get all giftcards functionality
+export const getGiftCards = (val) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await GetApi(`subcategory/listing`, getToken());
+      if (res.status === 200) {
+        dispatch({ type: "GiftCards", data: res.data});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Card_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+};
+
+
 // add new giftcards functionality
 export const AddGiftCard = (user) =>{
   return async (dispatch, getState) => {

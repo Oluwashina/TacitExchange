@@ -7,7 +7,8 @@ const initState = {
     userTrade: [],
     Trades: [],
     declineloader: false,
-    approveloader: false
+    approveloader: false,
+    giftcards: []
   };
   
   const adminReducer = (state = initState, action) => {
@@ -98,6 +99,11 @@ const initState = {
         return{
           ...state,
           declineloader: false
+        }
+      case 'GiftCards':
+        return{
+          ...state,
+          giftcards: action.data
         }
       default:
         return state;

@@ -1,6 +1,6 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Logo from '../../assets/images/logo.png'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useHistory} from 'react-router-dom'
 import {HashLink as Link,} from 'react-router-hash-link'
 import Modal from 'react-bootstrap/Modal'
 import loginCircle from '../../assets/images/loginCircle.svg'
@@ -14,9 +14,11 @@ import { forgotPassword, loginUser, signUp } from '../../store/actions/auth';
 
 const Navbar = (props) => {
 
-    const {login, Register, forgot} = props
+    const {login, Register, forgot, isAuthenticated} = props
 
     const [navShow, setnavShow] = useState(false);
+
+    const history = useHistory()
 
     const [role] = useState("Exchanger")
 
@@ -71,6 +73,12 @@ const Navbar = (props) => {
         console.log(values)
         await login(values);
       }
+
+    useEffect(() =>{
+        if(isAuthenticated){
+          history.push('/user/dashboard')
+        }
+      },[isAuthenticated, history])
 
     //   register func
     const handleRegisterSubmit = async (values) =>{

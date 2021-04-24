@@ -1,41 +1,54 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import DataTable from 'react-data-table-component'
-import {movies} from '../Dashboard/data'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import { getGiftCards } from '../../../store/actions/admin';
+import Moment from 'react-moment'
 
-const AdminRates = () => {
+const AdminRates = (props) => {
+
+  const {cards, getRates} = props
+
+  // fetch all pending trades on load of page
+  useEffect(() =>{
+    getRates()
+  }, [getRates])
 
     const columns = [
         {
           name: "Category",
-          selector: "id",
+          selector: "categoryname",
           sortable: true
         },
         {
           name: "SubCategory",
-          selector: "title",
+          selector: "subcategoryname",
           sortable: true
         },
         {
           name: "Minimum Amount",
           cell: row => <span> 
-                  {`NGN ${row.amount}`}
+                  {`${row.minimumAmount}`}
           </span>
         },
         {
             name: "Maximum Amount",
             cell: row => <span> 
-                    {`NGN ${row.amount}`}
+                    {`${row.maximumAmount}`}
             </span>
           },
         {
             name: "Date Added",
-            selector: 'date'
+            cell: row => <span>
+            <Moment format="MMMM Do, YYYY">
+            {row.createdAt}
+            </Moment>
+        </span>
         },
         {
             name: "Naira Rate",
-            selector: "status",
+            selector: "nairarate",
             sortable: true,
           },
           {
@@ -69,7 +82,7 @@ const AdminRates = () => {
                          <DataTable
                             title="Rates Table"
                             columns={columns}
-                            data={movies}
+                            data={cards}
                             pagination
                             persistTableHead
                             progressPending={false}
@@ -81,5 +94,18 @@ const AdminRates = () => {
         </>
      );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    cards: state.admin.giftcards
+  } 
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    getRates : (status) => dispatch(getGiftCards(status)),
+  }
+}
  
-export default AdminRates;
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminRates);

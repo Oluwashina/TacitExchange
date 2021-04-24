@@ -15,8 +15,16 @@ export const loginUser = (user) => {
     try {
       const res = await PostApi("authenticate", {...user}, "", "application/json")
       if (res.status === 200) {
-        dispatch({ type: "LOGIN_SUCCESS", data: res.data });
-        cogoToast.success('Login Successful!', { position: 'bottom-right', })
+        let role = res.data.profile.role
+        switch(role){
+          case 'Exchanger':
+            dispatch({ type: "LOGIN_SUCCESS", data: res.data });
+             cogoToast.success('Login Successful!', { position: 'bottom-right', })
+            break;
+          default:
+            cogoToast.error('User not authorized!')
+            break;
+        } 
       }
       if(res.status === 400){
         dispatch({ type: "LOGIN_FAIL", err: res.data});
