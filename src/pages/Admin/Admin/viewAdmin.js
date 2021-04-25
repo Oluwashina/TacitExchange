@@ -3,6 +3,7 @@ import Sidebar from '../../../components/Sidebar/Sidebar';
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
 import { getAllAdmins, SuspendAdmin, ActivateAdmin } from '../../../store/actions/admin';
+import Moment from 'react-moment'
 
 
 const ViewAdmin = (props) => {
@@ -33,10 +34,13 @@ const ViewAdmin = (props) => {
         sortable: true,
       },
       {
-          name: "Date Registered",
-          selector: "createdAt",
-          sortable: true,
-      },
+        name: "Date Registered",
+        cell: row => <span>
+          <Moment format="MMMM Do, YYYY">
+          {row.createdAt}
+          </Moment>
+      </span>
+    },
       {
           name: "Phone Number",
           selector: "phoneNumber",

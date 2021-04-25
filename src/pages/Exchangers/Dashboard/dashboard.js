@@ -1,23 +1,33 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import './dashboard.css'
 import OtherTrade from '../../../assets/images/OthersTrade.svg'
 import {Link} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
-import {movies} from '../../Admin/Dashboard/data'
+import {connect} from 'react-redux'
+import { getUserDashboardCount, getUserPendingTransaction } from '../../../store/actions/dashboard';
+import Moment from 'react-moment'
 
-const UserDashboard = () => {
+const UserDashboard = (props) => {
+
+    const {countFetch, count, pendingTransaction, transaction} = props
+
+    // make call to fetch dashboard count
+    useEffect(() => {
+        countFetch();
+        pendingTransaction()
+      }, [countFetch, pendingTransaction]);
 
     
     const columns = [
         {
-          name: "Trade Id",
-          selector: "id",
+          name: "Card Category",
+          selector: "cardCategory",
           sortable: true
         },
         {
           name: "Card Name",
-          selector: "title",
+          selector: "cardName",
           sortable: true
         },
         {
@@ -29,30 +39,18 @@ const UserDashboard = () => {
         {
             name: "Date Initiated",
             cell: row => <span>
-              
-              {row.date}
-              
+              <Moment format="MMMM Do, YYYY">
+              {row.createdAt}
+              </Moment>
           </span>
         },
         {
             name: "Status",
-            selector: "status",
+            selector: "paymentStatus",
             sortable: true,
           },
-          {
-            name: 'Actions',
-            button: true,
-            cell: row => <button
-            className="btn btn-sm btn-view"
-            onClick={() => {
-                ViewTransact(row.id)}}
-             >View</button>,
-          }
       ];
 
-      const ViewTransact = (id) =>{
-        alert(id)
-      }
 
     return ( 
         <>
@@ -68,7 +66,7 @@ const UserDashboard = () => {
                         <div className="TradeLayout">
 
                                 <div>
-                                    <h4 style={{fontWeight: 800, color: '#0898D7'}}>20</h4>
+                                    <h4 style={{fontWeight: 800, color: '#0898D7'}}>{count.countCompletedTrade ? count.countCompletedTrade : 0}</h4>
                                 </div>
 
                                 <div className="mt-1">
@@ -85,7 +83,7 @@ const UserDashboard = () => {
                         <div className="TradeLayout">
 
                                 <div>
-                                    <h4 style={{fontWeight: 800, color: '#2C3A50'}}>5</h4>
+                                    <h4 style={{fontWeight: 800, color: '#2C3A50'}}>{count.countPendingTrade ? count.countPendingTrade : 0}</h4>
                                 </div>
 
                                 <div className="mt-1">
@@ -113,29 +111,38 @@ const UserDashboard = () => {
                 </div>
 
                 {/* Recent Trades Layout or table */}
-                <div className="dashTrade mt-lg-0 mt-4 mb-5">
+                {
+                    transaction.length ? 
 
-                    <div>
-                        <p className="mb-0 text-center" style={{fontWeight: 'bold'}}>You currently don't have any pending <br /> transactions.</p>
-                    </div>
-
-                    <div className="mt-3">
-                        <Link to="/user/trade" className="btn btn-blueTacit">Start Trade</Link>
-                    </div>
-
-                </div>
-
-                {/* trade history */}
-                <div className="mt-4 mb-5">
-                         <DataTable
+                            <div className="mt-4 mb-5">
+                            <DataTable
                             title="Pending Transactions"
                             columns={columns}
-                            data={movies}
+                            data={transaction}
                             pagination
                             persistTableHead
                             progressPending={false}
                             />
-                 </div>
+                          </div>
+
+                          :
+
+                          <div className="dashTrade mt-lg-0 mt-4 mb-5">
+
+                          <div>
+                              <p className="mb-0 text-center" style={{fontWeight: 'bold'}}>You currently don't have any pending <br /> transactions.</p>
+                          </div>
+      
+                          <div className="mt-3">
+                              <Link to="/user/trade" className="btn btn-blueTacit">Start Trade</Link>
+                          </div>
+      
+                      </div>
+
+                }
+               
+
+              
 
 
             </div>
@@ -144,5 +151,19 @@ const UserDashboard = () => {
         </>
      );
 }
+
+const mapStateToProps = (state) =>{
+    return{
+        count: state.dashboard.count,
+        transaction: state.dashboard.pendingTransaction
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        countFetch: () => dispatch(getUserDashboardCount()),
+        pendingTransaction: () => dispatch(getUserPendingTransaction()),
+    }
+}
  
-export default UserDashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard);

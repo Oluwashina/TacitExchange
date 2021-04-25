@@ -285,8 +285,36 @@ export const UploadPhoto = (value) => {
             dispatch({type: "profilePicture", image})
             // check for role so to know what to send
             let role = getState().auth.role
-            if(role === 'Admin' || 'SubAdmin'){
-              const values = {
+            switch(role){
+              case 'Admin':
+                const values = {
+                  firstName: getState().auth.firstname,
+                  lastName: getState().auth.lastname,
+                  role: getState().auth.role,
+                  email: getState().auth.email,
+                  phoneNumber:getState().auth.phoneNumber,
+                  isVerified: getState().auth.isVerified,
+                  isEnabled: getState().auth.isEnabled,
+                  walletBalance: getState().auth.walletBalance,
+                  profilePic: image,
+                }
+                  axios.put(apiUrl + "member", {...values}, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: getToken()
+                    }
+                }).then((res) => {
+                    if (res.status === 201) {
+                      dispatch({ type: "StopPhotoLoader"});
+                      cogoToast.success('Image updated successfully!')
+                    } 
+                }).catch((err) => {
+                  dispatch({ type: "StopPhotoLoader"});
+                    cogoToast.error('Error while uploading picture!')
+                })
+                break;
+            case 'SubAdmin':
+              const val2 = {
                 firstName: getState().auth.firstname,
                 lastName: getState().auth.lastname,
                 role: getState().auth.role,
@@ -297,7 +325,7 @@ export const UploadPhoto = (value) => {
                 walletBalance: getState().auth.walletBalance,
                 profilePic: image,
               }
-                axios.put(apiUrl + "member", {...values}, {
+                axios.put(apiUrl + "member", {...val2}, {
                   headers: {
                       Accept: 'application/json',
                       Authorization: getToken()
@@ -311,8 +339,39 @@ export const UploadPhoto = (value) => {
                 dispatch({ type: "StopPhotoLoader"});
                   cogoToast.error('Error while uploading picture!')
               })
+               break;
+            case 'Exchanger':
+              const val3 = {
+                firstName: getState().auth.firstname,
+                lastName: getState().auth.lastname,
+                role: getState().auth.role,
+                email: getState().auth.email,
+                phoneNumber:getState().auth.phoneNumber,
+                isVerified: getState().auth.isVerified,
+                isEnabled: getState().auth.isEnabled,
+                walletBalance: getState().auth.walletBalance,
+                accountDetails: getState().auth.accountDetails,
+                profilePic: image,
+              }
+                  axios.put(apiUrl + "member", {...val3}, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: getToken()
+                    }
+                }).then((res) => {
+                    if (res.status === 201) {
+                      dispatch({ type: "StopPhotoLoader"});
+                      cogoToast.success('Image updated successfully!')
+                    } 
+                }).catch((err) => {
+                  dispatch({ type: "StopPhotoLoader"});
+                    cogoToast.error('Error while uploading picture!')
+                })
+              break;
+              default:
+                break;
             }
-                  // else for exchanger
+           
           }
         if(res.status === 400 || res.status === 404){
           cogoToast.error('Error while uploading image!')

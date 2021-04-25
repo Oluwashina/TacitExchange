@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import './profile.css'
 import Profile from '../../../assets/images/userProfile.svg'
@@ -6,13 +6,15 @@ import {connect} from 'react-redux'
 import { ChangePassword, UploadPhoto } from '../../../store/actions/auth';
 import { Form, Formik } from "formik";
 import {ChangePasswordValidator} from '../../../validationSchema/validator'
+import {useHistory} from 'react-router-dom'
 
 const UserProfile = (props) => {
 
-    const {handlePicture, photoloader, firstname, lastname, email, saveProfile} = props
+    const {handlePicture, photoloader, firstname, lastname, email, saveProfile, image, loading} = props
 
     const fileRef = useRef(null)
 
+    const history = useHistory()
     
     const [passwordShown, setPasswordShown] = useState(false);
     const [passwordNew, setPasswordNew] = useState(false);
@@ -42,6 +44,14 @@ const UserProfile = (props) => {
         console.log(values)
       };
 
+      //  route to login after successful changed password
+      useEffect(() =>{
+        if(loading){
+          history.push("/")
+        }
+     },[loading, history])
+
+
 
 
     return ( 
@@ -56,18 +66,18 @@ const UserProfile = (props) => {
                      <div className="text-center ">
                         <img
                         // src="/img/profile.png"
-                        src={ Profile}
+                        src={ image ? image :Profile}
                         className="profileImage"
                         alt="profile-pix"
                         />
                     </div>
 
                     <div className="text-center mt-4">
-                         <label className={photoloader ? "file disabled" : "file"}
+                         <label className={photoloader ? "file disabled" : "file user"}
                                 ><i className="mdi mdi-camera-outline mr-1"></i> Upload Photo
                                 <input type="file" size="60"
                                     ref={fileRef}
-                                 className="adminphoto file"
+                                 className="adminphoto user"
                                 onChange={() => handleFile()}
                                 />
                                 </label> 
@@ -263,6 +273,7 @@ const mapStateToProps = (state) =>{
         firstname: state.auth.firstname,
         lastname: state.auth.lastname,
         email: state.auth.email,
+        loading: state.auth.loading,
     }
 }
 

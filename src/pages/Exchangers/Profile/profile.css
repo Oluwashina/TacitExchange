@@ -6,7 +6,7 @@ border-radius: 8px;
 padding: 30px 50px;
 }
 
-.file.file{
+.file.user{
     display: table;
     width: 30%;
     margin: auto;
@@ -34,7 +34,7 @@ input[type="file"].adminphoto {
 /* Media query for smaller phones */
 
 @media (max-width:767px) {
-    .file.file{
+    .file.user{
         width: 100%;
     }
     .user-lay{

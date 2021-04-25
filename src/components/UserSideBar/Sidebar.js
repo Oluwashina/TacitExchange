@@ -2,18 +2,14 @@ import React, {useEffect, useState} from 'react';
 import './sidebar.css'
 import Logo from '../../assets/images/logo.png'
 import profile from '../../assets/images/header.png'
-import account from '../../assets/images/icons/account.svg'
-import profileIcon from '../../assets/images/icons/profile.svg'
-import tradeIcon from '../../assets/images/icons/trade.svg'
-import logoutIcon from '../../assets/images/icons/logout.svg'
-import notifyIcon from '../../assets/images/icons/notifications.svg'
-import transactIcon from '../../assets/images/icons/transactions.svg'
-import overviewLight from '../../assets/images/icons/overview_light.svg'
 import { Link, useLocation } from 'react-router-dom';
+import {connect} from 'react-redux'
 
-const UserSideBar = () => {
+const UserSideBar = (props) => {
 
     const [sideShow, setSideShow] = useState(false);
+
+    const {firstname, lastname, image} = props
 
     useEffect(() =>{
         document.body.classList.add('barBg');
@@ -75,8 +71,10 @@ const UserSideBar = () => {
                      style={{textDecoration: 'none'}}>
 
                         {/* icon */}
-                        <div className="v-list-icon active">
-                            <img src={overviewLight} className="img-fluid" alt="overview" />
+                        <div 
+                        className={ isActive.includes("/user/dashboard") ? 'v-list-icon active' : 'v-list-icon'}
+                       >
+                            <i className="fa fa-chart-pie"></i>
                         </div>
                         {/* title */}
                         <div className="v-list-title">
@@ -93,8 +91,11 @@ const UserSideBar = () => {
                     style={{textDecoration: 'none'}}>
 
                         {/* icon */}
-                        <div className="v-list-icon">
-                        <img src={transactIcon} alt="profile" className="img-fluid" />
+                        <div
+                        className={ isActive.includes("/user/transactions") ? 'v-list-icon active' : 'v-list-icon'}
+                         >
+                        <i className="fa fa-ticket-alt"></i>
+                        {/* <img src={transactIcon} alt="profile" className="img-fluid" /> */}
                         </div>
                         {/* title */}
                         <div className="v-list-title">
@@ -111,8 +112,11 @@ const UserSideBar = () => {
                      style={{textDecoration: 'none'}}>
 
                         {/* icon */}
-                        <div className="v-list-icon">
-                        <img src={notifyIcon} alt="profile" className="img-fluid" />
+                        <div
+                        className={ isActive.includes("/user/notifications") ? 'v-list-icon active' : 'v-list-icon'}
+                         >
+                            <i className="fa fa-lightbulb"></i>
+                        {/* <img src={notifyIcon} alt="profile" className="img-fluid" /> */}
                         </div>
                         {/* title */}
                         <div className="v-list-title">
@@ -129,8 +133,11 @@ const UserSideBar = () => {
                       style={{textDecoration: 'none'}}>
 
                         {/* icon */}
-                        <div className="v-list-icon">
-                            <img src={account} alt="account" className="img-fluid" />
+                        <div 
+                        className={ isActive.includes("/user/account") ? 'v-list-icon active' : 'v-list-icon'}
+                        >
+                            <i className="fa fa-book"></i>
+                            {/* <img src={account} alt="account" className="img-fluid" /> */}
                             
                         </div>
                         {/* title */}
@@ -148,8 +155,11 @@ const UserSideBar = () => {
                       style={{textDecoration: 'none'}}>
 
                         {/* icon */}
-                        <div className="v-list-icon">
-                            <img src={profileIcon} alt="profile" className="img-fluid" />
+                        <div 
+                        className={ isActive.includes("/user/profile") ? 'v-list-icon active' : 'v-list-icon'}
+                        >
+                            <i className='fa fa-user-tie'></i>
+                            {/* <img src={profileIcon} alt="profile" className="img-fluid" /> */}
                         </div>
                         {/* title */}
                         <div className="v-list-title">
@@ -170,7 +180,8 @@ const UserSideBar = () => {
 
                             {/* icon */}
                             <div className="v-list-icon">
-                            <img src={logoutIcon} alt="profile" className="img-fluid" />
+                                <i className="fa fa-cog"></i>
+                            {/* <img src={logoutIcon} alt="profile" className="img-fluid" /> */}
                             </div>
                             {/* title */}
                             <div className="v-list-title">
@@ -185,8 +196,11 @@ const UserSideBar = () => {
                           style={{textDecoration: 'none'}}>
 
                             {/* icon */}
-                            <div className="v-list-icon">
-                            <img src={tradeIcon} alt="profile" className="img-fluid" />
+                            <div 
+                             className={ isActive.includes("/user/trade") ? 'v-list-icon active' : 'v-list-icon'}
+                            >
+                                <i className="fa fa-award"></i>
+                                
                             </div>
                             {/* title */}
                             <div className="v-list-title">
@@ -226,13 +240,13 @@ const UserSideBar = () => {
                         <div>
                             <div style={{display: 'flex', alignItems: 'center'}}>
                                 <div>
-                                    <p className="mb-0" style={{color: '#252733', fontSize: 14, fontWeight: 500}}>Winsala Bayo</p>
+                                    <p className="mb-0" style={{color: '#252733', fontSize: 14, fontWeight: 500}}>{lastname ? lastname :  "Winsala"} {firstname ? firstname : "Bayo"}</p>
                                 </div>
 
                                 <div className="ml-3">
                                     <img 
                                     className="imageStyle"
-                                    src={ profile}
+                                    src={ image ? image : profile}
                                     alt="user" />
                                 </div>
 
@@ -249,5 +263,21 @@ const UserSideBar = () => {
         </>
      );
 }
+
+
+const mapStateToProps = (state) =>{
+    return{
+        firstname: state.auth.firstname,
+        lastname: state.auth.lastname,
+        image: state.auth.profilePic,
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+
+    }
+}
  
-export default UserSideBar;
+export default connect(mapStateToProps, mapDispatchToProps)(UserSideBar);

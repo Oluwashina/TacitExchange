@@ -14,7 +14,7 @@ import { forgotPassword, loginUser, signUp } from '../../store/actions/auth';
 
 const Navbar = (props) => {
 
-    const {login, Register, forgot, isAuthenticated} = props
+    const {login, register, forgot, isAuthenticated} = props
 
     const [navShow, setnavShow] = useState(false);
 
@@ -87,7 +87,7 @@ const Navbar = (props) => {
             ...values,
             role
         }
-        await Register(creds)
+        await register(creds)
         setShowRegister(false)
     }
 
@@ -511,7 +511,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps =(dispatch) =>{
     return{
         login: (creds) => dispatch(loginUser(creds)),
-        Register: (creds) => dispatch(signUp(creds)),
+        register: (creds) => dispatch(signUp(creds)),
         forgot: (val) => dispatch(forgotPassword(val)),
     }
 }
