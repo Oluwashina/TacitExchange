@@ -7,6 +7,7 @@ import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
 import { getUserDashboardCount, getUserTransaction } from '../../../store/actions/dashboard';
 import Moment from 'react-moment'
+import Eye from '../../../assets/images/eye.svg'
 
 const UserDashboard = (props) => {
 
@@ -54,7 +55,20 @@ const UserDashboard = (props) => {
             {`${row.paymentStatus}`}
             </span>
           },
+          {
+            name: "",
+            cell: row => 
+            <div style={{cursor: 'pointer'}} onClick={() => handleView(row.id)}>
+                <img src={Eye}
+                 alt="edit" width="20" height="20"  /> 
+            </div>
+            
+        },
       ];
+
+      const handleView = (id) =>{
+        alert(id)
+    }
 
 
     return ( 
