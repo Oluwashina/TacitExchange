@@ -24,15 +24,15 @@ export const getUserDashboardCount = () => {
     };
   };
 
-export const getUserPendingTransaction = () => {
+export const getUserTransaction = (val) => {
     return async (dispatch, getState) => {
       try {
-        const res = await GetApi("exchanger/trade/pending", getToken());
+        const res = await GetApi("exchanger/trade?status="+val, getToken());
         if (res.status === 200) {
-          dispatch({ type: "UserPendingTransaction", data: res.data});
+          dispatch({ type: "UserTransaction", data: res.data});
         }
         if(res.status === 400){
-          dispatch({ type: "PendingTradeError", err: res.data });
+          dispatch({ type: "TradeError", err: res.data });
         }
       } catch (err) {
        console.log(err)

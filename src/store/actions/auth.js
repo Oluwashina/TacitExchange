@@ -1,4 +1,4 @@
-import {PostApi, PutApi} from '../helpers'
+import {PostApi} from '../helpers'
 import cogoToast from "cogo-toast";
 import axios from 'axios'
 import {apiUrl} from '../config'
@@ -238,30 +238,104 @@ export const ResetPassword = (val) => {
 };
 
 
-// profile update of user functionality
-export const updateProfile = (user) => {
+// update account details functionality
+export const addAccountDetails = (user) => {
   return async (dispatch, getState) => {
-    const id = getState().auth.id
     try {
-      const res = await PutApi("member/"+id, {
-                   firstName: getState().auth.firstname,
-                   lastName: getState().auth.lastname,
-                   role: getState().auth.role,
-                   email: getState().auth.email,
-                   phoneNumber:getState().auth.phoneNumber,
-                   isVerified: getState().auth.isVerified,
-                   isEnabled: getState().auth.isEnabled,
-                   walletBalance: getState().auth.walletBalance,
-                   profilePic: getState().auth.profilePic,
-                  }, getToken(), "application/json")
-      if (res.status === 201) {
-        dispatch({ type: "PROFILE_UPDATE", data: user });
-        cogoToast.success("Profile Update Successful!");
-      }
-      if(res.status === 400){
-        dispatch({ type: "PROFILE_ERROR", err: res.data});
-        cogoToast.error('Error while updating profile!!!')
-      }
+        let role = getState().auth.role
+            switch(role){
+              case 'Admin':
+                const values = {
+                  firstName: getState().auth.firstname,
+                  lastName: getState().auth.lastname,
+                  role: getState().auth.role,
+                  email: getState().auth.email,
+                  phoneNumber:getState().auth.phoneNumber,
+                  isVerified: getState().auth.isVerified,
+                  isEnabled: getState().auth.isEnabled,
+                  walletBalance: getState().auth.walletBalance,
+                  profilePic: getState().auth.profilePic,
+                }
+                  axios.put(apiUrl + "member", {...values}, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: getToken()
+                    }
+                }).then((res) => {
+                    if (res.status === 201) {
+                      dispatch({ type: "PROFILE_UPDATE", data: user });
+                      cogoToast.success("Account Details Successful!");
+                    } 
+                }).catch((err) => {
+                  if( err.response.status === 400){
+                    dispatch({ type: "PROFILE_ERROR", err: err.response.data});
+                    cogoToast.error('Error while updating account details!!!')
+                  }
+                })
+                break;
+            case 'SubAdmin':
+              const val2 = {
+                firstName: getState().auth.firstname,
+                lastName: getState().auth.lastname,
+                role: getState().auth.role,
+                email: getState().auth.email,
+                phoneNumber:getState().auth.phoneNumber,
+                isVerified: getState().auth.isVerified,
+                isEnabled: getState().auth.isEnabled,
+                walletBalance: getState().auth.walletBalance,
+                profilePic:  getState().auth.profilePic,
+              }
+                axios.put(apiUrl + "member", {...val2}, {
+                  headers: {
+                      Accept: 'application/json',
+                      Authorization: getToken()
+                  }
+              }).then((res) => {
+                  if (res.status === 201) {
+                    dispatch({ type: "PROFILE_UPDATE", data: user });
+                    cogoToast.success("Account Details Successful!");
+                  } 
+              }).catch((err) => {
+                if( err.response.status === 400){
+                  dispatch({ type: "PROFILE_ERROR", err: err.response.data });
+                  cogoToast.error('Error while updating account details!!!')
+                }
+              })
+               break;
+            case 'Exchanger':
+              const val3 = {
+                firstName: getState().auth.firstname,
+                lastName: getState().auth.lastname,
+                role: getState().auth.role,
+                email: getState().auth.email,
+                phoneNumber:getState().auth.phoneNumber,
+                isVerified: getState().auth.isVerified,
+                isEnabled: getState().auth.isEnabled,
+                walletBalance: getState().auth.walletBalance,
+                accountDetails: getState().auth.accountDetails,
+                profilePic: getState().auth.profilePic,
+              }
+                  axios.put(apiUrl + "member", {...val3}, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: getToken()
+                    }
+                }).then((res) => {
+                    if (res.status === 201) {
+                      dispatch({ type: "PROFILE_UPDATE", data: user });
+                    cogoToast.success("Account Details Successful!");
+                    } 
+                }).catch((err) => {
+                  if( err.response.status === 400){
+                    dispatch({ type: "PROFILE_ERROR", err: err.response.data});
+                    cogoToast.error('Error while updating account details!!!')
+                  }
+                })
+              break;
+              default:
+                break;
+            }
+
     } catch (err) {
       console.log(err)
     }
@@ -350,7 +424,6 @@ export const UploadPhoto = (value) => {
                 isVerified: getState().auth.isVerified,
                 isEnabled: getState().auth.isEnabled,
                 walletBalance: getState().auth.walletBalance,
-                accountDetails: getState().auth.accountDetails,
                 profilePic: image,
               }
                   axios.put(apiUrl + "member", {...val3}, {

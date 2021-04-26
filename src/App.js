@@ -31,6 +31,8 @@ import UserDashboard from './pages/Exchangers/Dashboard/dashboard';
 import UserProfile from './pages/Exchangers/Profile/profile';
 import UserNotifications from './pages/Exchangers/Notifications/notifications';
 import UserTrade from './pages/Exchangers/Trade/trade';
+import UserAccount from './pages/Exchangers/AccountDetails/accountDetails';
+import UserTransactions from './pages/Exchangers/Transactions/transactions';
 
 
 
@@ -52,6 +54,8 @@ function App() {
               <Route path="/user/profile" component={UserProfile} />
               <Route path="/user/notifications" component={UserNotifications} />
               <Route path="/user/trade" component={UserTrade} />
+              <Route path="/user/account" component={UserAccount} />
+              <Route path="/user/transactions" component={UserTransactions} />
 
 
               {/* admin route */}

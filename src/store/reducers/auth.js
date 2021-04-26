@@ -123,6 +123,10 @@ const authReducer = (state = initState, action) => {
             ...state,
             profilePic: action.image   
       }
+    case 'PROFILE_UPDATE':
+      return{
+        ...state
+      }
     default:
       return state;
   }

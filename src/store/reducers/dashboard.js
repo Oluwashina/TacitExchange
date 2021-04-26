@@ -2,7 +2,7 @@
 
 const initState = {
     count: {},
-    pendingTransaction: []
+    Transaction: []
   };
   
   const dashboardReducer = (state = initState, action) => {
@@ -12,10 +12,10 @@ const initState = {
               ...state,
               count: action.data
           }
-    case 'UserPendingTransaction':
+    case 'UserTransaction':
         return{
             ...state,
-            pendingTransaction: action.data
+            Transaction: action.data
         }
       default:
         return state;

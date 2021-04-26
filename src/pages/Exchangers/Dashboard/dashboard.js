@@ -1,22 +1,24 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import './dashboard.css'
 import OtherTrade from '../../../assets/images/OthersTrade.svg'
 import {Link} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
-import { getUserDashboardCount, getUserPendingTransaction } from '../../../store/actions/dashboard';
+import { getUserDashboardCount, getUserTransaction } from '../../../store/actions/dashboard';
 import Moment from 'react-moment'
 
 const UserDashboard = (props) => {
 
-    const {countFetch, count, pendingTransaction, transaction} = props
+    const {countFetch, count, getTransaction, transaction} = props
+
+    const [status] = useState("Pending")
 
     // make call to fetch dashboard count
     useEffect(() => {
         countFetch();
-        pendingTransaction()
-      }, [countFetch, pendingTransaction]);
+        getTransaction(status)
+      }, [countFetch, getTransaction, status]);
 
     
     const columns = [
@@ -46,8 +48,11 @@ const UserDashboard = (props) => {
         },
         {
             name: "Status",
-            selector: "paymentStatus",
-            sortable: true,
+            cell: row => <span
+             className={row.paymentStatus === 'Pending' ? "defaultDiv" : "success-color"}
+             > 
+            {`${row.paymentStatus}`}
+            </span>
           },
       ];
 
@@ -100,10 +105,6 @@ const UserDashboard = (props) => {
                          <Link to="/user/trade">
                             <div style={{height: '191.33px', position: 'relative'}}>
                                 <img src={OtherTrade} className="img-fluid" alt="trade" />
-
-                                <div style={{position: 'absolute', bottom: '40px', left: '100px'}}>
-                                    <h5 style={{color: '#fff', fontWeight: 'bold'}}>Trade Cards</h5>
-                                </div>
                             </div>
                             </Link>
 
@@ -155,14 +156,14 @@ const UserDashboard = (props) => {
 const mapStateToProps = (state) =>{
     return{
         count: state.dashboard.count,
-        transaction: state.dashboard.pendingTransaction
+        transaction: state.dashboard.Transaction
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         countFetch: () => dispatch(getUserDashboardCount()),
-        pendingTransaction: () => dispatch(getUserPendingTransaction()),
+        getTransaction: (status) => dispatch(getUserTransaction(status)),
     }
 }
  

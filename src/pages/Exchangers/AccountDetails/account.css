@@ -1,0 +1,27 @@
+.accountDiv{
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    background: #FFFFFF;
+    height: 400px;
+}
+
+.defaultDiv{
+    background: #0898D7;
+   border-radius: 100px;
+   color: white;
+   padding: 3px 25px;
+}
+
+
+
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .defaultDiv{
+        color: #0898D7;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+}

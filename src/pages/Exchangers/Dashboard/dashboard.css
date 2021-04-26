@@ -18,3 +18,23 @@
     align-items: center;
     flex-direction: column;
 }
+
+.success-color{
+    background: #40D057;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px;
+}
+
+
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .success-color{
+        color: #40D057;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+}

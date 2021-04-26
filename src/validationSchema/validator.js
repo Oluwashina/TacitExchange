@@ -114,3 +114,15 @@ export const addGiftCardValidator = Yup.object({
   terms: Yup.string()
     .required("Terms and Conditions is required"),
 });
+
+export const accountDetailsValidator = Yup.object({
+  bank: Yup.string().required("Bank Name is required"),
+  accountNumber:  Yup.string()
+  .min(10, 'Account number cannot be less than 10 digits')
+  .max(10, 'Exceeded characters for Account Number')
+  .required("Account Number is required").matches(
+    /^-?[0-9]+(.[0-9]{1-7})?$/,
+    "Enter a valid Account Number"),
+  accountName: Yup.string()
+    .required("Account Name is required"),
+});

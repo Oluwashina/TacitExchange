@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './sidebar.css'
 import Logo from '../../assets/images/logo.png'
-import profile from '../../assets/images/header.png'
+// import profile from '../../assets/images/header.png'
+import profile from '../../assets/images/userProfile.svg'
 import { Link, useLocation } from 'react-router-dom';
 import {connect} from 'react-redux'
 
