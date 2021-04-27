@@ -4,6 +4,7 @@ import rateReducer from "./rate";
 import adminReducer from './admin'
 import dashboardReducer from "./dashboard";
 import notificationReducer from "./notifications";
+import tradeReducer from "./trade";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     rate: rateReducer,
     admin: adminReducer,
     dashboard: dashboardReducer,
-    notification: notificationReducer
+    notification: notificationReducer,
+    trade: tradeReducer
   });
   
   export default rootReducer;

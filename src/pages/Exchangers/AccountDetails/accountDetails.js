@@ -2,7 +2,6 @@ import React, {useState, useRef} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './account.css'
 import DataTable from 'react-data-table-component'
-import {movies} from '../../Admin/Dashboard/data'
 import Check from '../../../assets/images/check-square.svg'
 import Edit from '../../../assets/images/edit.svg'
 import {Form, Formik} from 'formik'
@@ -40,22 +39,22 @@ const UserAccount = (props) => {
     const columns = [
         {
           name: "Account Name",
-          selector: "id",
+          selector: "accountName",
           sortable: true
         },
         {
           name: "Account Number",
-          selector: "title",
+          selector: "accountNumber",
           sortable: true
         },
         {
           name: "Bank Name",
-          selector: 'amount'
+          selector: 'bankName'
         },
         {
             name: "Default",
             cell: row => <span className="defaultDiv"> 
-            {`${row.status}`}
+            {`${row.isDefault ? "Default" : ""}`}
             </span>
         },
         {
@@ -63,13 +62,18 @@ const UserAccount = (props) => {
             cell: row => 
             <div>
                 <img src={Edit}
-                  onClick={handleEditShow}
+                  onClick={() => OpenEditModal(row.id)}
                  alt="edit" width="25" height="25" style={{cursor: 'pointer'}} /> 
                 <img src={Check} alt="check" className="ml-2" width="25" height="25" /> 
             </div>
             
         },
       ];
+
+      const OpenEditModal = (id) =>{
+        alert(id)
+        handleEditShow()
+      }
 
 
     return ( 
@@ -314,7 +318,7 @@ const UserAccount = (props) => {
                             <DataTable
                             title="Bank Accounts"
                             columns={columns}
-                            data={movies}
+                            data={accountDetails}
                             pagination
                             persistTableHead
                             progressPending={false}

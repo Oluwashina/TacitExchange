@@ -126,3 +126,17 @@ export const accountDetailsValidator = Yup.object({
   accountName: Yup.string()
     .required("Account Name is required"),
 });
+
+
+export const tradeValidator = Yup.object({
+  giftname: Yup.string()
+  .required("Giftname is required"),
+  category: Yup.string()
+    .required("Select a category"),
+  amount: Yup.string()
+    .required("Enter an amount")
+    .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid amount")
+    .min(2, "Minimum amount is $25"),
+  comment: Yup.string(),
+});
+

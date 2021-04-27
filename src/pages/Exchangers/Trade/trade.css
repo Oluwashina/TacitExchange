@@ -1,0 +1,77 @@
+.tradeSection{
+    background: #FFFFFF;
+    border: 1px solid #DFE0EB;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 30px 50px;
+}
+
+.file_upload {
+    opacity: 0.0;
+ 
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+ 
+    /* IE 5-7 */
+    filter: alpha(opacity=0);
+  
+    /* Netscape or and older firefox browsers */
+    -moz-opacity: 0.0;
+ 
+    /* older Safari browsers */
+    -khtml-opacity: 0.0;
+ 
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height:100%;
+ }
+
+ .tradeImage{
+     position: relative;
+     background: rgba(196, 196, 196, 0.4);
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 150px;
+ }
+
+ .cameraStyle{
+     position: absolute;
+     width: 30px;
+     height: 30px;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+ }
+
+ .cameraUploadStyle{
+    position: absolute;
+    width: 100%;
+    height: 150px;
+ }
+
+ .trade-size{
+     width: 40%;
+ }
+
+
+ /* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .trade-size{
+        width: 100%;
+    }
+    .tradeSection{
+        padding: 30px 20px;
+    }
+    .cameraUploadStyle {
+        position: absolute;
+        width: 100%;
+        height: 150px;
+    }
+}
+ 
