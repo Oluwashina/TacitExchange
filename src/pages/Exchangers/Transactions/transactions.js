@@ -52,16 +52,22 @@ const UserTransactions = (props) => {
     }
 
     const columns = [
-        {
-          name: "Card Category",
-          selector: "cardCategory",
-          sortable: true
-        },
-        {
-          name: "Card Name",
-          selector: "cardName",
-          sortable: true
-        },
+      {
+        name: "Card Category",
+        cell: row => <span
+        > 
+      { row['subCategoryDetails']['categoryname']  }
+       </span>,
+        sortable: true
+      },
+      {
+        name: "Card Name",
+        cell: row => <span
+        > 
+      { row['subCategoryDetails']['subcategoryname']  }
+       </span>,
+        sortable: true
+      },
         {
           name: "Amount Due",
           cell: row => <span> 

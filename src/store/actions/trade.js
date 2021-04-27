@@ -70,9 +70,10 @@ export const createTrade = (val) => {
         ]
       try {
         const res = await PostApi("trade", {
-            amount: val.amount,
-            cardName: val.giftname,
-            cardCategory: val.category,
+            cardAmount: val.amount,
+            amount: getState().rate.amount,
+            categoryId: val.giftname,
+            subCategoryId: val.category,
             imageUrl: result,
             comment: val.comment
         }, getToken(), "application/json")

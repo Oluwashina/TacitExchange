@@ -25,12 +25,18 @@ const UserDashboard = (props) => {
     const columns = [
         {
           name: "Card Category",
-          selector: "cardCategory",
+          cell: row => <span
+          > 
+        { row['subCategoryDetails']['categoryname']  }
+         </span>,
           sortable: true
         },
         {
           name: "Card Name",
-          selector: "cardName",
+          cell: row => <span
+          > 
+        { row['subCategoryDetails']['subcategoryname']  }
+         </span>,
           sortable: true
         },
         {

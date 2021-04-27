@@ -30,19 +30,19 @@ const UserTrade = (props) => {
    const handleFrontImage = (index) =>{
     var file = fileRef.current.files[0]
     console.log(file)
-    // handleCard(file, index)
+    handleCard(file, index)
 }
 
 // upload back image of card
 const handleBackImage = (index) =>{
-    var file = fileRef.current.files[0]
+    var file = fileRef2.current.files[0]
     console.log(file)
     handleCard(file, index)
 }
 
 // handle receipt of card
 const handleReceiptImage = (index) =>{
-    var file = fileRef.current.files[0]
+    var file = fileRef3.current.files[0]
     console.log(file)
     handleCard(file, index)
 }
@@ -55,7 +55,7 @@ const handleReceiptImage = (index) =>{
     if(firstcard === ''){
         cogoToast.warn('Front and Back images are compulsory for a trade initialization')
     }
-    if(secondcard === ''){
+    else if(secondcard === ''){
       cogoToast.warn('Front and Back images are compulsory for a trade initialization')
     }
     else{
@@ -289,7 +289,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                                 className="file_upload"
                                                 accept="image/*"
                                                 ref={fileRef3}
-                                                onChange={() => handleReceiptImage(3)}
+                                                onChange={() => handleReceiptImage(2)}
                                                 />
                                             </label>
                                         </div>

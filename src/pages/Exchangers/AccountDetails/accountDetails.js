@@ -10,11 +10,11 @@ import { accountDetailsValidator } from "../../../validationSchema/validator";
 import accountCircle from '../../../assets/images/accountCircle.svg'
 import closeIcon from '../../../assets/images/closeIcon.svg'
 import {connect} from 'react-redux'
-import { addAccountDetails } from '../../../store/actions/auth';
+import { addAccountDetails, filterDetails, updateAccountDetails } from '../../../store/actions/auth';
 
 const UserAccount = (props) => {
 
-    const {accountDetails, addAccount} = props
+    const {accountDetails, addAccount, handleFilter, details, updateAccount} = props
 
      const ref = useRef()
 
@@ -34,7 +34,21 @@ const UserAccount = (props) => {
     const handleSubmit = async (values) =>{
         console.log(values)
         await addAccount(values)
+
+        setTimeout(() => {
+            handleClose()
+          }, 2000);
       }
+    
+      const handleUpdate = async (values) =>{
+          console.log(values)
+
+          await updateAccount(values)
+
+          setTimeout(() => {
+            handleEditClose()
+          }, 2000);
+      } 
     
     const columns = [
         {
@@ -54,7 +68,7 @@ const UserAccount = (props) => {
         {
             name: "Default",
             cell: row => <span className="defaultDiv"> 
-            {`${row.isDefault ? "Default" : ""}`}
+            {`${row.isDefault ? "Default" : "Yeah"}`}
             </span>
         },
         {
@@ -71,8 +85,12 @@ const UserAccount = (props) => {
       ];
 
       const OpenEditModal = (id) =>{
-        alert(id)
-        handleEditShow()
+        handleFilter(id)
+
+        setTimeout(() => {
+            handleEditShow()
+          }, 500);
+       
       }
 
 
@@ -222,10 +240,10 @@ const UserAccount = (props) => {
                  {/* form submission */}
               <Formik
                 onSubmit={(values, {setSubmitting}) =>
-                    handleSubmit(values, setSubmitting)
+                    handleUpdate(values, setSubmitting)
                     }
                 validationSchema={accountDetailsValidator}
-                initialValues={{bank: "", accountNumber: "", accountName: ""}}
+                initialValues={{bank: details.bankName ? details.bankName : "", accountNumber: details.accountNumber ? details.accountNumber : "", accountName: details.accountName ? details.accountName : ""}}
               >
                   {({
                       handleChange,
@@ -310,7 +328,7 @@ const UserAccount = (props) => {
 
                   {/* check if there is account details */}
                   {
-                      accountDetails ? 
+                      accountDetails.length ? 
 
                     <div className="accountDiv mt-lg-4 mt-5 mb-5">
 
@@ -365,13 +383,16 @@ const UserAccount = (props) => {
 
 const mapStateToProps = (state) =>{
     return{
-        accountDetails: state.auth.accountDetails
+        accountDetails: state.auth.accountDetails,
+        details: state.auth.details
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         addAccount: (val) => dispatch(addAccountDetails(val)),
+        updateAccount: (val) => dispatch(updateAccountDetails(val)),
+        handleFilter: (id) => dispatch(filterDetails(id)),
     }
 }
  

@@ -13,12 +13,13 @@ const initState = {
   walletBalance: "",
   role: "",
   profilePic: "",
-  accountDetails: {},
+  accountDetails: [],
   resetcode: false,
   email_msg: "",
   validlink: false,
   photoloader: false,
   loading: false,
+  details:{}
 };
 
 const authReducer = (state = initState, action) => {
@@ -127,6 +128,22 @@ const authReducer = (state = initState, action) => {
       return{
         ...state
       }
+    case 'filterDetails':
+      let details = state.accountDetails.find(pro=> pro.id === action.id)
+      return{
+        ...state,
+        details: details
+      }
+    case 'AccountCreateSuccessful':
+      return{
+        ...state,
+        accountDetails: action.data.accountDetails
+      }
+   case 'AccountUpdatedSuccessful':
+     return{
+       ...state,
+       accountDetails: action.data.accountDetails
+     }
     default:
       return state;
   }
