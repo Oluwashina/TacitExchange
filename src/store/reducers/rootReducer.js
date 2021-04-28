@@ -7,7 +7,8 @@ import notificationReducer from "./notifications";
 import tradeReducer from "./trade";
 
 
-const rootReducer = combineReducers({
+
+const appReducer = combineReducers({
     auth: authReducer,
     rate: rateReducer,
     admin: adminReducer,
@@ -15,6 +16,16 @@ const rootReducer = combineReducers({
     notification: notificationReducer,
     trade: tradeReducer
   });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'logout') {
+    state = undefined
+  }
+
+    return appReducer(state, action)
+  }
+
+
   
   export default rootReducer;
   

@@ -93,15 +93,21 @@ const UsersDetails = (props) => {
 
     const columns = [
         {
-          name: "Trade Id",
-          selector: "id",
-          sortable: true
-        },
-        {
-          name: "Card Name",
-          selector: "cardName",
-          sortable: true
-        },
+            name: "Card Category",
+            cell: row => <span
+                > 
+              { row['subCategoryDetails']['categoryname']  }
+               </span>,
+                sortable: true
+          },
+          {
+            name: "Card Name",
+            cell: row => <span
+            > 
+          { row['subCategoryDetails']['subcategoryname']  }
+           </span>,
+            sortable: true
+          },
         {
           name: "Amount Due",
           sortable: true,
@@ -136,7 +142,11 @@ const UsersDetails = (props) => {
       const ViewTransact = (id) =>{
         history.push("/admin/usertrade/"+id)
       }
-  
+      
+       // get default account details
+    const account =  user.accountDetails.find(pro => pro.isDefault === true)
+
+
 
     return ( 
         <>
@@ -225,18 +235,18 @@ const UsersDetails = (props) => {
                                 <div className="row mt-4">
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Bank Name</p>
-                                        <p className="mt-1" style={{color: '#898D93'}}>{user.accountDetails.bankName}</p>
+                                        <p className="mt-1" style={{color: '#898D93'}}>{account.bankName ? account.bankName : ""}</p>
                                     </div>
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Account Number</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{user.accountDetails.accountNumber}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountNumber ? account.accountNumber : ""}</p>
                                     </div>
                                 </div>
 
                                 <div className="row mt-lg-3 mt-3">
                                     <div className="col-lg-12">
                                         <p className="mb-0" >Account Name</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{user.accountDetails.accountName}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountName ? account.accountName : ""}</p>
                                     </div>
                                    
                                 </div>

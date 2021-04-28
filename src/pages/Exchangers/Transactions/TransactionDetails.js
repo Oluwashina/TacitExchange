@@ -14,7 +14,7 @@ const UserTransactionDetails = (props) => {
     const {transaction} = props
 
     // mapping images 
-    const imageLayout = transaction.imageUrl.map((item, index) => (
+    const imageLayout = transaction.imageUrl.filter(el => el !== "").map((item, index) => (
         <div key={index} className="col-lg-6 mb-4 mb-lg-3">
             <div className="transactImage">
             <ImageZoom
@@ -201,7 +201,7 @@ const mapStateToProps = (state, ownProps) =>{
     const transaction = transactions.find(val => val.id === id);
     return{
         transaction: transaction,
-        id: id
+        id: id,
     }
 }
 

@@ -5,12 +5,17 @@ import Logo from '../../assets/images/logo.png'
 import profile from '../../assets/images/userProfile.svg'
 import { Link, useLocation } from 'react-router-dom';
 import {connect} from 'react-redux'
+import { logOut } from '../../store/actions/auth';
 
 const UserSideBar = (props) => {
 
     const [sideShow, setSideShow] = useState(false);
 
-    const {firstname, lastname, image} = props
+    const {firstname, lastname, image, Logout} = props
+
+    const ToggleLogout = () =>{
+        Logout()
+    }
 
     
 
@@ -47,9 +52,6 @@ const UserSideBar = (props) => {
                 break;
             case '/user/account':
                 val = 'Account Details'
-                break;
-            case '/user/transaction/1':
-                val = 'Transaction Details'
                 break;
              default:
                  val = 'Transaction Details'
@@ -186,7 +188,9 @@ const UserSideBar = (props) => {
                         </div>
 
                     {/* logout */}
-                        <Link to="/" className="v-list-item v-list-link" style={{textDecoration: 'none'}}>
+                        <Link to="/"
+                         onClick={ToggleLogout}
+                         className="v-list-item v-list-link" style={{textDecoration: 'none'}}>
 
                             {/* icon */}
                             <div className="v-list-icon">
@@ -286,7 +290,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-
+        Logout: () => dispatch(logOut()),
     }
 }
  

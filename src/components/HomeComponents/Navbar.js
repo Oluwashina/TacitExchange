@@ -25,7 +25,6 @@ const Navbar = (props) => {
     // check for which path you are on
     const isActive = useLocation().pathname
 
-    console.log(props)
 
     const [show, setShow] = useState(false);
     const [showRegister, setShowRegister] = useState(false);

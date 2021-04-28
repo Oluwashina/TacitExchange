@@ -12,10 +12,11 @@ import Admin from '../../assets/images/admin.svg'
 import Rates from '../../assets/images/fund.svg'
 import Trades from '../../assets/images/withdrawal.svg'
 import { logOut } from '../../store/actions/auth';
+import { SearchUser } from '../../store/actions/admin';
 
 const SideBar = (props) => {
     
-    const {firstname, lastname, image, Logout} = props
+    const {firstname, lastname, image, Logout, Search} = props
 
     useEffect(() =>{
         document.body.classList.add('sidebarBg');
@@ -29,8 +30,8 @@ const SideBar = (props) => {
          }
      
          const handleChange = (e) =>{
-            //  let keyword = e.target.value
-            //  Search(keyword)
+             let keyword = e.target.value
+             Search(keyword)
          }
      
 
@@ -154,7 +155,7 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = (dispatch) => {
     return {
         Logout: () => dispatch(logOut()),
-        // Search: (value) => dispatch(SearchUser(value))
+        Search: (value) => dispatch(SearchUser(value))
     };
   };
 

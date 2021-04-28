@@ -43,23 +43,6 @@ const authReducer = (state = initState, action) => {
               profilePic: action.data.profile.profilePic,
               accountDetails: action.data.profile.accountDetails
           }
-    case 'logout':
-          return {
-              ...state,
-              isAuthenticated: false,
-              token: '',
-              firstname: '',
-              lastname: '',
-              email: '',
-              id: '',
-              phoneNumber: '',
-              isVerified: '',
-              isEnabled: '',
-              walletBalance: '',
-              role: '',
-              profilePic: '',
-              accountDetails: {}
-          }
     case 'PasswordChanged':
       return{
         ...state,

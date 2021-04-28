@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import DataTable from 'react-data-table-component'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { getGiftCards } from '../../../store/actions/admin';
 import Moment from 'react-moment'
@@ -9,6 +9,8 @@ import Moment from 'react-moment'
 const AdminRates = (props) => {
 
   const {cards, getRates} = props
+
+  const history = useHistory()
 
   // fetch all pending trades on load of page
   useEffect(() =>{
@@ -63,7 +65,8 @@ const AdminRates = (props) => {
       ];
 
       const ViewTransact = (id) =>{
-        alert(id)
+
+        history.push('/admin/edit/rate/'+id)
     }
 
     return ( 

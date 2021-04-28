@@ -34,6 +34,7 @@ import UserTrade from './pages/Exchangers/Trade/trade';
 import UserAccount from './pages/Exchangers/AccountDetails/accountDetails';
 import UserTransactions from './pages/Exchangers/Transactions/transactions';
 import UserTransactionDetails from './pages/Exchangers/Transactions/TransactionDetails';
+import UpdateRates from './pages/Admin/Rates/UpdateRate';
 
 
 
@@ -74,6 +75,7 @@ function App() {
               <Route path="/admin/usertrade/:id" component={UserTradeDetails} />
               <Route path="/admin/rates" component={AdminRates} />
               <Route path="/admin/add/rates" component={AdminNewRates} />
+              <Route path="/admin/edit/rate/:id" component={UpdateRates} />
 
 
             </Switch>

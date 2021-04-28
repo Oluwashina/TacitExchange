@@ -258,11 +258,18 @@ export const getGiftCards = (val) => {
 
 
 // add new giftcards functionality
-export const AddGiftCard = (user) =>{
+export const AddGiftCard = (val) =>{
   return async (dispatch, getState) => {
+    // filter by id and get category name
+    let categoryname = getState().rate.category.find(pro=> pro.id === val.categoryId).categoryname
     try {
-      const res = await PostApi("addcard", { ...user }, getToken());
-      if (res.status === 200) {
+      const res = await PostApi("category/subcategory", 
+      { 
+        ...val,
+        categoryname: categoryname
+      },
+       getToken());
+      if (res.status === 201) {
           dispatch({type: "Card_Success"})
         cogoToast.success('Giftcard successfully added!', { position: 'top-center', })
       }
@@ -276,6 +283,36 @@ export const AddGiftCard = (user) =>{
     }
   };
 }
+
+// add a new category of giftcards
+export const AddNewGiftCard = (val) =>{
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("category/subcategory", 
+      { 
+        ...val,
+      },
+       getToken());
+      if (res.status === 201) {
+          dispatch({type: "Card_Success"})
+        cogoToast.success('Giftcard successfully created to list!', { position: 'top-center', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "Card_Error" });
+        cogoToast.error('Error while adding card')
+      }
+    } catch (err) {
+      // var message = err.response.data
+      console.log(err)
+    }
+  };
+}
+
+export const SearchUser = (value) => {
+  return (dispatch, getState) => {
+    dispatch({ type: "SearchUser", data: value });
+  };
+};
 
 
 

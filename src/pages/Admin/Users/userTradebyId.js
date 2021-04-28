@@ -11,7 +11,7 @@ const UserTradeDetails = (props) => {
     const {trade, id, ApproveTrade, DeclineTrade, approveloader, declineloader} = props
     const history = useHistory()
     // mapping images 
-    const imageLayout = trade.imageUrl.map((item, index) => (
+    const imageLayout = trade.imageUrl.filter(el => el !== "").map((item, index) => (
         <div key={index} className="col-lg-3 mb-4">
             <ImageZoom
                 image={{
@@ -64,6 +64,9 @@ const UserTradeDetails = (props) => {
                 break;
         }
     }
+
+     // get default account details
+     const account =  trade.userDetails.accountDetails.find(pro => pro.isDefault === true)
 
     return ( 
         <>
@@ -137,11 +140,11 @@ const UserTradeDetails = (props) => {
                                 <div className="row mt-4">
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Category</p>
-                                        <p className="mt-1" style={{color: '#898D93'}}>{trade.cardCategory}</p>
+                                        <p className="mt-1" style={{color: '#898D93'}}>{trade.subCategoryDetails.categoryname ? trade.subCategoryDetails.categoryname : ""}</p>
                                     </div>
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Subcategory</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.cardName}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.subCategoryDetails.subcategoryname ? trade.subCategoryDetails.subcategoryname : ""}</p>
                                     </div>
                                 </div>
 
@@ -184,18 +187,18 @@ const UserTradeDetails = (props) => {
                                 <div className="row mt-4">
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Bank Name</p>
-                                        <p className="mt-1" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.bankName ? trade.userDetails.accountDetails.bankName : 'GTB'}</p>
+                                        <p className="mt-1" style={{color: '#898D93'}}>{account.bankName ? account.bankName : ''}</p>
                                     </div>
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Account Number</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.accountNumber ? trade.userDetails.accountDetails.accountNumber : '0010020002'}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountNumber ? account.accountNumber : ''}</p>
                                     </div>
                                 </div>
 
                                 <div className="row mt-lg-3 mt-3">
                                     <div className="col-lg-12">
                                         <p className="mb-0" >Account Name</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.userDetails.accountDetails.accountName ? trade.userDetails.accountDetails.accountName : 'Bola dea'}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountName ? account.accountName : 'Bola dea'}</p>
                                     </div>
                                    
                                 </div>

@@ -1,6 +1,7 @@
 
 const initState = {
     users: [],
+    usersSearch: [],
     admins: [],
     susloader: false,
     count: {},
@@ -16,8 +17,18 @@ const initState = {
       case 'Users':
           return{
               ...state,
-              users: action.data   
+              users: action.data,
+              usersSearch: action.data   
         }
+     case 'SearchUser':
+          var word = action.data
+          let user = state.usersSearch.filter(function (item) {
+              return item.firstName.toLowerCase().includes(word.toLowerCase());
+          });
+          return{
+              ...state,
+              users: user
+          }
       case 'Admins':
         return{
           ...state,

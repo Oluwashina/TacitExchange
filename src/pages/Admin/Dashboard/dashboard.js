@@ -21,13 +21,19 @@ const AdminDashboard = (props) => {
     
 const columns = [
     {
-      name: "Trade Id",
-      selector: "id",
-      sortable: true
+      name: "Card Category",
+      cell: row => <span
+          > 
+        { row['subCategoryDetails']['categoryname']  }
+         </span>,
+          sortable: true
     },
     {
       name: "Card Name",
-      selector: "cardName",
+      cell: row => <span
+      > 
+    { row['subCategoryDetails']['subcategoryname']  }
+     </span>,
       sortable: true
     },
     {

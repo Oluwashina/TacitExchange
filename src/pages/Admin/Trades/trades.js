@@ -60,13 +60,19 @@ const AdminTrades = (props) => {
 
     const columns = [
         {
-          name: "Trade Id",
-          selector: "id",
+          name: "Card Category",
+          cell: row => <span
+          > 
+        { row['subCategoryDetails']['categoryname']  }
+        </span>,
           sortable: true
         },
         {
           name: "Card Name",
-          selector: "cardName",
+          cell: row => <span
+          > 
+        { row['subCategoryDetails']['subcategoryname']  }
+         </span>,
           sortable: true
         },
         {
@@ -85,8 +91,11 @@ const AdminTrades = (props) => {
         },
         {
             name: "Status",
-            selector: "paymentStatus",
-            sortable: true,
+            cell: row => <span
+             className={getStatusColor(row.paymentStatus)}
+             > 
+            {`${row.paymentStatus}`}
+            </span>
           },
           {
             name: 'Actions',
@@ -102,7 +111,24 @@ const AdminTrades = (props) => {
       const ViewTransact = (id) =>{
         history.push("/admin/trade/"+id)
       }
-  
+      
+      const getStatusColor = (val) =>{
+        let result;
+        switch(val){
+          case 'Pending':
+            result = 'defaultDiv'
+            break;
+          case 'Completed':
+            result = 'success-color'
+            break;
+         case 'Declined':
+           result = 'declined-color'
+           break;
+          default:
+           break;
+        }
+        return result;
+      }
 
     return ( 
         <>

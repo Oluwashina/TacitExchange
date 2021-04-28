@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {Form, Formik} from 'formik'
 import {addGiftCardValidator} from '../../../validationSchema/validator'
 import {connect} from 'react-redux'
 import { getRateCategory } from '../../../store/actions/rate';
-import {AddGiftCard, AddNewGiftCard} from '../../../store/actions/admin'
 
-const AdminNewRates = (props) => {
+const UpdateRates = (props) => {
 
-    const {fetchCategory, category, addRate, addNewRate} = props
+    const {fetchCategory, category, card} = props
 
     const [newCategory, setNewCategory] = useState('')
 
@@ -16,56 +15,26 @@ const AdminNewRates = (props) => {
         fetchCategory()
   }, [fetchCategory])
 
-    const handleSubmit = async (values, setSubmitting) =>{
-        console.log(values)
-        // api call to add new giftcards
-        // check if it is a new category or existing
-        if(values.newcategory === ''){
-            let resp = {
-                categoryId : values.category,
-                subcategoryname: values.subcategory,
-                termsandconditions: values.terms,
-                nairarate: values.rate,
-                btcrate: "0",
-                cardapproveltime: "0",
-                minimumAmount:  values.minAmount,
-                maximumAmount: values.maxAmount
-            }
-            // make api call to add to an Existing category a giftcard
-            addRate(resp)
-        }
-        if(values.category === 'other'){
-            let result = {
-                categoryId : "",
-                categoryname: values.newcategory,
-                subcategoryname: values.subcategory,
-                termsandconditions: values.terms,
-                nairarate: values.rate,
-                btcrate: "0",
-                cardapproveltime: "0",
-                minimumAmount:  values.minAmount,
-                maximumAmount: values.maxAmount
-            }
-            // make api call to add a new giftcard entirely with a new category
-            addNewRate(result)
-        }
-    }
+  const handleSubmit = async (values, setSubmitting) =>{
+    console.log(values)
+  }
 
-    const handleCategory = (val ) =>{
-        if(val === 'other'){
-            setNewCategory('Others')
-        }
-        else{
-            setNewCategory('')
-        }
+  const handleCategory = (val ) =>{
+    if(val === 'other'){
+        setNewCategory('Others')
     }
+    else{
+        setNewCategory('')
+    }
+}
 
-    return ( 
+    return (
         <>
-        <Sidebar/>
-        <div className='main'>
+            <Sidebar />
+            <div className="main">
             <div className="contain">
 
+                
             <div className="mb-5">    
                 
 
@@ -74,7 +43,7 @@ const AdminNewRates = (props) => {
                     <div className="col-lg-6">
 
                     <div className="mt-lg-5 mt-4 text-center">
-                            <h4 style={{fontWeight: 'bold'}}>Add New Giftcard</h4>
+                            <h4 style={{fontWeight: 'bold'}}>Edit Giftcard</h4>
                      </div>
 
                     <Formik
@@ -82,7 +51,10 @@ const AdminNewRates = (props) => {
                     handleSubmit(values, setSubmitting, resetForm, setFieldValue)
                     }
                 validationSchema={addGiftCardValidator}
-                initialValues={{ category: "", subcategory: "", newcategory: "", minAmount: "", maxAmount: "", rate: "", terms: ""}}
+                initialValues={{ category:  "", subcategory: card.subcategoryname ? card.subcategoryname : "",
+                 newcategory: "", minAmount: card.minimumAmount ? card.minimumAmount : "", 
+                 maxAmount: card.maximumAmount ? card.maximumAmount : "", rate: card.nairarate ? card.nairarate : "",
+                  terms: card.termsandconditions ? card.termsandconditions : ""}}
               >
                   {({
                       handleChange,
@@ -111,7 +83,8 @@ const AdminNewRates = (props) => {
                                     id="category">
                                     <option defaultValue="" >--Select--</option>
                                     {category.map((opt, index) => {
-                                            return <option key={index} value={opt.id}>{opt.categoryname}</option>
+                                            return <option key={index}
+                                             value={opt.id}>{opt.categoryname}</option>
                                         })}
                                     <option value="other">Others</option>
                                    
@@ -228,7 +201,7 @@ const AdminNewRates = (props) => {
                             <button
                             type="submit"
                             disabled={isSubmitting}
-                             className="btn btn-pinkTacit mt-3">Add Giftcard</button>
+                             className="btn btn-pinkTacit mt-3">Update Giftcard</button>
                          </div>
                       </Form>
                   )}
@@ -238,27 +211,29 @@ const AdminNewRates = (props) => {
                     </div>
                 </div> 
 
-            </div>    
+            </div> 
 
+             </div>
             </div>
-        </div>
-
         </>
      );
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state, ownProps) =>{
+    const id = ownProps.match.params.id
+    const cards = state.admin.giftcards
+    const card = cards.find(val => val.id === id);
     return{
         category: state.rate.category,
+        card: card,
+        id: id
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchCategory: () => dispatch(getRateCategory()),
-        addRate: (val) => dispatch(AddGiftCard(val)),
-        addNewRate: (val) => dispatch(AddNewGiftCard(val))
     }
 }
  
-export default connect(mapStateToProps, mapDispatchToProps)(AdminNewRates);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateRates);
