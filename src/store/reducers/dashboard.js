@@ -2,7 +2,8 @@
 
 const initState = {
     count: {},
-    Transaction: []
+    Transaction: [],
+    chartData: []
   };
   
   const dashboardReducer = (state = initState, action) => {
@@ -17,6 +18,11 @@ const initState = {
             ...state,
             Transaction: action.data
         }
+    case 'ChartData':
+      return{
+        ...state,
+        chartData: action.data
+      }
       default:
         return state;
     }

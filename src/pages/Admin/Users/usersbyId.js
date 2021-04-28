@@ -125,8 +125,11 @@ const UsersDetails = (props) => {
         },
         {
             name: "Status",
-            selector: "paymentStatus",
-            sortable: true,
+            cell: row => <span
+             className={getStatusColor(row.paymentStatus)}
+             > 
+            {`${row.paymentStatus}`}
+            </span>
           },
           {
             name: 'Actions',
@@ -141,6 +144,24 @@ const UsersDetails = (props) => {
 
       const ViewTransact = (id) =>{
         history.push("/admin/usertrade/"+id)
+      }
+
+      const getStatusColor = (val) =>{
+        let result;
+        switch(val){
+          case 'Pending':
+            result = 'defaultDiv'
+            break;
+          case 'Completed':
+            result = 'success-color'
+            break;
+         case 'Declined':
+           result = 'declined-color'
+           break;
+          default:
+           break;
+        }
+        return result;
       }
       
        // get default account details

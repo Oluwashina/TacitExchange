@@ -8,7 +8,7 @@ import {AddGiftCard, AddNewGiftCard} from '../../../store/actions/admin'
 
 const AdminNewRates = (props) => {
 
-    const {fetchCategory, category, addRate, addNewRate} = props
+    const {fetchCategory, category, addRate, addNewRate, userRole} = props
 
     const [newCategory, setNewCategory] = useState('')
 
@@ -32,7 +32,7 @@ const AdminNewRates = (props) => {
                 maximumAmount: values.maxAmount
             }
             // make api call to add to an Existing category a giftcard
-            addRate(resp)
+           await addRate(resp)
         }
         if(values.category === 'other'){
             let result = {
@@ -47,7 +47,7 @@ const AdminNewRates = (props) => {
                 maximumAmount: values.maxAmount
             }
             // make api call to add a new giftcard entirely with a new category
-            addNewRate(result)
+          await addNewRate(result)
         }
     }
 
@@ -227,7 +227,7 @@ const AdminNewRates = (props) => {
                         <div className="text-center">
                             <button
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || userRole === 'SubAdmin'}
                              className="btn btn-pinkTacit mt-3">Add Giftcard</button>
                          </div>
                       </Form>
@@ -250,6 +250,7 @@ const AdminNewRates = (props) => {
 const mapStateToProps = (state) =>{
     return{
         category: state.rate.category,
+        userRole: state.auth.role
     }
 }
 

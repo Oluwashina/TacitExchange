@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {Form, Formik} from 'formik'
 import {addGiftCardValidator} from '../../../validationSchema/validator'
 import {connect} from 'react-redux'
 import { getRateCategory } from '../../../store/actions/rate';
+import { updateGiftCards } from '../../../store/actions/admin';
 
 const UpdateRates = (props) => {
 
-    const {fetchCategory, category, card} = props
+    const {fetchCategory, category, card, userRole, updateRate, id} = props
 
-    const [newCategory, setNewCategory] = useState('')
 
     useEffect(() =>{
         fetchCategory()
@@ -17,16 +17,27 @@ const UpdateRates = (props) => {
 
   const handleSubmit = async (values, setSubmitting) =>{
     console.log(values)
+
+    // api call to add new giftcards
+        // check if it is a new category or existing
+        if(values.newcategory === ''){
+            let resp = {
+                categoryId : values.category,
+                subcategoryname: values.subcategory,
+                termsandconditions: values.terms,
+                nairarate: values.rate,
+                btcrate: "0",
+                cardapproveltime: "0",
+                minimumAmount:  values.minAmount,
+                maximumAmount: values.maxAmount
+            }
+            // make api call to update an Existing category a giftcard
+          await updateRate(resp, id)
+        }
+        
   }
 
-  const handleCategory = (val ) =>{
-    if(val === 'other'){
-        setNewCategory('Others')
-    }
-    else{
-        setNewCategory('')
-    }
-}
+  
 
     return (
         <>
@@ -51,7 +62,7 @@ const UpdateRates = (props) => {
                     handleSubmit(values, setSubmitting, resetForm, setFieldValue)
                     }
                 validationSchema={addGiftCardValidator}
-                initialValues={{ category:  "", subcategory: card.subcategoryname ? card.subcategoryname : "",
+                initialValues={{ category:  card.categoryId ? card.categoryId : "", subcategory: card.subcategoryname ? card.subcategoryname : "",
                  newcategory: "", minAmount: card.minimumAmount ? card.minimumAmount : "", 
                  maxAmount: card.maximumAmount ? card.maximumAmount : "", rate: card.nairarate ? card.nairarate : "",
                   terms: card.termsandconditions ? card.termsandconditions : ""}}
@@ -76,17 +87,18 @@ const UpdateRates = (props) => {
                                  values={values.category}
                                  onChange={(e) => {
                                     handleChange(e)
-                                    handleCategory(e.currentTarget.value);
+                                    
                                   }}
                                     onBlur={handleBlur}
                                     className="form-control select-style" 
                                     id="category">
-                                    <option defaultValue="" >--Select--</option>
-                                    {category.map((opt, index) => {
+                                    {/* <option defaultValue="" >--Select--</option> */}
+                                    <option value={card.categoryId} >{card.categoryname}</option>
+                                    {category.filter(val => val.id !== card.categoryId).map((opt, index) => {
                                             return <option key={index}
                                              value={opt.id}>{opt.categoryname}</option>
                                         })}
-                                    <option value="other">Others</option>
+                                    
                                    
                                 </select>
                                 <small style={{ color: "#dc3545" }}>
@@ -94,27 +106,7 @@ const UpdateRates = (props) => {
                               </small>
                             </div>
 
-                            {/* New Category */}
-                            {
-                                newCategory !== '' ?
-                                    <div className="form-group">
-                                    <label htmlFor="subcategory">New Category</label>
-                                    <input className="form-control input-style"
-                                    type="text"
-                                    id="newcategory"
-                                    value={values.newcategory}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder="" />
-                                    <small style={{ color: "#dc3545" }}>
-                                        {touched.newcategory && errors.newcategory}
-                                    </small>
-                                 </div>
-                                 :
-                                 ''
-                            }
-                            
-
+                           
                             {/* Subcategory */}
                             <div className="form-group">
                               <label htmlFor="subcategory">Enter SubCategory</label>
@@ -200,7 +192,7 @@ const UpdateRates = (props) => {
                         <div className="text-center">
                             <button
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting  || userRole === 'SubAdmin'}
                              className="btn btn-pinkTacit mt-3">Update Giftcard</button>
                          </div>
                       </Form>
@@ -226,13 +218,15 @@ const mapStateToProps = (state, ownProps) =>{
     return{
         category: state.rate.category,
         card: card,
-        id: id
+        id: id,
+        userRole: state.auth.role
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchCategory: () => dispatch(getRateCategory()),
+        updateRate: (resp, id) => dispatch(updateGiftCards(resp,id))
     }
 }
  

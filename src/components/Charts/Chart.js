@@ -1,12 +1,15 @@
 import {Line} from 'react-chartjs-2'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 import './Chart.css'
+import Moment from 'moment';
+import { ChartRequest } from '../../store/actions/dashboard';
 
 
-const Chart = () => {
+const Chart = (props) => {
 
-    
+  const {getChartData, graphData} = props
+
   const [chartDate, setChartDate] = useState("today");
 
    const [chartDayData] = useState([
@@ -16,12 +19,48 @@ const Chart = () => {
         { id: 4, name: 'tab-4', text: 'Year', value: 'year' },
     ]);
 
-     const data = {
-        labels: ['1', '2', '3', '4', '5', '6'],
+    //  Get all funding data
+   useEffect(() =>{
+    const values = 'today'
+    getChartData(values)
+  },[getChartData])
+
+    const dateFormat = (date) =>{
+      var dayShow;
+      switch(chartDate){
+          // today
+          case "today":
+              dayShow = 
+                Moment(date).format('YYYY/MM/DD')
+              break;
+          case "week":
+              // week
+              dayShow = 
+              Moment(date).format('dddd')
+              break;
+          case "month":
+              // month
+              dayShow = 
+              Moment(date).format('MMMM Do')
+              break;
+          case "year":
+              // year
+              dayShow = 
+              Moment(date).format('MMMM Do, YYYY')
+              break;
+          default:
+              dayShow = ""
+      }
+       return dayShow;
+    }
+
+
+      const data = {
+        labels: graphData.map(({updatedAt})=> dateFormat(updatedAt)),
         datasets: [
           {
-            label: 'Trades',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'OutFlow',
+            data: graphData.map(({amount})=> amount),
             fill: false,
             backgroundColor: '#0898D7',
             borderColor: '#0898D7',
@@ -50,8 +89,30 @@ const Chart = () => {
     </div>
     )
 
-    const FundToggle = (id) =>{
-        setChartDate(id)
+    const FundToggle = (value) =>{
+        setChartDate(value)
+        var values;
+        switch(value){
+          case "today":
+              values = 'today'
+            getChartData(values)
+            break;
+          case "week":
+              // time,user and type is subject to change
+             values = 'week'
+            getChartData(values)
+           break;
+           case "month":
+              values = 'month'
+                getChartData(values)
+               break;
+           case "year":
+              values = 'year'
+                getChartData(values)
+               break;
+           default:
+               break;
+      }
     }
 
     
@@ -80,13 +141,13 @@ const Chart = () => {
 
 const mapStateToProps = (state) =>{
     return{
-
+      graphData: state.dashboard.chartData,
     }
 }
 
 const mapDispatchToProps =(dispatch) =>{
     return{
-
+      getChartData: (value) => dispatch(ChartRequest(value)),
     }
 }
  

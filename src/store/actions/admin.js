@@ -1,4 +1,4 @@
-import {PostApi, GetApi} from '../helpers'
+import {PostApi, GetApi, DeleteApi, PutApi} from '../helpers'
 import cogoToast from "cogo-toast";
 
 
@@ -307,6 +307,50 @@ export const AddNewGiftCard = (val) =>{
     }
   };
 }
+
+// update a giftcard category or rate functionality
+export const updateGiftCards = (val, id) => {
+  return async (dispatch, getState) => {
+       // filter by id and get category name
+       let categoryname = getState().rate.category.find(pro=> pro.id === val.categoryId).categoryname
+    try {
+      const res = await PutApi("subcategory/listing/"+id, {
+        ...val,
+        categoryname: categoryname
+      }, getToken(), "application/json")
+      if (res.status === 201) {
+        dispatch({type: "Card_Success"})
+        cogoToast.success('Giftcard successfully updated!', { position: 'top-center', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "Card_Error" });
+        cogoToast.error('Error while updating card')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};
+
+
+// delete a giftcard category
+export const deleteGiftCards = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await DeleteApi(`subcategory/listing/${id}`, getToken());
+      if (res.status === 200) {
+        dispatch({ type: "GiftCards"});
+        cogoToast.success('Giftcard deleted successfully!')
+      }
+      if(res.status === 400){
+        dispatch({ type: "Card_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+};
+
 
 export const SearchUser = (value) => {
   return (dispatch, getState) => {

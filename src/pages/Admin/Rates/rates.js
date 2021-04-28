@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import DataTable from 'react-data-table-component'
-import {Link, useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
-import { getGiftCards } from '../../../store/actions/admin';
+import { deleteGiftCards, getGiftCards } from '../../../store/actions/admin';
 import Moment from 'react-moment'
 
 const AdminRates = (props) => {
 
-  const {cards, getRates} = props
+  const {cards, getRates, userRole, deleteRates} = props
 
   const history = useHistory()
 
@@ -41,26 +41,37 @@ const AdminRates = (props) => {
             </span>
           },
         {
+            name: "Naira Rate",
+            selector: "nairarate",
+            sortable: true,
+          },
+          {
             name: "Date Added",
             cell: row => <span>
             <Moment format="MMMM Do, YYYY">
             {row.createdAt}
             </Moment>
         </span>
-        },
-        {
-            name: "Naira Rate",
-            selector: "nairarate",
-            sortable: true,
-          },
+        },  
           {
             name: 'Actions',
             button: true,
-            cell: row => <button
+            cell: row => 
+            <button
             className="btn btn-sm btn-view"
             onClick={() => {
                 ViewTransact(row.id)}}
              >View</button>,
+          },
+          {
+            name: '',
+            button: true,
+            cell: row => 
+            <button
+            className="btn btn-sm btn-view"
+            onClick={() => {
+                DeleteTransact(row.id)}}
+             >Delete</button>,
           }
       ];
 
@@ -68,6 +79,23 @@ const AdminRates = (props) => {
 
         history.push('/admin/edit/rate/'+id)
     }
+
+    const addButton = () =>{
+      history.push('/admin/add/rates')
+    }
+
+    const DeleteTransact = (id) =>{
+      var confirm_flag = window.confirm("You are about to delete this giftcard?");
+
+        if(confirm_flag){
+           deleteRates(id)
+
+           setTimeout(() => {
+             getRates()
+           }, 1000);
+        }
+    }
+
 
     return ( 
         <>
@@ -77,7 +105,10 @@ const AdminRates = (props) => {
 
                     {/* add giftcard button */}
                 <div className="mt-4" style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Link to="/admin/add/rates" className="btn btn-pinkTacit">Add New Giftcard</Link>
+                    <button 
+                    onClick={addButton}
+                    disabled={userRole === 'SubAdmin'}
+                     className="btn btn-pinkTacit">Add New Giftcard</button>
                 </div>
 
                 {/* rates table */}
@@ -100,13 +131,15 @@ const AdminRates = (props) => {
 
 const mapStateToProps = (state) =>{
   return{
-    cards: state.admin.giftcards
+    cards: state.admin.giftcards,
+    userRole: state.auth.role
   } 
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return{
     getRates : (status) => dispatch(getGiftCards(status)),
+    deleteRates : (id) => dispatch(deleteGiftCards(id)),
   }
 }
  

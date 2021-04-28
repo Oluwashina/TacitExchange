@@ -53,8 +53,11 @@ const columns = [
     },
     {
         name: "Status",
-        selector: "paymentStatus",
-        sortable: true,
+        cell: row => <span
+             className={row.paymentStatus === 'Pending' ? "defaultDiv" : "success-color"}
+             > 
+            {`${row.paymentStatus}`}
+            </span>
       },
       {
         name: 'Actions',
@@ -80,6 +83,29 @@ const columns = [
 
                     {/* overview count */}
                     <div className="row mt-3">
+
+                    <div className="col-lg-3">
+                                    {/* hhh */}
+                          <div className="dash-div">
+
+                                <div>
+                                    <p className="mb-0" style={{color: '#0898D7'}}>Total Outflow (NGN)</p>
+                                </div>
+
+                                <div className="mt-4">
+                                    <h5 style={{fontWeight: 500}}>
+                                            <CountUp
+                                                start={0}
+                                                end= {count.sumTotalTrade ? count.sumTotalTrade : 0.00}
+                                                duration={2.5}
+                                                separator=","
+                                            />
+                                     </h5>
+                            
+                                </div>
+
+                                </div>
+                            </div>
 
                             <div className="col-lg-3">
                                 {/* cc */}
@@ -147,20 +173,7 @@ const columns = [
 
                                 </div>
                             </div>
-                            <div className="col-lg-3">
-                                    {/* hhh */}
-                          <div className="dash-div">
-
-                                <div>
-                                    <p className="mb-0" style={{color: '#0898D7'}}>Total Outflow</p>
-                                </div>
-
-                                <div className="mt-4">
-                                    <h5 style={{fontWeight: 500}}>NGN {count.sumTotalTrade ? count.sumTotalTrade : 0.00}</h5>
-                                </div>
-
-                                </div>
-                            </div>
+                            
                     </div>
 
                     {/* end of overview count */}
