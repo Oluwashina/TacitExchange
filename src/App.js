@@ -33,6 +33,7 @@ import UserNotifications from './pages/Exchangers/Notifications/notifications';
 import UserTrade from './pages/Exchangers/Trade/trade';
 import UserAccount from './pages/Exchangers/AccountDetails/accountDetails';
 import UserTransactions from './pages/Exchangers/Transactions/transactions';
+import UserTransactionDetails from './pages/Exchangers/Transactions/TransactionDetails';
 
 
 
@@ -56,6 +57,7 @@ function App() {
               <Route path="/user/trade" component={UserTrade} />
               <Route path="/user/account" component={UserAccount} />
               <Route path="/user/transactions" component={UserTransactions} />
+              <Route path="/user/transaction/:id" component={UserTransactionDetails} />
 
 
               {/* admin route */}

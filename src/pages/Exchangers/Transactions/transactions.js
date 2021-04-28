@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import {connect} from 'react-redux'
 import { getUserTransaction } from '../../../store/actions/dashboard';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import Moment from 'react-moment'
 import DataTable from 'react-data-table-component'
 import Eye from '../../../assets/images/eye.svg'
@@ -18,6 +18,8 @@ const UserTransactions = (props) => {
     useEffect(() => {
         getTransaction(tradeName)
       }, [getTransaction, tradeName]); 
+
+      const history = useHistory()
 
 
     const [tabData] = useState([
@@ -103,7 +105,7 @@ const UserTransactions = (props) => {
       ];
       
       const handleView = (id) =>{
-          alert(id)
+          history.push('/user/transaction/'+id)
       }
 
       

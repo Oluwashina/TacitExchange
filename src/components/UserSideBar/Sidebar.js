@@ -12,12 +12,16 @@ const UserSideBar = (props) => {
 
     const {firstname, lastname, image} = props
 
+    
+
     useEffect(() =>{
         document.body.classList.add('barBg');
      }, [])
 
      // check for which path you are on
      const isActive = useLocation().pathname
+
+
 
      const ToggleSidebar = () =>{
          setSideShow(sideShow ? false : true);
@@ -44,8 +48,13 @@ const UserSideBar = (props) => {
             case '/user/account':
                 val = 'Account Details'
                 break;
+            case '/user/transaction/1':
+                val = 'Transaction Details'
+                break;
              default:
+                 val = 'Transaction Details'
                  break;
+                 
          }
          return val
      }

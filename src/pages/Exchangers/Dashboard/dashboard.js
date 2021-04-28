@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import './dashboard.css'
 import OtherTrade from '../../../assets/images/OthersTrade.svg'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
 import { getUserDashboardCount, getUserTransaction } from '../../../store/actions/dashboard';
@@ -14,6 +14,8 @@ const UserDashboard = (props) => {
     const {countFetch, count, getTransaction, transaction} = props
 
     const [status] = useState("Pending")
+
+    const history = useHistory()
 
     // make call to fetch dashboard count
     useEffect(() => {
@@ -73,7 +75,7 @@ const UserDashboard = (props) => {
       ];
 
       const handleView = (id) =>{
-        alert(id)
+        history.push('/user/transaction/'+id)
       }
 
 
