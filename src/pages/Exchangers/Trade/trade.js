@@ -1,24 +1,42 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import {Form, Formik} from 'formik'
 import {tradeValidator} from '../../../validationSchema/validator'
 import Nigeria from  '../../../assets/images/nigerialogo.svg'
 import camera from '../../../assets/images/camera.svg'
 import {connect} from 'react-redux'
-import { getRateCategory, getRateSubCategory, getRateValue } from '../../../store/actions/rate';
+import { getRateCategory, getRateSubCategory, getRateValue, getTermsAndConditions } from '../../../store/actions/rate';
 import './trade.css'
 import cogoToast from "cogo-toast";
 import { clearCardImages, createTrade, UploadGiftCardImage } from '../../../store/actions/trade';
 import {useHistory} from 'react-router-dom'
+import accountCircle from '../../../assets/images/accountCircle.svg'
+import closeIcon from '../../../assets/images/closeIcon.svg'
+import Modal from 'react-bootstrap/Modal'
+import ReactHtmlParser from 'react-html-parser'
 
 const UserTrade = (props) => {
 
     const {fetchCategory, category, fetchSubCategory, subcategory, amount, calcRate,
-         handleCard, firstcard, secondcard, thirdcard, handleStartTrade, emptyImage} = props
+         handleCard, firstcard, secondcard, thirdcard, handleStartTrade, emptyImage, getTerms, 
+         terms, accountDetails, minAmount, maxAmount
+        } = props
 
     const fileRef = useRef(null)
     const fileRef2 = useRef(null)
     const fileRef3 = useRef(null)
+
+    const [editShow, setEditShow] = useState(false);
+
+    const [tradeval, setTradeVal] = useState({});
+
+
+    const handleEditClose = () => setEditShow(false);
+    const handleEditShow = () => {
+        setEditShow(true);
+    }
+
+    const ref = useRef()
 
     const history = useHistory()
 
@@ -51,24 +69,53 @@ const handleReceiptImage = (index) =>{
 //   submit a trade
   const handleSubmit = async (values, setSubmitting,)  =>{
     console.log(values)
+    // check if amount entered is less than minimum expected or greater than maximum expected
+    if(parseFloat(values.amount) < minAmount) {
+        cogoToast.warn(`The minimum amount for this subcategory is $${minAmount}`)
+    } 
+    else if(parseFloat(values.amount) > maxAmount){
+        cogoToast.warn(`The maximum amount for this subcategory is $${maxAmount}`)
+    }
     // check if at least an image of the card is added
-    if(firstcard === ''){
-        cogoToast.warn('Front and Back images are compulsory for a trade initialization')
+    else if(firstcard === ''){
+        cogoToast.warn('Giftcard image(Front) is compulsory for a trade initialization')
     }
     else if(secondcard === ''){
-      cogoToast.warn('Front and Back images are compulsory for a trade initialization')
+      cogoToast.warn('Giftcard image(Back) is compulsory for a trade initialization')
     }
     else{
-        await handleStartTrade(values) 
+        // filter by category id and get terms and conditions for a trade
+        let id = values.category
+        getTerms(id)
 
-        setTimeout(() => {
-            history.push('/user/transactions')
-          }, 2000);  
-          
-        //   clear gift card images uploaded
-        emptyImage()
+        handleEditShow()
+        setTradeVal(values)
     }
   }
+
+//   confirm a trade
+const confirmTrade = () =>{
+    // check if user has a default account filled before starting trade
+    if(accountDetails.length === 0){
+        cogoToast.info('Please add a default account in the account details tab', {position: 'top-right'})
+    }
+    else{
+        console.log(tradeval)
+
+        handleStartTrade(tradeval) 
+
+    setTimeout(() => {
+        handleEditClose()
+        history.push('/user/transactions')
+        }, 2000);  
+          
+    //   clear gift card images uploaded
+    emptyImage()
+    
+    }
+   
+    
+}
 
   const handleSubCategory = (val) =>{
     fetchSubCategory(val)
@@ -91,6 +138,48 @@ const handleCalculation = (amount, categoryId, giftname) =>{
 
     return ( 
         <>
+      {/* modal for displaying terms and conditions */}
+      <Modal show={editShow}
+            ref={ref}
+            {...props}
+         onHide={handleEditClose}>
+            {/* login container */}
+            <div className="d-none d-md-block" style={{position: 'absolute', left: '70px', top: '0px'}}>
+                    <img alt="login" src={accountCircle} width="350" height="140" />
+             </div>
+             {/* close icon */}
+             <div onClick={handleEditClose} style={{position: 'absolute', right: '35px', top: '20px', cursor: 'pointer'}}>
+                <img src={closeIcon} alt="close" width="30" height="30" />
+            </div>
+
+            <div className="text-center contain-head mt-3 mt-lg-4" style={{position: 'relative'}}>
+                <h3 className="login-text">Terms and
+                <br /> Conditions</h3>
+            </div>
+
+            {/* login section */}
+            <div className="container modal-contain">
+                
+                {/* terms and conditions layout */}
+               
+                { ReactHtmlParser(terms) }  
+
+
+                {/* end of terms and conditions layout */}
+
+                <div className="text-center mt-4">
+                <button 
+                type="submit"
+                onClick={confirmTrade}
+                className="btn btn-blueTacit">Confirm Trade</button>
+                </div>
+             
+            </div>
+        
+      </Modal>
+      {/* end of edit account details modal */}
+
+
         <UserSideBar />
         <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
@@ -344,9 +433,13 @@ const mapStateToProps = (state) =>{
         category: state.rate.category,
         subcategory: state.rate.subcategory,
         amount: state.rate.amount,
+        minAmount: state.rate.minAmount,
+        maxAmount: state.rate.maxAmount,
         firstcard: state.trade.firstCard,
         secondcard: state.trade.secondCard,
-        thirdcard: state.trade.thirdCard
+        thirdcard: state.trade.thirdCard,
+        terms: state.rate.terms,
+        accountDetails: state.auth.accountDetails
     }
 }
 
@@ -357,7 +450,8 @@ const mapDispatchToProps = (dispatch) =>{
         calcRate: (amount, id) => dispatch(getRateValue(amount, id)),
         handleCard: (values, index) => dispatch(UploadGiftCardImage(values, index)),
         handleStartTrade: (values) => dispatch(createTrade(values)),
-        emptyImage: () => dispatch(clearCardImages())
+        emptyImage: () => dispatch(clearCardImages()),
+        getTerms: (id) => dispatch(getTermsAndConditions(id))
     }
 }
  

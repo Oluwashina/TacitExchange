@@ -73,6 +73,12 @@ export const getRateValue = (amount, id) =>{
     }
 }
 
+export const getTermsAndConditions = (id) =>{
+  return dispatch =>{
+      dispatch({type: 'Terms', data: id})
+  }
+}
+
 
 // api call for contact functionality on landing page
 export const contactSupport = (user) => {

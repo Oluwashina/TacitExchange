@@ -5,11 +5,12 @@ import { Form, Formik } from "formik";
 import { resetPasswordValidator } from "../../validationSchema/validator";
 import { connect } from "react-redux";
 import {ResetPassword, verifyResetCode  } from '../../store/actions/auth';
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useHistory } from "react-router-dom";
 
 const UserReset = ({ Reset, verifyCode, code,  }) => {
   const search = useLocation().search;
 
+  const history = useHistory()
 
   // Verify reset code sent to email if valid!
   useEffect(() => {
@@ -26,6 +27,11 @@ const UserReset = ({ Reset, verifyCode, code,  }) => {
       password: values.password,
     };
     await Reset(creds);
+
+    setTimeout(() => {
+      history.push('/')
+    }, 2000);  
+
   };
 
   if (code) {

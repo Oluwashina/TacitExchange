@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import { getRateCategory } from '../../../store/actions/rate';
 import {AddGiftCard, AddNewGiftCard} from '../../../store/actions/admin'
 
+
 const AdminNewRates = (props) => {
 
     const {fetchCategory, category, addRate, addNewRate, userRole} = props

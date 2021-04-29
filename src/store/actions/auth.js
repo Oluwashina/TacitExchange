@@ -28,7 +28,7 @@ export const loginUser = (user) => {
       }
       if(res.status === 400){
         dispatch({ type: "LOGIN_FAIL", err: res.data});
-        cogoToast.error('Invalid Credentials!')
+        cogoToast.error(`${res.data.message}`)
       }
     } catch (err) {
       console.log(err)
@@ -60,7 +60,7 @@ export const loginAdmin = (user) => {
       }
       if(res.status === 400){
         dispatch({ type: "LOGIN_FAIL", err: res.data});
-        cogoToast.error('Invalid Credentials!')
+        cogoToast.error(`${res.data.message}`)
       }
     } catch (err) {
       console.log(err)
