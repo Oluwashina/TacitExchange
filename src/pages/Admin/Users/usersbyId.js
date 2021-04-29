@@ -165,7 +165,8 @@ const UsersDetails = (props) => {
       }
       
        // get default account details
-    const account =  user.accountDetails.find(pro => pro.isDefault === true)
+    const account =  
+        user.accountDetails.length ? user.accountDetails.find(pro => pro.isDefault === true) : ""
 
 
 
@@ -256,18 +257,18 @@ const UsersDetails = (props) => {
                                 <div className="row mt-4">
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Bank Name</p>
-                                        <p className="mt-1" style={{color: '#898D93'}}>{account.bankName ? account.bankName : ""}</p>
+                                        <p className="mt-1" style={{color: '#898D93'}}>{account.bankName ? account.bankName : "Not Updated yet"}</p>
                                     </div>
                                     <div className="col-lg-6">
                                         <p className="mb-0" >Account Number</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountNumber ? account.accountNumber : ""}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountNumber ? account.accountNumber : "Not Updated yet"}</p>
                                     </div>
                                 </div>
 
                                 <div className="row mt-lg-3 mt-3">
                                     <div className="col-lg-12">
                                         <p className="mb-0" >Account Name</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountName ? account.accountName : ""}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountName ? account.accountName : "Not Updated Yet"}</p>
                                     </div>
                                    
                                 </div>

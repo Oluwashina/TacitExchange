@@ -5,8 +5,12 @@ import './contact.css'
 import {Form, Formik} from 'formik'
 import {contactValidator} from '../../validationSchema/validator'
 import ContactImage from '../../assets/images/contact.svg'
+import {connect} from 'react-redux'
+import {contactSupport} from '../../store/actions/rate'
 
-const ContactPage = () => {
+const ContactPage = (props) => {
+
+    const {support} = props
 
     useEffect(() =>{
         const script = document.createElement("script")
@@ -17,6 +21,7 @@ const ContactPage = () => {
 
     const handleSubmit = async (values) =>{
         console.log(values)
+        await support(values)
       }
 
     return ( 
@@ -177,5 +182,18 @@ const ContactPage = () => {
         </>
      );
 }
+
+const mapStateToProps = (state) =>{
+    return{
+
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        support : (status) => dispatch(contactSupport(status)),
+    }
+}
  
-export default ContactPage;
+export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);

@@ -1,4 +1,5 @@
-import {GetApi} from '../helpers'
+import {GetApi, PostApi} from '../helpers'
+import cogoToast from "cogo-toast";
 
 
 
@@ -71,3 +72,23 @@ export const getRateValue = (amount, id) =>{
         }})
     }
 }
+
+
+// api call for contact functionality on landing page
+export const contactSupport = (user) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("support", {...user}, "", "application/json")
+      if (res.status === 200) {
+         dispatch({ type: "CONTACT_SUCCESS" });
+         cogoToast.success('Thanks for getting across to us!', { position: 'top-right', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "CONTACT_ERROR", err: res.data});
+        cogoToast.error('Error sending message!')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};

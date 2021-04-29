@@ -178,7 +178,7 @@ const UserTransactionDetails = (props) => {
                             <Link 
                                to="/user/trade"
                                 type="submit"                    
-                                className="btn btn-pinkTacit btn-transact">Start Trade</Link>
+                                className="btn btn-pinkTacit btn-transact">Start Another Trade</Link>
                             </div>
 
                         </div>

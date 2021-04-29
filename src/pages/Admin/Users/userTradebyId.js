@@ -65,8 +65,10 @@ const UserTradeDetails = (props) => {
         }
     }
 
-     // get default account details
-     const account =  trade.userDetails.accountDetails.find(pro => pro.isDefault === true)
+     // get default account details  
+     const account =  
+     trade.userDetails.accountDetails.length ? trade.userDetails.accountDetails.find(pro => pro.isDefault === true) : ""
+
 
     return ( 
         <>
