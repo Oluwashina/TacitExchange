@@ -4,6 +4,7 @@ import './transaction.css'
 import SentIcon from '../../../assets/images/sentIcon.svg'
 import PendingIcon from '../../../assets/images/pendingIcon.svg'
 import completeIcon from '../../../assets/images/completeIcon.svg'
+import declineIcon from '../../../assets/images/declinedIcon.svg'
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import ImageZoom from 'react-medium-image-zoom'
@@ -32,6 +33,63 @@ const UserTransactionDetails = (props) => {
             </div>
          </div>
       ));
+
+      const iconFormat = (val) =>{
+          let result;
+          switch(val){
+              case 'Pending':
+                  result = PendingIcon
+                    break;
+              case 'Completed':
+                  result = completeIcon
+                  break;
+            case 'Declined':
+                result = declineIcon
+                break;
+            default:
+                break;
+                
+          }
+          return result;
+      }
+
+      const statusName = (val) =>{
+        let result;
+        switch(val){
+            case 'Pending':
+                result = 'Pending Payment'
+                  break;
+            case 'Completed':
+                result = 'Payment Sent'
+                break;
+          case 'Declined':
+              result = 'Payment Declined'
+              break;
+          default:
+              break;
+              
+        }
+        return result;
+      }
+
+      const AdminState = (val) =>{
+        let result;
+        switch(val){
+            case 'Pending':
+                result = 'Payment is been processed by'
+                  break;
+            case 'Completed':
+                result = 'Payment was processed by'
+                break;
+          case 'Declined':
+              result = 'Payment was declined by'
+              break;
+          default:
+              break;
+              
+        }
+        return result;
+      }
 
     return ( 
         <>
@@ -64,12 +122,12 @@ const UserTransactionDetails = (props) => {
                                   <div className="transactStatus">
                                            <div>
                                             <img 
-                                            src={transaction.paymentStatus === 'Pending' ? PendingIcon : completeIcon} 
+                                            src={iconFormat(transaction.paymentStatus)} 
                                             width="60" height="60" alt="pending" />
                                         </div>
                                         <div className="ml-3 mt-3">
                                             <h6 style={{fontWeight: 'bold'}}>
-                                                {transaction.paymentStatus === 'Pending' ? "Pending Payment" : "Payment Sent"}
+                                                {statusName(transaction.paymentStatus)}
                                                 </h6>
                                             <p>{transaction.amount} Naira</p>
                                         </div>
@@ -106,7 +164,7 @@ const UserTransactionDetails = (props) => {
                                     {/* amount to recieve */}
                                     <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
-                                           {transaction.paymentStatus === 'Pending' ? "Pending Payment" : "Payment Sent"}
+                                           {statusName(transaction.paymentStatus)}
                                             </h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14}}>{transaction.amount} Naira</p>
                                     </div>
@@ -118,12 +176,19 @@ const UserTransactionDetails = (props) => {
                                     </div>
 
                                         {/* account info */}
-                                    <div className=" mt-3">
+                                    {
+                                        transaction.paymentStatus === 'Declined' ?
+                                        ""
+                                        :
+                                        <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
                                         {transaction.paymentStatus === 'Pending' ? "Payment will be sent to" : "Payment was sent to"}
                                             </h6>
                                         <Link to="/user/account" className="mb-0 mt-1" style={{fontSize: 14, color: '#0898D7', textDecoration: 'none'}}>Default Account</Link>
                                     </div>
+
+                                    }
+                                   
 
 
                                     {/* status */}
@@ -139,19 +204,24 @@ const UserTransactionDetails = (props) => {
                                         ""
                                         :
                                         <div className=" mt-3">
-                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Date Completed</h6>
+                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>
+                                           {transaction.paymentStatus === 'Completed' ? "Date Completed" : "Date Declined"}
+                                            </h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14,}}>
                                         <Moment format="MMMM Do, YYYY">
                                             {transaction.updatedAt}
                                         </Moment></p>
                                       </div>
+                                      
                                     }
+
+                                    
                                     
 
                                     {/* processed by admin */}
                                     <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
-                                        {transaction.paymentStatus === 'Pending' ? "Payment is been processed by" : "Payment was processed by"}</h6>
+                                        {AdminState(transaction.paymentStatus)}</h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14,}}>Admin</p>
                                     </div>
 

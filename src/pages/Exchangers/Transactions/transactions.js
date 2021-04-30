@@ -14,17 +14,13 @@ const UserTransactions = (props) => {
     const [initialTab, setTab] = useState(1);
     const [tradeName, setTradeName] = useState('Pending')
 
-    // make call to fetch Transactions count
-    useEffect(() => {
-        getTransaction(tradeName)
-      }, [getTransaction, tradeName]); 
-
       const history = useHistory()
 
 
     const [tabData] = useState([
         { id: 1, name: "tab-1", text: "Pending Transactions"},
         { id: 2, name: "tab-2", text: "Completed Transactions" },
+        { id: 3, name: "tab-3", text: "Declined Transactions" },
       ]);
 
       // tab Layout
@@ -39,19 +35,37 @@ const UserTransactions = (props) => {
       ));
 
       const handleToggle = (id) => {
-        if(id === 1){
+        let value
+        switch(id){
+          case 1:
             setTab(id)
             setTradeName('Pending') 
-            const value = 'Pending'
-            getTransaction(value)       
-          }
-          else if(id === 2){
+            value = 'Pending'
+            getTransaction(value) 
+            break;
+          case 2:
             setTab(id);
             setTradeName('Completed')
-            const value = 'Completed'
+            value = 'Completed'
             getTransaction(value)
-          }
+            break;
+          case 3:
+            setTab(id);
+            setTradeName('Declined')
+             value = 'Declined'
+            getTransaction(value)
+            break;
+          default:
+            break;
+        }
+
     }
+
+     // make call to fetch Transactions pending
+     useEffect(() => {
+      var value = 'Pending'
+        getTransaction(value)
+      }, [getTransaction]); 
 
     const columns = [
       {
@@ -87,7 +101,7 @@ const UserTransactions = (props) => {
         {
             name: "Status",
             cell: row => <span
-             className={row.paymentStatus === 'Pending' ? "defaultDiv" : "success-color"}
+            className={getStatusColor(row.paymentStatus)}
              > 
             {`${row.paymentStatus}`}
             </span>
@@ -103,6 +117,25 @@ const UserTransactions = (props) => {
             
         },
       ];
+
+      const getStatusColor = (val) =>{
+        let result;
+        switch(val){
+          case 'Pending':
+            result = 'defaultDiv'
+            break;
+          case 'Completed':
+            result = 'success-color'
+            break;
+         case 'Declined':
+           result = 'declined-color'
+           break;
+          default:
+           break;
+        }
+        return result;
+      }
+
       
       const handleView = (id) =>{
           history.push('/user/transaction/'+id)
@@ -175,4 +208,4 @@ const UserTransactions = (props) => {
         }
     }
     
-    export default connect(mapStateToProps, mapDispatchToProps)(UserTransactions);
+export default connect(mapStateToProps, mapDispatchToProps)(UserTransactions);
