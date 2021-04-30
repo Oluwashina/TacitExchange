@@ -68,10 +68,11 @@ export const createTrade = (val) => {
           getState().trade.secondCard,
           getState().trade.thirdCard,
         ]
+        dispatch({ type: 'TRADE_START' });
       try {
         const res = await PostApi("trade", {
             cardAmount: val.amount,
-            amount: getState().rate.amount,
+            amount: getState().rate.tradeamount,
             categoryId: val.giftname,
             subCategoryId: val.category,
             imageUrl: result,

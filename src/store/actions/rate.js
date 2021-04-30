@@ -73,6 +73,23 @@ export const getRateValue = (amount, id) =>{
     }
 }
 
+// clear user trade amount to zero after successful trade
+export const clearTradeAmount = () =>{
+  return dispatch =>{
+      dispatch({type: 'clearTradeAmount'})
+  }
+}
+
+
+export const getUserRateValue = (amount, id) =>{
+  return dispatch =>{
+      dispatch({type: 'UserRateCalculation', data: {
+          amount,
+          id
+      }})
+  }
+}
+
 export const getTermsAndConditions = (id) =>{
   return dispatch =>{
       dispatch({type: 'Terms', data: id})

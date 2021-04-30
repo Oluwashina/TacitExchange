@@ -5,7 +5,7 @@ import {tradeValidator} from '../../../validationSchema/validator'
 import Nigeria from  '../../../assets/images/nigerialogo.svg'
 import camera from '../../../assets/images/camera.svg'
 import {connect} from 'react-redux'
-import { getRateCategory, getRateSubCategory, getRateValue, getTermsAndConditions } from '../../../store/actions/rate';
+import { clearTradeAmount, getRateCategory, getRateSubCategory, getTermsAndConditions, getUserRateValue } from '../../../store/actions/rate';
 import './trade.css'
 import cogoToast from "cogo-toast";
 import { clearCardImages, createTrade, UploadGiftCardImage } from '../../../store/actions/trade';
@@ -19,7 +19,7 @@ const UserTrade = (props) => {
 
     const {fetchCategory, category, fetchSubCategory, subcategory, amount, calcRate,
          handleCard, firstcard, secondcard, thirdcard, handleStartTrade, emptyImage, getTerms, 
-         terms, accountDetails, minAmount, maxAmount
+         terms, accountDetails, minAmount, maxAmount, emptyamount, confirmed
         } = props
 
     const fileRef = useRef(null)
@@ -28,12 +28,19 @@ const UserTrade = (props) => {
 
     const [editShow, setEditShow] = useState(false);
 
+    const [successShow, setSuccessShow] = useState(false);
+
     const [tradeval, setTradeVal] = useState({});
 
 
     const handleEditClose = () => setEditShow(false);
     const handleEditShow = () => {
         setEditShow(true);
+    }
+
+    const handleSuccessClose = () => setSuccessShow(false);
+    const handleSuccessShow = () => {
+        setSuccessShow(true);
     }
 
     const ref = useRef()
@@ -103,17 +110,29 @@ const confirmTrade = () =>{
         console.log(tradeval)
 
         handleStartTrade(tradeval) 
+        
+        setTimeout(() => {
+            handleEditClose()
+
+            // open success modal
+            handleSuccessShow()
+        }, 1000); 
+         
+          
+    } 
+}
+
+// close a trade success dialog
+const CloseTrade = () =>{
 
     setTimeout(() => {
-        handleEditClose()
+        handleSuccessClose()
+        //   clear gift card images uploaded
+        emptyImage()   
+        //    empty Amount you get too
+        emptyamount()
         history.push('/user/transactions')
-        }, 2000);  
-          
-    //   clear gift card images uploaded
-    emptyImage()
-    
-    }
-   
+    }, 500); 
     
 }
 
@@ -170,6 +189,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                 <div className="text-center mt-4">
                 <button 
                 type="submit"
+                disabled={confirmed}
                 onClick={confirmTrade}
                 className="btn btn-blueTacit">Confirm Trade</button>
                 </div>
@@ -178,6 +198,42 @@ const handleCalculation = (amount, categoryId, giftname) =>{
         
       </Modal>
       {/* end of edit account details modal */}
+
+      {/* modal for displaying success fo trade */}
+      <Modal show={successShow}
+            ref={ref}
+            {...props}
+            
+            backdrop="static"
+         onHide={handleSuccessClose}>
+
+            <div className="d-none d-md-block" style={{position: 'absolute', left: '70px', top: '0px'}}>
+                    <img alt="login" src={accountCircle} width="350" height="140" />
+             </div>
+
+             <div className="text-center contain-head mt-4 mt-lg-5" style={{position: 'relative'}}>
+                <h3 className="login-text">Trade Started
+                </h3>
+            </div>
+           
+            {/* login section */}
+            <div className="modal-success">
+
+                    <div className="text-center mt-3">
+                        <h6 style={{fontWeight: 'bold', lineHeight: '22px'}}>You have successfully started a trade. <br /> We will get back to you shortly.</h6>
+                    </div>
+
+                <div className="text-center mt-lg-5 mt-4">
+                <button 
+                type="submit"
+                onClick={CloseTrade}
+                className="btn btn-blueTacit ">OK</button>
+                </div>
+             
+            </div>
+        
+      </Modal>
+      {/* end of successful trade */}
 
 
         <UserSideBar />
@@ -432,14 +488,15 @@ const mapStateToProps = (state) =>{
     return{
         category: state.rate.category,
         subcategory: state.rate.subcategory,
-        amount: state.rate.amount,
-        minAmount: state.rate.minAmount,
-        maxAmount: state.rate.maxAmount,
+        amount: state.rate.tradeamount,
+        minAmount: state.rate.userminAmount,
+        maxAmount: state.rate.usermaxAmount,
         firstcard: state.trade.firstCard,
         secondcard: state.trade.secondCard,
         thirdcard: state.trade.thirdCard,
         terms: state.rate.terms,
-        accountDetails: state.auth.accountDetails
+        accountDetails: state.auth.accountDetails,
+        confirmed: state.trade.confirmed
     }
 }
 
@@ -447,10 +504,11 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         fetchCategory: () => dispatch(getRateCategory()),
         fetchSubCategory: (id) => dispatch(getRateSubCategory(id)),
-        calcRate: (amount, id) => dispatch(getRateValue(amount, id)),
+        calcRate: (amount, id) => dispatch(getUserRateValue(amount, id)),
         handleCard: (values, index) => dispatch(UploadGiftCardImage(values, index)),
         handleStartTrade: (values) => dispatch(createTrade(values)),
         emptyImage: () => dispatch(clearCardImages()),
+        emptyamount: () => dispatch(clearTradeAmount()),
         getTerms: (id) => dispatch(getTermsAndConditions(id))
     }
 }

@@ -16,7 +16,6 @@ const RateCalculator = (props) => {
 
 
     const handleSubmit = (values, setSubmitting,)  =>{
-        console.log(values)
 
         var amount = values.amount;
         var categoryId =  values.category

@@ -114,12 +114,14 @@ const UserTransactionDetails = (props) => {
                                     {/* comment */}
                                     <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>Comment</h6>
-                                        <p className="mb-0 mt-1" style={{fontSize: 14}}>{transaction.comment}</p>
+                                        <p className="mb-0 mt-1" style={{fontSize: 14}}>{transaction.comment ? transaction.comment : "No comment"}</p>
                                     </div>
 
                                         {/* account info */}
                                     <div className=" mt-3">
-                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Payment will be sent to</h6>
+                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>
+                                        {transaction.paymentStatus === 'Pending' ? "Payment will be sent to" : "Payment was sent to"}
+                                            </h6>
                                         <Link to="/user/account" className="mb-0 mt-1" style={{fontSize: 14, color: '#0898D7', textDecoration: 'none'}}>Default Account</Link>
                                     </div>
 

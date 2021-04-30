@@ -467,7 +467,9 @@ const Navbar = (props) => {
                                 >Home</Link>
                             </li>
                             <li className="navLink">
-                                <Link to="/">Support & FAQ</Link>
+                                <Link
+                                 className={isActive === "/faq" ? 'active' : ''}
+                                 to="/faq">Support & FAQ</Link>
                             </li>
                             <li className="navLink">
                                 <Link 

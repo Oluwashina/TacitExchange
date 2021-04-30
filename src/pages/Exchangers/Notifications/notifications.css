@@ -13,6 +13,27 @@
     padding: 25px 20px;
 }
 
+.btn-outline-newer{
+    border: 1px solid #D1D1D1;
+    background: #FAFBFC;
+    color: #0898D7;
+}
+.btn-outline-newer:hover{
+    background: #0898D7;
+    color: #fff;
+}
+
+.btn-outline-older{
+    border: 1px solid #D1D1D1;
+    background: #FAFBFC;
+    color: #0898D7;
+    transition: all ease-in .15s;
+}
+.btn-outline-older:hover{
+    background: #0898D7;
+    color: #fff;
+}
+
 /* Media query for smaller phones */
 
 @media (max-width:767px) {

@@ -3,14 +3,14 @@ import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import './notifications.css'
 import Circle from '../../../assets/images/circle.svg'
 import {connect} from 'react-redux'
-import { getUserNotifications } from '../../../store/actions/notifications';
+import { getUserNotifications, getAllUserNotifications } from '../../../store/actions/notifications';
 import {Link} from 'react-router-dom'
 import moment from 'moment'
 
 
 const UserNotifications = (props) => {
 
-    const {notifications, getNotification} = props
+    const {notifications, getNotification, getAllNotifications} = props
 
      // make call to fetch notifications
      useEffect(() => {
@@ -79,6 +79,20 @@ const UserNotifications = (props) => {
 
                     </div>
 
+                <div className="text-center mt-lg-4 mt-3">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                        <button type="button"
+                        onClick={getNotification}
+                         disabled={notifications.length === 6}
+                         className="btn btn-outline-newer" 
+                         >Newer</button>
+                        <button type="button"
+                    
+                        onClick={getAllNotifications}
+                         className="btn btn-outline-older">Older</button>
+                    </div>
+                </div>
+
 
                 </div>
                 :
@@ -118,6 +132,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
     return{
         getNotification: () => dispatch(getUserNotifications()),
+        getAllNotifications: () => dispatch(getAllUserNotifications()),
     }
 }
 

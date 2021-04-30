@@ -333,9 +333,18 @@ header{
     background: #fff;
     position: initial;
     border-radius: 30px;
-    border: 1px solid #fff;
-    /* height: 515px; */
+    border: 1px solid #fff; 
+    /* /* height: 515px; */
 }
+
+.modal-content.trade{
+    background: #2C3A50;
+    position: initial;
+    border-radius: 30px;
+    border: 1px solid #2C3A50;
+}
+
+
 .login-text{
     color: white;
     font-weight: 800;
@@ -343,6 +352,11 @@ header{
 .modal-contain{
     padding: 80px 40px 30px 40px;
 }
+
+.modal-success{
+    padding: 80px 40px;
+}
+
 .contain-head{
     padding: 0px 40px
 }
@@ -504,6 +518,9 @@ header{
     }
     .modal-contain{
         padding: 20px 40px;
+    }
+    .modal-success{
+        padding: 30px 40px;
     }
     .registerDialog .modal-dialog{
         width: auto;

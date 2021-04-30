@@ -3,7 +3,8 @@
 const initState = {
     firstCard: "",
     secondCard: "",
-    thirdCard: ""
+    thirdCard: "",
+    confirmed: false
   };
   
   const tradeReducer = (state = initState, action) => {
@@ -29,6 +30,16 @@ const initState = {
             firstCard: "",
             secondCard: "",
             thirdCard: ""
+        }
+    case 'TRADE_START':
+        return{
+            ...state,
+            confirmed: true
+        }
+    case 'TRADE_SUCCESS':
+        return{
+            ...state,
+            confirmed: false
         }
       default:
         return state;
