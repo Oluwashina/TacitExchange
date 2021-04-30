@@ -70,7 +70,7 @@ const AdminRates = (props) => {
             <button
             className="btn btn-sm btn-view"
             onClick={() => {
-                DeleteTransact(row.id)}}
+                DeleteTransact(row.id, row.categoryId)}}
              >Delete</button>,
           }
       ];
@@ -84,11 +84,12 @@ const AdminRates = (props) => {
       history.push('/admin/add/rates')
     }
 
-    const DeleteTransact = (id) =>{
+    const DeleteTransact = (id, categoryId) =>{
+    
       var confirm_flag = window.confirm("You are about to delete this giftcard?");
 
         if(confirm_flag){
-           deleteRates(id)
+           deleteRates(id, categoryId)
 
            setTimeout(() => {
              getRates()
@@ -139,7 +140,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
   return{
     getRates : (status) => dispatch(getGiftCards(status)),
-    deleteRates : (id) => dispatch(deleteGiftCards(id)),
+    deleteRates : (id, categoryId) => dispatch(deleteGiftCards(id, categoryId)),
   }
 }
  

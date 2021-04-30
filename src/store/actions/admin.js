@@ -334,10 +334,10 @@ export const updateGiftCards = (val, id) => {
 
 
 // delete a giftcard category
-export const deleteGiftCards = (id) => {
+export const deleteGiftCards = (id, categoryId) => {
   return async (dispatch, getState) => {
     try {
-      const res = await DeleteApi(`subcategory/listing/${id}`, getToken());
+      const res = await DeleteApi(`subcategory/listing/${id}?categoryId=${categoryId}`, getToken());
       if (res.status === 200) {
         dispatch({ type: "GiftCards"});
         cogoToast.success('Giftcard deleted successfully!')
