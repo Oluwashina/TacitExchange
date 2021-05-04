@@ -11,6 +11,9 @@ import verifyEmail from './pages/VerifyEmail/verifyEmail';
 import ResetPassword from './pages/ResetPassword/resetPassword'
 import ContactPage from './pages/Home/contact';
 import FaqPage from './pages/Home/faq';
+import TermsPage from './pages/Home/terms';
+import PrivacyPage from './pages/Home/privacy';
+
 
 // admin routes
 import AdminLogin from './pages/Admin/Login/login'
@@ -40,6 +43,7 @@ import UpdateRates from './pages/Admin/Rates/UpdateRate';
 
 
 
+
 function App() {
   return (
     <>
@@ -53,6 +57,8 @@ function App() {
               <Route path="/resetpassword" component={ResetPassword} />
               <Route path="/contact" component={ContactPage} />
               <Route path="/faq" component={FaqPage} />
+              <Route path="/terms" component={TermsPage} />
+              <Route path="/privacypolicy" component={PrivacyPage} />
 
               {/* Exchanger route */}
               <Route path="/user/dashboard" component={UserDashboard} />

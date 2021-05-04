@@ -45,8 +45,8 @@ const Footer = () => {
                     <div className="col-lg-2 mt-lg-0 mt-3">
                         <h6>Legal</h6>
                         <ul className="mt-4 footer-links">
-                            <li className="mt-3"><Link to="/">Terms and Conditions</Link></li>
-                            <li className="mt-2"><Link to="/" >Privacy Policy</Link></li>
+                            <li className="mt-3"><Link to="/terms">Terms and Conditions</Link></li>
+                            <li className="mt-2"><Link to="/privacypolicy" >Privacy Policy</Link></li>
                         </ul>
                     </div>
 

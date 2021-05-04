@@ -89,7 +89,7 @@ const FaqPage = () => {
                     </div>
 
                         <div className="text-center">
-                            <h6 style={{fontWeight: 'bold'}}>Frequently Asked Questions</h6>
+                            <h4 style={{fontWeight: 'bold'}}>Frequently Asked Questions</h4>
                             <p>You can ask more questions by contacting us <Link to="/contact" style={{textDecoration: 'none', color: '#0898D7'}} >here</Link></p>
                         </div>
 
