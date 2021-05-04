@@ -10,6 +10,7 @@ const FaqPage = () => {
 
     useEffect(() =>{
         document.body.classList.add('faqBg');
+        document.body.classList.remove('body-hidden');
      }, [])
 
      const FAQS = [

@@ -7,7 +7,6 @@ import notificationReducer from "./notifications";
 import tradeReducer from "./trade";
 
 
-
 const appReducer = combineReducers({
     auth: authReducer,
     rate: rateReducer,

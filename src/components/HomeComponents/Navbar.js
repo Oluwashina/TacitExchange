@@ -1,8 +1,8 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Logo from '../../assets/images/logo.png'
 import {useLocation, useHistory} from 'react-router-dom'
 import {HashLink as Link,} from 'react-router-hash-link'
-import Modal from 'react-bootstrap/Modal'
+import {Modal} from 'react-bootstrap/'
 import loginCircle from '../../assets/images/loginCircle.svg'
 import registerCircle from '../../assets/images/registerCircle.svg'
 import closeIcon from '../../assets/images/closeIcon.svg'
@@ -25,9 +25,11 @@ const Navbar = (props) => {
     // check for which path you are on
     const isActive = useLocation().pathname
 
+    // login modal state
+    const [showModal, setShow] = useState(false);
 
-    const [show, setShow] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
+
     const [showForgot, setShowForgot] = useState(false);
 
     // login modal
@@ -37,7 +39,6 @@ const Navbar = (props) => {
       setShow(true);
   }
 
-  const ref = useRef()
 
 //   register modal
   const handleCloseRegister = () => setShowRegister(false);
@@ -100,18 +101,19 @@ const Navbar = (props) => {
         <>
 
         {/* modal display for login */}
-        <Modal show={show}
-             {...props}
-            ref={ref}
+        <Modal show={showModal}
          onHide={handleClose}>
             {/* login container */}
-            <div className="d-none d-md-block" style={{position: 'absolute', left: '70px', top: '0px'}}>
-                    <img alt="login" src={loginCircle} width="350" height="140" />
-             </div>
-             {/* close icon */}
+
+            <Modal.Header >
              <div onClick={handleClose} style={{position: 'absolute', right: '35px', top: '20px', cursor: 'pointer'}}>
-                <img src={closeIcon} alt="close" width="30" height="30" />
+                <img src={closeIcon} alt="close" width="40" height="40" />
             </div>
+             </Modal.Header>
+
+            <div className="d-none d-md-block" style={{position: 'absolute', left: '70px', top: '0px'}} >
+                <img alt="loginicon " src={loginCircle} width="350" height="140" />
+             </div>
 
             <div className="text-center contain-head mt-3 mt-lg-5" style={{position: 'relative'}}>
                 <h3 className="login-text">Login</h3>
@@ -207,20 +209,23 @@ const Navbar = (props) => {
       <Modal show={showRegister}
         className="registerDialog"
        onHide={handleCloseRegister}>
-            {/* login container */}
-            <div className="d-none d-md-block registerImage">
-                    <img alt="login" src={registerCircle} width="350" height="140" />
-             </div>
-             {/* close icon */}
+           
+           <Modal.Header >
              <div onClick={handleCloseRegister} style={{position: 'absolute', right: '35px', top: '20px', cursor: 'pointer'}}>
-                <img src={closeIcon} alt="close" width="30" height="30" />
+                <img src={closeIcon} alt="close" width="40" height="40" />
             </div>
+             </Modal.Header>
+
+            {/* Register container */}
+            <div className="d-none d-md-block registerImage">
+                    <img alt="registerIcon" src={registerCircle} width="350" height="140" />
+             </div>
 
             <div className="text-center contain-head mt-3 mt-lg-5" style={{position: 'relative'}}>
                 <h3 className="login-text">Register</h3>
             </div>
 
-            {/* login section */}
+            {/*    Register section */}
             <div className="container modal-contain">
                 <div className="text-center">
                     <h6 style={{fontWeight: 'bold'}}>It's easy and straight forward</h6>
@@ -229,7 +234,7 @@ const Navbar = (props) => {
                     <hr style={{borderTop: '1px solid #CDCDCD'}} />
                 </div>
 
-                {/* form login submission */}
+                {/* form register submission */}
                  {/* form submission */}
               <Formik
                 onSubmit={(values, {setSubmitting}) =>

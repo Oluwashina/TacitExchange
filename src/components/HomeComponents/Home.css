@@ -357,6 +357,11 @@ header{
     padding: 80px 40px;
 }
 
+.modal-header {
+    padding: 0px;
+    border-bottom: 0px;
+}
+
 .contain-head{
     padding: 0px 40px
 }
@@ -521,6 +526,9 @@ header{
     }
     .modal-success{
         padding: 30px 40px;
+    }
+    .modal-header{
+        padding: 1rem 1em;
     }
     .registerDialog .modal-dialog{
         width: auto;

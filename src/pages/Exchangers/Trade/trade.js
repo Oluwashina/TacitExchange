@@ -162,14 +162,18 @@ const handleCalculation = (amount, categoryId, giftname) =>{
             ref={ref}
             {...props}
          onHide={handleEditClose}>
+
+              <Modal.Header >
+             <div onClick={handleEditClose} style={{position: 'absolute', right: '35px', top: '20px', cursor: 'pointer'}}>
+                <img src={closeIcon} alt="close" width="40" height="40" />
+            </div>
+             </Modal.Header>
+
             {/* login container */}
             <div className="d-none d-md-block" style={{position: 'absolute', left: '70px', top: '0px'}}>
                     <img alt="login" src={accountCircle} width="350" height="140" />
              </div>
-             {/* close icon */}
-             <div onClick={handleEditClose} style={{position: 'absolute', right: '35px', top: '20px', cursor: 'pointer'}}>
-                <img src={closeIcon} alt="close" width="30" height="30" />
-            </div>
+            
 
             <div className="text-center contain-head mt-3 mt-lg-4" style={{position: 'relative'}}>
                 <h3 className="login-text">Terms and

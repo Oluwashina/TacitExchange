@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../../assets/images/logo.png'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
+import {HashLink as Link} from 'react-router-hash-link'
 
 const Footer = () => {
     return ( 
@@ -35,9 +36,9 @@ const Footer = () => {
                         <h6>TacitExchange Links</h6>
                         <ul className="mt-4 footer-links">
                             <li className="mt-3"><Link to="/">Home</Link></li>
-                            <li className="mt-2"><Link to="/" >Support</Link></li>
-                            <li className="mt-2"><Link to="/" >Contact Us</Link></li>
-                            <li className="mt-2"><Link to="/faq">Rate Calculator</Link></li>
+                            <li className="mt-2"><Link to="/faq" >Support</Link></li>
+                            <li className="mt-2"><Link to="/contact" >Contact Us</Link></li>
+                            <li className="mt-2"><Link to="/#rate-calculator">Rate Calculator</Link></li>
                         </ul>
                     </div>
 
