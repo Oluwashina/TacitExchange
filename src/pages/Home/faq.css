@@ -1,0 +1,105 @@
+.faqBg{
+    background: #E5E5E5;
+}
+
+.faqDiv{
+    background: #FFFFFF;
+    border-radius: 30px;
+    padding: 40px 30px;
+    position: relative;
+}
+
+.faqImg{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.faqImg div{
+    position: absolute;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    color: white;
+}
+
+/* faq styles */
+.faqHead{
+    margin-top: 70px;
+}
+.faq{
+    border-bottom:  1px solid #DFE0EB;
+    padding: 20px;
+    position: relative;
+}
+
+.faq-title{
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    display: block;
+    padding-left: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2C3A50;
+    position: relative;
+}
+
+.faq-title.active{
+    color: #0898D7;
+}
+
+.faq-title::after{
+    content: '';
+    /* display: block; */
+    background-image: url(../../assets/images/plus-circle.svg);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    /* content: "\f107"; */
+    /* font-family: 'Font Awesome 5 Free'; */
+    float: right;
+    cursor: pointer;
+}
+
+.faq-title.active.faq-title::after{
+    background-image: url(../../assets/images/minus-circle.svg);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.faq-content {
+    padding: 15px 40px 0px 20px;
+    line-height: 26px;
+}
+
+
+/* Media query for smaller phones */
+
+@media (max-width:767px) {
+    .faqImg{
+        display: none;
+    }
+    .faqHead{
+        margin-top: 30px;
+    }
+    .faq-title{
+        padding-left: 0px;
+    }
+    .faq-content {
+        padding: 15px 0px 0px 0px;
+        line-height: 26px;
+    }
+    .faq-title::after{
+        content: none;
+    }
+    .faqDiv{
+        border-radius: 0px;
+    }
+}
