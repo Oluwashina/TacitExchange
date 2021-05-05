@@ -5,6 +5,9 @@ import {addGiftCardValidator} from '../../../validationSchema/validator'
 import {connect} from 'react-redux'
 import { getRateCategory } from '../../../store/actions/rate';
 import {AddGiftCard, AddNewGiftCard} from '../../../store/actions/admin'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import cogoToast from 'cogo-toast';
 
 
 const AdminNewRates = (props) => {
@@ -12,6 +15,8 @@ const AdminNewRates = (props) => {
     const {fetchCategory, category, addRate, addNewRate, userRole} = props
 
     const [newCategory, setNewCategory] = useState('')
+
+    const [value, setValue] = useState('');
 
     useEffect(() =>{
         fetchCategory()
@@ -22,33 +27,44 @@ const AdminNewRates = (props) => {
         // api call to add new giftcards
         // check if it is a new category or existing
         if(values.newcategory === ''){
-            let resp = {
-                categoryId : values.category,
-                subcategoryname: values.subcategory,
-                termsandconditions: values.terms,
-                nairarate: values.rate,
-                btcrate: "0",
-                cardapproveltime: "0",
-                minimumAmount:  values.minAmount,
-                maximumAmount: values.maxAmount
+            if(value === ''){
+                cogoToast.info('Terms and Conditions is required')
             }
-            // make api call to add to an Existing category a giftcard
-           await addRate(resp)
-        }
+            else{
+                let resp = {
+                    categoryId : values.category,
+                    subcategoryname: values.subcategory,
+                    termsandconditions: value,
+                    nairarate: values.rate,
+                    btcrate: "0",
+                    cardapproveltime: "0",
+                    minimumAmount:  values.minAmount,
+                    maximumAmount: values.maxAmount
+                }
+                // make api call to add to an Existing category a giftcard
+               await addRate(resp)
+      
+            }
+         }
         if(values.category === 'other'){
-            let result = {
-                categoryId : "",
-                categoryname: values.newcategory,
-                subcategoryname: values.subcategory,
-                termsandconditions: values.terms,
-                nairarate: values.rate,
-                btcrate: "0",
-                cardapproveltime: "0",
-                minimumAmount:  values.minAmount,
-                maximumAmount: values.maxAmount
+            if(value === ''){
+                cogoToast.info('Terms and Conditions is required')
             }
-            // make api call to add a new giftcard entirely with a new category
-          await addNewRate(result)
+            else{    
+                let result = {
+                    categoryId : "",
+                    categoryname: values.newcategory,
+                    subcategoryname: values.subcategory,
+                    termsandconditions: value,
+                    nairarate: values.rate,
+                    btcrate: "0",
+                    cardapproveltime: "0",
+                    minimumAmount:  values.minAmount,
+                    maximumAmount: values.maxAmount
+                }
+                // make api call to add a new giftcard entirely with a new category
+            await addNewRate(result)
+            }
         }
     }
 
@@ -83,7 +99,7 @@ const AdminNewRates = (props) => {
                     handleSubmit(values, setSubmitting, resetForm, setFieldValue)
                     }
                 validationSchema={addGiftCardValidator}
-                initialValues={{ category: "", subcategory: "", newcategory: "", minAmount: "", maxAmount: "", rate: "", terms: ""}}
+                initialValues={{ category: "", subcategory: "", newcategory: "", minAmount: "", maxAmount: "", rate: "", terms: value ? value : ""}}
               >
                   {({
                       handleChange,
@@ -205,24 +221,30 @@ const AdminNewRates = (props) => {
                               </small>
                             </div>
 
-
-
-
-                             {/* Terms and conditions */}
-                             <div className="form-group">
+                            <div className="form-group">
                               <label htmlFor="terms">Terms and Conditions</label>
-                              <textarea className="form-control input-style"
-                              id="terms"
-                              rows="5"
-                              style={{resize: 'none'}}
-                              value={values.terms}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              placeholder="" />
-                               <small style={{ color: "#dc3545" }}>
-                                  {touched.terms && errors.terms}
-                              </small>
+                            <CKEditor
+                                editor={ ClassicEditor }
+                                data={values.terms}
+                                onReady={ editor => {
+                                    // You can store the "editor" and use when it is needed.
+                                    console.log( 'Editor is ready to use!', editor );
+                                } }
+                                onChange={ ( event, editor ) => {
+                                    const data = editor.getData();
+                                    setValue(data)
+                                    console.log( { event, editor, data } );
+                                } }
+                               
+                            /> 
+                            <small style={{ color: "#dc3545" }}>
+                                  {value === '' ? 'Terms and Conditions is required' : ''}
+                              </small>    
                             </div>
+
+
+
+                             
 
                             
                         <div className="text-center">
@@ -235,6 +257,9 @@ const AdminNewRates = (props) => {
                   )}
 
               </Formik>
+
+               
+            
 
                     </div>
                 </div> 

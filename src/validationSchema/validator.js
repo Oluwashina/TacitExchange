@@ -111,8 +111,7 @@ export const addGiftCardValidator = Yup.object({
   rate: Yup.string()
   .required("Rate is required")
   .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid amount"),
-  terms: Yup.string()
-    .required("Terms and Conditions is required"),
+  terms: Yup.string(),
 });
 
 export const accountDetailsValidator = Yup.object({

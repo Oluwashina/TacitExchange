@@ -1,14 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {Form, Formik} from 'formik'
 import {addGiftCardValidator} from '../../../validationSchema/validator'
 import {connect} from 'react-redux'
 import { getRateCategory } from '../../../store/actions/rate';
 import { updateGiftCards } from '../../../store/actions/admin';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import cogoToast from 'cogo-toast';
 
 const UpdateRates = (props) => {
 
     const {fetchCategory, category, card, userRole, updateRate, id} = props
+
+    const [value, setValue] = useState(card.termsandconditions  ? card.termsandconditions : '');
 
 
     useEffect(() =>{
@@ -21,18 +26,24 @@ const UpdateRates = (props) => {
     // api call to add new giftcards
         // check if it is a new category or existing
         if(values.newcategory === ''){
-            let resp = {
-                categoryId : values.category,
-                subcategoryname: values.subcategory,
-                termsandconditions: values.terms,
-                nairarate: values.rate,
-                btcrate: "0",
-                cardapproveltime: "0",
-                minimumAmount:  values.minAmount,
-                maximumAmount: values.maxAmount
+            if(value === ''){
+                cogoToast.info('Terms and Conditions is required')
             }
-            // make api call to update an Existing category a giftcard
-          await updateRate(resp, id)
+            else{
+                let resp = {
+                    categoryId : values.category,
+                    subcategoryname: values.subcategory,
+                    termsandconditions: value,
+                    nairarate: values.rate,
+                    btcrate: "0",
+                    cardapproveltime: "0",
+                    minimumAmount:  values.minAmount,
+                    maximumAmount: values.maxAmount
+                }
+                // make api call to update an Existing category a giftcard
+              await updateRate(resp, id) 
+            }
+            
         }
         
   }
@@ -65,7 +76,7 @@ const UpdateRates = (props) => {
                 initialValues={{ category:  card.categoryId ? card.categoryId : "", subcategory: card.subcategoryname ? card.subcategoryname : "",
                  newcategory: "", minAmount: card.minimumAmount ? card.minimumAmount : "", 
                  maxAmount: card.maximumAmount ? card.maximumAmount : "", rate: card.nairarate ? card.nairarate : "",
-                  terms: card.termsandconditions ? card.termsandconditions : ""}}
+                  }}
               >
                   {({
                       handleChange,
@@ -169,25 +180,33 @@ const UpdateRates = (props) => {
                               </small>
                             </div>
 
-
-
-
-                             {/* Terms and conditions */}
-                             <div className="form-group">
+                            
+                            <div className="form-group">
                               <label htmlFor="terms">Terms and Conditions</label>
-                              <textarea className="form-control input-style"
-                              id="terms"
-                              rows="5"
-                              style={{resize: 'none'}}
-                              value={values.terms}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              placeholder="" />
-                               <small style={{ color: "#dc3545" }}>
-                                  {touched.terms && errors.terms}
-                              </small>
+                            <CKEditor
+                                editor={ ClassicEditor }
+                                data={card.termsandconditions ? card.termsandconditions : value}
+                                onReady={ editor => {
+                                    // You can store the "editor" and use when it is needed.
+                                    console.log( 'Editor is ready to use!', editor );
+                                } }
+                                onChange={ ( event,editor ) => {
+                                    const data = editor.getData();
+                                    setValue(data)
+                                    console.log( { event, editor, data } );
+                                   
+                                } }
+                               
+                            /> 
+                            <small style={{ color: "#dc3545" }}>
+                                  {value === '' ? 'Terms and Conditions is required' : ''}
+                              </small>    
                             </div>
 
+
+
+
+                            
                             
                         <div className="text-center">
                             <button
