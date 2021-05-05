@@ -21,6 +21,7 @@ const UserDashboard = (props) => {
     useEffect(() => {
         countFetch();
         getTransaction(status)
+        document.body.classList.remove('body-hidden');
       }, [countFetch, getTransaction, status]);
 
     
