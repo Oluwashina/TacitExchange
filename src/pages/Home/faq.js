@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/HomeComponents/Navbar';
 import './faq.css'
-import FaqImage from '../../assets/images/faqPic.svg'
+import FaqImage from '../../assets/images/FaqPiqNew.svg'
 import Footer from '../../components/HomeComponents/Footer';
 import FaqItem from '../../components/FAQ/FaqItem';
 
@@ -82,7 +82,7 @@ const FaqPage = () => {
 
                     {/* faq image */}
                     <div className="faqImg">
-                        <img src={FaqImage} style={{maxWidth: '100%', height: '120px'}} alt="faqimage" />
+                        <img src={FaqImage} style={{maxWidth: '100%', height: '250px'}} alt="faqimage" />
                         <div>
                             <h3>FAQ</h3>
                         </div>

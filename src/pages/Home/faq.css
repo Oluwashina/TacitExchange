@@ -14,15 +14,14 @@
     top: 0px;
     left: 0px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 .faqImg div{
     position: absolute;
     font-weight: 800;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 40px;
+    left: 50px;
     z-index: 99;
     color: white;
 }
@@ -79,6 +78,10 @@
     line-height: 26px;
 }
 
+.break{
+    display: inline;
+}
+
 
 /* Media query for smaller phones */
 
@@ -101,5 +104,8 @@
     }
     .faqDiv{
         border-radius: 0px;
+    }
+    .break{
+        display: block;
     }
 }
