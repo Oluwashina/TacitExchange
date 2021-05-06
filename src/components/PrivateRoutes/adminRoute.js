@@ -13,12 +13,13 @@ const AdminRoute = ({
         {...rest}
         render={(props) =>
           // check for role SubAdmin too
-        role !== 'Admin' ? (
-        <>
-         <Redirect to={'/'} />
-        </>
+        role === 'Admin' || role === 'SubAdmin' ? (
+          <Component {...props} />
       ) : (
-        <Component {...props} />
+        <>
+        <Redirect to={'/admin'} />
+       </>
+        
       )
         }
      />

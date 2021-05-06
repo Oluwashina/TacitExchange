@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // private routes
-// import UserRoute from './components/PrivateRoutes/exchangerRoute'
-// import AdminRoute from './components/PrivateRoutes/adminRoute'
+import UserRoute from './components/PrivateRoutes/exchangerRoute'
+import AdminRoute from './components/PrivateRoutes/adminRoute'
 
 import HomePage from './pages/Home/home';
 import verifyEmail from './pages/VerifyEmail/verifyEmail';
@@ -61,30 +61,30 @@ function App() {
               <Route path="/privacypolicy" component={PrivacyPage} />
 
               {/* Exchanger route */}
-              <Route path="/user/dashboard" component={UserDashboard} />
-              <Route path="/user/profile" component={UserProfile} />
-              <Route path="/user/notifications" component={UserNotifications} />
-              <Route path="/user/trade" component={UserTrade} />
-              <Route path="/user/account" component={UserAccount} />
-              <Route path="/user/transactions" component={UserTransactions} />
-              <Route path="/user/transaction/:id" component={UserTransactionDetails} />
+              <UserRoute path="/user/dashboard" component={UserDashboard} />
+              <UserRoute path="/user/profile" component={UserProfile} />
+              <UserRoute path="/user/notifications" component={UserNotifications} />
+              <UserRoute path="/user/trade" component={UserTrade} />
+              <UserRoute path="/user/account" component={UserAccount} />
+              <UserRoute path="/user/transactions" component={UserTransactions} />
+              <UserRoute path="/user/transaction/:id" component={UserTransactionDetails} />
 
 
               {/* admin route */}
               <Route exact path="/admin" component={AdminLogin} />
               <Route path="/admin/forgotpassword" component={AdminForgotPassword} />
-              <Route path="/admin/dashboard" component={AdminDashboard} />
-              <Route path="/admin/admin" component={Admins} />
-              <Route path="/admin/all" component={ViewAdmin} />
-              <Route path="/admin/profile" component={adminProfile} />
-              <Route path="/admin/trades" component={AdminTrades} />
-              <Route path="/admin/trade/:id" component={AdminTradeDetails} />
-              <Route path="/admin/users" component={AdminUsers} />
-              <Route path="/admin/user/:id" component={UsersDetails} />
-              <Route path="/admin/usertrade/:id" component={UserTradeDetails} />
-              <Route path="/admin/rates" component={AdminRates} />
-              <Route path="/admin/add/rates" component={AdminNewRates} />
-              <Route path="/admin/edit/rate/:id" component={UpdateRates} />
+              <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
+              <AdminRoute path="/admin/admin" component={Admins} />
+              <AdminRoute path="/admin/all" component={ViewAdmin} />
+              <AdminRoute path="/admin/profile" component={adminProfile} />
+              <AdminRoute path="/admin/trades" component={AdminTrades} />
+              <AdminRoute path="/admin/trade/:id" component={AdminTradeDetails} />
+              <AdminRoute path="/admin/users" component={AdminUsers} />
+              <AdminRoute path="/admin/user/:id" component={UsersDetails} />
+              <AdminRoute path="/admin/usertrade/:id" component={UserTradeDetails} />
+              <AdminRoute path="/admin/rates" component={AdminRates} />
+              <AdminRoute path="/admin/add/rates" component={AdminNewRates} />
+              <AdminRoute path="/admin/edit/rate/:id" component={UpdateRates} />
 
 
             </Switch>

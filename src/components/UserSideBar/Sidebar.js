@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import './sidebar.css'
 import Logo from '../../assets/images/logo.png'
 // import profile from '../../assets/images/header.png'
@@ -11,7 +11,7 @@ const UserSideBar = (props) => {
 
     const [sideShow, setSideShow] = useState(false);
 
-    const {firstname, lastname, image, Logout} = props
+    const {firstname, lastname, image, Logout,} = props
 
     const ToggleLogout = () =>{
         Logout()
@@ -23,6 +23,23 @@ const UserSideBar = (props) => {
         document.body.classList.add('barBg');
      }, [])
 
+     
+
+    const closeSideBar = useCallback(() => {
+        setSideShow(sideShow ? false : true);
+      }, [sideShow])
+
+     useEffect(() => {
+         if(sideShow){
+
+            document.body.addEventListener("click", closeSideBar);
+      
+            return () => document.body.removeEventListener("click", closeSideBar);
+         }
+       
+      }, [closeSideBar, sideShow]);
+      
+
      // check for which path you are on
      const isActive = useLocation().pathname
 
@@ -31,6 +48,9 @@ const UserSideBar = (props) => {
      const ToggleSidebar = () =>{
          setSideShow(sideShow ? false : true);
      }
+
+    
+    
      
      const TitleFormat = () =>{
          let val;
