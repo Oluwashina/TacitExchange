@@ -10,7 +10,7 @@ import moment from 'moment'
 
 const UserNotifications = (props) => {
 
-    const {notifications, getNotification, getAllNotifications} = props
+    const {notifications, getNotification, getAllNotifications, count} = props
 
      // make call to fetch notifications
      useEffect(() => {
@@ -87,7 +87,7 @@ const UserNotifications = (props) => {
                          className="btn btn-outline-newer" 
                          >Newer</button>
                         <button type="button"
-                    
+                            disabled={notifications.length < 6 || notifications.length === count}
                         onClick={getAllNotifications}
                          className="btn btn-outline-older">Older</button>
                     </div>
@@ -124,7 +124,8 @@ const UserNotifications = (props) => {
 
 const mapStateToProps = (state) =>{
     return{
-        notifications: state.notification.Notifications
+        notifications: state.notification.Notifications,
+        count: state.notification.allCount
     }
 }
 

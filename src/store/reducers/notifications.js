@@ -2,7 +2,8 @@
 
 const initState = {
     Notifications: [],
-    countUnread: 0
+    countUnread: 0,
+    allCount: 0
   };
   
   const notificationReducer = (state = initState, action) => {
@@ -11,7 +12,8 @@ const initState = {
         return{
             ...state,
             Notifications: action.data.findNotification,
-            countUnread: action.data.unReadCount
+            countUnread: action.data.unReadCount,
+            allCount: action.data.allCount
         }
       default:
         return state;

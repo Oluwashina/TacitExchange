@@ -68,6 +68,7 @@ const AdminRates = (props) => {
             button: true,
             cell: row => 
             <button
+            disabled={userRole === 'SubAdmin'}
             className="btn btn-sm btn-view"
             onClick={() => {
                 DeleteTransact(row.id, row.categoryId)}}
