@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useRef} from 'react';
 import Footer from '../../components/HomeComponents/Footer';
 import Navbar from '../../components/HomeComponents/Navbar';
 import './contact.css'
@@ -12,6 +12,8 @@ const ContactPage = (props) => {
 
     const {support} = props
 
+    const ref = useRef()
+
     useEffect(() =>{
         const script = document.createElement("script")
         script.src = "//code.tidio.co/xk1by3s7lv023iycqvnyon4hvtr9fyo7.js"
@@ -21,9 +23,13 @@ const ContactPage = (props) => {
      }, [])
 
     const handleSubmit = async (values) =>{
-        console.log(values)
         await support(values)
-      }
+
+        // reset the form
+        setTimeout(() => {
+            ref.current.reset()
+        }, 500);
+    }
 
     return ( 
         <>  
@@ -74,7 +80,7 @@ const ContactPage = (props) => {
                                     touched,
                                     errors
                                 })=>(
-                                    <Form onSubmit={handleSubmit}>
+                                    <Form ref={ref} onSubmit={handleSubmit}>
                                         <div className="row">
                                             <div className="col-lg-6">
 

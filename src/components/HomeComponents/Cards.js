@@ -2,14 +2,14 @@ import React from 'react';
 import Amazon from '../../assets/images/Amazon.svg'
 import AppleItunes from '../../assets/images/appItunes.svg'
 import Steam from '../../assets/images/Steam.svg'
-import Ethereum from '../../assets/images/ethereum.svg'
+import Ebay from '../../assets/images/ebay.svg'
 import Itunes from '../../assets/images/itunes.svg'
 import Walmart from '../../assets/images/walmart.svg'
 import Nordstorm from '../../assets/images/nordstrom.svg'
 import googleplay from '../../assets/images/Google Play.svg'
 import macy from '../../assets/images/macy.svg'
-import bitcoin from '../../assets/images/bitcoin.svg'
 import nike from '../../assets/images/nike.svg'
+import Vanilla from '../../assets/images/onevanilla.png'
 import Others from '../../assets/images/Others.svg'
 
 const GiftCards = () => {
@@ -42,7 +42,7 @@ const GiftCards = () => {
 
                     <div className="col-lg-2 col-6">
                         <div>
-                            <img src={Ethereum} className="img-fluid" alt="giftcards" />
+                            <img src={Ebay} className="img-fluid" alt="giftcards" />
                         </div>
                     </div>
                     <div className="col-lg-2 col-6">
@@ -80,7 +80,7 @@ const GiftCards = () => {
 
                     <div className="col-lg-2 col-6">
                         <div>
-                            <img src={bitcoin} className="img-fluid" alt="giftcards" />
+                            <img src={Vanilla} className="img-fluid" alt="giftcards" />
                         </div>
                     </div>
                     <div className="col-lg-2 col-6">

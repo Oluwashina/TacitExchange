@@ -17,9 +17,6 @@ const Footer = () => {
                         <p className="mt-3 mb-0" style={{fontSize: 14}}>Fusce ut elit aliquet, fermentum leo vel, tempus nunc. <br /> Fusce eu rhoncus augue. Fusce vel metus pharetra, fermentum</p>
                         {/* brands */}
                         <div className="mt-3" style={{display: 'flex'}}>
-                            <div>
-                                <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/tacit" style={{color: 'white'}}><i className="fab fa-google-plus"></i></a>
-                            </div>
                             <div className="ml-3">
                                 <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/tacit" style={{color: 'white'}}><i className="fab fa-facebook"></i></a>
                             </div>
@@ -53,7 +50,7 @@ const Footer = () => {
                     <div className="col-lg-2 mt-lg-0 mt-3">
                         <h6>Contact Us</h6>
                         <div className="mt-4">
-                            <a href="tel:+234137632128"  style={{textDecoration: 'none', color: '#fff', fontSize: 14}}>+2348168516315</a>
+                            <a href="https://api.whatsapp.com/send?phone=+2348168516315&text=Hello TacitExchange, I want to trade with you"  style={{textDecoration: 'none', color: '#fff', fontSize: 14}}>+2348168516315</a>
                         </div>
                         <div className="mt-2">
                             <a href="mailto:support@tacitexchange.com"  style={{fontSize: 14, color: '#fff', textDecoration: 'none'}}>support@tacitexchange.com</a>

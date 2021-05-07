@@ -485,10 +485,10 @@ const Navbar = (props) => {
                                 <Link to="/#rate-calculator">Rate Calculator</Link>
                             </li>
                             <li className="headerbtn">
-                                <a href="/#" className="btn btn-blueTacit"  onClick={handleShow}>Login</a>
+                                <Link to="/" className="btn btn-blueTacit"  onClick={handleShow}>Login</Link>
                             </li>
                             <li className="headerbtn">
-                                <a href="/#" className="btn btn-pinkTacit" onClick={handleShowRegister}>Register</a>
+                                <Link to="/" className="btn btn-pinkTacit" onClick={handleShowRegister}>Register</Link>
                             </li>
                         </ul>
                     </nav>
