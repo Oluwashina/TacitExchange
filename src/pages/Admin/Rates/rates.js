@@ -86,7 +86,7 @@ const AdminRates = (props) => {
     }
 
     const DeleteTransact = (id, categoryId) =>{
-    
+      
       var confirm_flag = window.confirm("You are about to delete this giftcard?");
 
         if(confirm_flag){

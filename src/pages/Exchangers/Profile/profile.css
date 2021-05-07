@@ -40,5 +40,8 @@ input[type="file"].adminphoto {
     .user-lay{
         width: 100%;
     }
+    .userProfile{
+        padding: 30px 30px;
+    }
 
 }
