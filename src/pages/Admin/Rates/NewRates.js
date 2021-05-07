@@ -8,6 +8,7 @@ import {AddGiftCard, AddNewGiftCard} from '../../../store/actions/admin'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import cogoToast from 'cogo-toast';
+import {useHistory} from 'react-router-dom'
 
 
 const AdminNewRates = (props) => {
@@ -17,6 +18,8 @@ const AdminNewRates = (props) => {
     const [newCategory, setNewCategory] = useState('')
 
     const [value, setValue] = useState('');
+
+    const history = useHistory();
 
     useEffect(() =>{
         fetchCategory()
@@ -43,6 +46,11 @@ const AdminNewRates = (props) => {
                 }
                 // make api call to add to an Existing category a giftcard
                await addRate(resp)
+
+            //    route
+            setTimeout(() => {
+                history.push('/admin/rates')
+            }, 1000);
       
             }
          }
@@ -64,7 +72,13 @@ const AdminNewRates = (props) => {
                 }
                 // make api call to add a new giftcard entirely with a new category
             await addNewRate(result)
-            }
+
+             //    route
+             setTimeout(() => {
+                history.push('/admin/rates')
+            }, 1000);
+
+          }
         }
     }
 
