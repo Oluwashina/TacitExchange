@@ -17,7 +17,7 @@ padding: 30px 50px;
     font-weight: bold;
     transition: all ease-in 0.5s;
   }
-  .file.disabled, .file:disabled {
+  .file.user.disabled, .file.user:disabled {
     opacity: .65;
     pointer-events: none;
 }

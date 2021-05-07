@@ -73,7 +73,7 @@ const UserProfile = (props) => {
                     </div>
 
                     <div className="text-center mt-4">
-                         <label className={photoloader ? "file disabled" : "file user"}
+                         <label className={photoloader ? "file user disabled" : "file user"}
                                 ><i className="mdi mdi-camera-outline mr-1"></i> Upload Photo
                                 <input type="file" size="60"
                                     ref={fileRef}
