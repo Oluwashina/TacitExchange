@@ -28,7 +28,7 @@ const UserSideBar = (props) => {
     const closeSideBar = useCallback(() => {
         setSideShow(sideShow ? false : true);
       }, [sideShow])
-
+ 
      useEffect(() => {
          if(sideShow){
 

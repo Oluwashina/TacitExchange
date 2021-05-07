@@ -37,12 +37,12 @@ const ContactPage = (props) => {
                             <h5 style={{fontWeight: 500}}>Contact information</h5>
 
                             <div className="mt-5">
-                                <p className="text-white" style={{fontSize: 14}}>+234 816 851 6315</p>
+                                <p className="text-white" style={{fontSize: 14}}>+2348168516315</p>
                                 <hr style={{borderTop: '1px solid #eaf0ff'}} />
                                 <p className="text-white" style={{fontSize: 14}}>support@tacitexchange.com</p>
                                 <hr style={{borderTop: '1px solid #eaf0ff'}} />
                                 <p className="text-white" style={{fontSize: 14}}> 
-                                No 89B Lekki Phase 1, Lagos</p>
+                                No 2b Olayinka Balogun Crescent Magodo phase 2, Lagos</p>
                             </div>
 
                             <div className="mt-5">
