@@ -15,58 +15,74 @@ const FaqPage = () => {
 
      const FAQS = [
         {
-          title: 'What tech does Gatsby use?',
+          title: 'How Do I Verify My Email',
           content: () => (
             <>
-              Enjoy the power of the latest web technologies – React.js , Webpack ,
-              modern JavaScript and CSS and more — all set up and waiting for you to
-              start building
+              This is a one-time process to ensure that the email provided during registration is correct because every important update concerning your account and transactions will be sent the email address.
+              To complete every registration process, log in to your email, a verification link must have been sent there. If you don’t find it in your inbox, check the spam folder. 
+              Click the verification link in the email and you are good to go.
             </>
           ),
         },
         {
-          title: 'Where can you source data from?',
+          title: 'How Can I Reset My Password',
           content: () => (
             <>
-              Gatsby’s rich data plugin ecosystem lets you build sites with the data
-              you want — from one or many sources: Pull data from headless CMSs, SaaS
-              services, APIs, databases, your file system, and more directly into your
-              pages using GraphQL.
-            </>
-          ),
-        },
-        {
-          title: 'How do I scale Gatsby sites?',
-          content: () => (
-            <>
-              Gatsby.js is Internet Scale. Forget complicated deploys with databases
-              and servers and their expensive, time-consuming setup costs,
-              maintenance, and scaling fears. Gatsby.js builds your site as “static”
-              files which can be deployed easily on dozens of services.
-            </>
-          ),
-        },
-        {
-          title: 'How does do I future-proof my website?',
-          content: () => (
-            <>
-              Do not build a website with last decade’s tech. The future of the web is
-              mobile, JavaScript and APIs—the{` `}
+              In case you forget your password, proceed to our website homepage. 
 
-              Every website is a web app and every web app is a website. Gatsby.js is
-              the universal JavaScript framework you’ve been waiting for.
+Right on the login page, you will see a "Forgot Password" link. Input your email address. You will see a mail containing the reset password link. 
+
+Kindly check your spam folder if you don't find it in your inbox. Our support team is always available to assist
             </>
           ),
         },
         {
-          title: 'What exactly does Gatsby build?',
+          title: 'What Gift Card Has The Highest Rate At The Moment',
           content: () => (
             <>
-              Gatsby.js is a static PWA (Progressive Web App) generator. You get code
-              and data splitting out-of-the-box. Gatsby loads only the critical HTML,
-              CSS, data, and JavaScript so your site loads as fast as possible. Once
-              loaded, Gatsby prefetches resources for other pages so clicking around
-              the site feels incredibly fast.
+          This is a rather rhetorical question as no specific or general answer can be given. Gift card values and rates vary from time to time depending on several factors. So the gift card that has the best rate at this moment might be different in the next hour. 
+
+We advise that you always use our rate calculator to check current rates and prices. Be rest assured that Tacit Exchange provides you with the best rates always.
+
+If you need any specific help or more advice concerning this, you can reach out to our customer support via live chat or call/WhatsApp: +2348168516315
+           </>
+          ),
+        },
+        {
+          title: 'Why Is My Trade Rejected',
+          content: () => (
+            <>
+              Your trade will be rejected for any of the following reasons:
+
+      - Your gift card is already redeemed.
+
+    - Your gift card is not ‘properly’ activated
+
+    - Your gift card is not clear enough
+
+    - Your gift card code is wrong
+
+- You submitted an empty trade.
+
+- You uploaded the wrong picture
+
+- You submitted the wrong trade
+
+- You uploaded an unacceptable receipt (For cards that require a receipt)
+
+And many more…
+
+Whatever reason it is will be specified along with the rejection. ​​​​​
+            </>
+          ),
+        },
+        {
+          title: 'How Long Does A Gift Card Transaction Take',
+          content: () => (
+            <>
+             Gift card transactions typically take a few minutes. However, some gift cards like Apple Store, Walmart, Nordstrom e.t.c take more time than others.
+
+Average time will always be stated in trade terms but be rest assured we attend to all transactions as quick as possible.
             </>
           ),
         },
