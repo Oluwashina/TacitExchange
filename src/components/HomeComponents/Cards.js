@@ -9,7 +9,7 @@ import Nordstorm from '../../assets/images/nordstrom.svg'
 import googleplay from '../../assets/images/Google Play.svg'
 import macy from '../../assets/images/macy.svg'
 import nike from '../../assets/images/nike.svg'
-import Vanilla from '../../assets/images/onevanilla.png'
+import Vanilla from '../../assets/images/onevanilla.svg'
 import Others from '../../assets/images/Others.svg'
 
 const GiftCards = () => {

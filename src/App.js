@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // private routes
 import UserRoute from './components/PrivateRoutes/exchangerRoute'
@@ -13,6 +13,7 @@ import ContactPage from './pages/Home/contact';
 import FaqPage from './pages/Home/faq';
 import TermsPage from './pages/Home/terms';
 import PrivacyPage from './pages/Home/privacy';
+import NotFoundPage from './pages/404/NotFound';
 
 
 // admin routes
@@ -44,11 +45,12 @@ import UpdateRates from './pages/Admin/Rates/UpdateRate';
 
 
 
+
 function App() {
   return (
     <>
       <div>
-          <Router>
+          <BrowserRouter>
             <Switch>
               
               {/* home route */}
@@ -85,10 +87,11 @@ function App() {
               <AdminRoute path="/admin/rates" component={AdminRates} />
               <AdminRoute path="/admin/add/rates" component={AdminNewRates} />
               <AdminRoute path="/admin/edit/rate/:id" component={UpdateRates} />
+              <Route path="*" component={NotFoundPage} />
 
 
             </Switch>
-          </Router>
+          </BrowserRouter>
       </div>
     </>
   );
