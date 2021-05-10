@@ -249,7 +249,7 @@ const Steps = (props) => {
                             <div className="ml-4">
                                 <h5 className="rate-text mt-1">Initiate A Trade</h5>
                                 <p className="steps-p">
-                                Click on the "trade cards" button on your dashboard to start a trade.
+                                Click on the "Trade Cards" button on your dashboard to start a trade.
                                 Select the brand of card you want to sell in "Category". The "Subcategory" option is for you to be more specific with your type of card. Enter the total amount of the gift card you want to trade.
                                 Once submitted, verification takes a few minutes or more depending on the type of card you are trading.
                                 </p>

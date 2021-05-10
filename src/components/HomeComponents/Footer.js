@@ -14,7 +14,9 @@ const Footer = () => {
                         <div>
                             <img src={Logo} className="img-fluid" alt="logo" />
                         </div>
-                        <p className="mt-3 mb-0" style={{fontSize: 14}}>Fusce ut elit aliquet, fermentum leo vel, tempus nunc. <br /> Fusce eu rhoncus augue. Fusce vel metus pharetra, fermentum</p>
+                        <p className="mt-3 mb-0" style={{fontSize: 14}}>
+                        Tacit Exchange places a premium on trade convenience by providing exclusive market rates with complete transparency and customer satisfaction.
+                        </p>
                         {/* brands */}
                         <div className="mt-3" style={{display: 'flex'}}>
                             <div className="ml-3">
