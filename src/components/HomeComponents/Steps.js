@@ -222,9 +222,7 @@ const Steps = (props) => {
                             </div>
                             <div className="ml-4">
                                 <h5 className="rate-text mt-1">Register An Account</h5>
-                                <p className="steps-p">Type in your gift card's corresponding merchant and current balance. 
-                                    Need help calculating your gift card's current exchange value?
-                                    Use the Exchange Rate Calculator Here</p>
+                                <p className="steps-p">To start a trade on our platform, you need to sign up with you name, email address, phone number and a password to protect your account. You will receive a verification mail in your email address to confirm your registration. You can then login directly into your dashboard where you can initiate a trade.</p>
                             </div>
                         </div>
                     </div>
@@ -235,10 +233,8 @@ const Steps = (props) => {
                                 <h2 style={{color: '#0898D7', fontWeight: 'bold'}}>02</h2>
                             </div>
                             <div className="ml-4">
-                                <h5 className="rate-text mt-1">Enter Your Cards</h5>
-                                <p className="steps-p">Type in your gift card's corresponding merchant and current balance. 
-                                    Need help calculating your gift card's current exchange value?
-                                    Use the Exchange Rate Calculator Here</p>
+                                <h5 className="rate-text mt-1">Add Bank Account</h5>
+                                <p className="steps-p">On your dashboard click on "account details" and "add account". You cannot initiate any trade if bank datails is not added. Kindly ensure correct bank details is added, this is where all your completed trades will be swiftly paid into.</p>
                             </div>
                         </div>
                     </div>
@@ -251,10 +247,12 @@ const Steps = (props) => {
                                 <h2 style={{color: '#0898D7', fontWeight: 'bold'}}>03</h2>
                             </div>
                             <div className="ml-4">
-                                <h5 className="rate-text mt-1">Accept Our Offer</h5>
-                                <p className="steps-p">Type in your gift card's corresponding merchant and current balance. 
-                                    Need help calculating your gift card's current exchange value?
-                                    Use the Exchange Rate Calculator Here</p>
+                                <h5 className="rate-text mt-1">Initiate A Trade</h5>
+                                <p className="steps-p">
+                                Click on the "trade cards" button on your dashboard to start a trade.
+                                Select the brand of card you want to sell in "Category". The "Subcategory" option is for you to be more specific with your type of card. Enter the total amount of the gift card you want to trade.
+                                Once submitted, verification takes a few minutes or more depending on the type of card you are trading.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -266,9 +264,10 @@ const Steps = (props) => {
                             </div>
                             <div className="ml-4">
                                 <h5 className="rate-text mt-1">Receive Your Cash</h5>
-                                <p className="steps-p">Type in your gift card's corresponding merchant and current balance. 
-                                    Need help calculating your gift card's current exchange value?
-                                    Use the Exchange Rate Calculator Here</p>
+                                <p className="steps-p">
+                                On clicking the "Submit Trade" button, the terms of trade will be displayed before you proceed. It is EXTREMELY important that you read this to be sure of what you are trading as the trade will be rejected if it doesn't go inline with the terms.
+                                 Once approved, we'll process your payment and send you cash!
+                                </p>
                             </div>
                         </div>
                     </div>

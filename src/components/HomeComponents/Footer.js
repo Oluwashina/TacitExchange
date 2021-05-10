@@ -18,13 +18,13 @@ const Footer = () => {
                         {/* brands */}
                         <div className="mt-3" style={{display: 'flex'}}>
                             <div className="ml-3">
-                                <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/tacit" style={{color: 'white'}}><i className="fab fa-facebook"></i></a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/Tacit-Exchange-108185364772325" style={{color: 'white'}}><i className="fab fa-facebook"></i></a>
                             </div>
                             <div className="ml-3">
-                                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/tacit" style={{color: 'white'}}><i className="fab fa-twitter"></i></a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/tacitexchange" style={{color: 'white'}}><i className="fab fa-twitter"></i></a>
                             </div>
                             <div className="ml-3">
-                                <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/tacit" style={{color: 'white'}}><i className="fab fa-instagram"></i></a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/p/CAtPcVUBSEj/?igshid=ep96ehxgrh7h" style={{color: 'white'}}><i className="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
