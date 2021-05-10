@@ -18,7 +18,7 @@ const FaqPage = () => {
           title: 'How Do I Verify My Email',
           content: () => (
             <>
-              This is a one-time process to ensure that the email provided during registration is correct because every important update concerning your account and transactions will be sent the email address.
+              This is a one-time process to ensure that the email provided during registration is correct because every important update concerning your account and transactions will be sent to the email address.
               To complete every registration process, log in to your email, a verification link must have been sent there. If you don’t find it in your inbox, check the spam folder. 
               Click the verification link in the email and you are good to go.
             </>
