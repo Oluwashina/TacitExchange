@@ -58,6 +58,96 @@
      width: 40%;
  }
 
+ /* new cards upload styles */
+ .cursor-pointer {
+    cursor: pointer;
+}
+
+.input-group>.custom-file {
+    display: -ms-flexbox;
+    display: flex;
+    /* border: 1px solid rgba(8, 152, 215, 0.2); */
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+.custom-file, .custom-file-input {
+    height: calc(48px + 2px);
+    cursor: pointer;
+}
+.custom-file-input {
+    height: calc(48px + 2px);
+    cursor: pointer;
+}
+.custom-file-input {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin: 0;
+    opacity: 0;
+}
+.custom-file-label {
+    padding: 14px 80px 14px 18px;
+    height: calc(48px + 2px);
+}
+.custom-file-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    border-radius: .25rem;
+}
+.custom-file-label::after {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    content: "Browse";
+    background: transparent;
+    border-left: none;
+    border-radius: 0 .25rem .25rem 0;
+    color: #0898D7;
+}
+
+.custom-file-input:focus {
+    border: none;
+    box-shadow: none;
+    outline: 0 none;
+}
+
+.fileupload{
+    margin-top: 20px;
+    position: relative;
+}
+.imageFile{
+    position: relative;
+    width: 75px;
+    margin: 0 15px 15px 0;
+}
+.imageFile .close-icon {
+    position: absolute;
+    top: 5px;
+    right: -6px;
+    cursor: pointer;
+    z-index: 1;
+}
+.close-icon {
+    width: 22px;
+    height: 22px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAhtJREFUOBG1lc9LAlEQx2clDUUhA1ESAiHRi0H37L6esvVPCfobhI52tj+g7cfJztk93JNiIASmsqCBoaTJNt/VlbXeVhbOYd9j3sznzZs3b1YiB2k0Ghv9fj/Ly4okSbuGYYRgynOd5xpP1UAgcBWLxV6g/yzSZ0W9Xl8fDAbHDDjx+/1SMBj0e71ecrvdpul4PKbhcEi9Xu+Vhfcw8j6f7zQej7/ZWQvgarW6NRqNSgzciUajPo/HY7f9MmdbajabA97gkW3lZDL5bBnNwTPoQyQS2QyFQmuWwW9GXdff2+12l+F7FtwFRxwfkf4FCn8EAl8wwILOBCOnOP6ykQJgCXzBAAs6aXb7T4lEIvBTTi2I04ic12q1PlfLtgslhdv/LxSbgQEWmEiFgpJyiqJYLFKn01lY5ouic9aLZMZSXCh+1KmTyLJM6sXFHA7opaqSnMkIXcACkzRNG04mExS6o7RaLeOsUDAqlYo5MtzRFiwwzaoQbm1TcinRfjpNN9fXlD44oHA4bFsVT5EKHc/0O8Hx78tlOsxmqXx3N0+LyAcsMF18Jg1v30msnCq5HKVSKcKInEMvErDARCpUNBSREXS3pZIJs46P8UhRTL3IZ8ZSV/dA0E859Dy6lCiCZXRggAWmWRXop2h96FLLgOy28AUDLOhNMJo0P0eZL6T7F7itbcpWw5/3Y+yykkYPMGQlv6Ypevr978/0AyH3oBomU94UAAAAAElFTkSuQmCC) no-repeat;
+}
+
 
  /* Media query for smaller phones */
 

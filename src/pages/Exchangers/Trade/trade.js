@@ -32,6 +32,9 @@ const UserTrade = (props) => {
 
     const [tradeval, setTradeVal] = useState({});
 
+    const [preview, setPreview] = useState([]);
+    const fileobj= [];
+
 
     const handleEditClose = () => setEditShow(false);
     const handleEditShow = () => {
@@ -59,10 +62,38 @@ const UserTrade = (props) => {
 }
 
 // upload back image of card
-const handleBackImage = (index) =>{
+const handleBackImage = () =>{
     var file = fileRef2.current.files[0]
     console.log(file)
-    handleCard(file, index)
+    // handleCard(file, index)
+}
+
+const changedHandler = event => {
+    let files = event.target.files;
+    fileobj.push(files);
+    let reader;
+
+    for (var i = 0; i < fileobj[0].length; i++) {
+        reader = new FileReader();
+        reader.readAsDataURL(fileobj[0][i]);
+        reader.onload = event => {
+        preview.push(event.target.result);   // update the array instead of replacing the entire value of preview
+
+        setPreview([...new Set(preview)]); // spread into a new array to trigger rerender
+        } 
+    } 
+}
+
+const removeImage = (index) =>{
+  console.log(index)
+  const result = [...preview];
+
+  // removing the element using splice
+  result.splice(index, 1);
+
+  // updating the list
+  setPreview(result);
+
 }
 
 // handle receipt of card
@@ -373,11 +404,10 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                         <div className="col-lg-6">
 
                         {/* images to upload */}
-                            <div className="row mt-lg-3 mt-0">
+                            {/* <div className="row mt-lg-3 mt-0">
                                     <div className="col-lg-6">
                                         <p className="mb-0">Upload card image (Front)</p>
 
-                                        {/* image div */}
                                         <div className="tradeImage mt-2">
                                             <img 
                                              src={firstcard ? firstcard : camera}
@@ -400,7 +430,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                     <div className="col-lg-6 mt-3 mt-lg-0">
                                          <p className="mb-0">Upload card image (Back)</p>
 
-                                          {/* image div */}
+                                         
                                         <div className="tradeImage mt-2">
                                             <img 
                                              src={secondcard ? secondcard : camera}
@@ -419,13 +449,14 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                         </div>
 
                                     </div>
-                            </div>    
-
+                                    
+                            </div>     */}
+{/* 
                             <div className="row mt-lg-3 mt-3">
                                     <div className="col-lg-6">
                                         <p className="mb-0">Purchase Receipt</p>
 
-                                        {/* image div */}
+                                        
                                         <div className="tradeImage mt-2">
                                             <img 
                                              src={thirdcard ? thirdcard : camera}
@@ -444,7 +475,53 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                         </div>
 
                                     </div>
-                            </div>        
+                            </div>   */}
+
+                                  {/* upload image  */}
+                                <div className="form-group mt-lg-3 mt-0">
+                                       <label>Upload Cards</label>
+                                       <div className="input-group cursor-pointer">
+                                                <div className="custom-file">
+                                                    <input accept="image/*"
+                                                  
+                                                     multiple
+                                                     onChange={changedHandler}
+                                                     className="custom-file-input" type="file" />
+                                                    <label className="custom-file-label">
+                                                        Add your file
+                                                    </label>
+                                                </div>
+                                        </div>         
+                                </div> 
+
+                                <div className="fileupload">
+                                    <div className="row">
+                                        
+                                        {(preview || []).map((url, index) => (
+                                            <div className="col-3">
+                                                 <div className="imageFile mb-3">
+                                                    <span className="close-icon"
+                                                     onClick={() => removeImage(index)}
+                                                    ></span>
+                                                    <img src={url} alt="..." key={index} 
+                                                    style={{width: '75px',
+                                                    height: '75px',
+                                                    borderRadius: '4px'}} />
+                                                </div>
+                                             </div>
+                                            ))}
+                                        {/* <div className="imageFile">
+                                            <span className="close-icon"></span>
+                                            <img src={cardImg}
+                                            style={{width: '75px',
+                                                height: '75px',
+                                                borderRadius: '4px'}}
+                                            alt="d" />
+                                            </div> */}
+
+                                        
+                                    </div>                                    
+                                </div>
                             
                         </div>
                         
