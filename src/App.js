@@ -50,7 +50,7 @@ function App() {
   return (
     <>
       <div>
-          <HashRouter basename='/TacitExchange' >
+          <HashRouter>
             <Switch>
               
               {/* home route */}
