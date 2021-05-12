@@ -61,13 +61,13 @@ export const clearCardImages = () =>{
 
 export const createTrade = (val) => {
     return async (dispatch, getState) => {
-        let image = [];
-        var result = [
-          ...image,
-          getState().trade.firstCard,
-          getState().trade.secondCard,
-          getState().trade.thirdCard,
-        ]
+        // let image = [];
+        // var result = [
+        //   ...image,
+        //   getState().trade.firstCard,
+        //   getState().trade.secondCard,
+        //   getState().trade.thirdCard,
+        // ]
         dispatch({ type: 'TRADE_START' });
       try {
         const res = await PostApi("trade", {
@@ -75,7 +75,7 @@ export const createTrade = (val) => {
             amount: getState().rate.tradeamount,
             categoryId: val.giftname,
             subCategoryId: val.category,
-            imageUrl: result,
+            imageUrl: val.imageUrl,
             comment: val.comment
         }, getToken(), "application/json")
         if (res.status === 201) {

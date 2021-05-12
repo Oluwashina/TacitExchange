@@ -107,6 +107,13 @@ const removeImage = (index) =>{
 //   submit a trade
   const handleSubmit = async (values, setSubmitting,)  =>{
     console.log(values)
+    
+    var res = {
+        ...values,
+        imageUrl: preview
+    }
+
+    console.log(res)
     // check if amount entered is less than minimum expected or greater than maximum expected
     if(parseFloat(values.amount) < minAmount) {
         cogoToast.warn(`The minimum amount for this subcategory is $${minAmount}`)
@@ -115,19 +122,19 @@ const removeImage = (index) =>{
         cogoToast.warn(`The maximum amount for this subcategory is $${maxAmount}`)
     }
     // check if at least an image of the card is added
-    // else if(firstcard === ''){
-    //     cogoToast.warn('Giftcard image(Front) is compulsory for a trade initialization')
-    // }
-    // else if(secondcard === ''){
-    //   cogoToast.warn('Giftcard image(Back) is compulsory for a trade initialization')
-    // }
+    else if(preview.length === 0){
+        cogoToast.warn('Kindly attach at least a giftcard!!!')
+    }
+    else if(preview.length === 11){
+      cogoToast.warn('The maximum you can attach is 10 for a trade initialization')
+    }
     else{
         // filter by category id and get terms and conditions for a trade
         let id = values.category
         getTerms(id)
 
         handleEditShow()
-        setTradeVal(values)
+        setTradeVal(res)
     }
   }
 
@@ -510,6 +517,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                                 </div>
                                              </div>
                                             ))}
+
                                         {/* <div className="imageFile">
                                             <span className="close-icon"></span>
                                             <img src={cardImg}
