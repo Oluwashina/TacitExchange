@@ -212,12 +212,12 @@ const AdminTradeDetails = (props) => {
                         <hr />
 
                         {/*  */}
-                        <div className="mt-4 mb-4">
+                        <div className="mt-4 ">
                            <h6 style={{fontWeight: 'bold'}}>Uploaded Cards</h6>
                         </div>
 
                         {/* cards images */}
-                        <div className="row mt-4">
+                        <div className="row mt-3">
                             {imageLayout}
                         </div>
 

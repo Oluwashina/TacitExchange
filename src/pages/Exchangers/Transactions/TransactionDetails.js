@@ -16,7 +16,7 @@ const UserTransactionDetails = (props) => {
 
     // mapping images 
     const imageLayout = transaction.imageUrl.filter(el => el !== "").map((item, index) => (
-        <div key={index} className="col-lg-6 mb-4 mb-lg-3">
+        <div key={index} className="col-4 mb-4 mb-lg-3">
             <div className="transactImage">
             <ImageZoom
                 image={{
@@ -235,7 +235,7 @@ const UserTransactionDetails = (props) => {
                                     </div>
 
                                     {/* images uploaded */}
-                                    <div className="row mt-lg-2 mt-4">
+                                    <div className="row mt-lg-1 mt-2">
                                         {imageLayout}    
                                     </div>
 
