@@ -58,7 +58,7 @@ const Footer = () => {
                             <a href="mailto:support@tacitexchange.com"  style={{fontSize: 14, color: '#fff', textDecoration: 'none'}}>support@tacitexchange.com</a>
                         </div>
                         <div className="mt-2">
-                            <p className="mb-0" style={{fontSize: 14}}>No 2b Olayinka Balogun Crescent Magodo phase 2, Lagos</p>
+                            <p className="mb-0" style={{fontSize: 14}}>Admiralty way, Lekki phase 1, Lagos Nigeria</p>
                         </div>
                     </div>
 

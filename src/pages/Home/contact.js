@@ -48,7 +48,7 @@ const ContactPage = (props) => {
                                 <p className="text-white" style={{fontSize: 14}}>support@tacitexchange.com</p>
                                 <hr style={{borderTop: '1px solid #eaf0ff'}} />
                                 <p className="text-white" style={{fontSize: 14}}> 
-                                No 2b Olayinka Balogun Crescent Magodo phase 2, Lagos</p>
+                                Admiralty way, Lekki phase 1, Lagos Nigeria</p>
                             </div>
 
                             <div className="mt-5">
