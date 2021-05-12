@@ -50,7 +50,7 @@ function App() {
   return (
     <>
       <div>
-          <BrowserRouter basename="/TacitExchange">
+          <BrowserRouter>
             <Switch>
               
               {/* home route */}
