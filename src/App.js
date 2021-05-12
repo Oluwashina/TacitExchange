@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // private routes
 import UserRoute from './components/PrivateRoutes/exchangerRoute'
@@ -50,7 +50,7 @@ function App() {
   return (
     <>
       <div>
-          <HashRouter>
+          <BrowserRouter basename="/TacitExchange">
             <Switch>
               
               {/* home route */}
@@ -91,7 +91,7 @@ function App() {
 
 
             </Switch>
-          </HashRouter>
+          </BrowserRouter>
       </div>
     </>
   );

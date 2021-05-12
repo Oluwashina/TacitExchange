@@ -3,7 +3,7 @@ import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import {Form, Formik} from 'formik'
 import {tradeValidator} from '../../../validationSchema/validator'
 import Nigeria from  '../../../assets/images/nigerialogo.svg'
-import camera from '../../../assets/images/camera.svg'
+// import camera from '../../../assets/images/camera.svg'
 import {connect} from 'react-redux'
 import { clearTradeAmount, getRateCategory, getRateSubCategory, getTermsAndConditions, getUserRateValue } from '../../../store/actions/rate';
 import './trade.css'
@@ -18,13 +18,13 @@ import ReactHtmlParser from 'react-html-parser'
 const UserTrade = (props) => {
 
     const {fetchCategory, category, fetchSubCategory, subcategory, amount, calcRate,
-         handleCard, firstcard, secondcard, thirdcard, handleStartTrade, emptyImage, getTerms, 
+         handleStartTrade, emptyImage, getTerms, 
          terms, accountDetails, minAmount, maxAmount, emptyamount, confirmed
         } = props
 
-    const fileRef = useRef(null)
-    const fileRef2 = useRef(null)
-    const fileRef3 = useRef(null)
+    // const fileRef = useRef(null)
+    // const fileRef2 = useRef(null)
+    // const fileRef3 = useRef(null)
 
     const [editShow, setEditShow] = useState(false);
 
@@ -55,18 +55,18 @@ const UserTrade = (props) => {
   }, [fetchCategory])
 
    //   upload front image of card
-   const handleFrontImage = (index) =>{
-    var file = fileRef.current.files[0]
-    console.log(file)
-    handleCard(file, index)
-}
+//    const handleFrontImage = (index) =>{
+//     var file = fileRef.current.files[0]
+//     console.log(file)
+//     handleCard(file, index)
+// }
 
 // upload back image of card
-const handleBackImage = () =>{
-    var file = fileRef2.current.files[0]
-    console.log(file)
-    // handleCard(file, index)
-}
+// const handleBackImage = () =>{
+//     var file = fileRef2.current.files[0]
+//     console.log(file)
+    
+// }
 
 const changedHandler = event => {
     let files = event.target.files;
@@ -97,11 +97,11 @@ const removeImage = (index) =>{
 }
 
 // handle receipt of card
-const handleReceiptImage = (index) =>{
-    var file = fileRef3.current.files[0]
-    console.log(file)
-    handleCard(file, index)
-}
+// const handleReceiptImage = (index) =>{
+//     var file = fileRef3.current.files[0]
+//     console.log(file)
+//     handleCard(file, index)
+// }
 
 
 //   submit a trade
@@ -115,12 +115,12 @@ const handleReceiptImage = (index) =>{
         cogoToast.warn(`The maximum amount for this subcategory is $${maxAmount}`)
     }
     // check if at least an image of the card is added
-    else if(firstcard === ''){
-        cogoToast.warn('Giftcard image(Front) is compulsory for a trade initialization')
-    }
-    else if(secondcard === ''){
-      cogoToast.warn('Giftcard image(Back) is compulsory for a trade initialization')
-    }
+    // else if(firstcard === ''){
+    //     cogoToast.warn('Giftcard image(Front) is compulsory for a trade initialization')
+    // }
+    // else if(secondcard === ''){
+    //   cogoToast.warn('Giftcard image(Back) is compulsory for a trade initialization')
+    // }
     else{
         // filter by category id and get terms and conditions for a trade
         let id = values.category
