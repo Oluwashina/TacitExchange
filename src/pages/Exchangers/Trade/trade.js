@@ -113,7 +113,6 @@ const removeImage = (index) =>{
         imageUrl: preview
     }
 
-    console.log(res)
     // check if amount entered is less than minimum expected or greater than maximum expected
     if(parseFloat(values.amount) < minAmount) {
         cogoToast.warn(`The minimum amount for this subcategory is $${minAmount}`)
