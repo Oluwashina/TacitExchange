@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 import { clearTradeAmount, getRateCategory, getRateSubCategory, getTermsAndConditions, getUserRateValue } from '../../../store/actions/rate';
 import './trade.css'
 import cogoToast from "cogo-toast";
-import { clearCardImages, createTrade, UploadGiftCardImage } from '../../../store/actions/trade';
+import { clearCardImages, createTrade, UploadGiftCardImage, clearConfirmStatus } from '../../../store/actions/trade';
 import {useHistory} from 'react-router-dom'
 import accountCircle from '../../../assets/images/accountCircle.svg'
 import closeIcon from '../../../assets/images/closeIcon.svg'
@@ -17,7 +17,7 @@ import ReactHtmlParser from 'react-html-parser'
 
 const UserTrade = (props) => {
 
-    const {fetchCategory, category, fetchSubCategory, subcategory, amount, calcRate,
+    const {fetchCategory, category, fetchSubCategory, clearConfirm, subcategory, amount, calcRate,
          handleStartTrade, emptyImage, getTerms,trade_success, 
          terms, accountDetails, minAmount, maxAmount, emptyamount, confirmed
         } = props
@@ -52,7 +52,8 @@ const UserTrade = (props) => {
 
     useEffect(() =>{
         fetchCategory()
-  }, [fetchCategory])
+        clearConfirm()
+  }, [fetchCategory, clearConfirm])
 
    //   upload front image of card
 //    const handleFrontImage = (index) =>{
@@ -595,6 +596,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchCategory: () => dispatch(getRateCategory()),
+        clearConfirm: () => dispatch(clearConfirmStatus()),
         fetchSubCategory: (id) => dispatch(getRateSubCategory(id)),
         calcRate: (amount, id) => dispatch(getUserRateValue(amount, id)),
         handleCard: (values, index) => dispatch(UploadGiftCardImage(values, index)),

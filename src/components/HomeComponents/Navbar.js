@@ -70,7 +70,6 @@ const Navbar = (props) => {
 
     // login func
     const handleSubmit = async (values) =>{
-        console.log(values)
         await login(values);
       }
 
@@ -82,7 +81,6 @@ const Navbar = (props) => {
 
     //   register func
     const handleRegisterSubmit = async (values) =>{
-        console.log(values)
         const creds = {
             ...values,
             role
@@ -93,7 +91,6 @@ const Navbar = (props) => {
 
     // forgot password submit
     const handleForgotSubmit = async (values) =>{
-        console.log(values)
         await forgot(values)
     }
 

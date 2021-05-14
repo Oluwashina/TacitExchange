@@ -33,6 +33,11 @@ const initState = {
             thirdCard: "",
             trade_success: false
         }
+    case 'clearConfirmStatus':
+        return{
+            ...state,
+            confirmed: false
+        }
     case 'TRADE_START':
         return{
             ...state,
@@ -43,6 +48,10 @@ const initState = {
             ...state,
             confirmed: false,
             trade_success: true
+        }
+    case 'TRADE_ERROR':
+        return{
+            ...state
         }
       default:
         return state;

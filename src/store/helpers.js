@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {apiUrl} from './config'
-
+import cogoToast from 'cogo-toast'
 import {store} from '../index'
 
 
@@ -30,6 +30,7 @@ export const PostApi = async (url, payload, token, contentType) => {
         }
       }
       else{
+        cogoToast.error('Ooops!, looks like something went wrong with this trade. Please try with another card upload')
         return {
             status: status, 
             data: e.response.data

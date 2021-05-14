@@ -57,6 +57,13 @@ export const clearCardImages = () =>{
         dispatch({type: 'clearCardImages'})
     }
   }
+
+  // clear confirm status
+  export const clearConfirmStatus = () =>{
+    return dispatch =>{
+        dispatch({type: 'clearConfirmStatus'})
+    }
+  }
   
 
 export const createTrade = (val) => {
@@ -85,6 +92,7 @@ export const createTrade = (val) => {
         if(res.status === 400){
           // invalid trade
           dispatch({ type: 'TRADE_ERROR' });
+          cogoToast.error('Ooops!, looks like something went wrong with this trade. Please try with another card upload')
         }
       } catch (err) {
         console.log(err)
