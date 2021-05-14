@@ -18,7 +18,7 @@ import ReactHtmlParser from 'react-html-parser'
 const UserTrade = (props) => {
 
     const {fetchCategory, category, fetchSubCategory, subcategory, amount, calcRate,
-         handleStartTrade, emptyImage, getTerms, 
+         handleStartTrade, emptyImage, getTerms,trade_success, 
          terms, accountDetails, minAmount, maxAmount, emptyamount, confirmed
         } = props
 
@@ -131,7 +131,7 @@ const removeImage = (index) =>{
         // filter by category id and get terms and conditions for a trade
         let id = values.category
         getTerms(id)
-
+        // shows terms and condition modal
         handleEditShow()
         setTradeVal(res)
     }
@@ -145,19 +145,22 @@ const confirmTrade = () =>{
     }
     else{
         console.log(tradeval)
-
+        // starts and sends data for trade
         handleStartTrade(tradeval) 
         
-        setTimeout(() => {
-            handleEditClose()
-
-            // open success modal
-            handleSuccessShow()
-        }, 1000); 
-         
-          
     } 
 }
+
+    // after a successful trade, show success modal
+    useEffect(() =>{
+        if(trade_success){
+            setTimeout(() => {
+                handleEditClose()
+                // open success modal
+                handleSuccessShow()
+            }, 1000);
+        }
+    }, [trade_success])
 
 // close a trade success dialog
 const CloseTrade = () =>{
@@ -584,7 +587,8 @@ const mapStateToProps = (state) =>{
         thirdcard: state.trade.thirdCard,
         terms: state.rate.terms,
         accountDetails: state.auth.accountDetails,
-        confirmed: state.trade.confirmed
+        confirmed: state.trade.confirmed,
+        trade_success: state.trade.trade_success
     }
 }
 
