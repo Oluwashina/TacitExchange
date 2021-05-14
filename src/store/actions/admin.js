@@ -158,6 +158,26 @@ export const getDashboardCount = () => {
   };
 };
 
+
+// get the droplet balance from digital oceans
+export const getDropletBalance = () => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await GetApi("droplet/balance", "tacitshayo");
+      if (res.status === 200) {
+        console.log(res)
+        dispatch({ type: "Droplet", data: res.data});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Droplet_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+};
+
+
 // get all pending trades
 export const getTrades = (val) => {
   return async (dispatch, getState) => {

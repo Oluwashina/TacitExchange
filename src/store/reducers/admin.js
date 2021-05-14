@@ -5,6 +5,7 @@ const initState = {
     admins: [],
     susloader: false,
     count: {},
+    droplet: {},
     userTrade: [],
     Trades: [],
     declineloader: false,
@@ -80,6 +81,11 @@ const initState = {
           return{
             ...state,
             count: action.data
+          }
+        case 'Droplet':
+          return{
+            ...state,
+            droplet: action.data.Balance
           }
         case 'UserTradeHistory':
           return{

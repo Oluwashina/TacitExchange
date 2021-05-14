@@ -5,19 +5,20 @@ import './dashboard.css'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
 import CountUp from 'react-countup'
-import {getDashboardCount, getTrades} from '../../../store/actions/admin'
+import {getDashboardCount, getDropletBalance, getTrades} from '../../../store/actions/admin'
 import Moment from 'react-moment'
 
 const AdminDashboard = (props) => {
 
-    const {count, getCount, getTrade, trade, history} = props
+    const {count, getCount, getTrade, trade, history, getDroplet, droplet} = props
 
     const [status] = useState('Pending')
 
    useEffect(() => {
         getCount();
+        getDroplet()
         getTrade(status)
-      }, [getCount, getTrade, status]);
+      }, [getCount, getTrade, status, getDroplet]);
     
 const columns = [
     {
@@ -105,9 +106,14 @@ const columns = [
                                 </div>
 
                                 </div>
-                            </div>
+                    </div>
 
-                            <div className="col-lg-3">
+                    {/*  */}
+                    <div className="col-lg-9">
+                        <div className="row">
+                            
+                            
+                        <div className="col-lg-3 mt-lg-0 mt-3">
                                 {/* cc */}
                                 <div className="dash-div">
 
@@ -129,7 +135,7 @@ const columns = [
                                 </div>
                             </div>
 
-                            <div className="col-lg-3">
+                            <div className="col-lg-3 mt-lg-0 mt-3">
                                 {/* trades count */}
                                 <div className="dash-div">
 
@@ -151,7 +157,8 @@ const columns = [
 
                                 </div>
                             </div>
-                            <div className="col-lg-3">
+
+                            <div className="col-lg-3 mt-lg-0 mt-3">
                                 {/* Users */}
                             <div className="dash-div">
 
@@ -173,6 +180,30 @@ const columns = [
 
                                 </div>
                             </div>
+
+                            <div className="col-lg-3 mt-lg-0 mt-3">
+                                {/* Droplet Balance/Usage */}
+                            <div className="dash-div">
+
+                                <div>
+                                    <p className="mb-0" style={{color: '#0898D7'}}>Droplet Balance</p>
+                                </div>
+
+                                <div className="mt-4">
+                                    <h5>
+                                        ${droplet.month_to_date_balance ? droplet.month_to_date_balance : "0.00"}
+                                        </h5>
+                                </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
                             
                     </div>
 
@@ -206,13 +237,15 @@ const columns = [
 const mapStateToProps = (state) =>{
     return{
         count: state.admin.count,
-        trade: state.admin.Trades
+        trade: state.admin.Trades,
+        droplet: state.admin.droplet
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
      getCount : () => dispatch(getDashboardCount()),
+     getDroplet: () => dispatch(getDropletBalance()),
      getTrade : (status) => dispatch(getTrades(status)),
     }
 }
