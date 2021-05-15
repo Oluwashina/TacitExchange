@@ -1,2 +1,2 @@
-export const apiUrl = "https://tacit-exchanger.herokuapp.com/";
-// export const apiUrl = "http://192.168.1.169:8000/";
+// export const apiUrl = "https://tacit-exchanger.herokuapp.com/";
+export const apiUrl = "http://134.209.160.224:8000/";
