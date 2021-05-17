@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {apiUrl} from './config'
-import cogoToast from 'cogo-toast'
 import {store} from '../index'
 
 
