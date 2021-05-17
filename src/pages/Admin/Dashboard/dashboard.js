@@ -186,7 +186,7 @@ const columns = [
                             <div className="dash-div">
 
                                 <div>
-                                    <p className="mb-0" style={{color: '#0898D7'}}>Droplet Balance</p>
+                                    <p className="mb-0" style={{color: '#0898D7'}}>Droplet Usage</p>
                                 </div>
 
                                 <div className="mt-4">
