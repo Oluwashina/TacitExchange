@@ -187,11 +187,12 @@ const columns = [
 
                                 <div>
                                     <p className="mb-0" style={{color: '#0898D7'}}>Droplet Usage</p>
+                                  
                                 </div>
 
                                 <div className="mt-4">
                                     <h5>
-                                        ${droplet.month_to_date_balance ? droplet.month_to_date_balance : "0.00"}
+                                        ${droplet.month_to_date_usage ? droplet.month_to_date_usage : "0.00"}
                                         </h5>
                                 </div>
 
