@@ -122,12 +122,12 @@ const UserTransactionDetails = (props) => {
                                   <div className="transactStatus">
                                            <div>
                                             <img 
-                                            src={iconFormat(transaction.paymentStatus)} 
+                                            src={iconFormat(transaction.tradeStatus)} 
                                             width="60" height="60" alt="pending" />
                                         </div>
                                         <div className="ml-3 mt-3">
                                             <h6 style={{fontWeight: 'bold'}}>
-                                                {statusName(transaction.paymentStatus)}
+                                                {statusName(transaction.tradeStatus)}
                                                 </h6>
                                             <p>{transaction.amount} Naira</p>
                                         </div>
@@ -164,7 +164,7 @@ const UserTransactionDetails = (props) => {
                                     {/* amount to recieve */}
                                     <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
-                                           {statusName(transaction.paymentStatus)}
+                                           {statusName(transaction.tradeStatus)}
                                             </h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14}}>{transaction.amount} Naira</p>
                                     </div>
@@ -177,12 +177,12 @@ const UserTransactionDetails = (props) => {
 
                                         {/* account info */}
                                     {
-                                        transaction.paymentStatus === 'Declined' ?
+                                        transaction.tradeStatus === 'Declined' ?
                                         ""
                                         :
                                         <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
-                                        {transaction.paymentStatus === 'Pending' ? "Payment will be sent to" : "Payment was sent to"}
+                                        {transaction.tradeStatus === 'Pending' ? "Payment will be sent to" : "Payment was sent to"}
                                             </h6>
                                         <Link to="/user/account" className="mb-0 mt-1" style={{fontSize: 14, color: '#0898D7', textDecoration: 'none'}}>Default Account</Link>
                                     </div>
@@ -193,19 +193,24 @@ const UserTransactionDetails = (props) => {
 
                                     {/* status */}
                                     <div className=" mt-3">
-                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Status</h6>
+                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Trade Status</h6>
+                                        <p className="mb-0 mt-1" style={{fontSize: 14,}}>{transaction.tradeStatus}</p>
+                                    </div>
+
+                                    <div className=" mt-3">
+                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Payment Status</h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14,}}>{transaction.paymentStatus}</p>
                                     </div>
 
                                     {/* Date completed */}
                                     {
-                                        transaction.paymentStatus === 'Pending'
+                                        transaction.tradeStatus === 'Pending'
                                         ?
                                         ""
                                         :
                                         <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
-                                           {transaction.paymentStatus === 'Completed' ? "Date Completed" : "Date Declined"}
+                                           {transaction.tradeStatus === 'Completed' ? "Date Completed" : "Date Declined"}
                                             </h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14,}}>
                                         <Moment format="MMMM Do, YYYY">
@@ -221,7 +226,7 @@ const UserTransactionDetails = (props) => {
                                     {/* processed by admin */}
                                     <div className=" mt-3">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>
-                                        {AdminState(transaction.paymentStatus)}</h6>
+                                        {AdminState(transaction.tradeStatus)}</h6>
                                         <p className="mb-0 mt-1" style={{fontSize: 14,}}>Admin</p>
                                     </div>
 
@@ -229,8 +234,21 @@ const UserTransactionDetails = (props) => {
                                 </div>
                                 <div className="col-lg-7 mt-lg-0 mt-4">
 
+                                     {/* amount */}
+                                     <div className="">
+                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Card Name</h6>
+                                        <p className="mb-0 mt-1" style={{fontSize: 14}}>{transaction.subCategoryDetails.subcategoryname}</p>
+                                    </div>
+
+                                     {/* amount */}
+                                     <div className=" mt-3">
+                                        <h6 className="mb-0" style={{fontWeight: 'bold'}}>Card Category</h6>
+                                        <p className="mb-0 mt-1" style={{fontSize: 14}}>{transaction.subCategoryDetails.categoryname}</p>
+                                    </div>
+
+
                                     {/* cards uploaded */}
-                                    <div className="">
+                                    <div className="mt-4">
                                         <h6 className="mb-0" style={{fontWeight: 'bold'}}>Uploaded Cards</h6>
                                     </div>
 

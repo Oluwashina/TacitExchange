@@ -53,11 +53,11 @@ const columns = [
       </span>
     },
     {
-        name: "Status",
+        name: "Trade Status",
         cell: row => <span
-             className={row.paymentStatus === 'Pending' ? "defaultDiv" : "success-color"}
+             className={row.tradeStatus === 'Pending' ? "defaultDiv" : "success-color"}
              > 
-            {`${row.paymentStatus}`}
+            {`${row.tradeStatus}`}
             </span>
       },
       {

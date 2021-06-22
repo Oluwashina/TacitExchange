@@ -215,15 +215,14 @@ export const getUserTradeHistory = (val) => {
 };
 
 // approve a trade payment
-export const ApproveTradePayment = (id) =>{
+export const ApproveTradePayment = (val, id) =>{
   return async (dispatch, getState) => {
     dispatch({ type: "approve_loader", });
     try {
-      const res = await PostApi(`payment/action/${id}?status=Completed`, '', getToken());
+      const res = await PostApi(`payment/action/${id}`, {...val}, getToken());
       if (res.status === 200) {
-          
           dispatch({ type: "StopApproveLoader" });
-        cogoToast.success('Trade successfully approved', { position: 'top-center', })
+          cogoToast.success('Your request is now been processed!', { position: 'top-center', })
       }
       if(res.status === 400){
         dispatch({ type: "StopApproveLoader" });
@@ -241,7 +240,7 @@ export const DeclineTradePayment = (id) =>{
   return async (dispatch, getState) => {
     dispatch({ type: "decline_loader", });
     try {
-      const res = await PostApi(`payment/action/${id}?status=Declined`, '', getToken());
+      const res = await PostApi(`decline/trade/${id}`, '', getToken());
       if (res.status === 200) {
           
           dispatch({ type: "StopDeclineLoader" });

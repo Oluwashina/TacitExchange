@@ -14,6 +14,7 @@ const initState = {
   role: "",
   profilePic: "",
   accountDetails: [],
+  banks: [],
   resetcode: false,
   email_msg: "",
   validlink: false,
@@ -127,6 +128,11 @@ const authReducer = (state = initState, action) => {
        ...state,
        accountDetails: action.data.accountDetails
      }
+  case 'Banks':
+    return{
+      ...state,
+      banks: action.data.data
+    }
     default:
       return state;
   }

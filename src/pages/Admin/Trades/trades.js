@@ -90,11 +90,11 @@ const AdminTrades = (props) => {
           </span>
         },
         {
-            name: "Status",
+            name: "Trade Status",
             cell: row => <span
-             className={getStatusColor(row.paymentStatus)}
+             className={getStatusColor(row.tradeStatus)}
              > 
-            {`${row.paymentStatus}`}
+            {`${row.tradeStatus}`}
             </span>
           },
           {

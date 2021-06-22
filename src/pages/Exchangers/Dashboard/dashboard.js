@@ -27,14 +27,6 @@ const UserDashboard = (props) => {
     
     const columns = [
         {
-          name: "Card Category",
-          cell: row => <span
-          > 
-        { row['subCategoryDetails']['categoryname']  }
-         </span>,
-          sortable: true
-        },
-        {
           name: "Card Name",
           cell: row => <span
           > 
@@ -57,9 +49,17 @@ const UserDashboard = (props) => {
           </span>
         },
         {
-            name: "Status",
+            name: "Trade Status",
             cell: row => <span
-             className={row.paymentStatus === 'Pending' ? "defaultDiv" : "success-color"}
+             className={row.tradeStatus === 'Pending' ? "defaultDiv" : "success-color"}
+             > 
+            {`${row.tradeStatus}`}
+            </span>
+          },
+          {
+            name: "Payment Status",
+            cell: row => <span
+             className={getColor(row.paymentStatus)}
              > 
             {`${row.paymentStatus}`}
             </span>
@@ -78,6 +78,23 @@ const UserDashboard = (props) => {
       const handleView = (id) =>{
         history.push('/user/transaction/'+id)
       }
+
+    //   get badge colors for payment
+      const getColor = (status) =>{
+        switch(status){
+            case 'Not Initiated':
+                return 'notinitStatus'
+            case 'Processing':
+                return 'processingStatus'
+            case 'Successful':
+                return 'successStatus'
+            case 'Failed':
+                return 'failedStatus'
+            
+            default:
+                break;
+        }
+    }
 
 
     return ( 
@@ -115,7 +132,7 @@ const UserDashboard = (props) => {
                                 </div>
 
                                 <div className="mt-1">
-                                    <h6 style={{color: '#2C3A50'}}>Pending Payments</h6>
+                                    <h6 style={{color: '#2C3A50'}}>Pending Trades</h6>
                                 </div>        
 
                             </div>

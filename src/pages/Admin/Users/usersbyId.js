@@ -124,11 +124,11 @@ const UsersDetails = (props) => {
             </span>
         },
         {
-            name: "Status",
+            name: "Trade Status",
             cell: row => <span
-             className={getStatusColor(row.paymentStatus)}
+             className={getStatusColor(row.tradeStatus)}
              > 
-            {`${row.paymentStatus}`}
+            {`${row.tradeStatus}`}
             </span>
           },
           {
@@ -266,9 +266,13 @@ const UsersDetails = (props) => {
                                 </div>
 
                                 <div className="row mt-lg-3 mt-3">
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-6">
                                         <p className="mb-0" >Account Name</p>
                                         <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountName ? account.accountName : "Not Updated Yet"}</p>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <p className="mb-0" >Bank Code</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.bankCode ? account.bankCode : ""}</p>
                                     </div>
                                    
                                 </div>

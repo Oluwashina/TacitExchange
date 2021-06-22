@@ -33,6 +33,35 @@
     border-radius: 5px;
 }
 
+/* payment status */
+.notinitStatus{
+    background: #0898D7;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px;
+}
+
+.processingStatus{
+    background: #FEC400;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px;   
+}
+
+.failedStatus{
+    background: #ff0000;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px; 
+}
+
+.successStatus{
+    background: #00B327;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px; 
+}
+
 
 
 /* Media query for smaller phones */
@@ -41,6 +70,30 @@
     .card-head{
         flex-direction: column;
         align-items: flex-start;
+    }
+    .notinitStatus{
+        color: #0898D7;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+    .processingStatus{
+        color: #FEC400;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+    .failedStatus{
+        color: #ff0000;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+    .successStatus{
+        color: #00B327;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
     }
 
 }

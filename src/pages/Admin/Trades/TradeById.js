@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import {connect} from 'react-redux'
 import {Link, useHistory} from 'react-router-dom'
 import './trades.css'
 import ImageZoom from 'react-medium-image-zoom'
 import { ApproveTradePayment, DeclineTradePayment } from '../../../store/actions/admin';
+import Modal from 'react-bootstrap/Modal'
+import accountCircle from '../../../assets/images/accountCircle.svg'
+import closeIcon from '../../../assets/images/closeIcon.svg'
 
 
 const AdminTradeDetails = (props) => {
 
     const {trade, id, ApproveTrade, DeclineTrade, approveloader, declineloader} = props
     const history = useHistory()
+    const ref = useRef()
+
+    const [editShow, setEditShow] = useState(false);
+
+    const handleEditClose = () => setEditShow(false);
+
+    const handleEditShow = () => {
+        setEditShow(true);
+    }
+
+
     // mapping images 
     const imageLayout = trade.imageUrl.filter(el => el !== "").map((item, index) => (
         <div key={index} className="col-lg-3 mb-4">
@@ -29,16 +43,12 @@ const AdminTradeDetails = (props) => {
          </div>
       ));
 
-      const Approve = (id) =>{
-        var confirm_flag = window.confirm("You are about to approve this payment?");
+      const Approve = () =>{
+        handleEditShow()
+      }
 
-        if(confirm_flag){
-            ApproveTrade(id)
-
-            setTimeout(() => {
-                history.push('/admin/trades')
-              }, 2000);
-        }
+      const RetryPayment = () =>{
+          handleEditShow()
       }
 
       const Decline = (id) =>{
@@ -49,8 +59,28 @@ const AdminTradeDetails = (props) => {
 
             setTimeout(() => {
                 history.push('/admin/trades')
-              }, 2000);
+              }, 3000);
         }
+      }
+
+      const Transfer = () =>{
+          const res = {
+            account_bank: account.bankCode,
+            account_number: account.accountNumber,
+            amount : trade.amount,
+            narration: "Giftcard Payment from Tacit Exchange",
+            currency: "NGN",
+            debit_currency: "NGN"
+          }
+
+          console.log(res)
+
+
+          ApproveTrade(res, id)
+
+        setTimeout(() => {
+                history.push('/admin/trades')
+         }, 3000);
       }
 
     const getColor = (status) =>{
@@ -66,6 +96,95 @@ const AdminTradeDetails = (props) => {
         }
     }
 
+    const getPayColor = (status) =>{
+        switch(status){
+            case 'Failed':
+                return '#ff0000'
+            case 'Not Initiated':
+                return '#0898D7'
+            case 'Successful':
+                return '#00B327'
+            case 'Processing':
+                return '#FEC400'
+            default:
+                break;
+        }
+    }
+
+
+    // approve and decline layout show based on payment status
+    const PayLayout = (status, tradeStatus) =>{
+        switch(status){
+            case 'Not Initiated':
+               return tradeStatus === "Declined" ?
+                <div>
+
+                </div>      
+                :
+                <div>
+                <button 
+                type="submit" 
+                className='btn btn-active mt-lg-0 mt-3'
+                onClick={() => {
+                    Approve(id)}}
+                >
+                    Approve
+                </button>
+                <button 
+                type="submit" 
+                disabled={declineloader}
+                className='btn btn-suspend ml-lg-3 mt-lg-0 mt-3'
+                onClick={() => {
+                    Decline(id)}}
+                >
+                    Decline
+                </button>
+            </div>
+            
+            case 'Procesing':
+                return(
+                    <div>
+
+                    </div>
+                )
+            case 'Failed':
+                return(
+                    <div>
+                    <button 
+                    type="submit" 
+                    className='btn btn-active mt-lg-0 mt-3'
+                    onClick={() => {
+                        RetryPayment(id)}}
+                    >
+                        Retry Payment
+                    </button>
+                    <button 
+                    type="submit" 
+                    disabled={declineloader}
+                    className='btn btn-suspend ml-lg-3 mt-lg-0 mt-3'
+                    onClick={() => {
+                        Decline(id)}}
+                    >
+                        Decline
+                    </button>
+                </div>
+                )
+            case 'Successful':
+                return(
+                    <div>
+                        
+                    </div>
+                )
+            default:
+                return(
+                    <div>
+
+                    </div>
+                )
+        }
+    }
+
+
     // get default account details
     const account =  
     trade.userDetails.accountDetails.length ? trade.userDetails.accountDetails.find(pro => pro.isDefault === true) : ""
@@ -74,6 +193,105 @@ const AdminTradeDetails = (props) => {
 
     return ( 
         <>
+         {/* modal for displaying details */}
+      <Modal show={editShow}
+            ref={ref}
+            {...props}
+            backdrop="static"
+         onHide={handleEditClose}>
+
+              <Modal.Header >
+             <div onClick={handleEditClose} style={{position: 'absolute', right: '35px', top: '20px', cursor: 'pointer'}}>
+                <img src={closeIcon} alt="close" width="40" height="40" />
+            </div>
+             </Modal.Header>
+
+            {/*container */}
+            <div className="d-none d-md-block" style={{position: 'absolute', left: '70px', top: '0px'}}>
+                    <img alt="login" src={accountCircle} width="350" height="140" />
+             </div>
+            
+
+            <div className="text-center contain-head mt-4 mt-lg-5" style={{position: 'relative'}}>
+                <h3 className="login-text">Confirm Payment
+                </h3>
+            </div>
+
+            
+            <div className="container modal-contain">
+                
+                {/* confirm details layout */}
+               
+                <div className="text-center">
+                        <h6 style={{fontWeight: 'bold', lineHeight: '22px'}}>Kindly confirm that the credentials are correct!.</h6>
+                 </div>
+
+             {/* account name */}
+                 <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div>
+                        <p>Account Name:</p>
+                    </div>
+                    <div>
+                        <p>{account.accountName ? account.accountName : ""}</p>
+                    </div>
+                 </div>
+
+            {/* Account Number */}
+                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div>
+                        <p>Account Number:</p>
+                    </div>
+                    <div>
+                        <p>{account.accountNumber ? account.accountNumber : ""}</p>
+                    </div>
+                 </div>
+
+                 {/* Bank Name */}
+                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div>
+                        <p>Bank Name:</p>
+                    </div>
+                    <div>
+                        <p>{account.bankName ? account.bankName : ""}</p>
+                    </div>
+                 </div>
+
+                 {/* bank code */}
+                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div>
+                        <p>Bank Code:</p>
+                    </div>
+                    <div>
+                        <p>{account.bankCode ? account.bankCode : ""}</p>
+                    </div>
+                 </div>
+
+                 {/* amount */}
+                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div>
+                        <p>Amount:</p>
+                    </div>
+                    <div>
+                        <p>NGN {trade.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ? trade.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}</p>
+                    </div>
+                 </div>
+
+
+                {/* end of details layout */}
+
+                <div className="text-center mt-4">
+                <button 
+                type="submit"
+                disabled={approveloader}
+                onClick={Transfer}
+                className="btn btn-blueTacit">Transfer Now</button>
+                </div>
+             
+            </div>
+        
+      </Modal>
+      {/* end of  details modal */}
+
             <Sidebar />
             <div className="main">
                 <div className="contain">
@@ -100,32 +318,9 @@ const AdminTradeDetails = (props) => {
                                 </div>
                             </div>
 
-                           {
-                               trade.paymentStatus === 'Pending'
-                               ?
-                               <div>
-                                <button 
-                                type="submit" 
-                                className='btn btn-active mt-lg-0 mt-3'
-                                disabled={approveloader}
-                                onClick={() => {
-                                    Approve(id)}}
-                                >
-                                    Approve
-                                </button>
-                                <button 
-                                type="submit" 
-                                disabled={declineloader}
-                                className='btn btn-suspend ml-lg-3 mt-lg-0 mt-3'
-                                onClick={() => {
-                                    Decline(id)}}
-                                >
-                                    Decline
-                                </button>
-                            </div>
-                            :
-                            ""
-                           } 
+
+                           {PayLayout(trade.paymentStatus, trade.tradeStatus)}
+
                         </div>
 
                           {/* ---- */}
@@ -159,7 +354,7 @@ const AdminTradeDetails = (props) => {
                                     </div>
                                     <div className="col-lg-6 mt-lg-0 mt-3">
                                         <p className="mb-0" >Amount to get</p>
-                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>NGN {trade.amount ? trade.amount : ""}</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>NGN {trade.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ? trade.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}</p>
                                     </div>
                                 </div>
 
@@ -169,10 +364,23 @@ const AdminTradeDetails = (props) => {
                                         <p className="mt-1 mb-0" style={{color: '#898D93'}}>{trade.comment ? trade.comment : ""}</p>
                                     </div>
                                     <div className="col-lg-6 mt-lg-0 mt-3">
-                                        <p className="mb-0" >Status</p>
+                                        <p className="mb-0" >Trade Status</p>
                                         <p className="mt-1 mb-0" 
                                         style={{
-                                            color: getColor(trade.paymentStatus)
+                                            color: getColor(trade.tradeStatus)
+                                            }}
+                                        >{trade.tradeStatus}</p>
+                                    </div>
+                                   
+                                </div>
+
+                                <div className="row mt-lg-4 mt-3">
+                                   
+                                    <div className="col-lg-6 mt-lg-0 mt-3">
+                                        <p className="mb-0" >Payment Status</p>
+                                        <p className="mt-1 mb-0" 
+                                        style={{
+                                            color: getPayColor(trade.paymentStatus)
                                             }}
                                         >{trade.paymentStatus}</p>
                                     </div>
@@ -199,9 +407,13 @@ const AdminTradeDetails = (props) => {
                                 </div>
 
                                 <div className="row mt-lg-3 mt-3">
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-6">
                                         <p className="mb-0" >Account Name</p>
                                         <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.accountName ? account.accountName : ""}</p>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <p className="mb-0" >Bank Code</p>
+                                        <p className="mt-1 mb-0" style={{color: '#898D93'}}>{account.bankCode ? account.bankCode : ""}</p>
                                     </div>
                                    
                                 </div>
@@ -245,7 +457,7 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        ApproveTrade: (id) => dispatch(ApproveTradePayment(id)),
+        ApproveTrade: (res, id) => dispatch(ApproveTradePayment(res, id)),
         DeclineTrade: (id) => dispatch(DeclineTradePayment(id))
     }
 }

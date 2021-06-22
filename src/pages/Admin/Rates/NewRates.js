@@ -140,7 +140,7 @@ const AdminNewRates = (props) => {
                                     onBlur={handleBlur}
                                     className="form-control select-style" 
                                     id="category">
-                                    <option defaultValue="" >--Select--</option>
+                                    <option defaultValue="" disabled>--Select--</option>
                                     {category.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.categoryname}</option>
                                         })}

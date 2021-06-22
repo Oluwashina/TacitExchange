@@ -1,4 +1,4 @@
-import {PostApi, PutApi} from '../helpers'
+import {PostApi, PutApi, GetApi} from '../helpers'
 import cogoToast from "cogo-toast";
 import axios from 'axios'
 import {apiUrl} from '../config'
@@ -245,7 +245,8 @@ export const addAccountDetails = (val) => {
       const res = await PostApi("accountdetails", {
         accountNumber: val.accountNumber,
         accountName: val.accountName,
-        bankName: val.bank
+        bankName: val.bankName,
+        bankCode: val.bankCode
       }, getToken(), "application/json")
       if (res.status === 200) {
         // add a new account
@@ -270,7 +271,8 @@ export const updateAccountDetails = (val) => {
       const res = await PutApi("accountdetails/"+id, {
         accountNumber: val.accountNumber,
         accountName: val.accountName,
-        bankName: val.bank,
+        bankName: val.bankName,
+        bankCode: val.bankCode,
         isDefault: getState().auth.details.isDefault
       }, getToken(), "application/json")
       if (res.status === 200) {
@@ -409,4 +411,22 @@ export const filterDetails = (id) =>{
       dispatch({type: 'filterDetails', id})
   }
 }
+
+// get a list of all banks with their bank codes
+export const getListOfBanks = ()  =>{
+  return async (dispatch, getState) => {
+    try {
+      const res = await GetApi("bank/code", "");
+      if (res.status === 200) {
+        console.log(res)
+        dispatch({ type: "Banks", data: res.data.bankCode});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Banks_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+ }
 

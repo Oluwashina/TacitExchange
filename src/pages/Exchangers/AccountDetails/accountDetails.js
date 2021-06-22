@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './account.css'
 import DataTable from 'react-data-table-component'
@@ -10,13 +10,20 @@ import { accountDetailsValidator } from "../../../validationSchema/validator";
 import accountCircle from '../../../assets/images/accountCircle.svg'
 import closeIcon from '../../../assets/images/closeIcon.svg'
 import {connect} from 'react-redux'
-import { addAccountDetails, filterDetails, updateAccountDetails } from '../../../store/actions/auth';
+import { addAccountDetails, filterDetails, getListOfBanks, updateAccountDetails } from '../../../store/actions/auth';
+
 
 const UserAccount = (props) => {
 
-    const {accountDetails, addAccount, handleFilter, details, updateAccount} = props
+    const {accountDetails, addAccount, handleFilter, details, updateAccount, getBanks, banks} = props
 
      const ref = useRef()
+
+    //  api call to get list fo all banks
+     useEffect(() => {
+       getBanks()
+      }, [getBanks]);
+
 
     const [show, setShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
@@ -32,8 +39,14 @@ const UserAccount = (props) => {
     }
 
     const handleSubmit = async (values) =>{
-        console.log(values)
-        await addAccount(values)
+        // find by the bank code from the banks the bank name
+        var bankCode = values.bankCode
+        var bankName = banks.find(pro=> pro.code === bankCode).name
+        var res ={
+            ...values,
+            bankName
+        }
+        await addAccount(res)
 
         setTimeout(() => {
             handleClose()
@@ -41,9 +54,14 @@ const UserAccount = (props) => {
       }
     
       const handleUpdate = async (values) =>{
-          console.log(values)
+         var bankCode = values.bankCode
+          var bankName = banks.find(pro=> pro.code === bankCode).name
+          var res = {
+              ...values,
+              bankName
+          }
 
-          await updateAccount(values)
+          await updateAccount(res)
 
           setTimeout(() => {
             handleEditClose()
@@ -135,7 +153,7 @@ const UserAccount = (props) => {
                     handleSubmit(values, setSubmitting)
                     }
                 validationSchema={accountDetailsValidator}
-                initialValues={{bank: "", accountNumber: "", accountName: ""}}
+                initialValues={{bankCode: "", accountNumber: "", accountName: ""}}
               >
                   {({
                       handleChange,
@@ -148,7 +166,7 @@ const UserAccount = (props) => {
                   })=>(
                       <Form onSubmit={handleSubmit}>
                           {/* bank name */}
-                             <div className="form-group input-container mt-4">
+                             {/* <div className="form-group input-container mt-4">
                                 <input
                                     className="form-control input-style"
                                     type="text"
@@ -161,6 +179,26 @@ const UserAccount = (props) => {
                                    <small style={{ color: "#dc3545" }}>
                                         {touched.bank && errors.bank}
                                     </small>
+                            </div> */}
+
+                            <div className="form-group mt-4">
+                              <select
+                                 name="bankCode"
+                                 values={values.bankCode}
+                                 onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className="form-control select-style" 
+                                    style={{border: '1px solid #D1D1D1'}}
+                                    id="bankCode">
+                                    <option defaultValue="" >Select Bank Name</option>
+                                    {banks.map((opt, index) => {
+                                            return <option key={index} value={opt.code}>{opt.name}</option>
+                                        })}
+                                   
+                                </select>
+                                <small style={{ color: "#dc3545" }}>
+                                  {touched.bankCode && errors.bankCode}
+                              </small>
                             </div>
                         
                             {/* account number */}
@@ -251,7 +289,7 @@ const UserAccount = (props) => {
                     handleUpdate(values, setSubmitting)
                     }
                 validationSchema={accountDetailsValidator}
-                initialValues={{bank: details.bankName ? details.bankName : "", accountNumber: details.accountNumber ? details.accountNumber : "", accountName: details.accountName ? details.accountName : ""}}
+                initialValues={{bankCode: details.bankCode ? details.bankCode : "", accountNumber: details.accountNumber ? details.accountNumber : "", accountName: details.accountName ? details.accountName : ""}}
               >
                   {({
                       handleChange,
@@ -264,7 +302,7 @@ const UserAccount = (props) => {
                   })=>(
                       <Form onSubmit={handleSubmit}>
                           {/* bank name */}
-                             <div className="form-group input-container mt-4">
+                             {/* <div className="form-group input-container mt-4">
                                 <input
                                     className="form-control input-style"
                                     type="text"
@@ -277,6 +315,29 @@ const UserAccount = (props) => {
                                    <small style={{ color: "#dc3545" }}>
                                         {touched.bank && errors.bank}
                                     </small>
+                            </div> */}
+
+                            
+                            <div className="form-group mt-4">
+                              <select
+                                 name="bankCode"
+                                 values={values.bankCode}
+                                 onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className="form-control select-style" 
+                                    style={{border: '1px solid #D1D1D1'}}
+                                    id="bankCode">
+                                   <option value={details.bankCode} >{details.bankName}</option>
+                                   {banks.filter(val => val.code !== details.bankCode).map((opt, index) => {
+                                            return <option key={index}
+                                             value={opt.code}>{opt.name}</option>
+                                        })}
+                                   
+                                   
+                                </select>
+                                <small style={{ color: "#dc3545" }}>
+                                  {touched.bankCode && errors.bankCode}
+                              </small>
                             </div>
                         
                             {/* account number */}
@@ -392,7 +453,8 @@ const UserAccount = (props) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        details: state.auth.details
+        details: state.auth.details,
+        banks: state.auth.banks
     }
 }
 
@@ -401,6 +463,7 @@ const mapDispatchToProps = (dispatch) =>{
         addAccount: (val) => dispatch(addAccountDetails(val)),
         updateAccount: (val) => dispatch(updateAccountDetails(val)),
         handleFilter: (id) => dispatch(filterDetails(id)),
+        getBanks: () => dispatch(getListOfBanks())
     }
 }
  
