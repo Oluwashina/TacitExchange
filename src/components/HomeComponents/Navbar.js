@@ -479,6 +479,9 @@ const Navbar = (props) => {
                                 to="/contact">Contact Us</Link>
                             </li>
                             <li className="navLink">
+                                <a className="" href="https://blog.tacitexchange.com" target="_blank" rel="noreferrer" >Blog</a>
+                            </li>
+                            <li className="navLink">
                                 <Link to="/#rate-calculator">Rate Calculator</Link>
                             </li>
                             <li className="headerbtn">
