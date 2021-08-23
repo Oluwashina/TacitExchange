@@ -371,6 +371,9 @@ header{
     border: 1px solid #D1D1D1;
     border-radius: 5px;
     padding: 25px 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
   .input-style:focus {
     border: 1px solid #D1D1D1;
