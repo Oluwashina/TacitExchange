@@ -43,7 +43,7 @@ const UserAccount = (props) => {
         var bankCode = values.bankCode
         var bankName = banks.find(pro=> pro.code === bankCode).name
         var res ={
-            ...values,
+            ...values,  
             bankName
         }
         await addAccount(res)

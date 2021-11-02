@@ -90,6 +90,7 @@ export const getUserRateValue = (amount, id) =>{
   }
 }
 
+
 export const getTermsAndConditions = (id) =>{
   return dispatch =>{
       dispatch({type: 'Terms', data: id})

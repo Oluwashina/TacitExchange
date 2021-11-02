@@ -61,7 +61,6 @@ const authReducer = (state = initState, action) => {
         role: '',
         profilePic: '',
         accountDetails: {}
-
       }
    case 'SIGNUP_SUCCESS':
             return{

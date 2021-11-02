@@ -124,7 +124,7 @@ const AdminProfile = (props) => {
                                 onChange={() => handleFile()}
                                 />
                                 </label> 
-                         </div>
+                    </div>
                         
                         {/* firstname and lastname */}
                         <div className="text-center mt-4">

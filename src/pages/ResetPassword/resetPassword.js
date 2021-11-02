@@ -53,7 +53,8 @@ const UserReset = ({ Reset, verifyCode, code,  }) => {
               The recovery link you selected has already been used to change
               your password. Try resetting your password again to receive a new
               recovery link.
-            </p>
+              </p>
+              
 
             <hr
               className="mt-5"

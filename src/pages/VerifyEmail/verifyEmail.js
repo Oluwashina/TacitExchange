@@ -16,7 +16,8 @@ const VerifyEmail = (props) => {
 
     useEffect(() =>{
       verify(code) 
-  }, [verify, code])
+    }, [verify, code])
+    
 
 if(link) {
     return ( 
