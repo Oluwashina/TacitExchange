@@ -127,6 +127,11 @@ export const accountDetailsValidator = Yup.object({
     .required("Account Name is required"),
 });
 
+export const DeclineTradeValidator = Yup.object({
+  reason: Yup.string().required("Reason is required"),
+});
+
+
 
 export const tradeValidator = Yup.object({
   giftname: Yup.string()

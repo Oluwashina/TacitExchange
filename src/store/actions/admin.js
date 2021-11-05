@@ -236,11 +236,11 @@ export const ApproveTradePayment = (val, id) =>{
 }
 
 // decline a trade payment
-export const DeclineTradePayment = (id) =>{
+export const DeclineTradePayment = (val,id) =>{
   return async (dispatch, getState) => {
     dispatch({ type: "decline_loader", });
     try {
-      const res = await PostApi(`decline/trade/${id}`, '', getToken());
+      const res = await PostApi(`decline/trade/${id}`, { ...val }, getToken());
       if (res.status === 200) {
           
           dispatch({ type: "StopDeclineLoader" });
