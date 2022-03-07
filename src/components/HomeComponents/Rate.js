@@ -95,7 +95,7 @@ const RateCalculator = (props) => {
                                 name="category"
                                 value={values.category}
                                 onBlur={handleBlur}
-                                onChange={handleChange}
+                                
                                 className="form-control select-style"
                                  id="category">
                                     <option defaultValue="">Select</option>
