@@ -8,6 +8,141 @@
     align-items: center;
     flex-direction: column;
 }
+
+.walletBalanceCard{
+    padding: 30px 20px 35px 20px;
+    background: linear-gradient(104.73deg, #0D92D5 -1.26%, #9D0957 133.07%, rgba(157, 9, 87, 0) 133.07%);
+    border-radius: 20px;
+    min-height: 204px;
+}
+
+.wallet_div{
+    display: flex;
+    align-items: center;
+}
+
+.wallet_div img{
+    width: 20px;
+    height: 20px;
+}
+
+.wallet_div img.eye{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.wallet_div div:first-child{
+    margin-right: 8px;
+}
+
+.wallet_title{
+    color: #fff;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.wallet_amount{
+    color: #fff;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.btn_dash {
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    background: transparent;
+    padding: 12px 30px;
+    color: #fff;
+    transition: all .15s ease-in-out;
+    width: 100%;
+}
+
+.btn_dash:hover{
+    color: #fff;
+}
+
+.trade_val{
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 0px;
+}
+
+.trade_title{
+    color: #fff;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.tradeCard{
+    background: url(../../../assets/images/Others.svg);
+    background-size: 100%; 
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 204px;
+}
+
+.services_title{
+    color: #252733;
+    font-weight: bold;
+}
+
+.service_card{
+    background: #FFFFFF;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.service_icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(40, 175, 176, 0.05);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.electricty{
+    background: rgba(0, 136, 163, 0.05);
+}
+
+.tv{
+    background: rgba(55, 42, 164, 0.05);
+}
+
+.buydata{
+    background: rgba(239, 35, 60, 0.05);
+}
+
+.service_icon img{
+    width: 30px;
+    height: 30px;
+}
+
+.service_title{
+    color: #2C3A50;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+.service_subtitle{
+    color: #2C3A50;
+    text-align: center;
+    font-weight: 300;
+    font-size: 14px;
+}
+
 .dashTrade{
     border: 1px solid #DFE0EB;
     border-radius: 8px;
@@ -48,5 +183,19 @@
         background: transparent;
         border-radius: none;
         padding: 0px;
+    }
+    .walletBalanceCard{
+        padding: 30px 20px 40px 20px;
+        background: linear-gradient(104.73deg, #0D92D5 -1.26%, #9D0957 133.07%, rgba(157, 9, 87, 0) 133.07%);
+    }
+    .tradeCard{
+        background: url(../../../assets/images/Others.svg);
+        background-size: 100%; 
+        position: relative;
+        min-height: 210px;
+        background-repeat: no-repeat;
+    }
+    .service_card{
+        height: 250px;
     }
 }

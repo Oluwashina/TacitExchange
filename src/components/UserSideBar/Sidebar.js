@@ -133,7 +133,28 @@ const UserSideBar = (props) => {
                         <div className="v-list-title">
                             <span
                             className={ isActive.includes("/user/transactions") ? 'active' : ''}
-                            >Transactions</span>
+                            >Trades</span>
+                        </div>
+
+                    </Link>
+
+                {/* third */}
+                    <Link to="/user/transactions"
+                    className={ isActive.includes("/user/transactions") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    style={{textDecoration: 'none'}}>
+
+                        {/* icon */}
+                        <div
+                        className={ isActive.includes("/user/transactions") ? 'v-list-icon active' : 'v-list-icon'}
+                         >
+                        <i className="fa fa-ticket-alt"></i>
+                        {/* <img src={transactIcon} alt="profile" className="img-fluid" /> */}
+                        </div>
+                        {/* title */}
+                        <div className="v-list-title">
+                            <span
+                            className={ isActive.includes("/user/transactions") ? 'active' : ''}
+                            >My Wallet</span>
                         </div>
 
                     </Link>

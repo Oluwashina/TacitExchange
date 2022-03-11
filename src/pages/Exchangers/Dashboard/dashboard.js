@@ -1,19 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import UserSideBar from '../../../components/UserSideBar/Sidebar';
 import './dashboard.css'
-import OtherTrade from '../../../assets/images/OthersTrade.svg'
 import {Link, useHistory} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 import {connect} from 'react-redux'
 import { getUserDashboardCount, getUserTransaction } from '../../../store/actions/dashboard';
 import Moment from 'react-moment'
 import Eye from '../../../assets/images/eye.svg'
+import briefcase from '../../../assets/images/briefcase.svg'
+import eye_fill from '../../../assets/images/ri-eye-fill.svg'
+import airtime_icon from '../../../assets/images/icons/plane-tickets.svg'
+import electricity_icon from '../../../assets/images/icons/electricity.svg'
+import tv_icon from '../../../assets/images/icons/tv-screen.svg'
+import buydata_icon from '../../../assets/images/icons/shopping-cart.svg'
 
 const UserDashboard = (props) => {
 
     const {countFetch, count, getTransaction, transaction} = props
 
     const [status] = useState("Pending")
+
+    const [walletShow, setWalletShow] = useState(false)
 
     const history = useHistory()
 
@@ -23,6 +30,10 @@ const UserDashboard = (props) => {
         getTransaction(status)
         document.body.classList.remove('body-hidden');
       }, [countFetch, getTransaction, status]);
+
+      const toggleWalletAmount = () =>{
+         setWalletShow(walletShow ? false : true );
+      }
 
     
     const columns = [
@@ -103,52 +114,133 @@ const UserDashboard = (props) => {
         <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
-                {/* trade overview */}
-                <div className="row mt-5">
+                <div className='row mt-5'>
 
-                    {/* completed trades */}
-                    <div className="col-lg-4 mb-4">
-                        <div className="TradeLayout">
+                     {/* wallet balance */}
+                     <div className="col-lg-4 mb-4 mb-lg-0">
+                        <div className="walletBalanceCard">
 
+                            <div className='wallet_div'>
                                 <div>
-                                    <h4 style={{fontWeight: 800, color: '#0898D7'}}>{count.countCompletedTrade ? count.countCompletedTrade : 0}</h4>
+                                    <img src={briefcase} alt="brief" className='img-fluid' />
                                 </div>
+                                <div>
+                                   <p className='wallet_title'>Wallet Balance</p> 
+                                </div>                                
+                             </div>  
 
-                                <div className="mt-1">
-                                    <h6 style={{color: '#0898D7'}}>Completed Trades</h6>
+                              <div className='wallet_div'>
+                               
+                                <div>
+                                   <h4 className='wallet_amount'>NGN {walletShow ? "2,000.00" : "XXXX.XX"}</h4> 
+                                </div>   
+
+                                 <div>
+                                    <img src={eye_fill} onClick={toggleWalletAmount} alt="brief" className='img-fluid eye' />
+                                </div>                             
+                             </div> 
+
+                             <div className='mt-4'>
+                                <Link to="/user/dashboard" className='btn btn_dash'>
+                                    Withdraw Funds
+                                </Link>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div className="col-lg-4 mb-4 mb-lg-0">
+                        <div className="walletBalanceCard">
+
+                            <div>
+                                <h4 className='trade_val'>{count.countPendingTrade ? count.countPendingTrade : 0}</h4> 
+                            </div>                                
+                            
+                            <div>
+                                   <h6 className='trade_title'>Pending Trade(s)</h6> 
+                             </div> 
+
+                             <div className='mt-4'>
+                                <Link to="/user/transactions" className='btn btn_dash'>
+                                    View Trades
+                                </Link>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div className="col-lg-4 mb-4 mb-lg-0">
+                         
+                         <Link to="/user/trade">
+                            <div className='tradeCard'>
+                            </div>
+                        </Link>
+
+                     </div>
+
+
+                </div>
+
+                <div>
+                    <h6 className='services_title mt-5'>Our Services</h6>
+
+                    <div className='row mt-4'>
+
+                        <div className='col-lg-3 mb-4 mb-lg-0'>
+
+                            <Link to="/user/transactions"  className='service_card' style={{textDecoration: 'none'}}>
+                                <div className='service_icon'>
+                                    <img src={airtime_icon} alt="airtime" />
                                 </div>
-                                
+                                <div>
+                                    <h6 className='service_title'>Buy Airtime</h6>
+                                    <p className='service_subtitle'>Tap to top up airtime</p>
+                                </div>
+                            </Link>
+
+                        </div>
+
+                        <div className='col-lg-3 mb-4 mb-lg-0'>
+
+                        <Link to="/user/transactions" className='service_card' style={{textDecoration: 'none'}}>
+                            <div className='service_icon electricity'>
+                                <img src={electricity_icon} alt="airtime" />
+                            </div>
+                            <div>
+                                <h6 className='service_title'>Buy Electricity</h6>
+                                <p className='service_subtitle'>Tap to top up airtime</p>
+                            </div>
+                        </Link>
+
+                        </div>
+
+                        <div className='col-lg-3 mb-4 mb-lg-0'>
+
+                        <Link to="/user/transactions" style={{textDecoration: 'none'}} className='service_card'>
+                            <div className='service_icon tv'>
+                                <img src={tv_icon} alt="airtime" />
+                            </div>
+                            <div>
+                                <h6 className='service_title'>TV Subscription</h6>
+                                <p className='service_subtitle'>Tap to top up airtime</p>
+                            </div>
+                        </Link>
+
+                        </div>
+
+                        <div className='col-lg-3'>
+
+                        <Link to="/user/transactions" style={{textDecoration: 'none'}} className='service_card'>
+                            <div className='service_icon buydata'>
+                                <img src={buydata_icon} alt="airtime" />
+                            </div>
+                            <div>
+                                <h6 className='service_title'>Buy Data</h6>
+                                <p className='service_subtitle'>Tap to top up airtime</p>
+                            </div>
+                        </Link>
 
                         </div>
 
                     </div>
-
-                    {/* pending payments */}
-                    <div className="col-lg-4 mb-4">
-                        <div className="TradeLayout">
-
-                                <div>
-                                    <h4 style={{fontWeight: 800, color: '#2C3A50'}}>{count.countPendingTrade ? count.countPendingTrade : 0}</h4>
-                                </div>
-
-                                <div className="mt-1">
-                                    <h6 style={{color: '#2C3A50'}}>Pending Trades</h6>
-                                </div>        
-
-                            </div>
-
-                     </div>
-
-                     {/* start trade */}
-                     <div className="col-lg-4 mb-4">
-                         
-                         <Link to="/user/trade">
-                            <div style={{height: '191.33px', position: 'relative'}}>
-                                <img src={OtherTrade} className="img-fluid" alt="trade" />
-                            </div>
-                            </Link>
-
-                     </div>
                 </div>
 
                 {/* Recent Trades Layout or table */}
@@ -168,10 +260,10 @@ const UserDashboard = (props) => {
 
                           :
 
-                          <div className="dashTrade mt-lg-0 mt-4 mb-5">
+                          <div className="dashTrade mt-lg-5 mt-4 mb-5">
 
                           <div>
-                              <p className="mb-0 text-center" style={{fontWeight: 'bold'}}>You currently don't have any pending <br /> transactions.</p>
+                              <p className="mb-0 text-center" style={{fontWeight: 'bold'}}>You currently don't have any pending <br /> trades.</p>
                           </div>
       
                           <div className="mt-3">
