@@ -61,7 +61,7 @@ const UserNotifications = (props) => {
 
     return ( 
         <>
-        <UserSideBar />
+        <UserSideBar title="Notifications" />
         <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
@@ -105,7 +105,7 @@ const UserNotifications = (props) => {
 
                     <div className="mt-3">
                         <Link 
-                        to="/user/trade"
+                        to="/trade"
                         className="btn btn-blueTacit">Start Trade</Link>
                     </div>
 

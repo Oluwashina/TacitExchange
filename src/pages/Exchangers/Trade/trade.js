@@ -172,7 +172,7 @@ const CloseTrade = () =>{
         emptyImage()   
         //    empty Amount you get too
         emptyamount()
-        history.push('/user/transactions')
+        history.push('/transactions')
     }, 500); 
     
 }
@@ -281,7 +281,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
       {/* end of successful trade */}
 
 
-        <UserSideBar />
+        <UserSideBar title="Trade Cards" />
         <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 

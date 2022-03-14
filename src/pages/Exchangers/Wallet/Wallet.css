@@ -1,0 +1,13 @@
+
+.wallet_table{
+    background: #fff;
+    border-radius: 10px;
+    filter: drop-shadow(0 30px 70px rgba(26,66,149,.15));
+    padding: 10px;
+}
+
+.rdt_TableHeader {
+    font-size: 16px!important;
+    color: #252733!important;
+    font-weight: bold;
+}

@@ -30,6 +30,34 @@ input[type="file"].adminphoto {
     margin: auto;
 }
 
+.password-style{
+    background: #F5F0FC;
+    border-radius: 5px;
+    padding: 23px 23px 23px 55px;
+    border: none;
+  }
+  .password-style::placeholder{
+    color: #aaaaaa;
+  }
+  
+   .password-style:focus {
+      box-shadow: none;
+      outline: 0 none;
+      background: #F5F0FC;
+    }
+  
+    .password_icon {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      color: #0d92d5;
+      cursor: pointer;
+    }
+    .profileImage {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
 
 /* Media query for smaller phones */
 

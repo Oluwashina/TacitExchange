@@ -90,7 +90,7 @@ const UserTransactionDetails = (props) => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar title="Transaction Details" />
       <div className="usermain">
         <div
           className="contain"

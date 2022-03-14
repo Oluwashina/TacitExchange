@@ -391,7 +391,7 @@ const UserAccount = (props) => {
       {/* end of edit account details modal */}
 
 
-            <Sidebar/>
+            <Sidebar title="Account Details" />
             <div className="usermain">
               <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
@@ -401,7 +401,7 @@ const UserAccount = (props) => {
 
                     <div className="accountDiv mt-lg-4 mt-5 mb-5">
 
-                            <div className="mt-4 mb-5">
+                            <div className="mt-4 mb-3">
                             <DataTable
                             title="Bank Accounts"
                             columns={columns}
@@ -412,11 +412,11 @@ const UserAccount = (props) => {
                             />
                             </div>
 
-                         {/* <div className="mt-3 text-center">
+                         <div className="mt-1 text-center">
                             <button 
                             onClick={handleShow}
                             className="btn btn-blueTacit">Add Other Account</button>
-                         </div> */}
+                         </div>
 
                      </div>
 

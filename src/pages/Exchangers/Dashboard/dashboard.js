@@ -87,7 +87,7 @@ const UserDashboard = (props) => {
       ];
 
       const handleView = (id) =>{
-        history.push('/user/transaction/'+id)
+        history.push('/transaction/'+id)
       }
 
     //   get badge colors for payment
@@ -110,7 +110,7 @@ const UserDashboard = (props) => {
 
     return ( 
         <>
-        <UserSideBar />
+        <UserSideBar title="Overview" />
         <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
@@ -141,7 +141,7 @@ const UserDashboard = (props) => {
                              </div> 
 
                              <div className='mt-4'>
-                                <Link to="/user/dashboard" className='btn btn_dash'>
+                                <Link to="/withdraw" className='btn btn_dash'>
                                     Withdraw Funds
                                 </Link>
                              </div>
@@ -156,11 +156,11 @@ const UserDashboard = (props) => {
                             </div>                                
                             
                             <div>
-                                   <h6 className='trade_title'>Pending Trade(s)</h6> 
+                                   <h5 className='trade_title'>Pending Trade(s)</h5> 
                              </div> 
 
                              <div className='mt-4'>
-                                <Link to="/user/transactions" className='btn btn_dash'>
+                                <Link to="/transactions" className='btn btn_dash'>
                                     View Trades
                                 </Link>
                              </div>
@@ -169,7 +169,7 @@ const UserDashboard = (props) => {
 
                     <div className="col-lg-4 mb-4 mb-lg-0">
                          
-                         <Link to="/user/trade">
+                         <Link to="/trade">
                             <div className='tradeCard'>
                             </div>
                         </Link>
@@ -186,7 +186,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                            <Link to="/user/transactions"  className='service_card' style={{textDecoration: 'none'}}>
+                            <Link to="/transactions"  className='service_card' style={{textDecoration: 'none'}}>
                                 <div className='service_icon'>
                                     <img src={airtime_icon} alt="airtime" />
                                 </div>
@@ -200,7 +200,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                        <Link to="/user/transactions" className='service_card' style={{textDecoration: 'none'}}>
+                        <Link to="/transactions" className='service_card' style={{textDecoration: 'none'}}>
                             <div className='service_icon electricity'>
                                 <img src={electricity_icon} alt="airtime" />
                             </div>
@@ -214,7 +214,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                        <Link to="/user/transactions" style={{textDecoration: 'none'}} className='service_card'>
+                        <Link to="/transactions" style={{textDecoration: 'none'}} className='service_card'>
                             <div className='service_icon tv'>
                                 <img src={tv_icon} alt="airtime" />
                             </div>
@@ -228,7 +228,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3'>
 
-                        <Link to="/user/transactions" style={{textDecoration: 'none'}} className='service_card'>
+                        <Link to="/transactions" style={{textDecoration: 'none'}} className='service_card'>
                             <div className='service_icon buydata'>
                                 <img src={buydata_icon} alt="airtime" />
                             </div>
@@ -267,7 +267,7 @@ const UserDashboard = (props) => {
                           </div>
       
                           <div className="mt-3">
-                              <Link to="/user/trade" className="btn btn-blueTacit">Start Trade</Link>
+                              <Link to="/trade" className="btn btn-blueTacit">Start Trade</Link>
                           </div>
       
                       </div>
