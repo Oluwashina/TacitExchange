@@ -210,7 +210,7 @@ const UserDashboard = (props) => {
                             </div>
                             <div>
                                 <h6 className='service_title'>Buy Electricity</h6>
-                                <p className='service_subtitle'>Tap to top up airtime</p>
+                                <p className='service_subtitle'>Easily pay your electric bills</p>
                             </div>
                         </Link>
 
@@ -224,7 +224,7 @@ const UserDashboard = (props) => {
                             </div>
                             <div>
                                 <h6 className='service_title'>TV Subscription</h6>
-                                <p className='service_subtitle'>Tap to top up airtime</p>
+                                <p className='service_subtitle'>Tap to pay your tv subscriptions</p>
                             </div>
                         </Link>
 
@@ -238,7 +238,7 @@ const UserDashboard = (props) => {
                             </div>
                             <div>
                                 <h6 className='service_title'>Buy Data</h6>
-                                <p className='service_subtitle'>Tap to top up airtime</p>
+                                <p className='service_subtitle'>Tap to buy data without stress</p>
                             </div>
                         </Link>
 

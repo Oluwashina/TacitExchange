@@ -200,7 +200,7 @@ const UserTransactionDetails = (props) => {
                             : "Payment was sent to"}
                         </h6>
                         <Link
-                          to="/user/account"
+                          to="/account"
                           className="mb-0 mt-1"
                           style={{
                             fontSize: 14,
@@ -312,7 +312,7 @@ const UserTransactionDetails = (props) => {
                 {/* button to start trade */}
                 <div className="text-center mt-lg-5 mt-4">
                   <Link
-                    to="/user/trade"
+                    to="/tradecard"
                     type="submit"
                     className="btn btn-pinkTacit btn-transact"
                   >

@@ -76,7 +76,7 @@ const RateCalculator = (props) => {
                                  onBlur={handleBlur}
                                  className="form-control select-style" 
                                  id="giftname">
-                                    <option defaultValue="" >Select</option>
+                                    <option value="" disabled>Select</option>
                                     {category.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.categoryname}</option>
                                         })}
@@ -95,10 +95,10 @@ const RateCalculator = (props) => {
                                 name="category"
                                 value={values.category}
                                 onBlur={handleBlur}
-                                
+                                onChange={handleChange}
                                 className="form-control select-style"
                                  id="category">
-                                    <option defaultValue="">Select</option>
+                                    <option value="" disabled>Select</option>
                                     {subcategory.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.subcategoryname}</option>
                                         })}
