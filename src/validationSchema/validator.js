@@ -145,3 +145,16 @@ export const tradeValidator = Yup.object({
   comment: Yup.string(),
 });
 
+export const withdrawValidator = Yup.object({
+  accountType: Yup.string().required("Select an account"),
+  narration: Yup.string(),
+  amount: Yup.string()
+    .required("Enter an amount")
+    .matches(/^[0-9]*\.?[0-9]*$/, "Enter a valid amount"),
+  pin: Yup.string()
+    .min(4, "Pin cannot be less than 4 characters")
+    .max(4, "Pin cannot be more than 4 characters")
+    .required("Pin is required")
+    .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid pin"),
+});
+

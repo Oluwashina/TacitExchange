@@ -1,0 +1,83 @@
+.withdrawBalanceCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 25px;
+    background: linear-gradient(104.73deg, #0D92D5 -1.26%, #9D0957 133.07%, rgba(157, 9, 87, 0) 133.07%);
+    border-radius: 20px;
+    min-height: 204px;
+}
+
+.withdraw_card{
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 60px;
+}
+
+.input-container label{
+    color: #2C3A50;
+    font-size: 14px;
+}
+
+.btn-withdraw{
+    background: #9d0957;
+    border-radius: 5px;
+    color: white;
+    padding: 12px 40px;
+    width: 40%;
+    transition: all ease-in-out .15s;
+}
+
+.btn-withdraw:hover{
+    color: white;
+}
+
+.no_withdraw_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+    padding: 0px 10px;
+}
+
+.no_withdraw_title{
+    color: #2D2D2D;
+    letter-spacing: 0.396px;
+    text-align: center;
+}
+.no_withdraw_subtitle{
+    letter-spacing: 0.396px;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 0px;
+}
+
+.btn-addaccount{
+    background: #0898D7;
+    border-radius: 5px;
+    color: white;
+    padding: 12px 40px;
+    transition: all ease-in-out .15s;  
+}
+
+.btn-addaccount:hover{
+    color: white;
+}
+
+
+/* Media query for smaller phones */
+@media (max-width:767px) {
+
+    .withdraw_card{
+        background: #fff;
+        border-radius: 10px;
+        padding: 40px 20px;
+    } 
+    
+    .btn-withdraw{
+        width: auto;
+    }
+   
+
+}
