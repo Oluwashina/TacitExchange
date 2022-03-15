@@ -8,16 +8,34 @@ import {withdrawValidator} from '../../../validationSchema/validator'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const UserWithdraw = ({accountDetails}) => {
+const UserWithdraw = ({accountDetails, walletBalance}) => {
 
     const [walletShow, setWalletShow] = useState(false)
+
+    const [bankInfo, setBankInfo] = useState({});
 
     const toggleWalletAmount = () =>{
         setWalletShow(walletShow ? false : true );
      }
+     
+     const handleToFixed = (val) =>{
+        return parseFloat(val).toFixed(2)
+    }
+
+    const handleType = (id) => {
+        var val = accountDetails.find((pro) => pro.id === id);
+        setBankInfo(val);
+    };
+
 
      const handleSubmit = async (values, setSubmitting,)  =>{
-        console.log(values)
+        const creds = {
+            ...values,
+            accountNumber: bankInfo.accountNumber,
+            bank: bankInfo.bankName,
+            bankCode: bankInfo.bankCode
+        }
+        console.log(creds)
      }
 
     return ( 
@@ -60,6 +78,7 @@ const UserWithdraw = ({accountDetails}) => {
                                                 value={values.accountType}
                                                 onChange={(e) => {
                                                     handleChange(e)
+                                                    handleType(e.currentTarget.value);
                                                 }}
                                                 onBlur={handleBlur}
                                                 id="accountType"
@@ -71,8 +90,17 @@ const UserWithdraw = ({accountDetails}) => {
                                                 <option value="" disabled>
                                                         --Select--
                                                     </option>
-                                                 <option value="Bank">Folalu Tomiwa</option>
-                                            </select>
+                                                    {accountDetails.map((opt, index) => {
+                                                    return (
+                                                    <option key={index} value={opt.id}>
+                                                        {opt.accountNumber}{" "}
+                                                        -{" "}
+                                                        {opt.bankName
+                                                        }
+                                                    </option>
+                                                    );
+                                                })}
+                                                 </select>
                                                  <small style={{ color: "#dc3545" }}>
                                                 {touched.accountType && errors.accountType}
                                                      </small>
@@ -81,40 +109,44 @@ const UserWithdraw = ({accountDetails}) => {
                                             <div className="form-group input-container">
                                                 <label htmlFor="bank">Bank</label>
                                                 <input
-                                                value={values.bank}
+                                                 value={
+                                                    bankInfo && bankInfo.bankName
+                                                      ? bankInfo.bankName
+                                                      : ""
+                                                  }
                                                 onChange={(e) => {
                                                     handleChange(e)
                                                 }}
                                                 onBlur={handleBlur}
                                                 id="bank"
                                                 className="form-control input-style"
-                                                placeholder="Guaranty Trust Bank"
+                                                placeholder="Bank"
                                               
                                                 type="text"
                                                 disabled
                                                 />
-                                                <small style={{ color: "#dc3545" }}>
-                                                {touched.bank && errors.bank}
-                                            </small>
+                                               
                                             </div>
         
                                             <div className="form-group input-container">
                                                 <label htmlFor="email">Account Number</label>
                                                 <input
-                                                value={values.accountNumber}
+                                                 value={
+                                                    bankInfo && bankInfo.accountNumber
+                                                      ? bankInfo.accountNumber
+                                                      : ""
+                                                  }
                                                 onChange={(e) => {
                                                     handleChange(e)
                                                 }}
                                                 onBlur={handleBlur}
                                                 id="accountNumber"
                                                 className="form-control input-style"
-                                                placeholder="0148800246"
+                                                placeholder="Account Number"
                                                 type="text"
                                                 disabled
                                                 />
-                                                <small style={{ color: "#dc3545" }}>
-                                                {touched.accountNumber && errors.accountNumber}
-                                            </small>
+                                               
                                             </div>
                                             <div className="form-group input-container">
                                                 <label htmlFor="email">Withdrawal Amount</label>
@@ -231,7 +263,7 @@ const UserWithdraw = ({accountDetails}) => {
                                     <div className='wallet_div'>
                                     
                                         <div>
-                                        <h4 className='wallet_amount'>NGN {walletShow ? "2,000.00" : "XXXX.XX"}</h4> 
+                                        <h4 className='wallet_amount'>NGN {walletShow ? handleToFixed(walletBalance) : "XXXX.XX"}</h4> 
                                         </div>   
 
                                         <div>
@@ -255,6 +287,7 @@ const UserWithdraw = ({accountDetails}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
+        walletBalance: state.auth.walletBalance
     }
 }
 

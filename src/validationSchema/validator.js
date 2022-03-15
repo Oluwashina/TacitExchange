@@ -158,3 +158,10 @@ export const withdrawValidator = Yup.object({
     .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid pin"),
 });
 
+export const filterValidator = Yup.object({
+  status: Yup.string().required("Select a status"),
+  amount: Yup.string()
+    .matches(/^[0-9]*\.?[0-9]*$/, "Enter a valid amount"),
+});
+
+

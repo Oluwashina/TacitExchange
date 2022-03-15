@@ -53,11 +53,11 @@ function App() {
               <UserRoute path="/dashboard" component={UserDashboard} />
               <UserRoute path="/profile" component={UserProfile} />
               <UserRoute path="/notifications" component={UserNotifications} />
-              <UserRoute path="/trade" component={UserTrade} />
+              <UserRoute path="/tradecard" component={UserTrade} />
               <Route path="/my-wallet" component={UserWallet} />
               <Route path="/withdraw" component={UserWithdraw} />
               <UserRoute path="/account" component={UserAccount} />
-              <UserRoute path="/transactions" component={UserTransactions} />
+              <UserRoute path="/trades" component={UserTransactions} />
               <UserRoute path="/transaction/:id" component={UserTransactionDetails} />
 
 

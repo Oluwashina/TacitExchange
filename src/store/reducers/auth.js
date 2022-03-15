@@ -127,6 +127,11 @@ const authReducer = (state = initState, action) => {
        ...state,
        accountDetails: action.data.accountDetails
      }
+  case "AccountDeletedSuccessful":
+    return{
+      ...state,
+      accountDetails: action.data.accountDetails
+    }
   case 'Banks':
     return{
       ...state,

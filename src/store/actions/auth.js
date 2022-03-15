@@ -1,4 +1,4 @@
-import {PostApi, PutApi, GetApi} from '../helpers'
+import {PostApi, PutApi, GetApi, DeleteApi} from '../helpers'
 import cogoToast from "cogo-toast";
 import axios from 'axios'
 import {apiUrl} from '../config'
@@ -290,6 +290,34 @@ export const updateAccountDetails = (val) => {
   };
 };
 
+
+// delete account details
+export const deleteAccountDetails = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await DeleteApi(
+        "accountdetails/" + id,
+        getToken(),
+        "application/json"
+      );
+      if (res.status === 200) {
+        // update account details
+        dispatch({
+          type: "AccountDeletedSuccessful",
+          data: res.data,
+        });
+        cogoToast.success("Account details deleted successfully!");
+      }
+      if (res.status === 400 || 404) {
+        // error while adding account
+        dispatch({ type: "Account_Error" });
+        cogoToast.error("Error while deleting account details");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
   
 
 // Upload a profile picture functionality

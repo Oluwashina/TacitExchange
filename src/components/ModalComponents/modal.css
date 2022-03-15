@@ -1,0 +1,106 @@
+.modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+.modal-close-icon{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    padding: 10px 20px 0px 0px;
+}
+
+.modal.show{
+    opacity: 1;
+    pointer-events: visible;
+}
+
+.modal.enter-done{
+    opacity: 1;
+    pointer-events: visible;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal.exit{
+    opacity: 0;
+}
+
+.modal.enter-done .modal-content{
+    transform: translateY(0);
+}
+
+.modal.exit .modal-content{
+    transform: translateY(-200px);
+}
+
+.modal-content{
+    width: auto;
+    background-color: #fff;
+    transform: translateY(-200px);
+    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
+    border: 1px solid #fff;
+    margin: .5rem;
+    /* filter: drop-shadow(0px 30px 70px rgba(26, 66, 149, 0.25)); */
+}
+
+.modal.show .modal-content{
+    transform: translateY(0);
+}
+
+.modal-title{
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal-content-layout{
+    padding: 25px 30px;
+}
+
+
+
+.modal-body{
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+/* ------------------MEDIA QUERY SECTION ------------------------- */
+/* Media query for tablets and screens higher */
+@media (min-width: 768px) {
+    
+}
+
+
+/* sreens higher than tablets */
+@media (min-width: 1024px) {
+  .modal-content{
+    max-width: 500px;
+     margin: 1.75rem auto;
+  }
+  .modal-close-icon{
+    display: flex;
+    justify-content: flex-end;
+     cursor: pointer;
+       padding: 10px 20px 0px 0px;
+  }
+}
+
+/* large screens */
+@media (min-width: 1536px) {
+   
+}

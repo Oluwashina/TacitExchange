@@ -16,13 +16,17 @@ import buydata_icon from '../../../assets/images/icons/shopping-cart.svg'
 
 const UserDashboard = (props) => {
 
-    const {countFetch, count, getTransaction, transaction} = props
+    const {countFetch, count, getTransaction, transaction,walletBalance} = props
 
     const [status] = useState("Pending")
 
     const [walletShow, setWalletShow] = useState(false)
 
     const history = useHistory()
+
+    const handleToFixed = (val) =>{
+        return parseFloat(val).toFixed(2)
+    }
 
     // make call to fetch dashboard count
     useEffect(() => {
@@ -132,7 +136,7 @@ const UserDashboard = (props) => {
                               <div className='wallet_div'>
                                
                                 <div>
-                                   <h4 className='wallet_amount'>NGN {walletShow ? "2,000.00" : "XXXX.XX"}</h4> 
+                                   <h4 className='wallet_amount'>NGN {walletShow ? handleToFixed(walletBalance) : "XXXX.XX"}</h4> 
                                 </div>   
 
                                  <div>
@@ -160,7 +164,7 @@ const UserDashboard = (props) => {
                              </div> 
 
                              <div className='mt-4'>
-                                <Link to="/transactions" className='btn btn_dash'>
+                                <Link to="/trades" className='btn btn_dash'>
                                     View Trades
                                 </Link>
                              </div>
@@ -169,7 +173,7 @@ const UserDashboard = (props) => {
 
                     <div className="col-lg-4 mb-4 mb-lg-0">
                          
-                         <Link to="/trade">
+                         <Link to="/tradecard">
                             <div className='tradeCard'>
                             </div>
                         </Link>
@@ -288,7 +292,8 @@ const UserDashboard = (props) => {
 const mapStateToProps = (state) =>{
     return{
         count: state.dashboard.count,
-        transaction: state.dashboard.Transaction
+        transaction: state.dashboard.Transaction,
+        walletBalance: state.auth.walletBalance
     }
 }
 
