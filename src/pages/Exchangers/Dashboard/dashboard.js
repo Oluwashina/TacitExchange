@@ -190,7 +190,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                            <Link to="/transactions"  className='service_card' style={{textDecoration: 'none'}}>
+                            <Link to="/dashboard/buyairtime"  className='service_card' style={{textDecoration: 'none'}}>
                                 <div className='service_icon'>
                                     <img src={airtime_icon} alt="airtime" />
                                 </div>
@@ -204,7 +204,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                        <Link to="/transactions" className='service_card' style={{textDecoration: 'none'}}>
+                        <Link to="/dashboard/buyairtime" className='service_card' style={{textDecoration: 'none'}}>
                             <div className='service_icon electricity'>
                                 <img src={electricity_icon} alt="airtime" />
                             </div>
@@ -218,7 +218,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                        <Link to="/transactions" style={{textDecoration: 'none'}} className='service_card'>
+                        <Link to="/dashboard/buyairtime" style={{textDecoration: 'none'}} className='service_card'>
                             <div className='service_icon tv'>
                                 <img src={tv_icon} alt="airtime" />
                             </div>
@@ -232,7 +232,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3'>
 
-                        <Link to="/transactions" style={{textDecoration: 'none'}} className='service_card'>
+                        <Link to="/dashboard/buyairtime" style={{textDecoration: 'none'}} className='service_card'>
                             <div className='service_icon buydata'>
                                 <img src={buydata_icon} alt="airtime" />
                             </div>

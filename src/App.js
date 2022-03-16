@@ -27,6 +27,7 @@ import UserTransactions from './pages/Exchangers/Transactions/transactions';
 import UserTransactionDetails from './pages/Exchangers/Transactions/TransactionDetails';
 import UserWallet from './pages/Exchangers/Wallet/Wallet';
 import UserWithdraw from './pages/Exchangers/Withdraw/Withdraw';
+import AirtimePage from './pages/Exchangers/BillPayments/Airtime';
 
 
 
@@ -50,7 +51,8 @@ function App() {
               <Route path="/privacypolicy" component={PrivacyPage} />
 
               {/* Exchanger route */}
-              <UserRoute path="/dashboard" component={UserDashboard} />
+              <UserRoute exact path="/dashboard" component={UserDashboard} />
+              <Route path="/dashboard/buyairtime" component={AirtimePage} />
               <UserRoute path="/profile" component={UserProfile} />
               <UserRoute path="/notifications" component={UserNotifications} />
               <UserRoute path="/tradecard" component={UserTrade} />

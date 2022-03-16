@@ -1,0 +1,84 @@
+.withdrawBalanceCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 25px;
+    background: linear-gradient(104.73deg, #0D92D5 -1.26%, #9D0957 133.07%, rgba(157, 9, 87, 0) 133.07%);
+    border-radius: 20px;
+    min-height: 204px;
+}
+
+.bills_card{
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 60px;
+}
+
+.phone_style {
+    position: absolute;
+    left: 0px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid rgba(8, 152, 215, 0.2);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 100px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone_input_style {
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding: 25px 20px 25px 120px;
+    -webkit-appearance: none;
+    appearance: none;
+    color: #2C3A50;
+}
+
+.phone_input_style:focus {
+    border: 1px solid #D1D1D1;
+    box-shadow: none;
+    outline: 0 none;
+    color: #2C3A50;
+  }
+
+  .summary_card{
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px 20px 60px 20px;
+  }
+
+  .summary_div{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(8, 152, 215, 0.2);
+  }
+
+  .summary_div:last-child{
+      border-bottom: none;
+  }
+
+  .summary_title{
+    color: #2C3A50;
+    font-size: 14px;
+  }
+
+  .summary_value{
+    color: #2C3A50;  
+    font-size: 14px;
+  }
+
+/* Media query for smaller phones */
+@media (max-width:767px) {
+
+    .bills_card{
+        background: #fff;
+        border-radius: 10px;
+        padding: 40px 20px;
+    } 
+   
+
+}

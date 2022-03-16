@@ -158,6 +158,18 @@ export const withdrawValidator = Yup.object({
     .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid pin"),
 });
 
+export const airtimeValidator = Yup.object({
+  provider: Yup.string().required("Select an provider"),
+  amount: Yup.string()
+    .required("Enter an amount")
+    .matches(/^[0-9]*\.?[0-9]*$/, "Enter a valid amount"),
+  phoneNumber: Yup.string()
+    .min(10, "Phone number cannot be less than 10 digits")
+    .max(10, "Exceeded characters for phone number")
+    .required("Phonenumber is required")
+    .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid phone number"),
+});
+
 export const filterValidator = Yup.object({
   status: Yup.string().required("Select a status"),
   amount: Yup.string()
