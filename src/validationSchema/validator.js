@@ -19,7 +19,6 @@ export const loginValidator = Yup.object({
     .email("Enter a valid email")
     .required("Email is required"),
   password: Yup.string()
-    .min(6, "Password cannot be less than 6 characters")
     .required("Password is required"),
 });
 
@@ -72,7 +71,7 @@ export const RegisterAdminValidator = Yup.object({
   email: Yup.string().email("Enter a valid email")
     .required("Email is required"),
   password: Yup.string()
-    .min(3, "Password cannot be less than 3 characters")
+    .min(6, "Password cannot be less than 6 characters")
     .required("Password is required"),
 });
 
@@ -151,11 +150,8 @@ export const withdrawValidator = Yup.object({
   amount: Yup.string()
     .required("Enter an amount")
     .matches(/^[0-9]*\.?[0-9]*$/, "Enter a valid amount"),
-  pin: Yup.string()
-    .min(4, "Pin cannot be less than 4 characters")
-    .max(4, "Pin cannot be more than 4 characters")
-    .required("Pin is required")
-    .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid pin"),
+  password: Yup.string()
+    .required("Password is required"),
 });
 
 export const airtimeValidator = Yup.object({

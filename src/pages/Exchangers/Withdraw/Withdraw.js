@@ -57,7 +57,7 @@ const UserWithdraw = ({accountDetails, walletBalance}) => {
                                             handleSubmit(values, setSubmitting)
                                             }
                                         validationSchema={withdrawValidator}
-                                        initialValues={{amount: "", pin: "", narration: "", accountNumber: "", bank: "", accountType: ""}}
+                                        initialValues={{amount: "", password: "", narration: "", accountNumber: "", bank: "", accountType: ""}}
                                     >
                                         {({
                                             handleChange,
@@ -188,21 +188,21 @@ const UserWithdraw = ({accountDetails, walletBalance}) => {
                                             </div>
         
                                             <div className="form-group input-container mt-lg-4 mt-0">
-                                                <label htmlFor="pin">Transaction Pin</label>
+                                                <label htmlFor="password">Confirm your Password</label>
                                                 <input
                                                 value={values.pin}
                                                 onChange={(e) => {
                                                     handleChange(e)
                                                 }}
                                                 onBlur={handleBlur}
-                                                id="pin"
+                                                id="password"
                                                 className="form-control input-style"
-                                                placeholder="Enter Pin"
+                                                placeholder="Enter your password"
                                                 style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                                 type="password"
                                                 />
                                                 <small style={{ color: "#dc3545" }}>
-                                                {touched.pin && errors.pin}
+                                                {touched.password && errors.password}
                                             </small>
                                             </div>
         
