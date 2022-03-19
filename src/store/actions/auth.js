@@ -308,7 +308,7 @@ export const deleteAccountDetails = (id) => {
         });
         cogoToast.success("Account details deleted successfully!");
       }
-      if (res.status === 400 || 404) {
+      if (res.status === 400) {
         // error while adding account
         dispatch({ type: "Account_Error" });
         cogoToast.error("Error while deleting account details");

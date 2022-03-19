@@ -69,6 +69,11 @@
   .summary_value{
     color: #2C3A50;  
     font-size: 14px;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: end;
   }
 
 /* Media query for smaller phones */

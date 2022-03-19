@@ -28,6 +28,9 @@ import UserTransactionDetails from './pages/Exchangers/Transactions/TransactionD
 import UserWallet from './pages/Exchangers/Wallet/Wallet';
 import UserWithdraw from './pages/Exchangers/Withdraw/Withdraw';
 import AirtimePage from './pages/Exchangers/BillPayments/Airtime';
+import BuyDataPage from './pages/Exchangers/BillPayments/BuyData';
+import Electricity from './pages/Exchangers/BillPayments/Electricity';
+import Cables from './pages/Exchangers/BillPayments/Cables';
 
 
 
@@ -53,6 +56,9 @@ function App() {
               {/* Exchanger route */}
               <UserRoute exact path="/dashboard" component={UserDashboard} />
               <Route path="/dashboard/buyairtime" component={AirtimePage} />
+              <Route path="/dashboard/buydata" component={BuyDataPage} />
+              <Route path="/dashboard/buyelectricity" component={Electricity} />
+              <Route path="/dashboard/tvsubscription" component={Cables} />
               <UserRoute path="/profile" component={UserProfile} />
               <UserRoute path="/notifications" component={UserNotifications} />
               <UserRoute path="/tradecard" component={UserTrade} />

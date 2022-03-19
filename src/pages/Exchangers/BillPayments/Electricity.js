@@ -5,11 +5,9 @@ import briefcase from '../../../assets/images/briefcase.svg'
 import eye_fill from '../../../assets/images/ri-eye-fill.svg'
 import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
-import {airtimeValidator} from '../../../validationSchema/validator'
-import Nigeria from  '../../../assets/images/nigerialogo.svg'
+import {buyElecValidator} from '../../../validationSchema/validator'
 
-
-const AirtimePage = ({walletBalance}) => {
+const BuyElectricityPage = ({walletBalance}) => {
 
     const [walletShow, setWalletShow] = useState(false)
 
@@ -22,7 +20,15 @@ const AirtimePage = ({walletBalance}) => {
     }
 
     const handleAmount = (val) =>{
-        setAmt(val)
+        let res;
+        if(val === ""){
+            res = 0
+        }
+        else{
+        res = parseFloat(val) + 100
+        }
+  
+        setAmt(res)
     }
 
 
@@ -39,10 +45,9 @@ const AirtimePage = ({walletBalance}) => {
      }
 
 
-
-    return ( 
+    return (  
         <>
-        <Sidebar title="Buy Airtime" />
+         <Sidebar title="Buy Electricity" />
             <div className="usermain">
                 <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
@@ -55,8 +60,8 @@ const AirtimePage = ({walletBalance}) => {
                             onSubmit={(values, {setSubmitting}) =>
                                 handleSubmit(values, setSubmitting)
                                 }
-                            validationSchema={airtimeValidator}
-                            initialValues={{amount: "", provider: "", phoneNumber: ""}}
+                            validationSchema={buyElecValidator}
+                            initialValues={{provider: "", meterNumber: "", amount: ""}}
                         >
                             {({
                                 handleChange,
@@ -90,53 +95,40 @@ const AirtimePage = ({walletBalance}) => {
                                             Select a Provider
                                             </option>
 
-                                            <option value="MTN">
-                                               MTN
+                                            <option value="IKEDC PREPAID TOP UP">
+                                            IKEDC PREPAID TOP UP
                                             </option>
-                                            <option value="AIRTEL">
-                                               AIRTEL
-                                            </option>
-                                            <option value="GLO">
-                                               GLO
-                                            </option>
-                                            <option value="9MOBILE">
-                                               9MOBILE
-                                            </option>       
+                                            <option value="EKEDC PREPAID TOPUP">
+                                            EKEDC PREPAID TOPUP
+                                            </option>      
                                             </select>
                                             <small style={{ color: "#dc3545" }}>
                                         {touched.provider && errors.provider}
                                                 </small>
                                     </div>
 
+
+
                                     <div className="form-group input-container">
-                                        <label htmlFor="phoneNumber">Phone Number</label>
-                                        <div className="phone_style">
-                                                <div className="amount-div">
-                                                    <div>
-                                                        <img src={Nigeria} style={{width: '25px', height:"25px"}} alt="nigeria" />
-                                                    </div>
-                                                    <div className="ml-2">
-                                                        <p className="mb-0" style={{color: '#2C3A50', fontWeight: 'bold'}}>+234</p>
-                                                    </div>
-                                                </div>
-                                        </div>
+                                        <label htmlFor="meterNumber">Meter Number</label>
                                          <input
-                                            value={values.phoneNumber}
+                                            value={values.meterNumber}
                                             onChange={(e) => {
                                                 handleChange(e)
                                             }}
                                             onBlur={handleBlur}
-                                            id="phoneNumber"
-                                            className="form-control phone_input_style"
-                                            placeholder="80 0000 0000"
+                                            id="meterNumber"
+                                            className="form-control input-style"
+                                            placeholder="Enter your meter number"
                                             style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                             type="tel"
                                             />
                                         <small style={{ color: "#dc3545" }}>
-                                        {touched.phoneNumber && errors.phoneNumber}
+                                        {touched.meterNumber && errors.meterNumber}
                                     </small>
                                     </div>
         
+
                                     <div className="form-group input-container mt-lg-4 mt-0">
                                         <label htmlFor="amount">Amount</label>
                                         <input
@@ -152,10 +144,13 @@ const AirtimePage = ({walletBalance}) => {
                                         style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                         type="text"
                                         />
-                                        <small style={{ color: "#dc3545" }}>
+                                          <small style={{ color: "#dc3545" }}>
                                         {touched.amount && errors.amount}
                                     </small>
+                                     
                                     </div>
+
+                                  
 
                                     <div className="text-center mt-4">
                                     <button
@@ -164,7 +159,7 @@ const AirtimePage = ({walletBalance}) => {
                                         style={{ fontWeight: "normal" }}
                                         disabled={isSubmitting}
                                         >
-                                        Buy Airtime
+                                        Buy Electricity
                                     </button>
                                 </div>
         
@@ -215,11 +210,6 @@ const AirtimePage = ({walletBalance}) => {
                                     <p className='summary_value'>{prov === null ? 'None' : prov}</p>
                                 </div>
 
-                                <div className='summary_div mt-4'>
-                                    <p className='summary_title'>You Get</p>
-                                    <p className='summary_value'>NGN {amt === "" ? '0' : amt}</p>
-                                </div>
-
 
                             </div>
                     </div>
@@ -232,10 +222,8 @@ const AirtimePage = ({walletBalance}) => {
                 </div>
         </div>
         </>
-     );
+    );
 }
-
-
 
 const mapStateToProps = (state) =>{
     return{
@@ -249,4 +237,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
  
-export default connect(mapStateToProps, mapDispatchToProps)(AirtimePage);
+export default connect(mapStateToProps, mapDispatchToProps)(BuyElectricityPage);
