@@ -173,7 +173,7 @@ const UserDashboard = (props) => {
 
                     <div className="col-lg-4 mb-4 mb-lg-0">
                          
-                         <Link to="/tradecard">
+                         <Link to="/start-trade">
                             <div className='tradeCard'>
                             </div>
                         </Link>

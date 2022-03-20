@@ -70,6 +70,14 @@ const UserTransactions = (props) => {
     const columns = [
    
       {
+        name: "Card Category",
+        cell: row => <span
+        > 
+      { row['subCategoryDetails']['categoryname']  }
+       </span>,
+        sortable: true
+      },
+      {
         name: "Card Name",
         cell: row => <span
         > 
@@ -98,14 +106,6 @@ const UserTransactions = (props) => {
              > 
             {`${row.tradeStatus}`}
             </span>
-        },
-        {
-          name: "Payment Status",
-          cell: row => <span
-           className={getColor(row.paymentStatus)}
-           > 
-          {`${row.paymentStatus}`}
-          </span>
         },
         {
             name: "",
@@ -137,27 +137,9 @@ const UserTransactions = (props) => {
         return result;
       }
 
-       //   get badge colors for payment
-       const getColor = (status) =>{
-        switch(status){
-            case 'Not Initiated':
-                return 'notinitStatus'
-            case 'Processing':
-                return 'processingStatus'
-            case 'Successful':
-                return 'successStatus'
-            case 'Failed':
-                return 'failedStatus'
-            
-            default:
-                break;
-        }
-    }
-
-
       
       const handleView = (id) =>{
-          history.push('/transaction/'+id)
+          history.push('/trade/'+id)
       }
 
       

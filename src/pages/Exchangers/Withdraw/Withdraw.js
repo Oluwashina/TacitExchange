@@ -7,6 +7,7 @@ import {Form, Formik} from 'formik'
 import {withdrawValidator} from '../../../validationSchema/validator'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { WithdrawFunds } from '../../../store/actions/wallet';
 
 const UserWithdraw = ({accountDetails, walletBalance}) => {
 
@@ -293,6 +294,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
+     withdraw: (val) => dispatch(WithdrawFunds(val)),    
     }
 }
  

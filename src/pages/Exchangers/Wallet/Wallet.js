@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './Wallet.css'
 import briefcase from '../../../assets/images/briefcase.svg'
@@ -14,9 +14,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Formik } from "formik";
 import { filterValidator } from "../../../validationSchema/validator";
+import { filterTransactionDetails, filterTransactions, getWalletTransactions, searchTransaction } from '../../../store/actions/wallet';
 
 
-const UserWallet = ({walletBalance}) => {
+const UserWallet = ({walletBalance, fetchTransactions, transactions, filterDetails, transaction, filterTransact, loader, searchUserTransact}) => {
 
 
   const [walletShow, setWalletShow] = useState(false)
@@ -47,42 +48,24 @@ const handleChange = (e) => {
   setSearchValue(e.target.value);
 };
 
- const data = [
-    {
-        id: 1,
-        type: 'Credit',
-        amount: '1000',
-        createdAt : '2021/01/20',
-        status: 'Successful'
-    },
-    {
-        id: 2,
-        type: 'Debit',
-        amount: '12000',
-        createdAt : '2021/01/20',
-        status: 'Successful'
-    },
-    {
-      id: 3,
-      type: 'Debit',
-      amount: '12000',
-      createdAt : '2021/03/2',
-      status: 'Failed'
-  },
-  {
-    id: 4,
-    type: 'Debit',
-    amount: '12000',
-    createdAt : '2021/01/25',
-    status: 'Pending'
-},
-]
+useEffect(() => {
+  searchUserTransact(search);
+}, [search, searchUserTransact]);
+
+  useEffect(()=>{
+    fetchTransactions()
+  },[fetchTransactions])
+
+
 
 const getStatusColor = (val) =>{
     let result;
     switch(val){
       case 'Pending':
         result = 'defaultDiv'
+        break;
+      case "Processing":
+        result = 'processingStatus'
         break;
       case 'Successful':
         result = 'success-color'
@@ -140,8 +123,7 @@ const getStatusColor = (val) =>{
 ];
 
 const handleView = (id) =>{
-  //  alert(id)
-  //  filterDetails(id);
+   filterDetails(id);
    setShowModal(true);
 }
 
@@ -165,8 +147,7 @@ const handleSubmit = async (values, setSubmitting) => {
     status: values.status,
   };
   setFilterModal(false);
-  console.log(res)
-  // await filterTransact(res);
+  await filterTransact(res);
 };
 
 
@@ -293,7 +274,7 @@ const handleSubmit = async (values, setSubmitting) => {
                     className="mb-0 mt-1"
                     style={{ color: "#2C3A50", fontSize: 14 }}
                   >
-                    12345
+                   {transaction ? transaction.id : "12345"}
                   </p>
                 </div>
               </div>
@@ -309,7 +290,13 @@ const handleSubmit = async (values, setSubmitting) => {
                     className="mb-0 mt-1"
                     style={{ color: "#2C3A50", fontSize: 14 }}
                   >
-                      Trade Date
+                    {transaction ? (
+                      <Moment format="MMMM Do, YYYY, h:mm:ss a">
+                        {transaction.createdAt}
+                      </Moment>
+                    ) : (
+                      "Transaction Date"
+                    )}
                   </p>
                 </div>
               </div>
@@ -325,7 +312,7 @@ const handleSubmit = async (values, setSubmitting) => {
                     className="mb-0 mt-1"
                     style={{ color: "#2C3A50", fontSize: 14 }}
                   >
-                    Credit
+                   {transaction ? `${transaction.type}` : "Type"}
                   </p>
                 </div>
               </div>
@@ -342,7 +329,7 @@ const handleSubmit = async (values, setSubmitting) => {
                     className="mb-0 mt-1"
                     style={{ color: "#2C3A50", fontSize: 14 }}
                   >
-                    NGN 1,000
+                    NGN {transaction ? `${transaction.amount}` : "0"}
                   </p>
                 </div>
               </div>
@@ -353,47 +340,13 @@ const handleSubmit = async (values, setSubmitting) => {
                     className="mb-0"
                     style={{ color: "#2C3A50", fontWeight: "bold" }}
                   >
-                    Account Number
+                   Description
                   </p>
                   <p
                     className="mb-0 mt-1"
                     style={{ color: "#2C3A50", fontSize: 14 }}
                   >
-                    0148800246
-                  </p>
-                </div>
-              </div>
-
-              <div className="col-lg-6 mb-3">
-                <div>
-                  <p
-                    className="mb-0"
-                    style={{ color: "#2C3A50", fontWeight: "bold" }}
-                  >
-                  Bank
-                  </p>
-                  <p
-                    className="mb-0 mt-1"
-                    style={{ color: "#2C3A50", fontSize: 14 }}
-                  >
-                    Guaranty Trust Bank
-                  </p>
-                </div>
-              </div>
-
-              <div className="col-lg-6 mb-3">
-                <div>
-                  <p
-                    className="mb-0"
-                    style={{ color: "#2C3A50", fontWeight: "bold" }}
-                  >
-                    Narration
-                  </p>
-                  <p
-                    className="mb-0 mt-1"
-                    style={{ color: "#2C3A50", fontSize: 14 }}
-                  >
-                    Wallet Credited
+                   {transaction ? `${transaction.transactionLabel}` : "Description"}
                   </p>
                 </div>
               </div>
@@ -404,16 +357,16 @@ const handleSubmit = async (values, setSubmitting) => {
                     className="mb-0"
                     style={{ color: "#2C3A50", fontWeight: "bold" }}
                   >
-                    Trade Status
+                   Status
                   </p>
                   <div className="mt-2" style={{ display: "flex" }}>
                     <p
                       className={getStatusColor(
-                        "Successful"
+                        transaction ? transaction.status : "Failed"
                       )}
                       style={{ fontSize: 14 }}
                     >
-                      Successful
+                     {transaction ? transaction.status : "Status"}
                     </p>
                   </div>
                 </div>
@@ -494,10 +447,10 @@ const handleSubmit = async (values, setSubmitting) => {
                      <DataTable
                         title="Wallet Transactions"
                         columns={columns}
-                        data={data}
+                        data={transactions}
                         pagination
                         persistTableHead
-                        progressPending={false}
+                        progressPending={loader}
                         />
               </div>
                 
@@ -510,12 +463,19 @@ const handleSubmit = async (values, setSubmitting) => {
 
 const mapStateToProps = (state) =>{
   return{
-      walletBalance: state.auth.walletBalance
+      walletBalance: state.auth.walletBalance,
+      transactions: state.wallet.transactions,
+      transaction: state.wallet.transaction,
+      loader: state.wallet.loader
   }
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return{
+    fetchTransactions: () => dispatch(getWalletTransactions()),
+    filterDetails: (id) => dispatch(filterTransactionDetails(id)),
+    filterTransact: (val) => dispatch(filterTransactions(val)),
+    searchUserTransact: (val) => dispatch(searchTransaction(val)),
   }
 }
  

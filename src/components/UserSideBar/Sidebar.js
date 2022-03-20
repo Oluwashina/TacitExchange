@@ -91,12 +91,12 @@ const UserSideBar = (props) => {
 
                     {/* second */}
                     <Link to="/trades"
-                    className={ isActive.includes("/trades") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    className={ isActive.includes("/trade") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                     style={{textDecoration: 'none'}}>
 
                         {/* icon */}
                         <div
-                        className={ isActive.includes("/trades") ? 'v-list-icon active' : 'v-list-icon'}
+                        className={ isActive.includes("/trade") ? 'v-list-icon active' : 'v-list-icon'}
                          >
                         <i className="fa fa-ticket-alt"></i>
                         {/* <img src={transactIcon} alt="profile" className="img-fluid" /> */}
@@ -104,7 +104,7 @@ const UserSideBar = (props) => {
                         {/* title */}
                         <div className="v-list-title">
                             <span
-                            className={ isActive.includes("/trades") ? 'active' : ''}
+                            className={ isActive.includes("/trade") ? 'active' : ''}
                             >Trades</span>
                         </div>
 
@@ -196,13 +196,13 @@ const UserSideBar = (props) => {
                         </Link>
 
                          {/* trade */}
-                         <Link to="/tradecard"
-                        className={ isActive.includes("/tradecard") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                         <Link to="/start-trade"
+                        className={ isActive.includes("start-trade") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                           style={{textDecoration: 'none'}}>
 
                             {/* icon */}
                             <div 
-                             className={ isActive.includes("/tradecard") ? 'v-list-icon active' : 'v-list-icon'}
+                             className={ isActive.includes("/start-trade") ? 'v-list-icon active' : 'v-list-icon'}
                             >
                                 <i className="fa fa-award"></i>
                                 
@@ -210,7 +210,7 @@ const UserSideBar = (props) => {
                             {/* title */}
                             <div className="v-list-title">
                                 <span
-                                className={ isActive.includes("/tradecard") ? 'active' : ''}
+                                className={ isActive.includes("/start-trade") ? 'active' : ''}
                                 >Trade</span>
                             </div>
 

@@ -90,7 +90,7 @@ const UserTransactionDetails = (props) => {
 
   return (
     <>
-      <Sidebar title="Transaction Details" />
+      <Sidebar title="Trade Details" />
       <div className="usermain">
         <div
           className="contain"
@@ -189,30 +189,7 @@ const UserTransactionDetails = (props) => {
                       </p>
                     </div>
 
-                    {/* account info */}
-                    {transaction.tradeStatus === "Declined" ? (
-                      ""
-                    ) : (
-                      <div className=" mt-3">
-                        <h6 className="mb-0" style={{ fontWeight: "bold" }}>
-                          {transaction.tradeStatus === "Pending"
-                            ? "Payment will be sent to"
-                            : "Payment was sent to"}
-                        </h6>
-                        <Link
-                          to="/account"
-                          className="mb-0 mt-1"
-                          style={{
-                            fontSize: 14,
-                            color: "#0898D7",
-                            textDecoration: "none",
-                          }}
-                        >
-                          Default Account
-                        </Link>
-                      </div>
-                    )}
-
+                   
                     {/* status */}
                     <div className=" mt-3">
                       <h6 className="mb-0" style={{ fontWeight: "bold" }}>
@@ -223,14 +200,6 @@ const UserTransactionDetails = (props) => {
                       </p>
                     </div>
 
-                    <div className=" mt-3">
-                      <h6 className="mb-0" style={{ fontWeight: "bold" }}>
-                        Payment Status
-                      </h6>
-                      <p className="mb-0 mt-1" style={{ fontSize: 14 }}>
-                        {transaction.paymentStatus}
-                      </p>
-                    </div>
 
                     {/* Date completed */}
                     {transaction.tradeStatus === "Pending" ? (
@@ -312,7 +281,7 @@ const UserTransactionDetails = (props) => {
                 {/* button to start trade */}
                 <div className="text-center mt-lg-5 mt-4">
                   <Link
-                    to="/tradecard"
+                    to="/start-trade"
                     type="submit"
                     className="btn btn-pinkTacit btn-transact"
                   >

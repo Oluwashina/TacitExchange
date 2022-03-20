@@ -68,6 +68,7 @@ const RateCalculator = (props) => {
                               <label htmlFor="category">Gift Card Name</label>
                                 <select
                                  name="giftname"
+                                defaultValue=""
                                  values={values.giftname}
                                  onChange={(e) => {
                                     handleChange(e, setFieldValue("category", ""))
@@ -93,6 +94,7 @@ const RateCalculator = (props) => {
                               <label htmlFor="category">Gift Card Category</label>
                                 <select 
                                 name="category"
+                            
                                 value={values.category}
                                 onBlur={handleBlur}
                                 onChange={handleChange}

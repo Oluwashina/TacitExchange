@@ -314,6 +314,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                              <div className="form-group mt-lg-3 mt-3">
                               <label htmlFor="category">Gift Card Name</label>
                                 <select
+                                defaultValue=""
                                  name="giftname"
                                  values={values.giftname}
                                  onChange={(e) => {
@@ -323,7 +324,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                  onBlur={handleBlur}
                                  className="form-control select-style" 
                                  id="giftname">
-                                    <option defaultValue="" >Select</option>
+                                    <option value="" disabled >Select</option>
                                     {category.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.categoryname}</option>
                                         })}
@@ -345,7 +346,7 @@ const handleCalculation = (amount, categoryId, giftname) =>{
                                 onChange={handleChange}
                                 className="form-control select-style"
                                  id="category">
-                                    <option defaultValue="">Select</option>
+                                    <option value="" disabled>Select</option>
                                     {subcategory.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.subcategoryname}</option>
                                         })}

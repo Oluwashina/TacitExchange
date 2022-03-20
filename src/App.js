@@ -61,12 +61,12 @@ function App() {
               <Route path="/dashboard/tvsubscription" component={Cables} />
               <UserRoute path="/profile" component={UserProfile} />
               <UserRoute path="/notifications" component={UserNotifications} />
-              <UserRoute path="/tradecard" component={UserTrade} />
-              <Route path="/my-wallet" component={UserWallet} />
+              <UserRoute path="/start-trade" component={UserTrade} />
+              <UserRoute path="/my-wallet" component={UserWallet} />
               <Route path="/withdraw" component={UserWithdraw} />
               <UserRoute path="/account" component={UserAccount} />
               <UserRoute path="/trades" component={UserTransactions} />
-              <UserRoute path="/transaction/:id" component={UserTransactionDetails} />
+              <UserRoute path="/trade/:id" component={UserTransactionDetails} />
 
 
          
