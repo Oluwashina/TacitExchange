@@ -76,7 +76,15 @@ export const WithdrawFunds = (val) => {
       try {
         const res = await PostApi(
           "withdraw",
-          { ...val },
+          { 
+            password: val.password,
+            amount: val.amount,
+            accountName: val.accountName,
+            accountNumber: val.accountNumber,
+            bankName: val.bankName,
+            bankCode: val.bankCode,
+            narration: val.narration
+           },
           getToken(),
           "application/json"
         );
@@ -94,5 +102,13 @@ export const WithdrawFunds = (val) => {
       }
     };
   };
+
+  // clear withdrawal success
+export const clearWithdrawal = () => {
+  return (dispatch, getState) => {
+    dispatch({ type: "clearWithdrawal" });
+  };
+};
+
 
 

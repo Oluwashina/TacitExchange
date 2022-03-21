@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './Withdraw.css'
 import briefcase from '../../../assets/images/briefcase.svg'
@@ -6,12 +6,15 @@ import eye_fill from '../../../assets/images/ri-eye-fill.svg'
 import {Form, Formik} from 'formik'
 import {withdrawValidator} from '../../../validationSchema/validator'
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { WithdrawFunds } from '../../../store/actions/wallet';
+import { Link, useHistory } from 'react-router-dom';
+import { clearWithdrawal, WithdrawFunds } from '../../../store/actions/wallet';
 
-const UserWithdraw = ({accountDetails, walletBalance}) => {
+const UserWithdraw = ({accountDetails, walletBalance, withdraw, clearWithdrawSuccess, withdrawsuccess}) => {
 
+    
     const [walletShow, setWalletShow] = useState(false)
+
+    const history = useHistory()
 
     const [bankInfo, setBankInfo] = useState({});
 
@@ -33,11 +36,23 @@ const UserWithdraw = ({accountDetails, walletBalance}) => {
         const creds = {
             ...values,
             accountNumber: bankInfo.accountNumber,
-            bank: bankInfo.bankName,
+            accountName: bankInfo.accountName,
+            bankName: bankInfo.bankName,
             bankCode: bankInfo.bankCode
         }
-        console.log(creds)
+        await withdraw(creds)
+
      }
+
+
+  useEffect(() => {
+    if (withdrawsuccess) {
+      setTimeout(() => {
+        clearWithdrawSuccess();
+        history.push('/dashboard')
+      }, 3000);
+    }
+  }, [withdrawsuccess, clearWithdrawSuccess, history]);
 
     return ( 
         <>
@@ -58,7 +73,7 @@ const UserWithdraw = ({accountDetails, walletBalance}) => {
                                             handleSubmit(values, setSubmitting)
                                             }
                                         validationSchema={withdrawValidator}
-                                        initialValues={{amount: "", password: "", narration: "", accountNumber: "", bank: "", accountType: ""}}
+                                        initialValues={{amount: "", password: "", narration: "", accountType: ""}}
                                     >
                                         {({
                                             handleChange,
@@ -288,13 +303,15 @@ const UserWithdraw = ({accountDetails, walletBalance}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.auth.walletBalance
+        walletBalance: state.auth.walletBalance,
+        withdrawsuccess: state.wallet.withdrawsuccess
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-     withdraw: (val) => dispatch(WithdrawFunds(val)),    
+     withdraw: (val) => dispatch(WithdrawFunds(val)),   
+     clearWithdrawSuccess: () => dispatch(clearWithdrawal()), 
     }
 }
  

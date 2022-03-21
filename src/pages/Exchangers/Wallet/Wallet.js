@@ -334,6 +334,70 @@ const handleSubmit = async (values, setSubmitting) => {
                 </div>
               </div>
 
+              {transaction && transaction.transactionLabel !== "Wallet Credited" ? (
+                <>
+                  <div className="col-lg-6 mb-3">
+                    <div>
+                      <p
+                        className="mb-0"
+                        style={{ color: "#2C3A50", fontWeight: "bold" }}
+                      >
+                        Account Number
+                      </p>
+                      <p
+                        className="mb-0 mt-1"
+                        style={{ color: "#2C3A50", fontSize: 14 }}
+                      >
+                        {transaction
+                          ? transaction.accountNumber
+                          : ""}
+                      </p>
+                    </div>
+                  </div>
+
+                    <div className="col-lg-6 mb-3">
+                      <div>
+                        <p
+                          className="mb-0"
+                          style={{ color: "#2C3A50", fontWeight: "bold" }}
+                        >
+                         Bank Name
+                        </p>
+                        <p
+                          className="mb-0 mt-1"
+                          style={{ color: "#2C3A50", fontSize: 14 }}
+                        >
+                          {transaction
+                            ? transaction.bankName
+                            : ""}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-6 mb-3">
+                      <div>
+                        <p
+                          className="mb-0"
+                          style={{ color: "#2C3A50", fontWeight: "bold" }}
+                        >
+                         Account Name
+                        </p>
+                        <p
+                          className="mb-0 mt-1"
+                          style={{ color: "#2C3A50", fontSize: 14 }}
+                        >
+                          {transaction
+                            ? transaction.accountName
+                            : ""}
+                        </p>
+                      </div>
+                    </div>
+                  
+                </>
+              ) : (
+                ""
+              )}
+
               <div className="col-lg-6 mb-3">
                 <div>
                   <p

@@ -5,6 +5,7 @@ const initState = {
     transactionsSearch: [],
     transaction: {},
     loader: false,
+    withdrawsuccess: false,
   };
   
   const walletReducer = (state = initState, action) => {
@@ -45,7 +46,18 @@ const initState = {
     case "WithdrawSuccess":
         return {
             ...state,
+            withdrawsuccess: true,
         };
+    case "Withdraw_Error":
+      return {
+        ...state,
+        withdrawsuccess: false,
+      };
+    case "clearWithdrawal":
+      return {
+        ...state,
+        withdrawsuccess: false,
+      };
       default:
         return state;
     }
