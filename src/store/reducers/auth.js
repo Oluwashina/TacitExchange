@@ -10,7 +10,6 @@ const initState = {
   phoneNumber: "",
   isVerified: false,
   isEnabled: false,
-  walletBalance: "",
   role: "",
   profilePic: "",
   accountDetails: [],
@@ -39,7 +38,6 @@ const authReducer = (state = initState, action) => {
               phoneNumber: action.data.profile.phoneNumber,
               isVerified: action.data.profile.isVerified,
               isEnabled: action.data.profile.isEnabled,
-              walletBalance: action.data.profile.walletBalance,
               role: action.data.profile.role,
               profilePic: action.data.profile.profilePic,
               accountDetails: action.data.profile.accountDetails
@@ -57,7 +55,6 @@ const authReducer = (state = initState, action) => {
         phoneNumber: '',
         isVerified: '',
         isEnabled: '',
-        walletBalance: '',
         role: '',
         profilePic: '',
         accountDetails: {}

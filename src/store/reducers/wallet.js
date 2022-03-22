@@ -6,6 +6,7 @@ const initState = {
     transaction: {},
     loader: false,
     withdrawsuccess: false,
+    walletBalance: 0
   };
   
   const walletReducer = (state = initState, action) => {
@@ -58,6 +59,11 @@ const initState = {
         ...state,
         withdrawsuccess: false,
       };
+    case "WalletBalance":
+        return{
+            ...state,
+            walletBalance: action.data.walletBalance
+        }
       default:
         return state;
     }

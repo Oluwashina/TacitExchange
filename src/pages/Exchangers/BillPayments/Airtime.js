@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './bills.css'
 import briefcase from '../../../assets/images/briefcase.svg'
@@ -7,11 +7,16 @@ import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
 import {airtimeValidator} from '../../../validationSchema/validator'
 import Nigeria from  '../../../assets/images/nigerialogo.svg'
+import { getWalletBalance } from '../../../store/actions/wallet';
 
 
-const AirtimePage = ({walletBalance}) => {
+const AirtimePage = ({walletBalance, fetchWallet}) => {
 
     const [walletShow, setWalletShow] = useState(false)
+
+    useEffect(()=>{
+        fetchWallet()
+    },[fetchWallet])
 
     const [prov, setProv] = useState(null)
 
@@ -240,12 +245,13 @@ const AirtimePage = ({walletBalance}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.auth.walletBalance
+        walletBalance: state.wallet.walletBalance
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
+        fetchWallet: () => dispatch(getWalletBalance()),
     }
 }
  

@@ -13,10 +13,11 @@ import airtime_icon from '../../../assets/images/icons/plane-tickets.svg'
 import electricity_icon from '../../../assets/images/icons/electricity.svg'
 import tv_icon from '../../../assets/images/icons/tv-screen.svg'
 import buydata_icon from '../../../assets/images/icons/shopping-cart.svg'
+import { getWalletBalance } from '../../../store/actions/wallet';
 
 const UserDashboard = (props) => {
 
-    const {countFetch, count, getTransaction, transaction,walletBalance} = props
+    const {countFetch, count, getTransaction, transaction,walletBalance, fetchWallet} = props
 
     const [status] = useState("Pending")
 
@@ -31,9 +32,10 @@ const UserDashboard = (props) => {
     // make call to fetch dashboard count
     useEffect(() => {
         countFetch();
+        fetchWallet()
         getTransaction(status)
         document.body.classList.remove('body-hidden');
-      }, [countFetch, getTransaction, status]);
+      }, [countFetch, getTransaction, fetchWallet, status]);
 
       const toggleWalletAmount = () =>{
          setWalletShow(walletShow ? false : true );
@@ -293,7 +295,7 @@ const mapStateToProps = (state) =>{
     return{
         count: state.dashboard.count,
         transaction: state.dashboard.Transaction,
-        walletBalance: state.auth.walletBalance
+        walletBalance: state.wallet.walletBalance
     }
 }
 
@@ -301,6 +303,7 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         countFetch: () => dispatch(getUserDashboardCount()),
         getTransaction: (status) => dispatch(getUserTransaction(status)),
+        fetchWallet: () => dispatch(getWalletBalance()),
     }
 }
  

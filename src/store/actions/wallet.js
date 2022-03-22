@@ -28,6 +28,25 @@ export const getWalletTransactions = (val) => {
 };
 
 
+// get wallet balance
+export const getWalletBalance = (val) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await GetApi("walletbalance", getToken());
+      if (res.status === 200) {
+        dispatch({ type: "WalletBalance", data: res.data.message});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Balance_Error", err: res.data });
+      }
+    } catch (err) {
+     console.log(err)
+    }
+  };
+};
+
+
+
 // Search transactions by type or amount
 export const searchTransaction = (val) =>{
     return dispatch =>{

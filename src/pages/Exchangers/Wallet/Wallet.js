@@ -14,10 +14,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Formik } from "formik";
 import { filterValidator } from "../../../validationSchema/validator";
-import { filterTransactionDetails, filterTransactions, getWalletTransactions, searchTransaction } from '../../../store/actions/wallet';
+import { filterTransactionDetails, filterTransactions, getWalletBalance, getWalletTransactions, searchTransaction } from '../../../store/actions/wallet';
 
 
-const UserWallet = ({walletBalance, fetchTransactions, transactions, filterDetails, transaction, filterTransact, loader, searchUserTransact}) => {
+const UserWallet = ({walletBalance, fetchTransactions, transactions, filterDetails, transaction, filterTransact, loader, searchUserTransact, fetchWallet}) => {
 
 
   const [walletShow, setWalletShow] = useState(false)
@@ -54,7 +54,8 @@ useEffect(() => {
 
   useEffect(()=>{
     fetchTransactions()
-  },[fetchTransactions])
+    fetchWallet()
+  },[fetchTransactions, fetchWallet])
 
 
 
@@ -527,7 +528,7 @@ const handleSubmit = async (values, setSubmitting) => {
 
 const mapStateToProps = (state) =>{
   return{
-      walletBalance: state.auth.walletBalance,
+      walletBalance: state.wallet.walletBalance,
       transactions: state.wallet.transactions,
       transaction: state.wallet.transaction,
       loader: state.wallet.loader
@@ -540,6 +541,7 @@ const mapDispatchToProps = (dispatch) =>{
     filterDetails: (id) => dispatch(filterTransactionDetails(id)),
     filterTransact: (val) => dispatch(filterTransactions(val)),
     searchUserTransact: (val) => dispatch(searchTransaction(val)),
+    fetchWallet: () => dispatch(getWalletBalance()),
   }
 }
  

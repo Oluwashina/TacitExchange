@@ -7,10 +7,14 @@ import {Form, Formik} from 'formik'
 import {withdrawValidator} from '../../../validationSchema/validator'
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { clearWithdrawal, WithdrawFunds } from '../../../store/actions/wallet';
+import { clearWithdrawal, getWalletBalance, WithdrawFunds } from '../../../store/actions/wallet';
 
-const UserWithdraw = ({accountDetails, walletBalance, withdraw, clearWithdrawSuccess, withdrawsuccess}) => {
+const UserWithdraw = ({accountDetails, walletBalance, withdraw, clearWithdrawSuccess, withdrawsuccess, fetchWallet}) => {
+    
 
+    useEffect(()=>{
+        fetchWallet()
+    },[fetchWallet])
     
     const [walletShow, setWalletShow] = useState(false)
 
@@ -303,7 +307,7 @@ const UserWithdraw = ({accountDetails, walletBalance, withdraw, clearWithdrawSuc
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.auth.walletBalance,
+        walletBalance: state.wallet.walletBalance,
         withdrawsuccess: state.wallet.withdrawsuccess
     }
 }
@@ -312,6 +316,7 @@ const mapDispatchToProps = (dispatch) =>{
     return{
      withdraw: (val) => dispatch(WithdrawFunds(val)),   
      clearWithdrawSuccess: () => dispatch(clearWithdrawal()), 
+     fetchWallet: () => dispatch(getWalletBalance()),
     }
 }
  

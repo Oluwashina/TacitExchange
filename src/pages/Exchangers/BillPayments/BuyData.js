@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './bills.css'
 import briefcase from '../../../assets/images/briefcase.svg'
@@ -6,8 +6,13 @@ import eye_fill from '../../../assets/images/ri-eye-fill.svg'
 import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
 import {buyDataValidator} from '../../../validationSchema/validator'
+import { getWalletBalance } from '../../../store/actions/wallet';
 
-const BuyDataPage = ({walletBalance}) => {
+const BuyDataPage = ({walletBalance, fetchWallet}) => {
+    
+    useEffect(()=>{
+        fetchWallet()
+    },[fetchWallet])
 
     const [walletShow, setWalletShow] = useState(false)
 
@@ -210,12 +215,13 @@ const BuyDataPage = ({walletBalance}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.auth.walletBalance
+        walletBalance: state.wallet.walletBalance
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
+        fetchWallet: () => dispatch(getWalletBalance()),
     }
 }
  
