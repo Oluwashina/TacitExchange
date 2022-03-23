@@ -33,8 +33,14 @@ const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category
          let fee = category.find(resp => resp.short_name === val).fee 
          setFee(fee)
 
-        //  set amount and fee
-        setAmt(parseFloat(amount)+fee)
+         if(amount === ""){
+             setAmt(0) 
+         }
+         else{
+            //  set amount and fee
+            setAmt(parseFloat(amount)+fee)
+         }
+       
     }
 
     const handleAmount = (val) =>{

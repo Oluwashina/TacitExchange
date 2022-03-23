@@ -172,7 +172,7 @@ const CloseTrade = () =>{
         emptyImage()   
         //    empty Amount you get too
         emptyamount()
-        history.push('/transactions')
+        history.push('/trades')
     }, 500); 
     
 }
