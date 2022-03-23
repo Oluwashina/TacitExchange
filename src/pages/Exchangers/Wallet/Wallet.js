@@ -399,6 +399,31 @@ const handleSubmit = async (values, setSubmitting) => {
                 ""
               )}
 
+      {transaction && transaction.isBillPayment ? (
+                <>
+                  <div className="col-lg-6 mb-3">
+                    <div>
+                      <p
+                        className="mb-0"
+                        style={{ color: "#2C3A50", fontWeight: "bold" }}
+                      >
+                       Customer
+                      </p>
+                      <p
+                        className="mb-0 mt-1"
+                        style={{ color: "#2C3A50", fontSize: 14 }}
+                      >
+                        {transaction
+                          ? transaction.customer
+                          : ""}
+                      </p>
+                    </div>
+                  </div>                  
+                </>
+              ) : (
+                ""
+              )}
+
               <div className="col-lg-6 mb-3">
                 <div>
                   <p
