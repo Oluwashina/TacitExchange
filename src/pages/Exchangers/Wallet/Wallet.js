@@ -335,7 +335,7 @@ const handleSubmit = async (values, setSubmitting) => {
                 </div>
               </div>
 
-              {transaction && transaction.transactionLabel !== "Wallet Credited" ? (
+              {transaction && transaction.transactionLabel === "Withdrawal Request" ? (
                 <>
                   <div className="col-lg-6 mb-3">
                     <div>

@@ -7,14 +7,21 @@ import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
 import {buyDataValidator} from '../../../validationSchema/validator'
 import { getWalletBalance } from '../../../store/actions/wallet';
+import { clearPayStatus, getBillerCategories, PayBill } from '../../../store/actions/bills';
+import { useHistory } from 'react-router-dom';
 
-const BuyDataPage = ({walletBalance, fetchWallet}) => {
+const BuyDataPage = ({walletBalance, fetchWallet, fetchCategory, category, pay, clearPay, paysuccess }) => {
+
+    const history = useHistory();
     
     useEffect(()=>{
         fetchWallet()
-    },[fetchWallet])
+        fetchCategory('data_bundle')
+    },[fetchWallet, fetchCategory])
 
     const [walletShow, setWalletShow] = useState(false)
+
+    const [amt, setAmt] = useState(0)
 
     const [prov, setProv] = useState(null)
 
@@ -22,7 +29,8 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
     const handleProv = (val) =>{
         setProv(val)
         // find the amount of the data from resp and set it for display from the get all data endpoint resp
-        // let amount = buydata.find(resp => resp.biller_name === val).amount 
+        let amount = category.find(resp => resp.short_name === val).amount 
+        setAmt(amount)
     }
 
     const toggleWalletAmount = () =>{
@@ -33,9 +41,28 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
         return parseFloat(val).toFixed(2)
     }
 
-    const handleSubmit = async (values, setSubmitting,)  =>{
-        console.log(values)
+    const handleSubmit = async (values)  =>{
+        let type = category.find(resp => resp.short_name === values.provider).biller_name 
+        const creds = {
+            ...values,
+            customer: values.customer,
+            provider: type,
+            billPaymentType: "Data Bundle",
+            amount: amt
+        }
+        console.log(creds)
+           await pay(creds)
      }
+
+     useEffect(()=>{
+        if(paysuccess){
+            setTimeout(()=>{
+                history.push('/my-wallet')
+            },3000)
+        clearPay()
+        }
+    },[history, paysuccess, clearPay])
+
 
 
     return ( 
@@ -54,7 +81,7 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
                                 handleSubmit(values, setSubmitting)
                                 }
                             validationSchema={buyDataValidator}
-                            initialValues={{provider: "", phoneNumber: ""}}
+                            initialValues={{provider: "", customer: ""}}
                         >
                             {({
                                 handleChange,
@@ -72,6 +99,7 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
                                     <div className="form-group input-container">
                                         <label htmlFor="provider">Select Provider</label>
                                         <select
+                                        defaultValue=""
                                         value={values.provider}
                                         onChange={(e) => {
                                             handleChange(e)
@@ -88,12 +116,9 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
                                             Select a Provider
                                             </option>
 
-                                            <option value="MTN 200 MB DATA BUNDLE">
-                                            MTN 200 MB DATA BUNDLE
-                                            </option>
-                                            <option value="GLO 35 MB data bundle">
-                                            GLO 35 MB data bundle
-                                            </option>      
+                                            {category.map((opt) => {
+                                                    return <option key={opt.id} value={opt.short_name}>{opt.short_name}</option>
+                                                    })}      
                                             </select>
                                             <small style={{ color: "#dc3545" }}>
                                         {touched.provider && errors.provider}
@@ -103,7 +128,7 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
                                     <div className="form-group input-container mt-lg-4 mt-0">
                                         <label htmlFor="amount">Amount</label>
                                         <input
-                                        value="200"
+                                        value={amt}
                                         onChange={(e) => {
                                             handleChange(e)
                                         }}
@@ -119,21 +144,21 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
                                     </div>
 
                                     <div className="form-group input-container">
-                                        <label htmlFor="phoneNumber">Phone Number</label>
+                                        <label htmlFor="customer">Phone Number</label>
                                          <input
-                                            value={values.phoneNumber}
+                                            value={values.customer}
                                             onChange={(e) => {
                                                 handleChange(e)
                                             }}
                                             onBlur={handleBlur}
-                                            id="phoneNumber"
+                                            id="customer"
                                             className="form-control input-style"
                                             placeholder="080 0000 0000"
                                             style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                             type="tel"
                                             />
                                         <small style={{ color: "#dc3545" }}>
-                                        {touched.phoneNumber && errors.phoneNumber}
+                                        {touched.customer && errors.customer}
                                     </small>
                                     </div>
         
@@ -189,7 +214,7 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
 
                                 <div className='summary_div mt-4'>
                                     <p className='summary_title'>You Pay</p>
-                                    <p className='summary_value'>NGN 200</p>
+                                    <p className='summary_value'>NGN {amt === 0 ? 0 : amt}</p>
                                 </div>
 
                                 <div className='summary_div mt-4'>
@@ -215,13 +240,18 @@ const BuyDataPage = ({walletBalance, fetchWallet}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.wallet.walletBalance
+        walletBalance: state.wallet.walletBalance,
+        category: state.bill.categories,
+        paysuccess: state.bill.paysuccess
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchWallet: () => dispatch(getWalletBalance()),
+        fetchCategory: (val) => dispatch(getBillerCategories(val)),
+        pay: (creds) => dispatch(PayBill(creds)),
+        clearPay: () => dispatch(clearPayStatus()),
     }
 }
  

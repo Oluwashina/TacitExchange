@@ -8,15 +8,20 @@ import {Form, Formik} from 'formik'
 import {airtimeValidator} from '../../../validationSchema/validator'
 import Nigeria from  '../../../assets/images/nigerialogo.svg'
 import { getWalletBalance } from '../../../store/actions/wallet';
+import { clearPayStatus, getBillerCategories, PayBill } from '../../../store/actions/bills';
+import { useHistory } from 'react-router-dom';
 
 
-const AirtimePage = ({walletBalance, fetchWallet}) => {
+const AirtimePage = ({walletBalance, fetchWallet,fetchCategory, category, pay, clearPay, paysuccess}) => {
 
     const [walletShow, setWalletShow] = useState(false)
 
+    const history = useHistory();
+
     useEffect(()=>{
         fetchWallet()
-    },[fetchWallet])
+        fetchCategory('airtime')
+    },[fetchWallet,fetchCategory])
 
     const [prov, setProv] = useState(null)
 
@@ -39,9 +44,27 @@ const AirtimePage = ({walletBalance, fetchWallet}) => {
         return parseFloat(val).toFixed(2)
     }
 
-    const handleSubmit = async (values, setSubmitting,)  =>{
-        console.log(values)
+    const handleSubmit = async (values)  =>{
+        let type = category.find(resp => resp.short_name === values.provider).biller_name 
+        const creds = {
+            ...values,
+            customer: "+234" + values.customer,
+            provider: type,
+            billPaymentType: "Airtime"
+        }
+        console.log(creds)
+        await pay(creds)
      }
+
+    useEffect(()=>{
+        if(paysuccess){
+            setTimeout(()=>{
+                history.push('/my-wallet')
+            },3000)
+        clearPay()
+        }
+    },[history, paysuccess, clearPay])
+
 
 
 
@@ -61,7 +84,7 @@ const AirtimePage = ({walletBalance, fetchWallet}) => {
                                 handleSubmit(values, setSubmitting)
                                 }
                             validationSchema={airtimeValidator}
-                            initialValues={{amount: "", provider: "", phoneNumber: ""}}
+                            initialValues={{amount: "", provider: "", customer: ""}}
                         >
                             {({
                                 handleChange,
@@ -79,34 +102,25 @@ const AirtimePage = ({walletBalance, fetchWallet}) => {
                                     <div className="form-group input-container">
                                         <label htmlFor="provider">Select Provider</label>
                                         <select
-                                        value={values.provider}
-                                        onChange={(e) => {
-                                            handleChange(e)
-                                            handleProv(e.currentTarget.value);
-                                        }}
-                                        onBlur={handleBlur}
-                                        id="provider"
-                                        className="form-control select-style"
-                                        placeholder="NGN 0.00"
-                                        style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
-                                        type="tel"
+                                            defaultValue=""
+                                            value={values.provider}
+                                            onChange={(e) => {
+                                                handleChange(e)
+                                                handleProv(e.currentTarget.value);
+                                            }}
+                                            onBlur={handleBlur}
+                                            id="provider"
+                                            className="form-control select-style"
+                                            placeholder="NGN 0.00"
+                                            style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
+                                            type="text"
                                         >
                                         <option value="" disabled>
                                             Select a Provider
                                             </option>
-
-                                            <option value="MTN">
-                                               MTN
-                                            </option>
-                                            <option value="AIRTEL">
-                                               AIRTEL
-                                            </option>
-                                            <option value="GLO">
-                                               GLO
-                                            </option>
-                                            <option value="9MOBILE">
-                                               9MOBILE
-                                            </option>       
+                                            {category.map((opt) => {
+                                                    return <option key={opt.id} value={opt.short_name}>{opt.short_name}</option>
+                                                    })}     
                                             </select>
                                             <small style={{ color: "#dc3545" }}>
                                         {touched.provider && errors.provider}
@@ -114,7 +128,7 @@ const AirtimePage = ({walletBalance, fetchWallet}) => {
                                     </div>
 
                                     <div className="form-group input-container">
-                                        <label htmlFor="phoneNumber">Phone Number</label>
+                                        <label htmlFor="customer">Phone Number</label>
                                         <div className="phone_style">
                                                 <div className="amount-div">
                                                     <div>
@@ -126,19 +140,19 @@ const AirtimePage = ({walletBalance, fetchWallet}) => {
                                                 </div>
                                         </div>
                                          <input
-                                            value={values.phoneNumber}
+                                            value={values.customer}
                                             onChange={(e) => {
                                                 handleChange(e)
                                             }}
                                             onBlur={handleBlur}
-                                            id="phoneNumber"
+                                            id="customer"
                                             className="form-control phone_input_style"
                                             placeholder="80 0000 0000"
                                             style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                             type="tel"
                                             />
                                         <small style={{ color: "#dc3545" }}>
-                                        {touched.phoneNumber && errors.phoneNumber}
+                                        {touched.customer && errors.customer}
                                     </small>
                                     </div>
         
@@ -245,13 +259,18 @@ const AirtimePage = ({walletBalance, fetchWallet}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.wallet.walletBalance
+        walletBalance: state.wallet.walletBalance,
+        category: state.bill.categories,
+        paysuccess: state.bill.paysuccess
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchWallet: () => dispatch(getWalletBalance()),
+        fetchCategory: (val) => dispatch(getBillerCategories(val)),
+        pay: (creds) => dispatch(PayBill(creds)),
+        clearPay: () => dispatch(clearPayStatus()),
     }
 }
  

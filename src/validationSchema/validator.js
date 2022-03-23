@@ -159,7 +159,7 @@ export const airtimeValidator = Yup.object({
   amount: Yup.string()
     .required("Enter an amount")
     .matches(/^[0-9]*\.?[0-9]*$/, "Enter a valid amount"),
-  phoneNumber: Yup.string()
+  customer: Yup.string()
     .min(10, "Phone number cannot be less than 10 digits")
     .max(10, "Exceeded characters for phone number")
     .required("Phonenumber is required")
@@ -168,7 +168,7 @@ export const airtimeValidator = Yup.object({
 
 export const buyDataValidator = Yup.object({
   provider: Yup.string().required("Select a provider"),
-  phoneNumber: Yup.string()
+  customer: Yup.string()
     .min(11, "Phone number cannot be less than 11 digits")
     .max(11, "Exceeded characters for phone number")
     .required("Phonenumber is required")
@@ -177,7 +177,7 @@ export const buyDataValidator = Yup.object({
 
 export const buyElecValidator = Yup.object({
   provider: Yup.string().required("Select a provider"),
-  meterNumber: Yup.string()
+  customer: Yup.string()
     .min(7, "Meter Number cannot be less than 7 digits")
     .max(11, "Exceeded characters for Meter Number")
     .required("Meter Number is required")
@@ -189,7 +189,7 @@ export const buyElecValidator = Yup.object({
 
 export const cableValidator = Yup.object({
   provider: Yup.string().required("Select a plan"),
-  decoderNumber: Yup.string()
+  customer: Yup.string()
     .required("Decoder Number is required")
     .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid phone number"),
 });

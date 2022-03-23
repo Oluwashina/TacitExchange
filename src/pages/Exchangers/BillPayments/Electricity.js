@@ -7,21 +7,34 @@ import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
 import {buyElecValidator} from '../../../validationSchema/validator'
 import { getWalletBalance } from '../../../store/actions/wallet';
+import { clearPayStatus, getBillerCategories, PayBill } from '../../../store/actions/bills';
+import { useHistory } from 'react-router-dom';
 
-const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
+const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category, pay, clearPay, paysuccess}) => {
+
+    const history = useHistory();
 
     useEffect(()=>{
         fetchWallet()
-    },[fetchWallet])
+        fetchCategory('power')
+    },[fetchWallet, fetchCategory])
 
     const [walletShow, setWalletShow] = useState(false)
 
     const [prov, setProv] = useState(null)
 
-    const [amt, setAmt] = useState("")
+    const [fee, setFee] = useState(0)
 
-    const handleProv = (val) =>{
+    const [amt, setAmt] = useState(0)
+
+    const handleProv = (val, amount) =>{
         setProv(val)
+         // find the fee of the data for the provider selected
+         let fee = category.find(resp => resp.short_name === val).fee 
+         setFee(fee)
+
+        //  set amount and fee
+        setAmt(parseFloat(amount)+fee)
     }
 
     const handleAmount = (val) =>{
@@ -30,7 +43,7 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
             res = 0
         }
         else{
-        res = parseFloat(val) + 100
+        res = parseFloat(val) + fee
         }
   
         setAmt(res)
@@ -45,9 +58,27 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
         return parseFloat(val).toFixed(2)
     }
 
-    const handleSubmit = async (values, setSubmitting,)  =>{
-        console.log(values)
+    const handleSubmit = async (values)  =>{
+        let type = category.find(resp => resp.short_name === values.provider).biller_name 
+        const creds = {
+            ...values,
+            customer: values.customer,
+            provider: type,
+            billPaymentType: "Electricity",
+            amount: amt
+        }
+        console.log(creds)
+         await pay(creds)
      }
+
+     useEffect(()=>{
+        if(paysuccess){
+            setTimeout(()=>{
+                history.push('/my-wallet')
+            },3000)
+        clearPay()
+        }
+    },[history, paysuccess, clearPay])
 
 
     return (  
@@ -66,7 +97,7 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
                                 handleSubmit(values, setSubmitting)
                                 }
                             validationSchema={buyElecValidator}
-                            initialValues={{provider: "", meterNumber: "", amount: ""}}
+                            initialValues={{provider: "", customer: "", amount: ""}}
                         >
                             {({
                                 handleChange,
@@ -84,10 +115,11 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
                                     <div className="form-group input-container">
                                         <label htmlFor="provider">Select Provider</label>
                                         <select
+                                        defaultValue=""
                                         value={values.provider}
                                         onChange={(e) => {
                                             handleChange(e)
-                                            handleProv(e.currentTarget.value);
+                                            handleProv(e.currentTarget.value, values.amount);
                                         }}
                                         onBlur={handleBlur}
                                         id="provider"
@@ -100,12 +132,9 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
                                             Select a Provider
                                             </option>
 
-                                            <option value="IKEDC PREPAID TOP UP">
-                                            IKEDC PREPAID TOP UP
-                                            </option>
-                                            <option value="EKEDC PREPAID TOPUP">
-                                            EKEDC PREPAID TOPUP
-                                            </option>      
+                                            {category.map((opt) => {
+                                                    return <option key={opt.id} value={opt.short_name}>{opt.short_name}</option>
+                                                    })}          
                                             </select>
                                             <small style={{ color: "#dc3545" }}>
                                         {touched.provider && errors.provider}
@@ -115,27 +144,27 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
 
 
                                     <div className="form-group input-container">
-                                        <label htmlFor="meterNumber">Meter Number</label>
+                                        <label htmlFor="customer">Meter Number</label>
                                          <input
-                                            value={values.meterNumber}
+                                            value={values.customer}
                                             onChange={(e) => {
                                                 handleChange(e)
                                             }}
                                             onBlur={handleBlur}
-                                            id="meterNumber"
+                                            id="customer"
                                             className="form-control input-style"
                                             placeholder="Enter your meter number"
                                             style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                             type="tel"
                                             />
                                         <small style={{ color: "#dc3545" }}>
-                                        {touched.meterNumber && errors.meterNumber}
+                                        {touched.customer && errors.customer}
                                     </small>
                                     </div>
         
 
                                     <div className="form-group input-container mt-lg-4 mt-0">
-                                        <label htmlFor="amount">Amount</label>
+                                        <label htmlFor="amount">Amount </label>
                                         <input
                                         value={values.amount}
                                         onChange={(e) => {
@@ -149,9 +178,19 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
                                         style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                         type="text"
                                         />
-                                          <small style={{ color: "#dc3545" }}>
-                                        {touched.amount && errors.amount}
-                                    </small>
+
+                                        {
+                                            errors.amount ?
+                                            <small style={{ color: "#dc3545" }}>
+                                            {touched.amount && errors.amount}
+                                        </small>
+                                        :
+                                        <small style={{ color: "#0d92d5" }}>
+                                        A covenience fee of {fee} naira will be charged
+                                        </small>
+                                        }
+                                     
+                                   
                                      
                                     </div>
 
@@ -207,7 +246,7 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
 
                                 <div className='summary_div mt-4'>
                                     <p className='summary_title'>You Pay</p>
-                                    <p className='summary_value'>NGN {amt === "" ? '0' : amt}</p>
+                                    <p className='summary_value'>NGN {amt === 0 ? 0 : amt}</p>
                                 </div>
 
                                 <div className='summary_div mt-4'>
@@ -233,13 +272,18 @@ const BuyElectricityPage = ({walletBalance, fetchWallet}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.wallet.walletBalance
+        walletBalance: state.wallet.walletBalance,
+        category: state.bill.categories,
+        paysuccess: state.bill.paysuccess
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchWallet: () => dispatch(getWalletBalance()),
+        fetchCategory: (val) => dispatch(getBillerCategories(val)),
+        pay: (creds) => dispatch(PayBill(creds)),
+        clearPay: () => dispatch(clearPayStatus()),
     }
 }
  

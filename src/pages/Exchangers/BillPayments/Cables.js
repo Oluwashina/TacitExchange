@@ -7,15 +7,26 @@ import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
 import {cableValidator} from '../../../validationSchema/validator'
 import { getWalletBalance } from '../../../store/actions/wallet';
+import { clearPayStatus, getBillerCategories, PayBill } from '../../../store/actions/bills';
+import { useHistory } from 'react-router-dom';
 
 
-const CablesPage = ({walletBalance, fetchWallet}) => {
+const CablesPage = ({walletBalance, fetchWallet,fetchCategory, category, pay, clearPay, paysuccess}) => {
+
+    const history = useHistory();
 
     useEffect(()=>{
         fetchWallet()
-    },[fetchWallet])
+        fetchCategory('cables')
+    },[fetchWallet,fetchCategory])
     
     const [walletShow, setWalletShow] = useState(false)
+
+    const [amt, setAmt] = useState(0)
+
+    const [fee, setFee] = useState(0)
+
+    const [amtToPay, setAmtToPay] = useState(0)
 
     const [prov, setProv] = useState(null)
 
@@ -23,9 +34,13 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
     const handleProv = (val) =>{
         setProv(val)
 
-         // find the amount of the subscription from resp and set it for display from the get all cables endpoint resp
-        // let amount = cablesSub.find(resp => resp.biller_name === val).amount 
-        // let fee = cablesSub.find(resp => resp.biller_name === val).fee 
+        // find the amount of the subscription from resp and set it for display from the get all data endpoint resp
+        let amount = category.find(resp => resp.short_name === val).amount 
+         // find the fee of the subscription for the provider selected
+         let fee = category.find(resp => resp.short_name === val).fee 
+         setFee(fee)
+         setAmtToPay(amount + fee)
+         setAmt(amount)
     }
 
     const toggleWalletAmount = () =>{
@@ -36,9 +51,30 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
         return parseFloat(val).toFixed(2)
     }
 
-    const handleSubmit = async (values, setSubmitting,)  =>{
-        console.log(values)
+    const handleSubmit = async (values)  =>{
+  
+        let type = category.find(resp => resp.short_name === values.provider).biller_name 
+        const creds = {
+            ...values,
+            customer: values.customer,
+            provider: type,
+            billPaymentType: "Cables",
+            amount: amtToPay
+        }
+        console.log(creds)
+            await pay(creds)
      }
+
+
+     useEffect(()=>{
+        if(paysuccess){
+            setTimeout(()=>{
+                history.push('/my-wallet')
+            },3000)
+        clearPay()
+        }
+    },[history, paysuccess, clearPay])
+
 
     return ( 
         <>
@@ -56,7 +92,7 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
                                 handleSubmit(values, setSubmitting)
                                 }
                             validationSchema={cableValidator}
-                            initialValues={{provider: "", decoderNumber: "",}}
+                            initialValues={{provider: "", customer: "",}}
                         >
                             {({
                                 handleChange,
@@ -90,18 +126,9 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
                                             Select a Plan
                                             </option>
 
-                                            <option value="DSTV ACCESS">
-                                            DSTV ACCESS
-                                            </option>
-                                            <option value="DSTV COMPASS">
-                                           DSTV COMPASS
-                                            </option> 
-                                            <option value="STARTIMES">
-                                            STARTIMES
-                                            </option> 
-                                            <option value="GOTV">
-                                            GOTV
-                                            </option>      
+                                            {category.map((opt) => {
+                                                    return <option key={opt.id} value={opt.short_name}>{opt.short_name}</option>
+                                                    })}          
                                             </select>
                                             <small style={{ color: "#dc3545" }}>
                                         {touched.provider && errors.provider}
@@ -111,21 +138,21 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
 
 
                                     <div className="form-group input-container">
-                                        <label htmlFor="decoderNumber">Decoder Number</label>
+                                        <label htmlFor="customer">Decoder/IUC Number</label>
                                          <input
-                                            value={values.decoderNumber}
+                                            value={values.customer}
                                             onChange={(e) => {
                                                 handleChange(e)
                                             }}
                                             onBlur={handleBlur}
-                                            id="decoderNumber"
+                                            id="customer"
                                             className="form-control input-style"
                                             placeholder="Enter your decoder number"
                                             style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
                                             type="tel"
                                             />
                                         <small style={{ color: "#dc3545" }}>
-                                        {touched.decoderNumber && errors.decoderNumber}
+                                        {touched.customer && errors.customer}
                                     </small>
                                     </div>
         
@@ -133,7 +160,7 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
                                     <div className="form-group input-container mt-lg-4 mt-0">
                                         <label htmlFor="amount">Amount</label>
                                         <input
-                                        value="2000"
+                                        value={amt}
                                         onChange={(e) => {
                                             handleChange(e)
                                         }}
@@ -145,6 +172,10 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
                                         type="text"
                                         disabled
                                         />
+
+                                        <small style={{ color: "#0d92d5" }}>
+                                          A covenience fee of {fee} naira will be charged
+                                        </small>
                                         
                                      
                                     </div>
@@ -201,7 +232,7 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
 
                                 <div className='summary_div mt-4'>
                                     <p className='summary_title'>You Pay</p>
-                                    <p className='summary_value'>NGN 2100</p>
+                                    <p className='summary_value'>NGN {amtToPay === 0 ? 0 : amtToPay}</p>
                                 </div>
 
                                 <div className='summary_div mt-4'>
@@ -227,13 +258,19 @@ const CablesPage = ({walletBalance, fetchWallet}) => {
 const mapStateToProps = (state) =>{
     return{
         accountDetails: state.auth.accountDetails,
-        walletBalance: state.wallet.walletBalance
+        walletBalance: state.wallet.walletBalance,
+        category: state.bill.categories,
+        paysuccess: state.bill.paysuccess
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         fetchWallet: () => dispatch(getWalletBalance()),
+        fetchCategory: (val) => dispatch(getBillerCategories(val)),
+        pay: (creds) => dispatch(PayBill(creds)),
+        clearPay: () => dispatch(clearPayStatus()),
+        
     }
 }
  
