@@ -407,7 +407,7 @@ const handleSubmit = async (values, setSubmitting) => {
                         className="mb-0"
                         style={{ color: "#2C3A50", fontWeight: "bold" }}
                       >
-                       Customer
+                       Receiver's Number
                       </p>
                       <p
                         className="mb-0 mt-1"
