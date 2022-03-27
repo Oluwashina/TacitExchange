@@ -191,7 +191,7 @@ export const cableValidator = Yup.object({
   provider: Yup.string().required("Select a plan"),
   customer: Yup.string()
     .required("Decoder Number is required")
-    .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid phone number"),
+    .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid Decoder/IUC number"),
 });
 
 

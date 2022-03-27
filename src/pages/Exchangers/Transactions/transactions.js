@@ -179,7 +179,7 @@ const UserTransactions = (props) => {
                           </div>
       
                           <div className="mt-3">
-                              <Link to="/user/trade" className="btn btn-blueTacit">Start Trade</Link>
+                              <Link to="/start-trade" className="btn btn-blueTacit">Start Trade</Link>
                           </div>
       
                       </div>
