@@ -198,6 +198,7 @@ header{
     border: 1px solid rgba(8, 152, 215, 0.2);
     border-radius: 5px;
     padding: 25px 20px;
+    color: #2C3A50;
   }
   .input-style:focus {
     border: 1px solid rgba(8, 152, 215, 0.2);
@@ -374,11 +375,13 @@ header{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    color: #2C3A50;
   }
   .input-style:focus {
     border: 1px solid #D1D1D1;
     box-shadow: none;
     outline: 0 none;
+    color: #2C3A50;
   }
 
   .registerImage{

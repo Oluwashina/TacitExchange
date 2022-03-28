@@ -75,7 +75,7 @@ const Navbar = (props) => {
 
     useEffect(() =>{
         if(isAuthenticated){
-          history.push('/user/dashboard')
+          history.push('/dashboard')
         }
       },[isAuthenticated, history])
 

@@ -1,0 +1,108 @@
+
+.wallet_table{
+    background: #fff;
+    border-radius: 10px;
+    filter: drop-shadow(0 30px 70px rgba(26,66,149,.15));
+    padding: 10px;
+}
+
+.rdt_TableHeader {
+    font-size: 16px!important;
+    color: #252733!important;
+    font-weight: bold;
+}
+
+.transaction-filter-container{
+    display: flex;
+    flex-direction: row;
+   justify-content: flex-end;
+   padding: 25px 30px 0px 0px;
+}
+.filter-div{
+    border: 1px solid #0898D7;
+   border-radius: 5px;
+   padding: 12px 40px;
+   color: #333A43;
+   transition: all 0.15s ease-in-out;
+   width: 100%;
+   font-size: 14px;
+   min-height: 52px;
+}
+.filter-search-div{
+   width: auto;
+}
+
+.transaction-search{
+   display: flex;
+}
+.search-container .input-style{
+    border-radius: 8px;
+   font-size: 14px;
+   color: rgba(51, 58, 67, 0.7);
+   width: 400px;
+}
+
+.transaction-search .btn-login_submit{
+   border-radius: 0px 5px 5px 0px;
+   height: 46px;
+}
+
+
+.btn-filter{
+    color: #fff;
+    border-radius: 5px;
+    background: #0898D7;
+    padding: 12px 30px;
+    transition: all .15s ease-in-out;
+    font-weight: 700;
+    width: 100%;
+}
+
+.btn-filter:hover{
+    color: #fff;
+}
+
+
+/* Media query for smaller phones */
+@media (max-width:767px) {
+
+    .transaction-filter-container{
+        display: flex;
+        flex-direction: column;
+        padding: 20px 10px 20px 10px;
+    }
+    .filter-div{
+        border: 1px solid #0898D7;
+        border-radius: 5px;
+         padding: 10px 45px;
+         color: #333A43;
+         transition: all 0.15s ease-in-out;
+        width: 100%;
+        font-size: 14px;
+    }
+    .filter-search-div{
+        width: 100%;
+    }
+    
+    .transaction-search{
+        display: flex;
+    }
+    
+    .search-container{
+        width: 100%;
+    }
+    
+    .search-container .input-style{
+          border-radius: 8px;
+        font-size: 14px;
+        color: rgba(51, 58, 67, 0.7);
+        width: 100%;
+    }
+    
+    .transaction-search .btn-login_submit{
+        border-radius: 0px 5px 5px 0px;
+        height: 46px;
+    }
+   
+
+}
