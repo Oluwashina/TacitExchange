@@ -2,6 +2,10 @@
   "name": "tacit",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.x",
+    "npm": "~1.0.20"
+  },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^27.1.0",
     "@ckeditor/ckeditor5-image": "^27.1.0",
