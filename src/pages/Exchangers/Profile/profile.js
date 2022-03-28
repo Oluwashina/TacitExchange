@@ -56,7 +56,7 @@ const UserProfile = (props) => {
 
     return ( 
         <>
-        <UserSideBar />
+        <UserSideBar title="Profile"  />
         <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 

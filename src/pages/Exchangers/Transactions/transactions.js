@@ -18,9 +18,9 @@ const UserTransactions = (props) => {
 
 
     const [tabData] = useState([
-        { id: 1, name: "tab-1", text: "Pending Transactions"},
-        { id: 2, name: "tab-2", text: "Completed Transactions" },
-        { id: 3, name: "tab-3", text: "Declined Transactions" },
+        { id: 1, name: "tab-1", text: "Pending Trades"},
+        { id: 2, name: "tab-2", text: "Completed Trades" },
+        { id: 3, name: "tab-3", text: "Declined Trades" },
       ]);
 
       // tab Layout
@@ -70,6 +70,14 @@ const UserTransactions = (props) => {
     const columns = [
    
       {
+        name: "Card Category",
+        cell: row => <span
+        > 
+      { row['subCategoryDetails']['categoryname']  }
+       </span>,
+        sortable: true
+      },
+      {
         name: "Card Name",
         cell: row => <span
         > 
@@ -98,14 +106,6 @@ const UserTransactions = (props) => {
              > 
             {`${row.tradeStatus}`}
             </span>
-        },
-        {
-          name: "Payment Status",
-          cell: row => <span
-           className={getColor(row.paymentStatus)}
-           > 
-          {`${row.paymentStatus}`}
-          </span>
         },
         {
             name: "",
@@ -137,33 +137,15 @@ const UserTransactions = (props) => {
         return result;
       }
 
-       //   get badge colors for payment
-       const getColor = (status) =>{
-        switch(status){
-            case 'Not Initiated':
-                return 'notinitStatus'
-            case 'Processing':
-                return 'processingStatus'
-            case 'Successful':
-                return 'successStatus'
-            case 'Failed':
-                return 'failedStatus'
-            
-            default:
-                break;
-        }
-    }
-
-
       
       const handleView = (id) =>{
-          history.push('/user/transaction/'+id)
+          history.push('/trade/'+id)
       }
 
       
     return ( 
         <>
-            <Sidebar />
+            <Sidebar title="Trades" />
             <div className="usermain">
             <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
@@ -177,7 +159,7 @@ const UserTransactions = (props) => {
                 {
                     transaction.length ? 
 
-                            <div className="mt-4 mb-5">
+                            <div className="mt-4 mb-5 wallet_table">
                             <DataTable
                             // title={tradeName}
                             columns={columns}
@@ -193,11 +175,11 @@ const UserTransactions = (props) => {
                           <div className="dashTrade mt-lg-4 mt-4 mb-5">
 
                           <div>
-                              <p className="mb-0 text-center" style={{fontWeight: 'bold'}}>You currently don't have any {tradeName.toLowerCase()} <br /> transactions.</p>
+                              <p className="mb-0 text-center" style={{fontWeight: 'bold'}}>You currently don't have any {tradeName.toLowerCase()} <br /> trade(s).</p>
                           </div>
       
                           <div className="mt-3">
-                              <Link to="/user/trade" className="btn btn-blueTacit">Start Trade</Link>
+                              <Link to="/start-trade" className="btn btn-blueTacit">Start Trade</Link>
                           </div>
       
                       </div>

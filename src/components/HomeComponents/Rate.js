@@ -68,6 +68,7 @@ const RateCalculator = (props) => {
                               <label htmlFor="category">Gift Card Name</label>
                                 <select
                                  name="giftname"
+                                defaultValue=""
                                  values={values.giftname}
                                  onChange={(e) => {
                                     handleChange(e, setFieldValue("category", ""))
@@ -76,7 +77,7 @@ const RateCalculator = (props) => {
                                  onBlur={handleBlur}
                                  className="form-control select-style" 
                                  id="giftname">
-                                    <option defaultValue="" >Select</option>
+                                    <option value="" disabled>Select</option>
                                     {category.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.categoryname}</option>
                                         })}
@@ -93,12 +94,13 @@ const RateCalculator = (props) => {
                               <label htmlFor="category">Gift Card Category</label>
                                 <select 
                                 name="category"
+                            
                                 value={values.category}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 className="form-control select-style"
                                  id="category">
-                                    <option defaultValue="">Select</option>
+                                    <option value="" disabled>Select</option>
                                     {subcategory.map((opt, index) => {
                                             return <option key={index} value={opt.id}>{opt.subcategoryname}</option>
                                         })}

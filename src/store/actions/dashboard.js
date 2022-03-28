@@ -39,6 +39,7 @@ export const getUserTransaction = (val) => {
       }
     };
   };
+  
 
     // Get ouflow chart data for month,year, and week functionality
 export const ChartRequest = (value) => {

@@ -148,6 +148,57 @@
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAhtJREFUOBG1lc9LAlEQx2clDUUhA1ESAiHRi0H37L6esvVPCfobhI52tj+g7cfJztk93JNiIASmsqCBoaTJNt/VlbXeVhbOYd9j3sznzZs3b1YiB2k0Ghv9fj/Ly4okSbuGYYRgynOd5xpP1UAgcBWLxV6g/yzSZ0W9Xl8fDAbHDDjx+/1SMBj0e71ecrvdpul4PKbhcEi9Xu+Vhfcw8j6f7zQej7/ZWQvgarW6NRqNSgzciUajPo/HY7f9MmdbajabA97gkW3lZDL5bBnNwTPoQyQS2QyFQmuWwW9GXdff2+12l+F7FtwFRxwfkf4FCn8EAl8wwILOBCOnOP6ykQJgCXzBAAs6aXb7T4lEIvBTTi2I04ic12q1PlfLtgslhdv/LxSbgQEWmEiFgpJyiqJYLFKn01lY5ouic9aLZMZSXCh+1KmTyLJM6sXFHA7opaqSnMkIXcACkzRNG04mExS6o7RaLeOsUDAqlYo5MtzRFiwwzaoQbm1TcinRfjpNN9fXlD44oHA4bFsVT5EKHc/0O8Hx78tlOsxmqXx3N0+LyAcsMF18Jg1v30msnCq5HKVSKcKInEMvErDARCpUNBSREXS3pZIJs46P8UhRTL3IZ8ZSV/dA0E859Dy6lCiCZXRggAWmWRXop2h96FLLgOy28AUDLOhNMJo0P0eZL6T7F7itbcpWw5/3Y+yykkYPMGQlv6Ypevr978/0AyH3oBomU94UAAAAAElFTkSuQmCC) no-repeat;
 }
 
+.orderTab{
+    cursor: pointer;
+}
+.tabSpace{
+    margin-right: 20px;
+}
+.activeOrderTab{
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+}
+
+.activeOrderTab::after{
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: #0898D7;
+    position: absolute;
+    left: 0px;
+    bottom: -8px;
+}
+
+/* payment status */
+.notinitStatus{
+    background: #0898D7;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px;
+}
+
+.processingStatus{
+    background: #FEC400;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px;   
+}
+
+.failedStatus{
+    background: #ff0000;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px; 
+}
+
+.successStatus{
+    background: #00B327;
+    border-radius: 100px;
+    color: white;
+    padding: 3px 25px; 
+}
+
 
  /* Media query for smaller phones */
 
@@ -162,6 +213,30 @@
         position: absolute;
         width: 100%;
         height: 150px;
+    }
+    .notinitStatus{
+        color: #0898D7;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+    .processingStatus{
+        color: #FEC400;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+    .failedStatus{
+        color: #ff0000;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
+    }
+    .successStatus{
+        color: #00B327;
+        background: transparent;
+        border-radius: none;
+        padding: 0px;
     }
 }
  

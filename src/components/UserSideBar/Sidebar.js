@@ -51,35 +51,7 @@ const UserSideBar = (props) => {
 
     
     
-     
-     const TitleFormat = () =>{
-         let val;
-         switch(isActive){
-             case '/user/profile':
-             val = 'Profile';
-             break;
-            case '/user/dashboard':
-                val = 'Overview'
-                break;
-            case '/user/transactions':
-                val = 'Transactions'
-                break;
-            case '/user/notifications':
-                val = 'Notifications'
-                break;
-            case '/user/trade':
-                val = 'Trade Cards'
-                break;
-            case '/user/account':
-                val = 'Account Details'
-                break;
-             default:
-                 val = 'Transaction Details'
-                 break;
-                 
-         }
-         return val
-     }
+    
 
     return ( 
         <>
@@ -98,33 +70,33 @@ const UserSideBar = (props) => {
                 <div className="v-list mt-4">
 
                     {/* first */}
-                    <Link to="/user/dashboard" 
-                    className={ isActive.includes("/user/dashboard") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    <Link to="/dashboard" 
+                    className={ isActive.includes("/dashboard") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                      style={{textDecoration: 'none'}}>
 
                         {/* icon */}
                         <div 
-                        className={ isActive.includes("/user/dashboard") ? 'v-list-icon active' : 'v-list-icon'}
+                        className={ isActive.includes("/dashboard") ? 'v-list-icon active' : 'v-list-icon'}
                        >
                             <i className="fa fa-chart-pie"></i>
                         </div>
                         {/* title */}
                         <div className="v-list-title">
                             <span 
-                            className={ isActive.includes("/user/dashboard") ? 'active' : ''}
+                            className={ isActive.includes("/dashboard") ? 'active' : ''}
                             >Overview</span>
                         </div>
 
                     </Link>
 
                     {/* second */}
-                    <Link to="/user/transactions"
-                    className={ isActive.includes("/user/transactions") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    <Link to="/trades"
+                    className={ isActive.includes("/trade") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                     style={{textDecoration: 'none'}}>
 
                         {/* icon */}
                         <div
-                        className={ isActive.includes("/user/transactions") ? 'v-list-icon active' : 'v-list-icon'}
+                        className={ isActive.includes("/trade") ? 'v-list-icon active' : 'v-list-icon'}
                          >
                         <i className="fa fa-ticket-alt"></i>
                         {/* <img src={transactIcon} alt="profile" className="img-fluid" /> */}
@@ -132,20 +104,62 @@ const UserSideBar = (props) => {
                         {/* title */}
                         <div className="v-list-title">
                             <span
-                            className={ isActive.includes("/user/transactions") ? 'active' : ''}
-                            >Transactions</span>
+                            className={ isActive.includes("/trade") ? 'active' : ''}
+                            >Trades</span>
+                        </div>
+
+                    </Link>
+
+                {/* third */}
+                    <Link to="/my-wallet"
+                    className={ isActive.includes("/my-wallet") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    style={{textDecoration: 'none'}}>
+
+                        {/* icon */}
+                        <div
+                        className={ isActive.includes("/my-wallet") ? 'v-list-icon active' : 'v-list-icon'}
+                         >
+                        <i className="fa fa-ticket-alt"></i>
+                        {/* <img src={transactIcon} alt="profile" className="img-fluid" /> */}
+                        </div>
+                        {/* title */}
+                        <div className="v-list-title">
+                            <span
+                            className={ isActive.includes("/my-wallet") ? 'active' : ''}
+                            >My Wallet</span>
+                        </div>
+
+                    </Link>
+
+                    {/* third */}
+                    <Link to="/withdraw"
+                    className={ isActive.includes("/withdraw") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    style={{textDecoration: 'none'}}>
+
+                        {/* icon */}
+                        <div
+                        className={ isActive.includes("/withdraw") ? 'v-list-icon active' : 'v-list-icon'}
+                         >
+                        <i className="fa fa-ticket-alt"></i>
+                        {/* <img src={transactIcon} alt="profile" className="img-fluid" /> */}
+                        </div>
+                        {/* title */}
+                        <div className="v-list-title">
+                            <span
+                            className={ isActive.includes("/withdraw") ? 'active' : ''}
+                            >Withdraw</span>
                         </div>
 
                     </Link>
 
                      {/* third */}
-                     <Link to="/user/notifications"
-                     className={ isActive.includes("/user/notifications") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                     <Link to="/notifications"
+                     className={ isActive.includes("/notifications") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                      style={{textDecoration: 'none'}}>
 
                         {/* icon */}
                         <div
-                        className={ isActive.includes("/user/notifications") ? 'v-list-icon active' : 'v-list-icon'}
+                        className={ isActive.includes("/notifications") ? 'v-list-icon active' : 'v-list-icon'}
                          >
                             <i className="fa fa-lightbulb"></i>
                         {/* <img src={notifyIcon} alt="profile" className="img-fluid" /> */}
@@ -153,20 +167,20 @@ const UserSideBar = (props) => {
                         {/* title */}
                         <div className="v-list-title">
                             <span
-                            className={ isActive.includes("/user/notifications") ? 'active' : ''}
+                            className={ isActive.includes("/notifications") ? 'active' : ''}
                             >Notifications</span>
                         </div>
 
                         </Link>
 
                     {/* fourth */}
-                    <Link to="/user/account"
-                    className={ isActive.includes("/user/account") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                    <Link to="/account"
+                    className={ isActive.includes("/account") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                       style={{textDecoration: 'none'}}>
 
                         {/* icon */}
                         <div 
-                        className={ isActive.includes("/user/account") ? 'v-list-icon active' : 'v-list-icon'}
+                        className={ isActive.includes("/account") ? 'v-list-icon active' : 'v-list-icon'}
                         >
                             <i className="fa fa-book"></i>
                             {/* <img src={account} alt="account" className="img-fluid" /> */}
@@ -175,20 +189,47 @@ const UserSideBar = (props) => {
                         {/* title */}
                         <div className="v-list-title">
                             <span
-                            className={ isActive.includes("/user/account") ? 'active' : ''}
+                            className={ isActive.includes("/account") ? 'active' : ''}
                             >Account Details</span>
                         </div>
 
                         </Link>
 
-                    {/* fifth */}
-                    <Link to="/user/profile"
-                    className={ isActive.includes("/user/profile") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                         {/* trade */}
+                         <Link to="/start-trade"
+                        className={ isActive.includes("start-trade") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                          style={{textDecoration: 'none'}}>
+
+                            {/* icon */}
+                            <div 
+                             className={ isActive.includes("/start-trade") ? 'v-list-icon active' : 'v-list-icon'}
+                            >
+                                <i className="fa fa-award"></i>
+                                
+                            </div>
+                            {/* title */}
+                            <div className="v-list-title">
+                                <span
+                                className={ isActive.includes("/start-trade") ? 'active' : ''}
+                                >Trade</span>
+                            </div>
+
+                        </Link>
+
+                   
+                        {/* horozontal line */}
+                        <div className="mt-5">
+                            <hr style={{borderTop: '1px solid #DFE0EB'}} />
+                        </div>
+
+                          {/* fifth */}
+                    <Link to="/profile"
+                    className={ isActive.includes("/profile") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
                       style={{textDecoration: 'none'}}>
 
                         {/* icon */}
                         <div 
-                        className={ isActive.includes("/user/profile") ? 'v-list-icon active' : 'v-list-icon'}
+                        className={ isActive.includes("/profile") ? 'v-list-icon active' : 'v-list-icon'}
                         >
                             <i className='fa fa-user-tie'></i>
                             {/* <img src={profileIcon} alt="profile" className="img-fluid" /> */}
@@ -196,16 +237,11 @@ const UserSideBar = (props) => {
                         {/* title */}
                         <div className="v-list-title">
                             <span
-                            className={ isActive.includes("/user/profile") ? 'active' : ''}
+                            className={ isActive.includes("/profile") ? 'active' : ''}
                             >Profile</span>
                         </div>
 
                      </Link>
-
-                        {/* horozontal line */}
-                        <div className="mt-5">
-                            <hr style={{borderTop: '1px solid #DFE0EB'}} />
-                        </div>
 
                     {/* logout */}
                         <Link to="/"
@@ -224,26 +260,7 @@ const UserSideBar = (props) => {
 
                         </Link>
 
-                        {/* trade */}
-                        <Link to="/user/trade"
-                        className={ isActive.includes("/user/trade") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
-                          style={{textDecoration: 'none'}}>
-
-                            {/* icon */}
-                            <div 
-                             className={ isActive.includes("/user/trade") ? 'v-list-icon active' : 'v-list-icon'}
-                            >
-                                <i className="fa fa-award"></i>
-                                
-                            </div>
-                            {/* title */}
-                            <div className="v-list-title">
-                                <span
-                                className={ isActive.includes("/user/trade") ? 'active' : ''}
-                                >Trade</span>
-                            </div>
-
-                        </Link>
+                       
 
 
 
@@ -267,7 +284,9 @@ const UserSideBar = (props) => {
                             </div>
 
                         <div>
-                          <p className="mb-0" style={{color: '#252733', fontWeight: 'bold'}}>{TitleFormat()}</p>
+                          <p className="mb-0" style={{color: '#252733', fontWeight: 'bold'}}>
+                              {props.title}
+                              </p>
                         </div>
 
                         <div style={{flexGrow: 1}}></div>

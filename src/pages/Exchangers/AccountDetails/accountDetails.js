@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import Sidebar from '../../../components/UserSideBar/Sidebar';
 import './account.css'
 import DataTable from 'react-data-table-component'
-import Check from '../../../assets/images/check-square.svg'
+import Check from '../../../assets/images/trash.svg'
 import Edit from '../../../assets/images/edit.svg'
 import {Form, Formik} from 'formik'
 import Modal from 'react-bootstrap/Modal'
@@ -10,12 +10,14 @@ import { accountDetailsValidator } from "../../../validationSchema/validator";
 import accountCircle from '../../../assets/images/accountCircle.svg'
 import closeIcon from '../../../assets/images/closeIcon.svg'
 import {connect} from 'react-redux'
-import { addAccountDetails, filterDetails, getListOfBanks, updateAccountDetails } from '../../../store/actions/auth';
+import { addAccountDetails, deleteAccountDetails, filterDetails, getListOfBanks, updateAccountDetails } from '../../../store/actions/auth';
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 
 const UserAccount = (props) => {
 
-    const {accountDetails, addAccount, handleFilter, details, updateAccount, getBanks, banks} = props
+    const {accountDetails, addAccount, handleFilter, deleteAcct, details, updateAccount, getBanks, banks} = props
 
      const ref = useRef()
 
@@ -84,23 +86,39 @@ const UserAccount = (props) => {
           selector: 'bankName'
         },
         {
-            name: "Default",
-            cell: row => <span className="defaultDiv"> 
-            {`${row.isDefault ? "Default" : "Yeah"}`}
-            </span>
-        },
-        {
             name: "",
             cell: row => 
             <div>
                 <img src={Edit}
                   onClick={() => OpenEditModal(row.id)}
                  alt="edit" width="25" height="25" style={{cursor: 'pointer'}} /> 
-                <img src={Check} alt="check" className="ml-2" width="25" height="25" /> 
+                <img src={Check} 
+                 onClick={() => handleDelete(row.id)}
+                alt="check" className="ml-2" width="25" height="25" style={{cursor: 'pointer'}} /> 
             </div>
             
         },
       ];
+
+    const handleDelete = (id) => {
+        confirmAlert({
+          title: "Confirm to submit",
+          message: `You are about to remove this account details, Do you wish to continue?`,
+          buttons: [
+            {
+              label: "Yes",
+              onClick: () => confirmDelete(id),
+            },
+            {
+              label: "No",
+            },
+          ],
+        });
+      };
+    
+      const confirmDelete = (id) => {
+        deleteAcct(id);
+      };
 
       const OpenEditModal = (id) =>{
         handleFilter(id)
@@ -391,7 +409,7 @@ const UserAccount = (props) => {
       {/* end of edit account details modal */}
 
 
-            <Sidebar/>
+            <Sidebar title="Account Details" />
             <div className="usermain">
               <div className="contain" style={{width: '100%', paddingLeft: '20px', paddingRight: '20px'}}>
 
@@ -401,7 +419,7 @@ const UserAccount = (props) => {
 
                     <div className="accountDiv mt-lg-4 mt-5 mb-5">
 
-                            <div className="mt-4 mb-5">
+                            <div className="mt-4 mb-2">
                             <DataTable
                             title="Bank Accounts"
                             columns={columns}
@@ -412,11 +430,11 @@ const UserAccount = (props) => {
                             />
                             </div>
 
-                         {/* <div className="mt-3 text-center">
+                         <div className="mt-1 text-center">
                             <button 
                             onClick={handleShow}
                             className="btn btn-blueTacit">Add Other Account</button>
-                         </div> */}
+                         </div>
 
                      </div>
 
@@ -462,6 +480,7 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         addAccount: (val) => dispatch(addAccountDetails(val)),
         updateAccount: (val) => dispatch(updateAccountDetails(val)),
+        deleteAcct: (id) => dispatch(deleteAccountDetails(id)),
         handleFilter: (id) => dispatch(filterDetails(id)),
         getBanks: () => dispatch(getListOfBanks())
     }

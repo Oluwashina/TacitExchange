@@ -5,6 +5,8 @@ import adminReducer from './admin'
 import dashboardReducer from "./dashboard";
 import notificationReducer from "./notifications";
 import tradeReducer from "./trade";
+import walletReducer from "./wallet";
+import billReducer from "./bills";
 
 
 const appReducer = combineReducers({
@@ -13,7 +15,9 @@ const appReducer = combineReducers({
     admin: adminReducer,
     dashboard: dashboardReducer,
     notification: notificationReducer,
-    trade: tradeReducer
+    trade: tradeReducer,
+    wallet: walletReducer,
+    bill: billReducer
   });
 
 const rootReducer = (state, action) => {
