@@ -13,6 +13,7 @@ const initState = {
     giftcards: []
   };
   
+  
   const adminReducer = (state = initState, action) => {
     switch (action.type) {
       case 'Users':
