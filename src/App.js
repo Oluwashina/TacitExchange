@@ -55,15 +55,15 @@ function App() {
 
               {/* Exchanger route */}
               <UserRoute exact path="/dashboard" component={UserDashboard} />
-              <Route path="/dashboard/buyairtime" component={AirtimePage} />
-              <Route path="/dashboard/buydata" component={BuyDataPage} />
-              <Route path="/dashboard/buyelectricity" component={Electricity} />
-              <Route path="/dashboard/tvsubscription" component={Cables} />
+              <UserRoute path="/dashboard/buyairtime" component={AirtimePage} />
+              <UserRoute path="/dashboard/buydata" component={BuyDataPage} />
+              <UserRoute path="/dashboard/buyelectricity" component={Electricity} />
+              <UserRoute path="/dashboard/tvsubscription" component={Cables} />
               <UserRoute path="/profile" component={UserProfile} />
               <UserRoute path="/notifications" component={UserNotifications} />
               <UserRoute path="/start-trade" component={UserTrade} />
               <UserRoute path="/my-wallet" component={UserWallet} />
-              <Route path="/withdraw" component={UserWithdraw} />
+              <UserRoute path="/withdraw" component={UserWithdraw} />
               <UserRoute path="/account" component={UserAccount} />
               <UserRoute path="/trades" component={UserTransactions} />
               <UserRoute path="/trade/:id" component={UserTransactionDetails} />
