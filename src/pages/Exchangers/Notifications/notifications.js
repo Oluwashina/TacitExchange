@@ -105,7 +105,7 @@ const UserNotifications = (props) => {
 
                     <div className="mt-3">
                         <Link 
-                        to="/trade"
+                        to="/start-trade"
                         className="btn btn-blueTacit">Start Trade</Link>
                     </div>
 
