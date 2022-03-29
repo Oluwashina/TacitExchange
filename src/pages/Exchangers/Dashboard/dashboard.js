@@ -192,7 +192,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                            <Link to="/dashboard/buyairtime"  className='service_card' style={{textDecoration: 'none'}}>
+                            <Link to="/utilities/buyairtime"  className='service_card' style={{textDecoration: 'none'}}>
                                 <div className='service_icon'>
                                     <img src={airtime_icon} alt="airtime" />
                                 </div>
@@ -206,13 +206,14 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                        <Link to="/dashboard/buyelectricity" className='service_card' style={{textDecoration: 'none'}}>
+                        <Link to="/dashboard" className='service_card' style={{textDecoration: 'none'}}>
                             <div className='service_icon electricity'>
                                 <img src={electricity_icon} alt="airtime" />
                             </div>
                             <div>
                                 <h6 className='service_title'>Buy Electricity</h6>
                                 <p className='service_subtitle'>Easily pay your electric bills</p>
+                                <p className='service_soon'>Coming Soon!</p>
                             </div>
                         </Link>
 
@@ -220,7 +221,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                        <Link to="/dashboard/tvsubscription" style={{textDecoration: 'none'}} className='service_card'>
+                        <Link to="/utilities/tvsubscription" style={{textDecoration: 'none'}} className='service_card'>
                             <div className='service_icon tv'>
                                 <img src={tv_icon} alt="airtime" />
                             </div>
@@ -234,7 +235,7 @@ const UserDashboard = (props) => {
 
                         <div className='col-lg-3'>
 
-                        <Link to="/dashboard/buydata" style={{textDecoration: 'none'}} className='service_card'>
+                        <Link to="/utilities/buydata" style={{textDecoration: 'none'}} className='service_card'>
                             <div className='service_icon buydata'>
                                 <img src={buydata_icon} alt="airtime" />
                             </div>

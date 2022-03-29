@@ -50,7 +50,6 @@ const BuyDataPage = ({walletBalance, fetchWallet, fetchCategory, category, pay, 
             billPaymentType: "Data Bundle",
             amount: amt
         }
-        console.log(creds)
            await pay(creds)
      }
 

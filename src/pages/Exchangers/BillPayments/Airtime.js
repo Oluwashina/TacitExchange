@@ -52,7 +52,6 @@ const AirtimePage = ({walletBalance, fetchWallet,fetchCategory, category, pay, c
             provider: type,
             billPaymentType: "Airtime"
         }
-        console.log(creds)
         await pay(creds)
      }
 

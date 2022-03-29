@@ -31,6 +31,7 @@ import AirtimePage from './pages/Exchangers/BillPayments/Airtime';
 import BuyDataPage from './pages/Exchangers/BillPayments/BuyData';
 import Electricity from './pages/Exchangers/BillPayments/Electricity';
 import Cables from './pages/Exchangers/BillPayments/Cables';
+import UtilitiesPage from './pages/Exchangers/BillPayments/Utilities';
 
 
 
@@ -54,12 +55,13 @@ function App() {
               <Route path="/privacypolicy" component={PrivacyPage} />
 
               {/* Exchanger route */}
-              <UserRoute exact path="/dashboard" component={UserDashboard} />
-              <UserRoute path="/dashboard/buyairtime" component={AirtimePage} />
-              <UserRoute path="/dashboard/buydata" component={BuyDataPage} />
-              <UserRoute path="/dashboard/buyelectricity" component={Electricity} />
-              <UserRoute path="/dashboard/tvsubscription" component={Cables} />
+              <UserRoute path="/dashboard" component={UserDashboard} />
+              <UserRoute path="/utilities/buyairtime" component={AirtimePage} />
+              <UserRoute path="/utilities/buydata" component={BuyDataPage} />
+              <UserRoute path="/utilities/buyelectricity" component={Electricity} />
+              <UserRoute path="/utilities/tvsubscription" component={Cables} />
               <UserRoute path="/profile" component={UserProfile} />
+              <Route exact path="/utilities" component={UtilitiesPage}  />
               <UserRoute path="/notifications" component={UserNotifications} />
               <UserRoute path="/start-trade" component={UserTrade} />
               <UserRoute path="/my-wallet" component={UserWallet} />

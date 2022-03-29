@@ -24,10 +24,6 @@ const CablesPage = ({walletBalance, fetchWallet,fetchCategory, category, pay, cl
 
     const [amt, setAmt] = useState(0)
 
-    const [fee, setFee] = useState(0)
-
-    const [amtToPay, setAmtToPay] = useState(0)
-
     const [prov, setProv] = useState(null)
 
 
@@ -36,10 +32,6 @@ const CablesPage = ({walletBalance, fetchWallet,fetchCategory, category, pay, cl
 
         // find the amount of the subscription from resp and set it for display from the get all data endpoint resp
         let amount = category.find(resp => resp.short_name === val).amount 
-         // find the fee of the subscription for the provider selected
-         let fee = category.find(resp => resp.short_name === val).fee 
-         setFee(fee)
-         setAmtToPay(amount + fee)
          setAmt(amount)
     }
 
@@ -59,10 +51,9 @@ const CablesPage = ({walletBalance, fetchWallet,fetchCategory, category, pay, cl
             customer: values.customer,
             provider: type,
             billPaymentType: "Cables",
-            amount: amtToPay
+            amount: amt
         }
-        console.log(creds)
-            await pay(creds)
+      await pay(creds)
      }
 
 
@@ -172,11 +163,6 @@ const CablesPage = ({walletBalance, fetchWallet,fetchCategory, category, pay, cl
                                         type="text"
                                         disabled
                                         />
-
-                                        <small style={{ color: "#0d92d5" }}>
-                                          A covenience fee of {fee} naira will be charged
-                                        </small>
-                                        
                                      
                                     </div>
 
@@ -232,7 +218,7 @@ const CablesPage = ({walletBalance, fetchWallet,fetchCategory, category, pay, cl
 
                                 <div className='summary_div mt-4'>
                                     <p className='summary_title'>You Pay</p>
-                                    <p className='summary_value'>NGN {amtToPay === 0 ? 0 : amtToPay}</p>
+                                    <p className='summary_value'>NGN {amt === 0 ? 0 : amt}</p>
                                 </div>
 
                                 <div className='summary_div mt-4'>

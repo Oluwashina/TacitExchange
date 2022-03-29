@@ -173,6 +173,27 @@ const UserSideBar = (props) => {
 
                         </Link>
 
+                        {/* refill */}
+                         {/* third */}
+                        <Link to="/utilities"
+                        className={ isActive.includes("/utilities") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}
+                        style={{textDecoration: 'none'}}>
+
+                            {/* icon */}
+                            <div
+                            className={ isActive.includes("/utilities") ? 'v-list-icon active' : 'v-list-icon'}
+                            >
+                                <i className="fa fa-tint"></i>
+                            </div>
+                            {/* title */}
+                            <div className="v-list-title">
+                                <span
+                                className={ isActive.includes("/utilities") ? 'active' : ''}
+                                >My Utility</span>
+                            </div>
+
+                        </Link>
+
                     {/* fourth */}
                     <Link to="/account"
                     className={ isActive.includes("/account") ? 'v-list-item active v-list-link' : 'v-list-item v-list-link'}

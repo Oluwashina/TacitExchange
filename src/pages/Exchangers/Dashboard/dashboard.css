@@ -149,6 +149,14 @@
     font-size: 14px;
 }
 
+
+.service_soon{
+    color: #ff0000;
+    text-align: center;
+    font-weight: 300;
+    font-size: 14px;
+}
+
 .dashTrade{
     border: 1px solid #DFE0EB;
     border-radius: 8px;

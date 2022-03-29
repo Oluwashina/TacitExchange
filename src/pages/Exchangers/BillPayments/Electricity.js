@@ -73,7 +73,6 @@ const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category
             billPaymentType: "Electricity",
             amount: amt
         }
-        console.log(creds)
          await pay(creds)
      }
 
