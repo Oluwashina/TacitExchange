@@ -179,7 +179,6 @@ export const buyElecValidator = Yup.object({
   provider: Yup.string().required("Select a provider"),
   customer: Yup.string()
     .min(7, "Meter Number cannot be less than 7 digits")
-    .max(11, "Exceeded characters for Meter Number")
     .required("Meter Number is required")
     .matches(/^-?[0-9]+(.[0-9]{1-7})?$/, "Enter a valid Meter Number"),
   amount: Yup.string()
