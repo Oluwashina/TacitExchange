@@ -7,40 +7,57 @@ import { connect } from 'react-redux';
 import {Form, Formik} from 'formik'
 import {buyElecValidator} from '../../../validationSchema/validator'
 import { getWalletBalance } from '../../../store/actions/wallet';
-import { clearPayStatus, getBillerCategories, PayBill } from '../../../store/actions/bills';
+import { clearMeterDetails, clearPayStatus, getBillerCategories, PayBill, validateMeterDetails } from '../../../store/actions/bills';
 import { useHistory } from 'react-router-dom';
+import cogoToast from 'cogo-toast';
 
-const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category, pay, clearPay, paysuccess}) => {
+const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category, pay, clearPay, paysuccess, validateMeter, meterdetails, validMeter, invalidMeter, loader, clearDetails}) => {
 
     const history = useHistory();
 
     useEffect(()=>{
+        clearDetails()
         fetchWallet()
         fetchCategory('power')
-    },[fetchWallet, fetchCategory])
+    },[fetchWallet, fetchCategory, clearDetails])
 
     const [walletShow, setWalletShow] = useState(false)
 
     const [prov, setProv] = useState(null)
 
-    const [fee, setFee] = useState(0)
+    const [billerCode, setBillerCode] = useState('')
+
+
+    const [itemCode, setItemCode] = useState('')
 
     const [amt, setAmt] = useState(0)
 
     const handleProv = (val, amount) =>{
         setProv(val)
-         // find the fee of the data for the provider selected
-         let fee = category.find(resp => resp.short_name === val).fee 
-         setFee(fee)
 
+        // get biller code, and item code of the provided selected
+        let billerCode = category.find(resp => resp.short_name === val).biller_code 
+        setBillerCode(billerCode)
+
+        let itemCode = category.find(resp => resp.short_name === val).item_code 
+        setItemCode(itemCode)
+      
          if(amount === ""){
              setAmt(0) 
          }
          else{
             //  set amount and fee
-            setAmt(parseFloat(amount)+fee)
+            setAmt(parseFloat(amount))
          }
-       
+    }
+
+    const handleMeterNumber = (customerId, provider) =>{
+        if(provider === ''){
+            cogoToast.warn('Please select a provider')
+        }
+        else{
+            validateMeter(itemCode, billerCode, customerId)
+        }
     }
 
     const handleAmount = (val) =>{
@@ -49,7 +66,7 @@ const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category
             res = 0
         }
         else{
-        res = parseFloat(val) + fee
+        res = parseFloat(val)
         }
   
         setAmt(res)
@@ -147,24 +164,51 @@ const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category
                                     </div>
 
 
-
                                     <div className="form-group input-container">
                                         <label htmlFor="customer">Meter Number</label>
-                                         <input
-                                            value={values.customer}
-                                            onChange={(e) => {
-                                                handleChange(e)
-                                            }}
-                                            onBlur={handleBlur}
-                                            id="customer"
-                                            className="form-control input-style"
-                                            placeholder="Enter your meter number"
-                                            style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
-                                            type="tel"
-                                            />
-                                        <small style={{ color: "#dc3545" }}>
-                                        {touched.customer && errors.customer}
-                                    </small>
+                                         
+                                         <div className='meterDiv'>
+                                            <input
+                                                value={values.customer}
+                                                onChange={(e) => {
+                                                    handleChange(e)
+                                                }}
+                                                onBlur={handleBlur}
+                                                id="customer"
+                                                className="form-control input-style"
+                                                placeholder="Enter your meter number"
+                                                style={{border: '1px solid rgba(8, 152, 215, 0.2)'}}
+                                                type="tel"
+                                                />
+                                                <p onClick={() => handleMeterNumber(values.customer, values.provider)} 
+                                                className={
+                                                    loader ? 'getBtn disabled' : 'getBtn'
+                                                }
+                                                
+                                                >Get Details</p>
+                                         </div>
+
+                                         {
+                                            errors.customer &&
+                                            <small style={{ color: "#dc3545" }}>
+                                              {touched.customer && errors.customer}
+                                            </small>
+                                        }
+
+                                        { 
+                                          validMeter &&                                          
+                                          <small style={{ color: "#0d92d5" }}>
+                                              {validMeter ? meterdetails.name : ""}
+                                          </small>
+                                        }
+
+                                        { 
+                                          invalidMeter &&                                          
+                                          <small style={{ color: "#dc3545" }}>
+                                              {invalidMeter ? "Invalid customer id": ""}
+                                          </small>
+                                        }
+
                                     </div>
         
 
@@ -184,24 +228,15 @@ const BuyElectricityPage = ({walletBalance, fetchWallet, fetchCategory, category
                                         type="text"
                                         />
 
-                                        {
-                                            errors.amount ?
-                                            <small style={{ color: "#dc3545" }}>
+                                        <small style={{ color: "#dc3545" }}>
                                             {touched.amount && errors.amount}
                                         </small>
-                                        :
-                                        <small style={{ color: "#0d92d5" }}>
-                                        A covenience fee of {fee} naira will be charged
-                                        </small>
-                                        }
-                                     
-                                   
                                      
                                     </div>
 
                                   
 
-                                    <div className="text-center mt-4">
+                                <div className="text-center mt-4">
                                     <button
                                         type="submit"
                                         className="btn btn-withdraw"
@@ -279,7 +314,11 @@ const mapStateToProps = (state) =>{
         accountDetails: state.auth.accountDetails,
         walletBalance: state.wallet.walletBalance,
         category: state.bill.categories,
-        paysuccess: state.bill.paysuccess
+        paysuccess: state.bill.paysuccess,
+        meterdetails: state.bill.meterdetails,
+        validMeter: state.bill.validMeter,
+        invalidMeter: state.bill.invalidMeter,
+        loader: state.bill.loader
     }
 }
 
@@ -289,6 +328,8 @@ const mapDispatchToProps = (dispatch) =>{
         fetchCategory: (val) => dispatch(getBillerCategories(val)),
         pay: (creds) => dispatch(PayBill(creds)),
         clearPay: () => dispatch(clearPayStatus()),
+        clearDetails: () => dispatch(clearMeterDetails()),
+        validateMeter: (itemCode, code, customerID) =>  dispatch(validateMeterDetails(itemCode, code, customerID))
     }
 }
  

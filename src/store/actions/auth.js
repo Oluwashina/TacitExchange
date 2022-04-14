@@ -81,13 +81,12 @@ export const logOut = () => {
 export const signUp = (user) => {
   return async (dispatch, getState) => {
     try {
-      const res = await PostApi("user", {
+      const res = await PostApi("exchanger/user", {
                    firstName: user.firstName,
                    lastName: user.lastName,
                    phoneNumber: user.phoneNumber,
                    email: user.email,
                    password: user.password,
-                   role: user.role
                   }, "", "application/json")
       if (res.status === 201) {
         dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
@@ -95,33 +94,7 @@ export const signUp = (user) => {
       }
       if(res.status === 400){
         dispatch({ type: "SIGNUP_FAIL", err: res.data});
-        cogoToast.error('Email already exists!!!')
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  };
-};
-
-// sign up an admin functionality(subadmin)
-export const signUpAdmin = (user) => {
-  return async (dispatch, getState) => {
-    try {
-      const res = await PostApi("user", {
-                   firstName: user.firstname,
-                   lastName: user.lastname,
-                   phoneNumber: user.phoneNumber,
-                   email: user.email,
-                   password: user.password,
-                   role: user.role
-                  }, "", "application/json")
-      if (res.status === 201) {
-        dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
-        cogoToast.success("Admin created successfully!");
-      }
-      if(res.status === 400){
-        dispatch({ type: "SIGNUP_FAIL", err: res.data});
-        cogoToast.error('Email already exists!!!')
+        cogoToast.error('Looks like a user already exist with this credentails!')
       }
     } catch (err) {
       console.log(err)

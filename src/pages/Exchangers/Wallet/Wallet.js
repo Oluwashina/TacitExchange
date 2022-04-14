@@ -424,6 +424,31 @@ const handleSubmit = async (values, setSubmitting) => {
                 ""
               )}
 
+      {transaction.isBillPayment && transaction.hasOwnProperty('token') ? (
+                <>
+                  <div className="col-lg-6 mb-3">
+                    <div>
+                      <p
+                        className="mb-0"
+                        style={{ color: "#2C3A50", fontWeight: "bold" }}
+                      >
+                       Token
+                      </p>
+                      <p
+                        className="mb-0 mt-1"
+                        style={{ color: "#2C3A50", fontSize: 14 }}
+                      >
+                        {transaction
+                          ? transaction.token
+                          : ""}
+                      </p>
+                    </div>
+                  </div>                  
+                </>
+              ) : (
+                ""
+              )}
+
               <div className="col-lg-6 mb-3">
                 <div>
                   <p

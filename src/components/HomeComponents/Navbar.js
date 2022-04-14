@@ -20,7 +20,6 @@ const Navbar = (props) => {
 
     const history = useHistory()
 
-    const [role] = useState("Exchanger")
 
     // check for which path you are on
     const isActive = useLocation().pathname
@@ -83,7 +82,6 @@ const Navbar = (props) => {
     const handleRegisterSubmit = async (values) =>{
         const creds = {
             ...values,
-            role
         }
         await register(creds)
         setShowRegister(false)

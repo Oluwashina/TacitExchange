@@ -32,14 +32,14 @@ const UtilitiesPage = () => {
 
                     <div className='col-lg-3 mb-4 mb-lg-0'>
 
-                    <Link to="/utilities" className='service_card' style={{textDecoration: 'none'}}>
+                    <Link to="/utilities/buyelectricity" className='service_card' style={{textDecoration: 'none'}}>
                         <div className='service_icon electricity'>
                             <img src={electricity_icon} alt="airtime" />
                         </div>
                         <div>
                             <h6 className='service_title'>Buy Electricity</h6>
                             <p className='service_subtitle'>Easily pay your electric bills</p>
-                            <p className='service_soon'>Coming Soon!</p>
+                           
                         </div>
                     </Link>
 

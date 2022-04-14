@@ -25,6 +25,26 @@ export const getBillerCategories = (type) => {
   };
 
 
+  // validate meter details
+  export const validateMeterDetails = (itemCode, code, customerID) => {
+    return async (dispatch, getState) => {
+      dispatch({ type: "startMeterCheck"})
+      try {
+        const res = await GetApi(`validate/bill/customer?item_code=${itemCode}&code=${code}&customer=${customerID}`, getToken());
+        if (res.status === 200) {
+          dispatch({ type: "validMeter"})
+          dispatch({ type: "MeterDetails", data: res.data.message.data});
+        }
+        if(res.status === 400){
+          dispatch({ type: "InvalidMeter"})
+          dispatch({ type: "MeterDetailsError", err: res.data });
+        }
+      } catch (err) {
+       console.log(err)
+      }
+    };
+  };
+
 
 // bill payments
 export const PayBill = (val) =>{
@@ -53,7 +73,12 @@ export const PayBill = (val) =>{
     };
   }
 
-
+// clear mater details
+  export const clearMeterDetails = () =>{
+    return dispatch =>{
+        dispatch({type: 'clearMeterDetails'})
+    }
+  }
 
   // clear  billpayment status
   export const clearPayStatus = () =>{
