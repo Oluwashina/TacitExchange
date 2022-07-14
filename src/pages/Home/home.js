@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import GiftCards from '../../components/HomeComponents/Cards';
+import ComingSoonSection from '../../components/HomeComponents/ComingSoon';
 import Features from '../../components/HomeComponents/Features';
 import Footer from '../../components/HomeComponents/Footer';
 import HeroSection from '../../components/HomeComponents/Hero';
@@ -7,6 +8,7 @@ import Navbar from '../../components/HomeComponents/Navbar';
 import RateCalculator from '../../components/HomeComponents/Rate';
 import Steps from '../../components/HomeComponents/Steps';
 import Testimonials from '../../components/HomeComponents/Testimonials';
+import TopUpSection from '../../components/HomeComponents/TopUp';
 
 
 const HomePage = () => {
@@ -25,9 +27,11 @@ const HomePage = () => {
         <HeroSection />
         <RateCalculator />
         <Features />
+        <TopUpSection  />
         <GiftCards />
         <Steps />
         <Testimonials />
+        <ComingSoonSection />
         <Footer />
             
         </>

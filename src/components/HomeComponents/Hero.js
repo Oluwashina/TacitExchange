@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Home.css';
 import registerCircle from '../../assets/images/registerCircle.svg'
 import closeIcon from '../../assets/images/closeIcon.svg'
 import {Form, Formik} from 'formik'
 import { registerValidator } from "../../validationSchema/validator";
 import Modal from 'react-bootstrap/Modal'
-import {Link} from 'react-router-dom'
+import {HashLink as Link} from 'react-router-hash-link'
 import {connect} from 'react-redux'
 import { signUp } from '../../store/actions/auth';
+import hero1 from '../../assets/images/myphone.svg'
+import circle from '../../assets/images/circle1.svg'
+import scratch from '../../assets/images/scratch.svg'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HeroSection = (props) => {
 
@@ -16,6 +21,11 @@ const HeroSection = (props) => {
     const [showRegister, setShowRegister] = useState(false);
 
     const [role] = useState("Exchanger")
+
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+      }, []);
 
     //   register modal
   const handleCloseRegister = () => setShowRegister(false);
@@ -205,9 +215,8 @@ const HeroSection = (props) => {
         
       </Modal>
       {/* end of dialof for register */}
-
-
-            <div className="hero">
+        
+            {/* <div className="hero">
                 <div className="container">
                     <div className="hero-title">
                         <h1>Sell All Your Gift Cards At Amazing Rates.</h1>    
@@ -221,6 +230,47 @@ const HeroSection = (props) => {
                    
                    
                 </div>
+            </div> */}
+
+            <div className='hero'>
+                <div className='container'>
+                    <div className='row align-items-center'>
+                        <div className='col-lg-6'>
+                            <div>
+                                <h2 className='hero-title'>Sell Gift Cards & Pay Utility Bills</h2>
+                                <p className='mt-3 hero-subtitle'>
+                                Exchange your unused gift cards at a fantastic rate and pay your utility bills seamlessly
+                                </p>
+
+                                <div className="mt-4 hero_cta">
+                                    <button 
+                                    onClick={handleShowRegister}
+                                    className="btn btn_ctaStart">Get Started</button>
+                                    <Link to="/#rate-calculator" className="btn btn_cta">
+                                        Calculator</Link>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+                        <div className='col-lg-6 mt-5 mt-lg-0' style={{zIndex: 3}}>
+                            <div data-aos='fade-up' data-aos-duration="500">
+                                <img src={hero1} alt="hero"  className='img-fluid' />
+                            </div>
+                        </div>       
+                    </div>
+
+                    <div>
+                        <img src={circle} alt="circle" className='hero-circle' width='200' height='200' />
+                    </div>
+
+                    <div>
+                        <img src={scratch} alt="scratch" className='hero-scratch' width='200' height='200' />
+                    </div>
+
+                </div>
+
             </div>
         </>
      );

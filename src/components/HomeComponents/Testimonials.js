@@ -54,12 +54,12 @@ const Testimonials = () => {
             <div className="container-fluid">
                 <Slider {...settings}>
 
-                    <div className="testimonials-div mt-4 mt-lg-5">
+                    <div className="testimonials-div mt-4 mt-lg-5 mb-4">
                         {/* image */}
                         <div>
                             <img src={user1} className="" alt="user1" style={{borderRadius: '50%', width: '50px', height: '50px'}} />
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-4">
                             <h6 className="rate-text">Olalekan</h6>
                         </div>
                         <div className="mt-3">
@@ -75,7 +75,7 @@ const Testimonials = () => {
                         <div>
                             <img src={user2} className="" alt="user1" style={{borderRadius: '50%', width: '50px', height: '50px'}} />
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-4">
                             <h6 className="rate-text">Ben Okafor</h6>
                         </div>
                         <div className="mt-3">
@@ -91,7 +91,7 @@ const Testimonials = () => {
                         <div>
                             <img src={user3} className="" alt="user1" style={{borderRadius: '50%', width: '50px', height: '50px'}} />
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-4">
                             <h6 className="rate-text">Lola Agbaje</h6>
                         </div>
                         <div className="mt-3">

@@ -160,27 +160,73 @@ header{
 
 /* hero styles */
 .hero{
-    background-image: url(../../assets/images/hero-1.jpg);
-    background: linear-gradient(rgba(8, 152, 215, 0.3), rgba(8, 152, 215, 0.4)), url(../../assets/images/hero-1.jpg);
-    background-size: cover;
+    background: #fff;
+    /* background-size: cover; */
     display: flex;
-    align-items: center;
-    height: 700px;
+    /* align-items: center; */
+    padding: 150px 0px 0px 0px;
     position: relative;
 }
 
+.hero-circle{
+    display: block;
+    position: absolute;
+    bottom: 40px;
+    right: 550px;
+}
+
+.hero-scratch{
+    display: block;
+    position: absolute;
+    right: 150px;
+    top: 100px;
+}
+
 .hero-title{
-    flex: 0 0 50%;
-    max-width: 50%;
-    margin-left: 60%;
+    color: #373737;
+    font-weight: 700;
+    font-family: 'Poppins';
+    max-width: 20rem;
+    line-height: 3rem;
 }
 
-.hero-title h1{
-    font-weight: 800;
-    line-height: 60px;
-    color: #fff;
+.hero-subtitle{
+    color: #5B5B5B;
+    font-weight: 500;
+    max-width: 26rem;
 }
 
+.hero_cta{
+    display: flex;
+}
+
+.btn_cta{
+    background: #9d0957;
+    border-radius: 10px;
+    color: white;
+    padding: 12px 40px;
+    transition: all ease-in-out .15s;
+}
+
+.btn_cta:hover{
+    background-color: #AB0351;
+    color: white;
+}
+
+.btn_ctaStart{
+    background: #0898D7;
+    border-radius: 10px;
+    color: white;
+    padding: 12px 40px;
+    margin-right: 10px;
+    font-weight: 500;
+    transition: all ease-in-out .15s;
+}
+
+.btn_ctaStart:hover{
+    background: #0d92d5;
+    color: white;
+  }
 
 
 /* rate calculator section */
@@ -191,7 +237,7 @@ header{
 
 .rate-text{
     color: #2C3A50;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .input-style{
@@ -272,11 +318,28 @@ header{
       align-items: center;
   }
 
+  /* bills */
+  .topUpDiv{
+    background: #F2F5F7;
+    padding: 80px 60px;
+   
+  }
+
+  .topUpHeading{
+    color: #2C3A50;
+    font-weight: 700;
+  }
+
+  .topUpSubtitle{
+    color: #2C3A50;
+    font-weight: 400;
+    max-width: 22rem;
+  }
 
   /* steps */
   .steps{
       padding: 80px 100px;
-      background: #fff;
+      background: #F2F5F7;
   }
   .steps-head{
     color: #2C3A50;
@@ -290,7 +353,7 @@ header{
   /* testimonials */
 .testimonials{
     padding: 80px 100px;
-    background: #F2F5F7;
+    background: #fff;
 }
 .testimonials-div{
     border: 1px solid #C4C4C4;
@@ -298,12 +361,51 @@ header{
     border-radius: 10px;
     padding: 30px 20px;
     width: 90% !important;
+    height: 300px;
+}
+
+/* Coming soon section */
+.comingBg{
+    padding: 80px 0px;
+    background: #F2F5F7;
+}
+
+.comingDiv{
+    display: flex;
+    align-items: center;
+    max-width: 48rem;
+    margin: auto;
+    flex-direction: row;
+}
+
+.comingTitle{
+    color: #2C3A50;
+    font-weight: 800;
+}
+
+.comingSubtitle{
+    color: #2C3A50;
+    font-weight: 400;
+    max-width: 30rem;
+}
+
+.comingText{
+    flex: 1;
+    margin-right: 50px;
+}
+
+.comingImg{
+    flex: 1;
+}
+
+.comingImg img{
+    height: 30rem;
 }
 
 /* cards */
 .cards{
     padding: 80px 100px;
-    background: #F2F5F7;
+    background: #fff;
 }
 
 /* footer */
@@ -460,11 +562,18 @@ header{
 
     /* hero */
     .hero{
-        height: 500px;
+        padding: 120px 0px 0px 0px;
     }
     .hero-title{
-        max-width: 100%;
-        margin-left: 0%;
+        
+    }
+
+    .hero-circle{
+        display: none;
+    }
+
+    .hero-scratch{
+        display: none;
     }
 
        /* rate section */
@@ -480,6 +589,12 @@ header{
     
     /* features */
     .features{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* bills */
+    .topUpDiv{
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -504,7 +619,26 @@ header{
     }
     .testimonials-div{
         width: 95% !important;
+        height: auto;
     }
+
+    /* coming soon div */
+    .comingBg{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .comingDiv{  
+        flex-direction: column;
+    }
+
+    .comingText{
+        margin-right: 0px;
+        text-align: center;
+    }
+    
 
     /* cards */
     .cards{
