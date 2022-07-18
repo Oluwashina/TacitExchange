@@ -15,7 +15,7 @@ const Footer = () => {
                             <img src={Logo} className="img-fluid" alt="logo" />
                         </div>
                         <p className="mt-3 mb-0" style={{fontSize: 14}}>
-                        Tacit Exchange places a premium on trade convenience by providing exclusive market rates with complete transparency and customer satisfaction.
+                        Your all-in-one gift cards and utility payment platform.
                         </p>
                         {/* brands */}
                         <div className="mt-3" style={{display: 'flex'}}>
