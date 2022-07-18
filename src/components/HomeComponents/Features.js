@@ -15,7 +15,7 @@ const Features = () => {
 
                         <div className="col-lg-12">
 
-                            <div className="text-center mt-lg-5 mt-5">
+                            <div className="text-center">
                                 <h4 className="rate-text">We Always Stand By Our Word</h4>
                             </div>
 
