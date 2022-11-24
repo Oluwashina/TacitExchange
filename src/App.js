@@ -15,8 +15,6 @@ import PrivacyPage from './pages/Home/privacy';
 import NotFoundPage from './pages/404/NotFound';
 
 
-
-
 // user routes
 import UserDashboard from './pages/Exchangers/Dashboard/dashboard';
 import UserProfile from './pages/Exchangers/Profile/profile';
@@ -32,9 +30,6 @@ import BuyDataPage from './pages/Exchangers/BillPayments/BuyData';
 import Electricity from './pages/Exchangers/BillPayments/Electricity';
 import Cables from './pages/Exchangers/BillPayments/Cables';
 import UtilitiesPage from './pages/Exchangers/BillPayments/Utilities';
-
-
-
 
 
 
