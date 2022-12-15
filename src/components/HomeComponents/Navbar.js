@@ -19,6 +19,7 @@ const Navbar = (props) => {
     const [navShow, setnavShow] = useState(false);
 
     const history = useHistory()
+    
 
 
     // check for which path you are on

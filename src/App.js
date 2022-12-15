@@ -30,6 +30,9 @@ import BuyDataPage from './pages/Exchangers/BillPayments/BuyData';
 import Electricity from './pages/Exchangers/BillPayments/Electricity';
 import Cables from './pages/Exchangers/BillPayments/Cables';
 import UtilitiesPage from './pages/Exchangers/BillPayments/Utilities';
+import MobileLoginPage from './pages/MobileAuth/login';
+import MobileForgotPage from './pages/MobileAuth/forgot';
+import MobileRegisterPage from './pages/MobileAuth/register';
 
 
 
@@ -48,6 +51,11 @@ function App() {
               <Route path="/faq" component={FaqPage} />
               <Route path="/terms" component={TermsPage} />
               <Route path="/privacypolicy" component={PrivacyPage} />
+
+              {/* mobile auth routes */}
+              <Route path="/login" component={MobileLoginPage} />
+              <Route path="/forgot" component={MobileForgotPage} />
+              <Route path="/register" component={MobileRegisterPage} />
 
               {/* Exchanger route */}
               <UserRoute path="/dashboard" component={UserDashboard} />

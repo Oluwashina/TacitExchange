@@ -493,6 +493,11 @@ header{
   }
   
 
+  /* mobile login div */
+  .login-div{
+    padding: 10px 60px;
+  }
+
 
 
 /* Media query for smaller phones */
@@ -675,5 +680,9 @@ header{
     .registerDialog .modal-dialog{
         width: auto;
     }
+
+    .login-div{
+        padding: 10px 10px;
+      }
 
 }
