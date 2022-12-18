@@ -267,7 +267,7 @@ const UserSideBar = (props) => {
                     {/* logout */}
                         <Link to="/"
                          onClick={ToggleLogout}
-                         className="v-list-item v-list-link" style={{textDecoration: 'none'}}>
+                         className="v-list-item v-list-link logout" style={{textDecoration: 'none'}}>
 
                             {/* icon */}
                             <div className="v-list-icon">
