@@ -265,9 +265,9 @@ const UserSideBar = (props) => {
                      </Link>
 
                     {/* logout */}
-                        <Link to="/"
+                        <div
                          onClick={ToggleLogout}
-                         className="v-list-item v-list-link logout" style={{textDecoration: 'none'}}>
+                         className="v-list-item v-list-link logout" style={{textDecoration: 'none', cursor: 'pointer'}}>
 
                             {/* icon */}
                             <div className="v-list-icon">
@@ -279,7 +279,7 @@ const UserSideBar = (props) => {
                                 <span>Logout</span>
                             </div>
 
-                        </Link>
+                        </div>
 
                        
 
