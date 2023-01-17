@@ -1,6 +1,7 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
+import { isAndroid } from 'react-device-detect';
 
 const UserRoute = ({
     component: Component,
@@ -14,7 +15,11 @@ const UserRoute = ({
         render={(props) =>
         role !== 'Exchanger' ? (
         <>
+         {isAndroid ?
+         <Redirect to={'/login'} />
+         :
          <Redirect to={'/'} />
+        }
         </>
       ) : (
         <Component {...props} />

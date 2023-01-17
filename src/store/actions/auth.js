@@ -72,12 +72,7 @@ export const loginAdmin = (user) => {
 export const logOut = () => {
   return (dispatch, getState) => {
     localStorage.setItem("token", "")
-    dispatch({ type: "logout", err: "User Out" });
-
-    // register an event listener
-    window.addEventListener("message", message => {
-      window.ReactNativeWebView.postMessage('Logout clicked')
-    });
+    dispatch({ type: "logout", err: "User Out" });  
     
   };
 };
